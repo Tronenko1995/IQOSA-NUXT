@@ -10,9 +10,12 @@
   },
   "dependencies": {
     "core-js": "^3.9.1",
+    "gsap": "^3.6.1",
     "node-sass": "^5.0.0",
     "nuxt": "^2.15.3",
     "sass-loader": "^10.1.1"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "nuxt-gsap-module": "^1.3.1"
+  }
 }

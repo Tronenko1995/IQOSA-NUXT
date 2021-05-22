@@ -1,74 +1,145 @@
 <template>
     <header class="header">
-        <nuxt-link to="/" class="header__logo">
-            <img src="@/static/svg/header-logo.svg" alt="" class="header__img">
-        </nuxt-link>
-        <nav class="nav">
-            <ul class="nav__list">
-                <li class="nav__item">
-                    <nuxt-link to="/projects" class="nav__link">Projects</nuxt-link>
-                    <nuxt-link to="/projects" class="nav__link nav__link--cursive">Projects</nuxt-link>
-                </li>
-                <li class="nav__item">
-                    <nuxt-link to="/about-plug-2" class="nav__link">About</nuxt-link>
-                    <nuxt-link to="/about-plug-2" class="nav__link nav__link--cursive">About</nuxt-link>
-                </li>
-                <li class="nav__item">
-                    <nuxt-link to="/career" class="nav__link">Career</nuxt-link>
-                    <nuxt-link to="/career" class="nav__link nav__link--cursive">Career</nuxt-link>
-                </li>
-                <li class="nav__item">
-                    <nuxt-link to="/news" class="nav__link">Media</nuxt-link>
-                    <nuxt-link to="/news" class="nav__link nav__link--cursive">Media</nuxt-link>
-                </li>
-                <li class="nav__item">
-                    <nuxt-link to="/contacts" class="nav__link">Contacts</nuxt-link>
-                    <nuxt-link to="/contacts" class="nav__link nav__link--cursive">Contacts</nuxt-link>
-                </li>
-            </ul>
-        </nav>
-        <div class="lang">
-            <ul class="lang__list">
-                <li class="lang__item">
-                    <nuxt-link to="/ua" class="lang__link">UA</nuxt-link>
-                </li>
-                <li class="lang__item">
-                    <nuxt-link to="/ru" class="lang__link">RU</nuxt-link>
-                </li>
-                <li class="lang__item">
-                    <nuxt-link to="/" class="lang__link">EN</nuxt-link>
-                </li>
-            </ul>
+        <div class="header__wrap">
+            <nuxt-link to="/" class="header__logo">
+                <img src="@/static/svg/header-logo.svg" alt="" class="header__img">
+            </nuxt-link>
+            <div class="menu-button" @click="openMenu()">
+                <div class="menu-button__list">
+                    <div class="menu-button__item" :class="{'menu-button__item--x' : menuStatus}"></div>
+                    <div class="menu-button__item" :class="{'menu-button__item--x' : menuStatus}"></div>
+                </div>
+            </div>
+            <nav class="nav header-nav">
+                <ul class="nav__list">
+                    <li class="nav__item" @mouseover="showCursive($event)" @mouseleave="hideCursive($event)">
+                        <nuxt-link to="/projects" class="nav__link">Projects</nuxt-link>
+                        <nuxt-link to="/projects" class="nav__link nav__link--cursive">Projects</nuxt-link>
+                    </li>
+                    <li class="nav__item" @mouseover="showCursive($event)" @mouseleave="hideCursive($event)">
+                        <nuxt-link to="/about-plug-2" class="nav__link">About</nuxt-link>
+                        <nuxt-link to="/about-plug-2" class="nav__link nav__link--cursive">About</nuxt-link>
+                    </li>
+                    <li class="nav__item" @mouseover="showCursive($event)" @mouseleave="hideCursive($event)">
+                        <nuxt-link to="/career" class="nav__link">Career</nuxt-link>
+                        <nuxt-link to="/career" class="nav__link nav__link--cursive">Career</nuxt-link>
+                    </li>
+                    <li class="nav__item" @mouseover="showCursive($event)" @mouseleave="hideCursive($event)">
+                        <nuxt-link to="/news" class="nav__link">Media</nuxt-link>
+                        <nuxt-link to="/news" class="nav__link nav__link--cursive">Media</nuxt-link>
+                    </li>
+                    <li class="nav__item" @mouseover="showCursive($event)" @mouseleave="hideCursive($event)">
+                        <nuxt-link to="/contacts" class="nav__link">Contacts</nuxt-link>
+                        <nuxt-link to="/contacts" class="nav__link nav__link--cursive">Contacts</nuxt-link>
+                    </li>
+                </ul>
+            </nav>
+            <div class="lang">
+                <ul class="lang__list">
+                    <li class="lang__item" @mouseover="showCursive($event)" @mouseleave="hideCursive($event)">
+                        <nuxt-link to="/ua" class="lang__link">UA</nuxt-link>
+                        <nuxt-link to="/ua" class="lang__link lang__link--cursive">UA</nuxt-link>
+                    </li>
+                    <li class="lang__item" @mouseover="showCursive($event)" @mouseleave="hideCursive($event)">
+                        <nuxt-link to="/ru" class="lang__link">RU</nuxt-link>
+                        <nuxt-link to="/ru" class="lang__link lang__link--cursive">RU</nuxt-link>
+                    </li>
+                    <li class="lang__item lang__item--selected">
+                        <nuxt-link to="/" class="lang__link">EN</nuxt-link>
+                        <nuxt-link to="/" class="lang__link lang__link--cursive">EN</nuxt-link>
+                    </li>
+                </ul>
+            </div>
+            <div class="request">
+                <nuxt-link to="/sayhi" class="request__link">Send request</nuxt-link>
+            </div>
         </div>
     </header>
 </template>
 
+<script>
+import { mapMutations } from 'vuex'
+export default {
+    props: {
+        menuStatus: {
+            type: Boolean,
+            required: true
+        }
+    },
+    methods: {
+        ...mapMutations({
+            setMenuStatus: 'menu/setStatus'
+        }),
+        showCursive(e) {
+            if (e.target.tagName === 'A') {
+                this.$gsap.to(e.target.parentElement.children[0], { 
+                    translateY: -100 + "%",
+                    duration: .5
+                })
+                this.$gsap.to(e.target.parentElement.children[1], { 
+                    translateY: -100 + "%",
+                    duration: .5
+                })
+            }
+        },
+        hideCursive(e) {
+            if (e.target.tagName === 'LI') {
+                this.$gsap.to(e.target.children[0], { 
+                    translateY: 0 + "%",
+                    duration: .5
+                })
+                this.$gsap.to(e.target.children[1], { 
+                    translateY: 0 + "%",
+                    duration: .5
+                })
+            }
+        },
+        openMenu() {
+            this.menuStatus ? this.setMenuStatus(false) : this.setMenuStatus(true)
+        }
+    },
+    mounted() {
+        console.log(this.menuStatus)
+    }
+}
+</script>
+
 <style lang="scss">
 .header {
-    padding: 30px 64px;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    &__logo {
-
+    justify-content: center;
+    width: 100%;
+    z-index: 1;
+    position: fixed;
+    &__wrap {
+        width: 100%;
+        padding: 30px 64px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
     }
     &__img {
         width: 85px;
         height: 27px;
         object-fit: cover;
     }
-    
+    &__logo {
+        display: flex;
+    }
 }
 .nav {
     width: 470px;
     &__list {
         display: flex;
         justify-content: space-between;
+        overflow: hidden;
     }
     &__item {
-
+        display: block;
+        transform: translateY(0);
     }
     &__link {
+        display: block;
         font-family: Roman,Arial;
         font-weight: 400;
         color: #fff;
@@ -86,14 +157,123 @@
     &__list {
         display: flex;
         justify-content: space-between;
+        overflow: hidden;
+        &:hover {
+            .lang__item {
+                opacity: 1;
+            }
+        }
     }
     &__item {
-
+        display: block;
+        transform: translateY(0);
+        opacity: 0;
+        transition: opacity .5s ease;
+        &--selected {
+            opacity: 1;
+            pointer-events: none;
+        }
     }
     &__link {
+        display: block;
         font-family: Roman,Arial;
         font-weight: 400;
         color: #fff;
+        &--cursive {
+            font-family: ThinItalic,Arial;
+            position: absolute;
+        }
+    }
+}
+.menu-button {
+    display: none;
+    height: 40px;
+    width: 40px;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%) rotate(0deg);
+    transition: .5s;
+    cursor: pointer;
+    &__list {
+        display: flex;
+        flex-direction: column;
+        width: 40px;
+        height: 7px;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    &__item {
+        height: 1px;
+        width: 100%;
+        background: #fff;
+        &:first-child {
+            margin-bottom: 5px;
+            transition: .5s;
+        }
+        &--x {
+            &:first-child {
+                margin-bottom: 0;
+                transform: rotate(45deg);
+                transition: .5s;
+            }
+            &:last-child {
+                transform: rotate(-45deg);
+                transition: .5s;
+            }
+        }
+    }
+}
+.request {
+    display: none;
+    white-space: nowrap;
+    &__link {
+        font-size: 13px;
+        font-family: Roman,Arial;
+        font-weight: 400;
+        color: #fff;
+        text-transform: uppercase;
+        line-height: 120%;
+    }
+}
+
+@media (min-width: 1930px) {
+    .header {
+        &__wrap {
+            max-width: 1920px;
+        }
+    }
+}
+@media (max-width: 1024px) {
+    .header {
+        &-nav {
+            display: none;
+        }
+    }
+    .menu-button {
+        display: block;
+    }
+    .request {
+        display: flex;
+    }
+    .lang {
+        display: none;
+    }
+}
+@media (max-width: 820px) {
+    .header {
+        &__wrap {
+            padding: 21px 16px;
+        }
+        &__img {
+            width: 65px;
+            height: 21px;
+        }
+    }
+    .request {
+        white-space: normal;
+        width: 30%;
+        text-align: center;
     }
 }
 </style>

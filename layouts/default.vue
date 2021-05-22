@@ -1,13 +1,13 @@
 <template>
   <div>
-    <Header />
+    <HeaderWrap />
     <Nuxt />
   </div>
 </template>
 
 <script>
-import Header from '@/components/system/Header.vue'
+import HeaderWrap from '@/components/system/HeaderWrap.vue'
 export default {
-  components: { Header }
+  components: { HeaderWrap }
 }
 </script>

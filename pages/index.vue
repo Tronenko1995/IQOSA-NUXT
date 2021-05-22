@@ -1,5 +1,3 @@
 <template>
-  <main>
-    123
-  </main>
+  <main></main>
 </template>
