@@ -29,6 +29,38 @@
                 </li>
             </ul>
         </nav>
+        <div class="social">
+            <ul class="social__list">
+                <li class="social__item" @mouseover="showCursive($event)" @mouseleave="hideCursive($event)">
+                    <a href="https://www.facebook.com/IQOSA/" class="social__link">Facebook,</a>
+                    <a href="https://www.facebook.com/IQOSA/" class="social__link social__link--cursive">Facebook,</a>
+                </li>
+                <li class="social__item" @mouseover="showCursive($event)" @mouseleave="hideCursive($event)">
+                    <a href="https://www.pinterest.com/iqosa/_created/" class="social__link">Pinterest,</a>
+                    <a href="https://www.pinterest.com/iqosa/_created/" class="social__link social__link--cursive">Pinterest,</a>
+                </li>
+                <li class="social__item" @mouseover="showCursive($event)" @mouseleave="hideCursive($event)">
+                    <a href="https://www.instagram.com/iqosa/" class="social__link">Instagram</a>
+                    <a href="https://www.instagram.com/iqosa/" class="social__link social__link--cursive">Instagram</a>
+                </li>
+            </ul>
+        </div>
+        <div class="language">
+            <ul class="language__list">
+                <li class="language__item language__item--selected">
+                   <nuxt-link to="/" class="language__link">English,</nuxt-link>
+                   <span class="language__line"></span>
+                </li>
+                <li class="language__item">
+                   <nuxt-link to="/" class="language__link">Русский,</nuxt-link>
+                   <span class="language__line"></span>
+                </li>
+                <li class="language__item">
+                   <nuxt-link to="/" class="language__link">Українська</nuxt-link>
+                   <span class="language__line"></span>
+                </li>
+            </ul>
+        </div>
     </div>
 </template>
 
@@ -94,6 +126,7 @@ export default {
         padding-right: 7px;
     }
     &__line {
+        opacity: 0;
         display: block;
         margin-right: 24px;
         margin-left: 24px;
@@ -109,10 +142,99 @@ export default {
         font-family: Light, Arial;
         font-weight: 300;
         font-size: 42px;
+        transform: translate(0px, 100%);
         &--cursive {
             font-family: ThinItalic, Arial;
             position: absolute;
         }
+    }
+}
+.social {
+    position: absolute;
+    left: 64px;
+    bottom: 40px;
+    &__list {
+        display: flex;
+    }
+    &__item {
+        display: flex;
+        transform: translateY(0);
+        margin-left: 10px;
+        padding-left: 2px;
+        padding-right: 2px;
+        overflow: hidden;
+    }
+    &__link {
+        font-family: Light,Arial;
+        font-weight: 300;
+        color: #fff;
+        font-size: 16px;
+        line-height: 140%;
+        transform: translate(0px, 100%);
+        &--cursive {
+            font-family: ThinItalic,Arial;
+            position: absolute;
+            bottom: -100%;
+        }
+    }
+}
+.language {
+    position: absolute;
+    bottom: 40px;
+    right: 64px;
+    &__list {
+        display: flex;
+    }
+    &__item {
+        display: flex;
+        margin-left: 10px;
+        overflow: hidden;
+        cursor: pointer;
+        padding-left: 2px;
+        padding-right: 2px;
+        position: relative;
+        &--selected {
+            .language {
+                &__link {
+                    // pointer-events: none;
+                }
+                &__line {
+                    transform: translate(-105%, 0px);
+                    width: 100%;
+                }
+            }
+            &:hover {
+                .language__line {
+                    animation: 'under-line' 1s;
+                    transition: .3s ease;
+                }
+            }
+        }
+        &:hover {
+            .language__line {
+                transition: .3s ease;
+                width: 100%;
+            }
+        }
+    }
+    &__link {
+        font-family: Light, Arial;
+        font-weight: 300;
+        color: #fff;
+        font-size: 16px;
+        line-height: 140%;
+        margin-bottom: 2px;
+        transform: translate(0px, 100%);
+    }
+    &__line {
+        position: absolute;
+        height: 1px;
+        width: 0;
+        background: #fff;
+        transform: translateX(0%);
+        display: block;
+        transition: .3s ease;
+        bottom: 0;
     }
 }
 </style>

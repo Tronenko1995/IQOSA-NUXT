@@ -71,6 +71,8 @@ export default {
             setMenuStatus: 'menu/setStatus'
         }),
         showCursive(e) {
+            console.log(e)
+            console.dir(e)
             if (e.target.tagName === 'A') {
                 this.$gsap.to(e.target.parentElement.children[0], { 
                     translateY: -100 + "%",
