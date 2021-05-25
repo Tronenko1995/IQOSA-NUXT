@@ -1,6 +1,8 @@
 <template>
     <div class="menu">
+        <div>
         <Icosahedron />
+        </div>
         <nav class="menu__nav">
             <ul class="menu__list">
                 <li class="menu__item" @mouseover="showCursive($event)" @mouseleave="hideCursive($event)">
@@ -152,6 +154,16 @@ export default {
             font-family: ThinItalic, Arial;
             position: absolute;
         }
+    }
+    &__icosahedron {
+        // pointer-events: none;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100vw;
+        height: 100vh;
+        /* opacity: 0; */
+        transition: opacity .5s ease;
     }
 }
 .social {

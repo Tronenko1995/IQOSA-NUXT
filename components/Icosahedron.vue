@@ -1,5 +1,7 @@
 <template>
-    <div class="menu__icosahedron"></div>
+<div>
+    <div class="menu__icosahedron" ref="menuIcosahedron"></div>
+</div>
 </template>
 
 <script>
@@ -9,19 +11,22 @@ import { ConvexGeometry } from "three/examples/jsm/geometries/ConvexGeometry.js"
 import { BufferGeometryUtils } from "three/examples/jsm/utils/BufferGeometryUtils.js"
 export default {
 mounted() {
+    this.icosahedronStart()
+},
+methods: {
+    icosahedronStart() {
     let group, camera, scene, renderer;
 
-    init();
-    animate();
+    const init = () => {
 
-    function init() {
+        const icosahedron = this.$refs.menuIcosahedron
 
         scene = new THREE.Scene();
 
         renderer = new THREE.WebGLRenderer( { antialias: true } );
         renderer.setPixelRatio( window.devicePixelRatio );
         renderer.setSize( window.innerWidth, window.innerHeight );
-        document.body.appendChild( renderer.domElement );
+        icosahedron.appendChild( renderer.domElement );
 
         // camera
         camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 1000 );
@@ -29,7 +34,7 @@ mounted() {
         scene.add( camera );
 
         // controls
-        const controls = new OrbitControls( camera, renderer.domElement );
+        const controls = new OrbitControls(camera, icosahedron);
         controls.minDistance = 20;
         controls.maxDistance = 50;
         controls.maxPolarAngle = Math.PI / 2;
@@ -46,7 +51,7 @@ mounted() {
 
         // textures
         const loader = new THREE.TextureLoader();
-        const texture = loader.load( 'textures/sprites/disc.png' );
+        const texture = loader.load( 'https://threejs.org/examples/textures/sprites/disc.png' );
 
         group = new THREE.Group();
         scene.add( group );
@@ -57,7 +62,6 @@ mounted() {
         // if normal and uv attributes are not removed, mergeVertices() can't consolidate indentical vertices with different normal/uv data
         dodecahedronGeometry.deleteAttribute( 'normal' );
         dodecahedronGeometry.deleteAttribute( 'uv' );
-
         dodecahedronGeometry = BufferGeometryUtils.mergeVertices( dodecahedronGeometry );
 
         const vertices = [];
@@ -69,14 +73,12 @@ mounted() {
             vertices.push( vertex );
         }
 
-        const pointsMaterial = new THREE.PointsMaterial( {
-
+        const pointsMaterial = new THREE.PointsMaterial({
             color: 0x0080ff,
             map: texture,
             size: 1,
             alphaTest: 0.5
-
-        } );
+        });
 
         const pointsGeometry = new THREE.BufferGeometry().setFromPoints( vertices );
 
@@ -108,28 +110,23 @@ mounted() {
     }
 
     function onWindowResize() {
-
         camera.aspect = window.innerWidth / window.innerHeight;
         camera.updateProjectionMatrix();
-
         renderer.setSize( window.innerWidth, window.innerHeight );
-
     }
 
     function animate() {
-
         requestAnimationFrame( animate );
-
         group.rotation.y += 0.005;
-
         render();
-
     }
 
     function render() {
-
         renderer.render( scene, camera );
+    }
 
+    init()
+    animate()
     }
 }
 }
