@@ -1,5 +1,6 @@
 <template>
     <div class="menu">
+        <Icosahedron />
         <nav class="menu__nav">
             <ul class="menu__list">
                 <li class="menu__item" @mouseover="showCursive($event)" @mouseleave="hideCursive($event)">
@@ -65,7 +66,11 @@
 </template>
 
 <script>
+import Icosahedron from '@/components/Icosahedron.vue'
 export default {
+    components: {
+        Icosahedron
+    },
     methods : {
         showCursive(e) {
             if (e.target.tagName === 'A') {
@@ -235,6 +240,62 @@ export default {
         display: block;
         transition: .3s ease;
         bottom: 0;
+    }
+}
+@media (max-width: 820px) {
+    .request {
+        justify-content: center;
+    }
+}
+@media (max-width: 768px) {
+    .menu {
+        &__link {
+            font-size: 36px;
+        }
+    }
+}
+@media(max-width: 690px) {
+    .menu {
+        flex-direction: column;
+        padding-top: 63px;
+        padding-bottom: 80px;
+        &__nav {
+            margin-top: auto;
+        }
+        &__list {
+            flex-direction: column;
+            &:last-child {
+                margin-top: 0;
+            }
+        }
+        &__line {
+            display: none;
+        }
+        &__item {
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+    }
+    .social {
+        position: relative;
+        bottom: unset;
+        right: unset;
+        left: unset;
+        margin-top: auto;
+        margin-bottom: 8px;
+    }
+    .language {
+        position: relative;
+        bottom: unset;
+        right: unset;
+        left: unset;
+    }
+}
+@media (max-width: 680px) {
+    .menu {
+        &__link {
+            font-size: 32px;
+        }
     }
 }
 </style>
