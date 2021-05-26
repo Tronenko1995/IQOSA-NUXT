@@ -15,29 +15,48 @@ mounted() {
 },
 methods: {
     icosahedronStart() {
-    let group, camera, scene, renderer;
+    let group, camera, scene, renderer, distance;
 
     const init = () => {
+
+        if (window.innerWidth <= 600) {
+            distance = 110 
+        } else if (window.innerWidth <= 800) {
+            distance = 104 
+        } else if (window.innerWidth <= 1100) {
+            distance = 84 
+        } else if (window.innerWidth <= 1800) {
+            distance = 70 
+        } else if (window.innerWidth <= 2200) {
+            distance = 90
+        } else {
+            distance = 105
+        }
+        if (window.innerWidth === 1024 && window.innerHeight === 1366) { // for ipad pro
+            distance = 105
+        }
 
         const icosahedron = this.$refs.menuIcosahedron
 
         scene = new THREE.Scene();
 
-        renderer = new THREE.WebGLRenderer( { antialias: true } );
+        renderer = new THREE.WebGLRenderer( { antialias: false } );
         renderer.setPixelRatio( window.devicePixelRatio );
-        renderer.setSize( window.innerWidth, window.innerHeight );
+        renderer.setSize( icosahedron.offsetWidth, icosahedron.offsetHeight );
         icosahedron.appendChild( renderer.domElement );
 
         // camera
-        camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 1000 );
-        camera.position.set( 15, 20, 30 );
+        camera = new THREE.PerspectiveCamera( distance, window.innerWidth / window.innerHeight, 0.001, 1000 );
+        // camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 1000 );
+        // camera.position.set( 15, 20, 30 );
+        camera.position.z = 2;
         scene.add( camera );
 
         // controls
-        const controls = new OrbitControls(camera, icosahedron);
-        controls.minDistance = 20;
-        controls.maxDistance = 50;
-        controls.maxPolarAngle = Math.PI / 2;
+        // const controls = new OrbitControls(camera, icosahedron);
+        // controls.minDistance = 20;
+        // controls.maxDistance = 50;
+        // controls.maxPolarAngle = Math.PI / 2;
 
         // ambient light
         scene.add( new THREE.AmbientLight( 0x222222 ) );
@@ -47,11 +66,11 @@ methods: {
         camera.add( light );
 
         // helper
-        scene.add( new THREE.AxesHelper( 20 ) );
+        // scene.add( new THREE.AxesHelper( 20 ) );
 
         // textures
-        const loader = new THREE.TextureLoader();
-        const texture = loader.load( 'https://threejs.org/examples/textures/sprites/disc.png' );
+        // const loader = new THREE.TextureLoader();
+        // const texture = loader.load( 'https://threejs.org/examples/textures/sprites/disc.png' );
 
         group = new THREE.Group();
         scene.add( group );
@@ -64,35 +83,36 @@ methods: {
         dodecahedronGeometry.deleteAttribute( 'uv' );
         dodecahedronGeometry = BufferGeometryUtils.mergeVertices( dodecahedronGeometry );
 
-        const vertices = [];
-        const positionAttribute = dodecahedronGeometry.getAttribute( 'position' );
+        // const vertices = [];
+        // const positionAttribute = dodecahedronGeometry.getAttribute( 'position' );
 
-        for ( let i = 0; i < positionAttribute.count; i ++ ) {
-            const vertex = new THREE.Vector3();
-            vertex.fromBufferAttribute( positionAttribute, i );
-            vertices.push( vertex );
-        }
+        // for ( let i = 0; i < positionAttribute.count; i ++ ) {
+            // const vertex = new THREE.Vector3();
+            // vertex.fromBufferAttribute( positionAttribute, i );
+            // vertices.push( vertex );
+        // }
 
-        const pointsMaterial = new THREE.PointsMaterial({
-            color: 0x0080ff,
-            map: texture,
-            size: 1,
-            alphaTest: 0.5
-        });
+        // const pointsMaterial = new THREE.PointsMaterial({
+        //     color: 0x0080ff,
+        //     map: texture,
+        //     size: 1,
+        //     alphaTest: 0.5
+        // });
 
-        const pointsGeometry = new THREE.BufferGeometry().setFromPoints( vertices );
+        // const pointsGeometry = new THREE.BufferGeometry().setFromPoints( vertices );
 
-        const points = new THREE.Points( pointsGeometry, pointsMaterial );
-        group.add( points );
+        // const points = new THREE.Points( pointsGeometry, pointsMaterial );
+        // group.add( points );
 
         // convex hull
         const meshMaterial = new THREE.MeshLambertMaterial( {
-            color: 0xffffff,
-            opacity: 0.5,
+            color: 0x333333,
+            opacity: 0.8,
             transparent: true
         } );
 
-        const meshGeometry = new ConvexGeometry( vertices );
+        // const meshGeometry = new ConvexGeometry( vertices );
+        const meshGeometry = new THREE.IcosahedronBufferGeometry(1, 0);
 
         const mesh1 = new THREE.Mesh( meshGeometry, meshMaterial );
         mesh1.material.side = THREE.BackSide; // back faces
