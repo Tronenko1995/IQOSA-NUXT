@@ -1,6 +1,6 @@
 <template>
 <div>
-    <div class="menu__icosahedron" ref="menuIcosahedron"></div>
+    <div class="icosahedron" ref="icosahedron"></div>
 </div>
 </template>
 
@@ -14,7 +14,7 @@ methods: {
     icosahedronStart() {
         let group, camera, scene, renderer, distance
 
-        const icosahedron = this.$refs.menuIcosahedron,
+        const icosahedron = this.$refs.icosahedron,
               mouse = new THREE.Vector2(),
               target = new THREE.Vector2()
 
@@ -107,11 +107,8 @@ methods: {
 }
 </script>
 
-
 <style lang="scss">
-.menu {
-    &__icosahedron {
-        opacity: 0;
+    .icosahedron {
         position: absolute;
         left: 0;
         top: 0;
@@ -119,5 +116,4 @@ methods: {
         height: 100vh;
         transition: opacity .5s ease;
     }
-}
 </style>
