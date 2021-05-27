@@ -46,6 +46,7 @@ export default {
             const showMenuLine = ((el) => {
                 el.forEach(item => {
                     this.$gsap.timeline().to(item, { 
+                        translateX: 0 + "%",
                         opacity: 1,
                         duration: 0.5,
                         delay: 1.2,
