@@ -31,7 +31,6 @@ export default {
   buildModules: ['nuxt-gsap-module'],
 
   gsap: {
-    /* module options */
   },
 
   // Modules: https://go.nuxtjs.dev/config-modules

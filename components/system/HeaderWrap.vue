@@ -32,7 +32,8 @@ export default {
                   socialLink = el.querySelectorAll('.social__link'),
                   languageLink = el.querySelectorAll('.language__link'),
                   menuLine = el.querySelectorAll('.menu__line'),
-                  languageLine = el.querySelectorAll('.language__line')
+                  languageLine = el.querySelectorAll('.language__line'),
+                  icosahedron = el.querySelector('.menu__icosahedron')
 
             const showLink = ((el) => {
                 el.forEach(item => {
@@ -59,10 +60,14 @@ export default {
                         translateX: 0 + "%",
                         duration: 0.6,
                         delay: 1.1,
-                        complete: done
                     }, 0)
                 });
             })
+            this.$gsap.timeline().to(icosahedron, {
+                opacity: 1,
+                delay: 2,
+                complete: done
+            }, 0)
 
             showLink(menuLink)
             showLink(socialLink)
@@ -76,7 +81,6 @@ export default {
 
 <style lang="scss" scoped>
     .fade-enter {
-        opacity: 0;
         transform: translateY(-100vh);
         &-active {
             transition: all 1s;
@@ -91,7 +95,6 @@ export default {
         }
         &-to {
             transform: translateY(-100vh);
-            opacity: 0;
         }
     }
 </style>

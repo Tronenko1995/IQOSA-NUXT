@@ -4,6 +4,7 @@
     box-sizing: border-box;
     border: none;
     outline: none;
+    transition-timing-function: ease-in;
     &::after,
     &::before {
         box-sizing: border-box;

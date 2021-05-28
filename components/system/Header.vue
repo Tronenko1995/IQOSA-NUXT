@@ -109,7 +109,7 @@ export default {
     display: flex;
     justify-content: center;
     width: 100%;
-    z-index: 1;
+    z-index: 2;
     position: fixed;
     &__wrap {
         width: 100%;
@@ -125,6 +125,7 @@ export default {
     }
     &__logo {
         display: flex;
+        opacity: 0;
     }
 }
 .nav {
@@ -136,7 +137,7 @@ export default {
     }
     &__item {
         display: block;
-        transform: translateY(0);
+        transform: translate(0px, 100%);
     }
     &__link {
         display: block;
@@ -166,7 +167,7 @@ export default {
     }
     &__item {
         display: block;
-        transform: translateY(0);
+        transform: translate(0px, 100%);
         opacity: 0;
         transition: opacity .5s ease;
         &--selected {

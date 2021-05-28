@@ -1,7 +1,7 @@
 <template>
     <div class="menu">
         <div>
-        <Icosahedron />
+            <Icosahedron />
         </div>
         <nav class="menu__nav">
             <ul class="menu__list">
@@ -104,6 +104,7 @@ export default {
 
 <style lang="scss">
 .menu {
+    z-index: 1;
     background: #1b1b1b;
     overflow: hidden;
     position: fixed;
