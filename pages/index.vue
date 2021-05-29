@@ -45,43 +45,54 @@
 </template>
 
 <script>
+import { gsap } from "gsap/dist/gsap";
+import { SplitText } from "gsap/dist/SplitText";
 import IcosahedronMain from '@/components/IcosahedronMain.vue'
 export default {
     components: {
         IcosahedronMain
     },
 	mounted() {
-		// gsap.registerPlugin(SplitText);
 		this.animate()
+		gsap.registerPlugin(SplitText);
 	},
 	methods: {
 		animate() {
-			this.$gsap.to('.main__title', { 
+
+		this.$gsap.registerPlugin(this.$SplitText);
+		
+		let split = new SplitText('.motto__item', {type: "lines"})
+
+			gsap.to('.main__title', { 
 				delay: 0.5,
 				translateX: 0,
 				opacity: 1,
 				duration: 0.5
 			})
-			this.$gsap.to('.motto__item--uno span', { 
-				translateY: 0,
-				delay: 1,
-                duration: 0.25,
-			})
-			this.$gsap.to('.motto__item--dos span', { 
-				translateY: 0,
-				delay: 1.25,
-                duration: 0.25,
-			})
-			this.$gsap.to('.motto__item--tres span', { 
-				translateY: 0,
-				delay: 1.50,
-                duration: 0.25,
-			})
-			this.$gsap.to('.motto__item--quatro span', { 
-				translateY: 0,
-				delay: 1.75,
-                duration: 0.25,
-			})
+			gsap.to(split, {
+                opacity: 0.5,
+                duration: 1,
+            })
+			// this.$gsap.to('.motto__item--uno span', { 
+			// 	translateY: 0,
+			// 	delay: 1,
+            //     duration: 0.25,
+			// })
+			// this.$gsap.to('.motto__item--dos span', { 
+			// 	translateY: 0,
+			// 	delay: 1.25,
+            //     duration: 0.25,
+			// })
+			// this.$gsap.to('.motto__item--tres span', { 
+			// 	translateY: 0,
+			// 	delay: 1.50,
+            //     duration: 0.25,
+			// })
+			// this.$gsap.to('.motto__item--quatro span', { 
+			// 	translateY: 0,
+			// 	delay: 1.75,
+            //     duration: 0.25,
+			// })
 			this.$gsap.to('.make-request__line', { 
 				translateX: 0,
 				delay: 2,
@@ -266,7 +277,7 @@ export default {
 		text-transform: uppercase;
 		font-feature-settings: 'pnum' on, 'lnum' on, 'kern' off;
 		span {
-			transform: translateY(100%);
+			// transform: translateY(100%);
     		display: block;
 		}
 	}

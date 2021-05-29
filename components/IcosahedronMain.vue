@@ -36,6 +36,13 @@ export default {
             this.target = new THREE.Vector2()
             this.light = new THREE.PointLight(0xffffff, 1)
 
+            // const texture = new THREE.TextureLoader().load(require('~/assets/img/icosahedron/MainEn.png'))
+            // const material2 = new THREE.MeshBasicMaterial({ 
+            //     map: texture,
+            //     color: 0x222222,
+            //     transparent: true
+            // })
+
             if (window.innerWidth <= 600) {
                 this.distance = 110 
             } else if (window.innerWidth <= 800) {
@@ -85,6 +92,8 @@ export default {
             this.group.add( mesh2 );
 
             this.scene.add( this.group );
+
+
         },
         animate() {
             requestAnimationFrame(this.animate)
