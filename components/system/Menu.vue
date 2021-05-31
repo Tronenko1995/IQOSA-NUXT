@@ -104,7 +104,7 @@ export default {
 
 <style lang="scss">
 .menu {
-    z-index: 1;
+    z-index: 2;
     background: #1b1b1b;
     overflow: hidden;
     position: fixed;

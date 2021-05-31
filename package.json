@@ -6,7 +6,10 @@
     "dev": "nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
-    "generate": "nuxt generate"
+    "generate": "nuxt generate",
+    "pm2:start": "pm2 start",
+    "pm2:restart": "pm2 restart stajWebClient",
+    "pm2:stop": "pm2 stop stajWebClient"
   },
   "dependencies": {
     "@types/dat.gui": "^0.7.6",
@@ -15,6 +18,7 @@
     "gsap": "file:gsap-bonus.tgz",
     "node-sass": "^5.0.0",
     "nuxt": "^2.15.3",
+    "pm2": "^4.5.6",
     "sass-loader": "^10.1.1",
     "three": "^0.128.0",
     "three-dat.gui": "^2.0.7"

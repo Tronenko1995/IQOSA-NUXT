@@ -109,8 +109,10 @@ export default {
     display: flex;
     justify-content: center;
     width: 100%;
-    z-index: 2;
+    z-index: 3;
     position: fixed;
+    transition: all .5s;
+    background: #1b1b1b;
     &__wrap {
         width: 100%;
         padding: 30px 64px;

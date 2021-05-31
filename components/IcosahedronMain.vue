@@ -27,6 +27,24 @@ export default {
        }
     },
     methods: {
+        testDistance() {
+            if (this.icosahedron.offsetWidth <= 600) {
+                this.distance = 110 
+            } else if (this.icosahedron.offsetWidth <= 800) {
+                this.distance = 104 
+            } else if (this.icosahedron.offsetWidth <= 1100) {
+                this.distance = 84 
+            } else if (this.icosahedron.offsetWidth <= 1800) {
+                this.distance = 70 
+            } else if (this.icosahedron.offsetWidth <= 2200) {
+                this.distance = 90
+            } else {
+                this.distance = 105
+            }
+            if (this.icosahedron.offsetWidth === 1024 && this.icosahedron.innerHeight === 1366) { // for ipad pro
+                this.distance = 105
+            }
+        },
         init() {
             this.icosahedron = this.$refs.icosahedron
             this.renderer = new THREE.WebGLRenderer({alpha: true})
@@ -36,29 +54,14 @@ export default {
             this.target = new THREE.Vector2()
             this.light = new THREE.PointLight(0xffffff, 1)
 
+            this.testDistance()
+
             // const texture = new THREE.TextureLoader().load(require('~/assets/img/icosahedron/MainEn.png'))
             // const material2 = new THREE.MeshBasicMaterial({ 
             //     map: texture,
             //     color: 0x222222,
             //     transparent: true
             // })
-
-            if (window.innerWidth <= 600) {
-                this.distance = 110 
-            } else if (window.innerWidth <= 800) {
-                this.distance = 104 
-            } else if (window.innerWidth <= 1100) {
-                this.distance = 84 
-            } else if (window.innerWidth <= 1800) {
-                this.distance = 70 
-            } else if (window.innerWidth <= 2200) {
-                this.distance = 90
-            } else {
-                this.distance = 105
-            }
-            if (window.innerWidth === 1024 && window.innerHeight === 1366) { // for ipad pro
-                this.distance = 105
-            }
 
             this.camera = new THREE.PerspectiveCamera( this.distance, window.innerWidth / window.innerHeight, 0.001, 1000 )
                 
@@ -105,7 +108,7 @@ export default {
             this.group.position.x = -0.4 * this.target.x;
             this.group.position.y = -0.4 * this.target.y;
 
-            this.renderer.render( this.scene, this.camera );
+            this.renderer.render(this.scene, this.camera);
         },
         onMouseMove(e) {
             e.preventDefault();
@@ -113,9 +116,11 @@ export default {
             this.mouse.y = - (e.clientY / window.innerHeight) * 2 + 1;
         },
         onWindowResize() {
-            this.camera.aspect = window.innerWidth / window.innerHeight
+            this.testDistance()
+            this.camera.fov = this.distance
+            this.camera.aspect = this.icosahedron.offsetWidth / this.icosahedron.offsetHeight
             this.camera.updateProjectionMatrix()
-            this.renderer.setSize( window.innerWidth, window.innerHeight )
+            this.renderer.setSize( this.icosahedron.offsetWidth, this.icosahedron.offsetHeight );
         }
     },
     beforeDestroy() {
@@ -131,10 +136,10 @@ export default {
         opacity: 0;
         left: 0;
         top: 0;
-        width: 100vw;
+        width: 100%;
         height: 100vh;
         transition: opacity .5s ease;
-        z-index: 5;
+        z-index: 1;
         pointer-events: none;
     }
 </style>

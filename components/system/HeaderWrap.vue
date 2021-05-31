@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Header :menuStatus="menuStatus"/>
+        <Header :menuStatus="menuStatus" :class="{'hideInScroll': hideInScroll}"/>
         <transition
         v-if="menuStatus"
         name="fade" 
@@ -21,10 +21,23 @@ export default {
         Header,
         Menu
     },
+    beforeMount() {
+        window.addEventListener('scroll', this.handleScroll);
+    },
+    beforeDestroy() {
+        window.removeEventListener('scroll', this.handleScroll);
+    },
     computed: {
         ...mapState({
             menuStatus: (state) => state.menu.status
         })
+    },
+    data() {
+        return {
+            lastScroll: 0,
+            scrollPosition: 0,
+            hideInScroll: false
+        }
     },
     methods: {
         beforeEnter(el, done) {
@@ -75,11 +88,25 @@ export default {
             showMenuLine(menuLine)
             showLanguageLine(languageLine)
         },
+        handleScroll() {
+            // console.log(window.scrollY)
+            this.scrollPosition = window.scrollY
+
+            if (this.lastScroll > this.scrollPosition) {
+                this.hideInScroll = false
+            } else if (this.lastScroll < this.scrollPosition && this.lastScroll >= 0) {
+                this.hideInScroll = true
+            }
+            this.lastScroll = this.scrollPosition
+        }
     }
 }
 </script>
 
 <style lang="scss" scoped>
+    .hideInScroll {
+        transform: translateY(-100%);
+    }
     .fade-enter {
         transform: translateY(-100vh);
         &-active {
