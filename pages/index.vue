@@ -60,8 +60,8 @@ export default {
     overflow: hidden;
 	width: 100%;
 }
-.scroll-container {
-	position: absolute;
-    width: 100%;
-}
+// .scroll-container {
+// 	position: absolute;
+//     width: 100%;
+// }
 </style>

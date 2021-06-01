@@ -22,7 +22,7 @@
             </div>
             <div class="main__row">
                 <p class="main__title main__title--second main__title--italic">A perfect</p>
-                <div class="make-request" @mouseover="animateTextShow($event)" @mouseleave="animateTextHide($event)">
+                <div class="make-request" @mouseover="findElement($event)" @mouseleave="animateTextHide($event)">
                     <nuxt-link to="/sayhi" class="make-request__link">
                         <span class="make-request__text">Make request</span>
                         <span class="make-request__change">
@@ -51,7 +51,7 @@ export default {
 	methods: {
 		animate() {
 
-		this.$gsap.registerPlugin(this.$SplitText);
+		// this.$gsap.registerPlugin(this.$SplitText);
 		
 		// let split = new SplitText('.motto__item', {type: "lines"})
 
@@ -115,36 +115,24 @@ export default {
 				delay: 3,
 			})
 		},
-		animateTextShow(e) {
-			if (e.target.classList.contains('make-request__text')) {
-				this.$gsap.to(e.target.nextElementSibling.children[0], { 
-					translateY: -100 + "%",
-					duration: .5
-				})
-				this.$gsap.to(e.target.nextElementSibling.children[1], { 
-					translateY: -100 + "%",
-					duration: .5
-				})
-			} else if (e.target.classList.contains('make-request__link')) {
-				this.$gsap.to(e.target.children[1].children[0], { 
-					translateY: -100 + "%",
-					duration: .5
-				})
-				this.$gsap.to(e.target.children[1].children[1], { 
-					translateY: -100 + "%",
-					duration: .5
-				})
+		findElement(e) {
+			if (e.target.classList.contains('make-request__text') || e.target.classList.contains('make-request__link')) {
+				const el = e.target.parentElement.querySelector('.make-request__change')
+				this.animateTextShow(el)
 			} else if (e.target.classList.contains('make-request__span--first')) {
-				this.$gsap.to(e.target, { 
-					translateY: -100 + "%",
-					duration: .5
-				})
-				this.$gsap.to(e.target.nextElementSibling, { 
-					translateY: -100 + "%",
-					duration: .5
-				})
+				this.animateTextShow(e.target.parentElement)
 			}
 		},
+        animateTextShow(el) {
+            this.$gsap.to(el.children[0], { 
+                translateY: -100 + "%",
+                duration: .5
+            })
+            this.$gsap.to(el.children[1], { 
+                translateY: -100 + "%",
+                duration: .5
+            })
+        },
 		animateTextHide(e) {
 			if (e.target.classList.contains('make-request')) {
 				this.$gsap.to(e.target.children[0].children[1].children[0], { 
@@ -214,12 +202,12 @@ export default {
 	&__change {
 		display: block;
 		overflow: hidden;
-			span {
-				display: block;
-					&:last-child {
-						position: absolute;
-					}
+		span {
+			display: block;
+			&:last-child {
+				position: absolute;
 			}
+		}
 	}
 	&__link {
 		display: flex;
@@ -235,7 +223,6 @@ export default {
 		&:hover + {
 			.make-request__line {
 				animation: 'under-line' 1s;
-				transition: .3s ease;
 			}
 		}
 	}
