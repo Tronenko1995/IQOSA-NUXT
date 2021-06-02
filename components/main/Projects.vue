@@ -29,18 +29,14 @@
                 <li class="projects-address__item">2019,  <span class="projects-address__span">KYIV</span>,  Ukraine,  560M2</li>
             </ul>
         </div>
-        <div class="projects__photos projects-photos">
-            <ul class="projects-photos__list">
-                <li class="projects-photos__item">
-                    <img class="projects-photos__img" :src="require('~/assets/img/projects/1.jpg')" alt="">
-                </li>
-            </ul>
-        </div>
+        <ProjectsPhotos />
     </div>
 </template>
 
 <script>
+import ProjectsPhotos from '@/components/main/ProjectsPhotos.vue'
 export default {
+    components: { ProjectsPhotos },
     methods: {
 		findElement(e) {
 			if (e.target.classList.contains('projects-link__text') || e.target.classList.contains('projects-link') || e.target.classList.contains('projects-link__circle')) {
@@ -185,19 +181,6 @@ export default {
     }
     &__span {
         font-family: 'LightItalic', Arial;
-    }
-}
-.projects-photos {
-    &__list {
-
-    }
-    &__item {
-
-    }
-    &__img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
     }
 }
 .featured {
