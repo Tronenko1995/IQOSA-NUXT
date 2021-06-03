@@ -29,14 +29,14 @@
                 <li class="projects-address__item">2019,  <span class="projects-address__span">KYIV</span>,  Ukraine,  560M2</li>
             </ul>
         </div>
-        <ProjectsPhotos />
+        <!-- <ProjectsPhotos /> -->
     </div>
 </template>
 
 <script>
-import ProjectsPhotos from '@/components/main/ProjectsPhotos.vue'
+// import ProjectsPhotos from '@/components/main/ProjectsPhotos.vue'
 export default {
-    components: { ProjectsPhotos },
+    // components: { ProjectsPhotos },
     methods: {
 		findElement(e) {
 			if (e.target.classList.contains('projects-link__text') || e.target.classList.contains('projects-link') || e.target.classList.contains('projects-link__circle')) {

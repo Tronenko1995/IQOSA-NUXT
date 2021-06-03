@@ -24,6 +24,54 @@
             // el: '.swiper-pagination'
         //   },
           // Some Swiper option/callback...
+          on: {
+              // slideChange: function () {
+              //     const slider_count = document.querySelector("#main-project_slider-count");
+              //     if (slider_count) {
+              //         slider_count.textContent = this.realIndex + 1;
+              //     }
+              //     let active_el = this.$el[0].querySelector(`[data-swiper-slide-index="${this.realIndex}"]`);
+              //     if (active_el) {
+              //         project_slider_link.setAttribute("href", active_el.dataset.sliderUrl);
+              //         main_slider_img.setAttribute("href", active_el.dataset.sliderUrl);
+              //         main_slider_name.setAttribute("href", active_el.dataset.sliderUrl);
+              //     }
+              // },
+              progress: function () {
+                  var swiper = this;
+                  let interleaveOffset = 0.5;
+
+                  for (var i = 0; i < swiper.slides.length; i++) {
+                    var slideProgress = swiper.slides[i].progress;
+                    var innerOffset = swiper.width * interleaveOffset;
+                    var innerTranslate = slideProgress * innerOffset;
+
+                    if (!swiper.slides[i].classList.contains("swiper-slide-active")) {
+                      swiper.slides[i].querySelector(
+                        ".projects-photos__item"
+                      ).style.transform = `translate3d(${innerTranslate}px, 0, 0)`;
+                    } else {
+                      swiper.slides[i].querySelector(
+                        ".projects-photos__item"
+                      ).style.transform = `translate3d(${innerTranslate}px, 0, 0)`;
+                    }
+                  }
+                },
+              //   touchStart: function () {
+              //     var swiper = this;
+              //     for (var i = 0; i < swiper.slides.length; i++) {
+              //       swiper.slides[i].style.transition = "";
+              //     }
+              //   },
+              //   setTransition: function (speed) {
+              //     var swiper = this;
+              //     for (var i = 0; i < swiper.slides.length; i++) {
+              //       swiper.slides[i].style.transition = speed + "ms";
+              //       swiper.slides[i].querySelector(".slide-inner").style.transition =
+              //         speed + "ms";
+              //     }
+              //   }
+            }
         }
       }
     },
@@ -33,6 +81,7 @@
       }
     },
     mounted() {
+      console.log(this.swiper)
     }
   }
 </script> 
