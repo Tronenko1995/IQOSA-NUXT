@@ -1,7 +1,8 @@
 <template>
 	<main class="index">
 		<!-- <div class="scroll-container" ref="scrollContainer"> -->
-			<IcosahedronMain />
+			<!-- <IcosahedronMain /> -->
+			<IcosahedronNew />
 			<Main />
 			<Projects />
 		<!-- </div> -->
