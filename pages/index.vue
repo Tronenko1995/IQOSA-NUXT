@@ -2,7 +2,7 @@
 	<main class="index">
 		<!-- <div class="scroll-container" ref="scrollContainer"> -->
 			<!-- <IcosahedronMain /> -->
-			<IcosahedronNew />
+			<IcosahedronCrystal />
 			<Main />
 			<Projects />
 		<!-- </div> -->
@@ -10,12 +10,10 @@
 </template>
 
 <script>
-import IcosahedronMain from '@/components/IcosahedronMain.vue'
 import Main from '@/components/main/Main.vue'
 import Projects from '@/components/main/Projects.vue'
 export default {
     components: {
-        IcosahedronMain,
 		Main,
 		Projects
     },

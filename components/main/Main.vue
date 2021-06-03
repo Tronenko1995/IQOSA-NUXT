@@ -110,7 +110,7 @@ export default {
 				delay: 1,
                 duration: 0.25,
 			})
-			this.$gsap.to('.icosahedron-main', { 
+			this.$gsap.to('.icosahedron-crystal', { 
 				opacity: 1,
 				delay: 3,
 			})

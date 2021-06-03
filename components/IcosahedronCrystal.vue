@@ -1,11 +1,11 @@
 <template>
-  <div class="icosahedron-new__container" ref="icosahedron"></div>
+  <div class="icosahedron-crystal" ref="icosahedron"></div>
 </template>
 
 <script>
 import Sketch from "~/plugins/icosahedron";
 export default {
-  name: "IcosahedronNew",
+  name: "IcosahedronCrystal",
   data: function () {
     return {
       icosahedron: null,
@@ -20,12 +20,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.icosahedron-new__container {
+.icosahedron-crystal {
   position: absolute;
   width: 100%;
   height: 100%;
+  opacity: 0;
   top: 0;
   left: 0;
   z-index: 5;
+  pointer-events: none;
 }
 </style>

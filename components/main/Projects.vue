@@ -9,11 +9,7 @@
                 </div>
             </div>
             <div class="projects__name projects-name">
-                <div class="projects-name__title">
-                    <ul class="projects-name__list">
-                        <li class="projects-name__item"><span>IQ</span>-08-SL</li>
-                    </ul>
-                </div>
+                <ProjectsName />
                 <nuxt-link to="/" class="projects__link projects-link" @mouseover.native="findElement($event)" @mouseleave.native="animateTextHide($event)">
                     <span class="projects-link__change">
                         <span class="projects-link__span projects-link__span--first">Explore</span>
@@ -25,19 +21,136 @@
                     </span>
                     </nuxt-link>
             </div>
-            <ul class="projects__address projects-address">
-                <li class="projects-address__item">2019,  <span class="projects-address__span">KYIV</span>,  Ukraine,  560M2</li>
-            </ul>
+            <template>
+                <swiper ref="projectAddress" :options="projectAddressSetting" class="projects__address  projects-address">
+                    <swiper-slide class="projects-address__item">
+                        2019,  <span class="projects-address__span">KYIV</span>,  Ukraine,  560M2
+                    </swiper-slide>
+                    <swiper-slide class="projects-address__item">
+                        2020,  <span class="projects-address__span">Moskow</span>,  Russia,  560M2
+                    </swiper-slide>
+                    <swiper-slide class="projects-address__item">
+                        2021,  <span class="projects-address__span">Rome</span>,  Italy,  560M2
+                    </swiper-slide>
+                </swiper>
+            </template>
         </div>
-        <!-- <ProjectsPhotos /> -->
+        <template>
+            <swiper ref="projectPhotos" :options="projectPhotosSetting" class="projects__photos projects-photos">
+                <swiper-slide class="projects-photos__item">
+                    <div class="projects-photos__slide">
+                        <img class="projects-photos__img" :src="require('~/assets/img/projects/1.jpg')" alt="">
+                    </div>
+                </swiper-slide>
+                <swiper-slide class="projects-photos__item">
+                    <div class="projects-photos__slide">
+                        <img class="projects-photos__img" :src="require('~/assets/img/projects/2.jpg')" alt="">
+                    </div>
+                </swiper-slide>
+                <swiper-slide class="projects-photos__item">
+                    <div class="projects-photos__slide">
+                        <img class="projects-photos__img" :src="require('~/assets/img/projects/3.jpg')" alt="">
+                    </div>
+                </swiper-slide>
+            </swiper>
+        </template>
     </div>
 </template>
 
 <script>
 // import ProjectsPhotos from '@/components/main/ProjectsPhotos.vue'
+import ProjectsName from '@/components/main/ProjectsName.vue'
+// import ProjectAddress from '@/components/main/ProjectsAddress.vue'
 export default {
-    // components: { ProjectsPhotos },
+    components: { ProjectsName },
+    data() {
+        return {
+            projectAddressSetting: {
+                speed: 700,
+                loop: true,
+                direction: 'vertical',
+                dragSize: 22,
+                slidesPerView: 1,
+            },
+            projectPhotosSetting: {
+                speed: 700,
+                loop: true,
+                touchStartPreventDefault: false,
+                watchSlidesProgress: true,
+                slidesPerView: 1,
+                autoplay: {
+                    delay: 3000,
+                },
+                pagination: {
+                    el: '.swiper-pagination',
+                    type: 'fraction',
+                },
+                controller: {
+                    control: [
+                        this.projectAddress,
+                    ]
+                },
+                on: {
+                    progress: function () {
+                        var swiper = this;
+                        let interleaveOffset = 0.5;
+
+                        for (var i = 0; i < swiper.slides.length; i++) {
+                            var slideProgress = swiper.slides[i].progress;
+                            var innerOffset = swiper.width * interleaveOffset;
+                            var innerTranslate = slideProgress * innerOffset;
+
+                            if (!swiper.slides[i].classList.contains("swiper-slide-active")) {
+                                swiper.slides[i].querySelector(
+                                    ".projects-photos__slide"
+                                ).style.transform = `translate3d(${innerTranslate}px, 0, 0)`;
+                            } else {
+                                swiper.slides[i].querySelector(
+                                    ".projects-photos__slide"
+                                ).style.transform = `translate3d(${innerTranslate}px, 0, 0)`;
+                            }
+                        }
+                    },
+                    touchStart: function () {
+                        var swiper = this;
+                        for (var i = 0; i < swiper.slides.length; i++) {
+                            swiper.slides[i].style.transition = "";
+                        }
+                    },
+                    setTransition: function (swiper, speed) {
+                        var swiper = this;
+                        for (var i = 0; i < swiper.slides.length; i++) {
+                            swiper.slides[i].style.transition = speed + "ms";
+                            swiper.slides[i].querySelector(".projects-photos__slide").style.transition =
+                                speed + "ms";
+                        }
+                    }
+                }
+            },
+            // photoSlider: null,
+            // nameSlider: null,
+            // adressSlider: null
+        }
+    },
+    computed: {
+        projectAddress() {
+            return this.$refs.projectAddress.$swiper
+        },
+        projectPhotos() {
+            return this.$refs.projectPhotos.$swiper
+        }
+    },
     methods: {
+
+        // photoSliderCb(swiper) {
+        //     this.photoSlider = swiper
+        // },
+        // nameSliderCb(swiper) {
+        //     this.nameSlider = swiper
+        // },
+        // adressSliderCb(swiper) {
+        //     this.adressSlider = swiper
+        // },
 		findElement(e) {
 			if (e.target.classList.contains('projects-link__text') || e.target.classList.contains('projects-link') || e.target.classList.contains('projects-link__circle')) {
                 const el = e.target.parentElement.querySelector('.projects-link__change')
@@ -86,29 +199,6 @@ export default {
     &__photos {
         width: 60%;
         height: 56vh;
-    }
-}
-.projects-name {
-    &__list {
-        
-    }
-    &__item {
-        font-family: 'ThinItalic', Arial;
-        font-weight: 300;
-        font-size: 62px;
-        line-height: 100%;
-        letter-spacing: 0.05em;
-        text-transform: uppercase;
-        font-feature-settings: 'pnum' on, 'lnum' on, 'kern' off;
-        color: #FFFFFF;
-        span {
-            font-family: 'Roman', Arial;
-            font-weight: normal;
-            letter-spacing: unset;
-        }
-    }
-    &__link {
-
     }
 }
 .projects-link {
@@ -170,7 +260,24 @@ export default {
     }
 }
 .projects-address {
+	overflow: hidden;
+	height: 17px;
+	.swiper-wrapper {
+		position: relative;
+		width: 100%;
+		height: 100%;
+		z-index: 1;
+		display: flex;
+		transition-property: transform;
+		flex-direction: column;
+	}
     &__item {
+		flex-shrink: 0;
+		width: 100%;
+		height: 100%;
+		position: relative;
+		transition-property: transform;
+
         font-family: 'Light', Arial;
         font-weight: 300;
         font-size: 14px;
@@ -182,6 +289,52 @@ export default {
     &__span {
         font-family: 'LightItalic', Arial;
     }
+}
+.projects-photos {
+	margin-left: auto;
+	margin-right: auto;
+	position: relative;
+	overflow: hidden;
+	list-style: none;
+	padding: 0;
+	z-index: 1;
+	width: 60%;
+	height: 80vh;
+	padding-top: 1px;
+	overflow-y: hidden;
+	.swiper-wrapper {
+		position: relative;
+		width: 100%;
+		height: 100%;
+		z-index: 1;
+		display: flex;
+		transition-property: transform;
+		box-sizing: content-box;
+		transition-timing-function: cubic-bezier(.79,.36,.34,.99)!important;
+	}
+	&__item {
+		flex-shrink: 0;
+		width: 100%;
+		height: 100%;
+		position: relative;
+		transition-property: transform;
+		overflow: hidden;
+	}
+	&__slide {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		left: 0;
+		top: 0;
+		transition-timing-function: cubic-bezier(.79,.36,.34,.99)!important;
+	}
+	&__img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: center;
+		transition-timing-function: ease-in;
+	}
 }
 .featured {
     display: flex;
