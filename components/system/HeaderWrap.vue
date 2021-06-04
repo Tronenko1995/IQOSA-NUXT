@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Header :menuStatus="menuStatus" :class="{'hideInScroll': hideInScroll}"/>
+        <Header :menuStatus="menuStatus" :class="[{'hideInScroll': hideInScroll}, {'open': menuStatus}]"/>
         <transition
         v-if="menuStatus"
         name="fade" 
@@ -104,6 +104,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+    .open {
+        background: none;
+    }
     .hideInScroll {
         transform: translateY(-100%);
     }

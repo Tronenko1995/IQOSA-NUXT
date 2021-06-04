@@ -19,7 +19,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .icosahedron-crystal {
   position: absolute;
   width: 100%;
@@ -27,7 +27,7 @@ export default {
   opacity: 0;
   top: 0;
   left: 0;
-  z-index: 5;
+  z-index: 1;
   pointer-events: none;
 }
 </style>

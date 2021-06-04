@@ -1,15 +1,33 @@
 <template>
     <div class="projects">
         <div class="projects__info">
+            <iqosaCursor></iqosaCursor>
             <div class="featured">
-                <p class="featured__text">Featured</p>
-                <div class="featured__item">
-                   <nuxt-link to="/" class="featured__link">Projects</nuxt-link>
-                   <span class="featured__line"></span>
+                <div class="featured__block">
+                    <p class="featured__text">Featured</p>
+                    <div class="featured__item">
+                        <nuxt-link to="/" class="featured__link">Projects</nuxt-link>
+                        <span class="featured__line"></span>
+                    </div>
                 </div>
+                <p class="projects__count">
+                    <span ref="currentSlide">1</span>/<span ref="totalSlides">1</span>
+                </p>
             </div>
             <div class="projects__name projects-name">
-                <ProjectsName />
+                <template>
+                    <swiper ref="projectName" :options="projectNameSetting" class="projects-name__title">
+                        <swiper-slide class="projects-name__item">
+                            <span>IQ</span>-08-SL
+                        </swiper-slide>
+                        <swiper-slide class="projects-name__item">
+                            <span>AA</span>-99-SL
+                        </swiper-slide>
+                        <swiper-slide class="projects-name__item">
+                            <span>XL</span>-92-SL
+                        </swiper-slide>
+                    </swiper>
+                </template>
                 <nuxt-link to="/" class="projects__link projects-link" @mouseover.native="findElement($event)" @mouseleave.native="animateTextHide($event)">
                     <span class="projects-link__change">
                         <span class="projects-link__span projects-link__span--first">Explore</span>
@@ -36,7 +54,7 @@
             </template>
         </div>
         <template>
-            <swiper ref="projectPhotos" :options="projectPhotosSetting" class="projects__photos projects-photos">
+            <swiper ref="projectPhotos" :options="projectPhotosSetting" class="projects__photos projects-photos" data-drag-circle>
                 <swiper-slide class="projects-photos__item">
                     <div class="projects-photos__slide">
                         <img class="projects-photos__img" :src="require('~/assets/img/projects/1.jpg')" alt="">
@@ -58,21 +76,37 @@
 </template>
 
 <script>
-// import ProjectsPhotos from '@/components/main/ProjectsPhotos.vue'
-import ProjectsName from '@/components/main/ProjectsName.vue'
-// import ProjectAddress from '@/components/main/ProjectsAddress.vue'
+import iqosaCursor from '@/components/system/Cursor.vue'
 export default {
-    components: { ProjectsName },
+    components: {
+        iqosaCursor
+    },
     data() {
         return {
+            projectNameSetting: {
+                observer: true,
+                speed: 500,
+                loop: true,
+                direction: 'vertical',
+                slidesPerView: 1,
+                dragSize: 22,
+                controller: {
+                    control: []
+                }
+            },
             projectAddressSetting: {
+                observer: true,
                 speed: 700,
                 loop: true,
                 direction: 'vertical',
                 dragSize: 22,
                 slidesPerView: 1,
+                controller: {
+                    control: []
+                }
             },
             projectPhotosSetting: {
+                observer: true,
                 speed: 700,
                 loop: true,
                 touchStartPreventDefault: false,
@@ -86,13 +120,10 @@ export default {
                     type: 'fraction',
                 },
                 controller: {
-                    control: [
-                        this.projectAddress,
-                    ]
+                    control: []
                 },
                 on: {
-                    progress: function () {
-                        var swiper = this;
+                    progress: function (swiper) {
                         let interleaveOffset = 0.5;
 
                         for (var i = 0; i < swiper.slides.length; i++) {
@@ -111,46 +142,36 @@ export default {
                             }
                         }
                     },
-                    touchStart: function () {
-                        var swiper = this;
+                    touchStart: function (swiper) {
                         for (var i = 0; i < swiper.slides.length; i++) {
                             swiper.slides[i].style.transition = "";
                         }
                     },
                     setTransition: function (swiper, speed) {
-                        var swiper = this;
                         for (var i = 0; i < swiper.slides.length; i++) {
                             swiper.slides[i].style.transition = speed + "ms";
                             swiper.slides[i].querySelector(".projects-photos__slide").style.transition =
                                 speed + "ms";
                         }
-                    }
+                    },
                 }
             },
-            // photoSlider: null,
-            // nameSlider: null,
-            // adressSlider: null
         }
     },
     computed: {
-        projectAddress() {
-            return this.$refs.projectAddress.$swiper
-        },
-        projectPhotos() {
-            return this.$refs.projectPhotos.$swiper
-        }
+        projectAddress() { return this.$refs.projectAddress.$swiper },
+        projectPhotos() { return this.$refs.projectPhotos.$swiper },
+        projectName() { return this.$refs.projectName.$swiper },
+    },
+    mounted() {
+        this.projectPhotos.controller.control = this.projectAddress
+        this.projectAddress.controller.control = this.projectName
+        this.$refs.totalSlides.textContent = this.projectPhotos.slides.length - 2
+        this.projectPhotos.on('slideChange', () => {
+            this.$refs.currentSlide.textContent = this.projectPhotos.realIndex + 1;
+        })
     },
     methods: {
-
-        // photoSliderCb(swiper) {
-        //     this.photoSlider = swiper
-        // },
-        // nameSliderCb(swiper) {
-        //     this.nameSlider = swiper
-        // },
-        // adressSliderCb(swiper) {
-        //     this.adressSlider = swiper
-        // },
 		findElement(e) {
 			if (e.target.classList.contains('projects-link__text') || e.target.classList.contains('projects-link') || e.target.classList.contains('projects-link__circle')) {
                 const el = e.target.parentElement.querySelector('.projects-link__change')
@@ -188,6 +209,7 @@ export default {
 
 <style lang="scss">
 .projects {
+    margin-top: 120px; 
     display: flex;
     &__info {
         display: flex;
@@ -199,6 +221,16 @@ export default {
     &__photos {
         width: 60%;
         height: 56vh;
+    }
+    &__count {
+        padding-right: 16px;
+        font-family: 'Roman', Arial;
+        font-weight: normal;
+        font-size: 15px;
+        line-height: 120%;
+        font-feature-settings: 'pnum' on, 'lnum' on, 'kern' off;
+        color: #FFFFFF;
+        display: none;
     }
 }
 .projects-link {
@@ -262,6 +294,7 @@ export default {
 .projects-address {
 	overflow: hidden;
 	height: 17px;
+    pointer-events: none;
 	.swiper-wrapper {
 		position: relative;
 		width: 100%;
@@ -302,6 +335,7 @@ export default {
 	height: 80vh;
 	padding-top: 1px;
 	overflow-y: hidden;
+    cursor: none;
 	.swiper-wrapper {
 		position: relative;
 		width: 100%;
@@ -336,8 +370,54 @@ export default {
 		transition-timing-function: ease-in;
 	}
 }
+.projects-name {
+	&__title {
+    position: relative;
+    margin-bottom: 24px;
+    height: 72px;
+    overflow: hidden;
+    pointer-events: none;
+	}
+	.swiper-wrapper {
+		position: relative;
+		width: 100%;
+		height: 100%;
+		z-index: 1;
+		display: flex;
+		transition-property: transform;
+		flex-direction: column;
+	}
+    &__item {
+	flex-shrink: 0;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transition-property: transform;
+
+        font-family: 'ThinItalic', Arial;
+        font-weight: 300;
+        font-size: 62px;
+        line-height: 100%;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        font-feature-settings: 'pnum' on, 'lnum' on, 'kern' off;
+        color: #FFFFFF;
+        span {
+            font-family: 'Roman', Arial;
+            font-weight: normal;
+            letter-spacing: unset;
+        }
+    }
+    &__link {
+
+    }
+}
 .featured {
     display: flex;
+    justify-content: space-between;
+    &__block {
+        display: flex;
+    }
     &__text {
         font-size: 22px;
         letter-spacing: 0.05em;
@@ -373,6 +453,140 @@ export default {
         transition: .3s ease;
         bottom: 0;
         width: 100%;
+    }
+}
+@media (max-width: 1440px) {
+    .projects {
+        &__info {
+            padding-left: 64px;
+        }
+    }
+}
+@media (max-width: 1280px) {
+    .projects {
+        &__info {
+            padding-left: 56px;
+        }
+    }
+    .featured {
+        &__text {
+            font-size: 19px;
+        }
+    }
+    .projects-name {
+        &__item {
+            font-size: 52px;
+        }
+    }
+    .projects-link {
+        &__span {
+            font-size: 14px;
+        }
+        &__text {
+            font-size: 14px;
+        }
+    }
+}
+@media (max-width: 1024px) {
+    .featured {
+        &__text {
+            font-size: 17px;
+        }
+        &__link {
+            font-size: 17px;
+        }
+    }
+    .projects-link {
+        &__span {
+            font-size: 12px;
+        }
+        &__text {
+            font-size: 12px;
+        }
+    }
+    .projects-address {
+        &__item {
+            font-size: 12px;
+        }
+    }
+}
+@media (max-width: 1000px) {
+    .projects {
+        &__info {
+            width: 50%;
+        }
+    }
+    .projects-photos {
+        width: 50%;
+    }
+}
+@media (max-width: 768px) {
+    .projects {
+        &__info {
+            padding-left: 48px;
+        }
+    }
+    .projects-name {
+        &__item {
+            font-size: 46px;
+        }
+    }
+    .featured {
+        &__text {
+            font-size: 16px;
+        }
+        &__link {
+            font-size: 16px;
+        }
+    }
+}
+@media (max-width: 700px) {
+    .projects-photos {
+        width: 100%;
+        height: 330px;
+        margin-top: 33px;
+    }
+    .featured {
+        margin-bottom: 370px;
+    }
+    .projects {
+        &__count {
+            display: block;
+        }
+        &__info {
+            position: absolute;
+            height: 600px;
+            width: 100%;
+            padding-left: 16px;
+        }
+    }
+}
+@media (max-width: 414px) {
+    .featured {
+        &__text {
+            font-size: 15px;
+        }
+        &__link {
+            font-size: 15px;
+        }
+    }
+    .projects-name {
+        &__item {
+            font-size: 40px;
+        }
+    }
+    .projects-link {
+        &__span {
+            font-size: 13px;
+        }
+        &__text {
+            font-size: 13px;
+        }
+    }
+    .projects-address {
+        &__item {
+            font-size: 13px;
+        }
     }
 }
 </style>

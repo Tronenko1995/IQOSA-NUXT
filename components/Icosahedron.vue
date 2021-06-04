@@ -29,7 +29,7 @@ export default {
     methods: {
         init() {
             this.icosahedron = this.$refs.menuIcosahedron
-            this.renderer = new THREE.WebGLRenderer()
+            this.renderer = new THREE.WebGLRenderer({alpha: true})
             this.group = new THREE.Group()
             this.scene = new THREE.Scene()
             this.mouse = new THREE.Vector2()
