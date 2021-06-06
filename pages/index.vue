@@ -5,6 +5,8 @@
 			<IcosahedronCrystal />
 			<Main />
 			<Projects />
+			<Team v-if="desktop"/>
+			<Modals />
 		<!-- </div> -->
 	</main>
 </template>
@@ -12,15 +14,24 @@
 <script>
 import Main from '@/components/main/Main.vue'
 import Projects from '@/components/main/Projects.vue'
+import Team from '@/components/main/Team.vue'
+import Modals from '@/components/system/modals/Modals.vue'
 export default {
     components: {
 		Main,
-		Projects
+		Projects,
+		Team,
+		Modals
     },
     beforeMount() {
+		window.addEventListener('resize', this.onWindowResize);
         // window.addEventListener('scroll', this.handleScroll);
     },
+	mounted() {
+		this.testSize()
+	},
     beforeDestroy() {
+		window.addEventListener('resize', this.onWindowResize);
         // window.removeEventListener('scroll', this.handleScroll);
     },
 	data() {
@@ -29,11 +40,18 @@ export default {
 				speed: 0.07,
 				position: 0,
 				y: 0
-			}
+			},
+			desktop: null
 		}
 
 	},
 	methods: {
+		testSize() {
+            window.innerWidth > 1024 ? this.desktop = true : this.desktop = false
+        },
+        onWindowResize() {
+			this.testSize()
+        },
         handleScroll() {
 			// console.log(this.scroll.y)
 			// console.log(-this.scroll.y)

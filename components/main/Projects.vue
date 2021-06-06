@@ -28,16 +28,16 @@
                         </swiper-slide>
                     </swiper>
                 </template>
-                <nuxt-link to="/" class="projects__link projects-link" @mouseover.native="findElement($event)" @mouseleave.native="animateTextHide($event)">
-                    <span class="projects-link__change">
-                        <span class="projects-link__span projects-link__span--first">Explore</span>
-                        <span class="projects-link__span">Explore</span>
+                <nuxt-link to="/" class="projects__link arrow-link" @mouseover.native="findElement($event)" @mouseleave.native="animateTextHide($event)">
+                    <span class="arrow-link__change">
+                        <span class="arrow-link__span arrow-link__span--first">Explore</span>
+                        <span class="arrow-link__span arrow-link__span--last">Explore</span>
                     </span>
-                    <span class="projects-link__text">THE project</span>
-                    <span class="projects-link__circle">
-                        <svg class="projects-link__svg" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.40039 12.4004H17.6004" stroke-linecap="square"/><path d="M13.9004 8L18.4004 12.4L13.9004 16.8" stroke-linecap="square"/></svg>
+                    <span class="arrow-link__text">THE project</span>
+                    <span class="arrow-link__circle">
+                        <svg class="arrow-link__svg" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.40039 12.4004H17.6004" stroke-linecap="square"/><path d="M13.9004 8L18.4004 12.4L13.9004 16.8" stroke-linecap="square"/></svg>
                     </span>
-                    </nuxt-link>
+                </nuxt-link>
             </div>
             <template>
                 <swiper ref="projectAddress" :options="projectAddressSetting" class="projects__address  projects-address">
@@ -173,10 +173,10 @@ export default {
     },
     methods: {
 		findElement(e) {
-			if (e.target.classList.contains('projects-link__text') || e.target.classList.contains('projects-link') || e.target.classList.contains('projects-link__circle')) {
-                const el = e.target.parentElement.querySelector('.projects-link__change')
+			if (e.target.classList.contains('arrow-link__text') || e.target.classList.contains('arrow-link') || e.target.classList.contains('arrow-link__circle')) {
+                const el = e.target.parentElement.querySelector('.arrow-link__change')
 				this.animateTextShow(el)
-			} else if (e.target.classList.contains('projects-link__span--first')) {
+			} else if (e.target.classList.contains('arrow-link__span--first')) {
                 this.animateTextShow(e.target.parentElement)
             }
 		},
@@ -191,8 +191,8 @@ export default {
             })
         },
 		animateTextHide(e) {
-			if (e.target.classList.contains('projects-link')) {
-                const el = e.target.querySelector('.projects-link__change')
+			if (e.target.classList.contains('arrow-link')) {
+                const el = e.target.querySelector('.arrow-link__change')
 				this.$gsap.to(el.children[0], { 
 					translateY: 0 + "%",
 					duration: .5
@@ -233,7 +233,7 @@ export default {
         display: none;
     }
 }
-.projects-link {
+.arrow-link {
     display: flex;
     width: fit-content;
     align-items: center;
@@ -242,7 +242,7 @@ export default {
 		display: block;
 		overflow: hidden;
         position: relative;
-		.projects-link__span {
+		.arrow-link__span {
 			display: block;
 			&:last-child {
 				position: absolute;
@@ -256,6 +256,9 @@ export default {
         letter-spacing: 0.05em;
         text-transform: uppercase;
         font-feature-settings: 'pnum' on, 'lnum' on;
+        &--last {
+            font-family: 'Light', Arial;
+        }
     }
     &__text {
         font-family: 'Light', Arial;
@@ -283,10 +286,10 @@ export default {
         transition: stroke .5s;
     }
     &:hover {
-        .projects-link__svg {
+        .arrow-link__svg {
             stroke: #000;
         }
-        .projects-link__circle {
+        .arrow-link__circle {
             background-color: #fff;
         }
     }
@@ -478,7 +481,7 @@ export default {
             font-size: 52px;
         }
     }
-    .projects-link {
+    .arrow-link {
         &__span {
             font-size: 14px;
         }
@@ -496,7 +499,7 @@ export default {
             font-size: 17px;
         }
     }
-    .projects-link {
+    .arrow-link {
         &__span {
             font-size: 12px;
         }
@@ -575,7 +578,7 @@ export default {
             font-size: 40px;
         }
     }
-    .projects-link {
+    .arrow-link {
         &__span {
             font-size: 13px;
         }
