@@ -15,6 +15,10 @@ export default {
     this.icosahedron = new Sketch({
       dom: this.$refs.icosahedron
     });
+    this.$gsap.to(this.$refs.icosahedron, { 
+				opacity: 1,
+				delay: 3,
+	  })
   },
 };
 </script>

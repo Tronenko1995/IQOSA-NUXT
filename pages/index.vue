@@ -2,11 +2,12 @@
 	<main class="index">
 		<!-- <div class="scroll-container" ref="scrollContainer"> -->
 			<!-- <IcosahedronMain /> -->
-			<IcosahedronCrystal />
+			<IcosahedronCrystal/>
 			<Main />
-			<Projects />
+			<Projects/>
 			<Team v-if="desktop"/>
-			<Modals />
+			<TeamMobi v-if="!desktop"/>
+			<Modals v-if="modal.show" :modal="modal"/>
 		<!-- </div> -->
 	</main>
 </template>
@@ -15,12 +16,14 @@
 import Main from '@/components/main/Main.vue'
 import Projects from '@/components/main/Projects.vue'
 import Team from '@/components/main/Team.vue'
+import TeamMobi from '@/components/main/TeamMobi.vue'
 import Modals from '@/components/system/modals/Modals.vue'
 export default {
     components: {
 		Main,
 		Projects,
 		Team,
+		TeamMobi,
 		Modals
     },
     beforeMount() {
@@ -44,6 +47,9 @@ export default {
 			desktop: null
 		}
 
+	},
+	computed: {
+		modal() { return this.$store.getters['modal/modal'] }
 	},
 	methods: {
 		testSize() {

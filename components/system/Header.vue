@@ -99,7 +99,31 @@ export default {
         }
     },
     mounted() {
-        console.log(this.menuStatus)
+        this.$gsap.to('.nav__item', { 
+            translateY: 0,
+            delay: 1,
+            duration: 0.25,
+        })
+        this.$gsap.to('.lang__item', { 
+            translateY: 0,
+            delay: 1,
+            duration: 0.25,
+        })
+        this.$gsap.to('.header__logo', { 
+            opacity: 1,
+            delay: 1,
+            duration: 0.25,
+        })
+        this.$gsap.to('.request', { 
+            opacity: 1,
+            delay: 1,
+            duration: 0.25,
+        })
+        this.$gsap.to('.menu-button', { 
+            opacity: 1,
+            delay: 1,
+            duration: 0.25,
+        })
     }
 }
 </script>
@@ -195,8 +219,9 @@ export default {
     position: absolute;
     left: 50%;
     transform: translate(-50%) rotate(0deg);
-    transition: .5s;
+    transition: transform .5s;
     cursor: pointer;
+    opacity: 0;
     &__list {
         display: flex;
         flex-direction: column;
@@ -230,6 +255,7 @@ export default {
 .request {
     display: none;
     white-space: nowrap;
+    opacity: 0;
     &__link {
         font-size: 13px;
         font-family: Roman,Arial;

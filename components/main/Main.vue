@@ -95,25 +95,6 @@ export default {
 				delay: 2.75,
 				duration: 0.25
 			})
-			this.$gsap.to('.nav__item', { 
-				translateY: 0,
-				delay: 1,
-                duration: 0.25,
-			})
-			this.$gsap.to('.lang__item', { 
-				translateY: 0,
-				delay: 1,
-                duration: 0.25,
-			})
-			this.$gsap.to('.header__logo', { 
-				opacity: 1,
-				delay: 1,
-                duration: 0.25,
-			})
-			this.$gsap.to('.icosahedron-crystal', { 
-				opacity: 1,
-				delay: 3,
-			})
 		},
 		findElement(e) {
 			if (e.target.classList.contains('make-request__text') || e.target.classList.contains('make-request__link')) {

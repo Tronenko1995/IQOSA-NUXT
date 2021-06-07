@@ -84,7 +84,6 @@ export default {
     data() {
         return {
             projectNameSetting: {
-                observer: true,
                 speed: 500,
                 loop: true,
                 direction: 'vertical',
@@ -95,7 +94,6 @@ export default {
                 }
             },
             projectAddressSetting: {
-                observer: true,
                 speed: 700,
                 loop: true,
                 direction: 'vertical',
@@ -106,7 +104,6 @@ export default {
                 }
             },
             projectPhotosSetting: {
-                observer: true,
                 speed: 700,
                 loop: true,
                 touchStartPreventDefault: false,
@@ -209,7 +206,8 @@ export default {
 
 <style lang="scss">
 .projects {
-    margin-top: 120px; 
+    margin-top: 120px;
+    margin-bottom: 188px;
     display: flex;
     &__info {
         display: flex;
@@ -530,6 +528,10 @@ export default {
         }
     }
     .projects-name {
+	    &__title {
+            height: 47px;
+            margin-bottom: 8px;
+        }
         &__item {
             font-size: 46px;
         }
@@ -548,19 +550,25 @@ export default {
         width: 100%;
         height: 330px;
         margin-top: 33px;
+        margin-bottom: 88px;
     }
     .featured {
         margin-bottom: 370px;
     }
     .projects {
+        margin-top: 0px;
+        height: 600px;
+        margin-bottom: 88px;
         &__count {
             display: block;
         }
         &__info {
             position: absolute;
-            height: 600px;
             width: 100%;
             padding-left: 16px;
+        }
+        &__link {
+            margin-bottom: 56px;
         }
     }
 }

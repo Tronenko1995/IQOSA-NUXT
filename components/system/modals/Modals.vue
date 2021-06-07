@@ -1,19 +1,32 @@
 <template>
-    <transition v-if="modal" name="fade" appear>
-        <Modal />
+    <transition v-if="modal.show" name="fade" appear>
+        <Modal :type="modal.type" />
     </transition>
 </template>
 
 <script>
 import Modal from '@/components/system/modals/Modal.vue' 
 export default {
-    components: { Modal }
+    components: { Modal },
+    props: {
+        modal: {
+            type: Object,
+            required: true
+        }
+    },
+    beforeMount() {
+        document.body.style = 'overflow: hidden'
+    },
+    beforeDestroy() {
+        document.body.style = ''
+    }
 }
 </script>
 
 <style lang="scss" scoped>
     .fade-enter {
         transform: translateY(-100vh);
+        opacity: 0;
         &-active {
             transition: all 1s;
         }
@@ -26,6 +39,7 @@ export default {
             transition: all 1s;
         }
         &-to {
+            opacity: 0;
             transform: translateY(-100vh);
         }
     }

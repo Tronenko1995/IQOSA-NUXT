@@ -1,7 +1,7 @@
 <template>
-        <kinesis-container ref="parallaxScene" class="team" style="transform: translate3d(0px, 0px, 0px) rotate(0.0001deg); transform-style: preserve-3d; backface-visibility: hidden; position: relative;">
-            <div class="team__shadow" style="transform: translate3d(0px, 0px, 0px); transform-style: preserve-3d; backface-visibility: hidden; position: relative; display: block; left: 0px; top: 0px;"></div>
-                <kinesis-element type="translate" :strength="strength" data-depth="1" ref="parallaxBody" class="team__container">
+        <div ref="parallaxScene" class="team">
+            <div class="team__shadow"></div>
+                <div type="translate" data-depth="1" ref="parallaxContainer" class="team__container">
                     <div class="team__line team__line--uno"></div>
                     <div class="team__line team__line--dos">
                         <div class="team__item team__item--uno team__item--small">
@@ -64,20 +64,20 @@
                             <picture class="team__block">
                                 <img @click="openModal($event)" class="team__img" src="https://iqosa.com/wp-content/uploads/2021/05/IMG_4211-2-copy-1.jpg" data-src="https://iqosa.com/wp-content/uploads/2021/05/IMG_4211-2-copy.jpg" alt="">
                             </picture>
-                            <div class="team__text">
+                            <div class="team__text" data-quote="IQOSA is ambition, striving for individuality in design. We always wanted to create something unique and that no one has pointed us what to do.">
                                 <p class="team__name">Fil Vladimir</p>
                                 <p class="team__position">Designer-Visualizer</p>
                             </div>
                         </div>
-                        <div ref="parallaxTitle" class="team__title">
-                            <p class="team__title-text" style="transform: translate(0px, 0px);">We form the quality of life</p>
-                            <p class="team__title-text" style="transform: translate(0px, 0px);">By the quality of implementation</p>
-                            <nuxt-link to="/" class="team__link arrow-link" @mouseover.native="findElement($event)" @mouseleave.native="animateTextHide($event)">
+                        <div ref="parallaxTitle" class="team__title team-title">
+                            <p class="team__title-text team-title__text" style="transform: translate(0px, 0px);">We form the quality of life</p>
+                            <p class="team__title-text team-title__text" style="transform: translate(0px, 0px);">By the quality of implementation</p>
+                            <nuxt-link to="/" class="team__link team-link arrow-link" @mouseover.native="findElement($event)" @mouseleave.native="animateTextHide($event)">
                                 <span class="arrow-link__change">
-                                    <span class="arrow-link__span arrow-link__span--first">Explore</span>
-                                    <span class="arrow-link__span arrow-link__span--last">Explore</span>
+                                    <span class="arrow-link__span arrow-link__span--first">Discover</span>
+                                    <span class="arrow-link__span arrow-link__span--last">Discover</span>
                                 </span>
-                                <span class="arrow-link__text">THE project</span>
+                                <span class="arrow-link__text">More</span>
                                 <span class="arrow-link__circle">
                                     <svg class="arrow-link__svg" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.40039 12.4004H17.6004" stroke-linecap="square"/><path d="M13.9004 8L18.4004 12.4L13.9004 16.8" stroke-linecap="square"/></svg>
                                 </span>
@@ -94,7 +94,7 @@
                         </div>
                         <div  class="team__item team__item--cuatro team__item--middle">
                             <picture class="team__block">
-                                <img class="team__item-img" src="https://iqosa.com/wp-content/uploads/2021/05/IMG_3622-2-1.jpg" alt="">
+                                <img class="team__img" src="https://iqosa.com/wp-content/uploads/2021/05/IMG_3622-2-1.jpg" alt="">
                             </picture>
                             <div class="team__text">
                                 <p class="team__name">Babanin Bogdan</p>
@@ -151,31 +151,81 @@
                             </div>
                         </div>
                     </div>
-                </kinesis-element>
-        </kinesis-container>
+                </div>
+        </div>
 </template>
 
 <script>
+import Parallax from 'parallax-js'
+import { mapMutations } from 'vuex'
 export default {
     data() {
         return {
             parallax: null,
             parallaxScene: null,
             parallaxTitle: null,
-            parallaxBody: null,
-            strength: 300
+            parallaxContainer: null
         }
     },
     beforeMount() {
-        this.parallaxScene = this.$refs.parallaxScene
-        this.parallaxTitle = this.$refs.parallaxTitle
-        this.parallaxBody = this.$refs.parallaxBody
+        window.addEventListener('resize', this.onWindowResize);
     },
     mounted() {
+        this.parallaxScene = this.$refs.parallaxScene
+        this.parallaxTitle = this.$refs.parallaxTitle
+        this.parallaxContainer = this.$refs.parallaxContainer
+        this.parallax = new Parallax(this.parallaxScene, {
+            relativeInput: true,
+            hoverOnly: true,
+        });
+        this.parallax.friction(0.01, 0.01);
+        this.testSize()
+        this.configContainer()
+    },
+    beforeDestroy() {
+		window.removeEventListener('resize',  this.onWindowResize)
     },
     methods: {
+        ...mapMutations({
+            setModal: 'modal/setModal',
+            setTeam: 'team/setTeam',
+        }),
+        configContainer() {
+            let marginW, marginH, elX, elH, x, h
+            marginW = (window.innerWidth - this.parallaxTitle.clientWidth)/2
+            marginH = (this.parallaxContainer.clientHeight - this.parallaxTitle.clientHeight)/2;
+            elX = this.parallaxTitle.getBoundingClientRect().left
+            elH = (window.innerHeight - this.parallaxTitle.clientHeight)/1.5;
+            x = elX - marginW
+            h = elH - marginH;
+            this.parallaxContainer.style.left = -x + "px"
+            this.parallaxContainer.style.top = h + "px";
+        },
+        testSize() {
+             if (window.innerWidth >= 1920) {
+                this.parallax.scalar(30, 75);
+            } else if (window.innerWidth >= 1440) {
+                this.parallax.scalar(50, 90);
+            } else {
+                this.parallax.scalar(40, 80);
+            }
+        },
+        onWindowResize() {
+			this.testSize()
+            this.configContainer()
+        },
         openModal(e) {
-            console.dir(e.target.dataset.src)
+            console.dir(e.target)
+            this.setTeam({
+                name: e.target.parentElement.parentElement.querySelector('.team__name').textContent,
+                position: e.target.parentElement.parentElement.querySelector('.team__position').textContent,
+                img: e.target.dataset.src,
+                quote: e.target.parentElement.parentElement.querySelector('.team__text').dataset.quote
+            })
+            this.setModal({
+                show: true,
+                type: 'team'
+            })
         },
 		findElement(e) {
 			if (e.target.classList.contains('arrow-link__text') || e.target.classList.contains('arrow-link') || e.target.classList.contains('arrow-link__circle')) {
@@ -218,9 +268,11 @@ export default {
     width: 100%;
     height: 100vh;
     overflow: hidden;
+    pointer-events: unset !important;
+    backface-visibility: hidden; 
+    position: relative;
     &__shadow {
         background: linear-gradient(180deg,#1b1b1b,rgba(27,27,27,0) 29.75%,rgba(27,27,27,0) 72.02%,#1b1b1b);
-        position: absolute;
         width: 120%;
         height: 100%;
         top: 0;
@@ -230,10 +282,12 @@ export default {
         z-index: 1;
         pointer-events: none;
         margin-left: -10%;
+        backface-visibility: hidden;
+        position: relative;
+        display: block;
     }
     &__link {
         width: 100%;
-        margin-top: 48px;
         justify-content: center;
     }
     &__container {
@@ -433,19 +487,26 @@ export default {
             white-space: nowrap;
             width: fit-content;
             color: #fff;
-            &:first-child {
-                margin-right: 140px;
-                transform: translateX(-300px);
-                opacity: .5;
-            }
             &:nth-child(2) {
-                margin-left: 175px;
                 font-family: 'ThinItalic', Arial;
                 font-weight: 300;
-                transform: translateX(300px);
-                opacity: .5;
             }
         }
     }
+}
+.team-title {
+    &__text {
+        &:first-child {
+            margin-right: 140px;
+            transform: translateX(-300px);
+        }
+        &:nth-child(2) {
+            margin-left: 175px;
+            transform: translateX(300px);
+        }
+    }
+}
+.team-link {
+    margin-top: 48px;
 }
 </style>
