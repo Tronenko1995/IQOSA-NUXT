@@ -73,6 +73,12 @@ export default {
     components: {
         Icosahedron
     },
+    beforeMount() {
+        document.body.style = 'overflow: hidden'
+    },
+    beforeDestroy() {
+        document.body.style = ''
+    },
     methods : {
         showCursive(e) {
             if (e.target.tagName === 'A') {

@@ -2,11 +2,11 @@
 	<main class="index">
 		<!-- <div class="scroll-container" ref="scrollContainer"> -->
 			<!-- <IcosahedronMain /> -->
-			<IcosahedronCrystal/>
+			<IcosahedronCrystal />
 			<Main />
 			<Projects/>
-			<Team v-if="desktop"/>
-			<TeamMobi v-if="!desktop"/>
+			<Team v-if="desktop" />
+			<TeamMobi v-if="!desktop" />
 			<Modals v-if="modal.show" :modal="modal"/>
 		<!-- </div> -->
 	</main>
