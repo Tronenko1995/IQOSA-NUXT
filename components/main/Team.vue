@@ -1,158 +1,158 @@
 <template>
-        <div ref="parallaxScene" class="team">
-            <div class="team__shadow"></div>
-                <div type="translate" data-depth="1" ref="parallaxContainer" class="team__container">
-                    <div class="team__line team__line--uno"></div>
-                    <div class="team__line team__line--dos">
-                        <div class="team__item team__item--uno team__item--small">
-                            <picture class="team__block">
-                                <img class="team__img" src="https://iqosa.com/wp-content/uploads/2021/05/IMG_3433-copy-scaled.jpg" alt="">
-                            </picture>
-                            <div class="team__text">
-                                <p class="team__name">Romanchenko Kateryna</p>
-                                <p class="team__position">SMM Manager</p>
-                            </div>
-                        </div>
-                        <div class="team__item team__item--dos team__item--middle">
-                            <picture class="team__block">
-                                <img class="team__img" src="https://iqosa.com/wp-content/uploads/2021/05/IMG_3816-2.jpg" alt="">
-                            </picture>
-                            <div class="team__text">
-                                <p class="team__name">Pichugina Alina</p>
-                                <p class="team__position">Designer-Visualizer</p>
-                            </div>
-                        </div>
-                        <div class="team__item team__item--tres team__item--middle">
-                            <picture class="team__block">
-                                <img class="team__img" src="https://iqosa.com/wp-content/uploads/2021/05/IMG_3778-2-1.jpg" alt="">
-                            </picture>
-                            <div class="team__text">
-                                <p class="team__name">Matsiura Vladislav</p>
-                                <p class="team__position">Purchasing Manager</p>
-                            </div>
-                        </div>
-                        <div class="team__item team__item--cuatro team__item--small">
-                            <picture class="team__block">
-                                <img class="team__img" src="https://iqosa.com/wp-content/uploads/2021/05/IMG_4125-2-copy-1.jpg" alt="">
-                            </picture>
-                            <div class="team__text">
-                                <p class="team__name">Maklyakova Aleksandra</p>
-                                <p class="team__position">Co-Founder, CEO</p>
-                            </div>
-                        </div>
-                        <div  class="team__item team__item--cinco team__item--small">
-                            <picture class="team__block">
-                                <img class="team__img" src="https://iqosa.com/wp-content/uploads/2021/05/IMG_3629-2-1.jpg" alt="">
-                            </picture>
-                            <div class="team__text">
-                                <p class="team__name">Boiko Valeriа</p>
-                                <p class="team__position">Chief Architect</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="team__line team__line--tres">
-                        <div  class="team__item team__item--uno team__item--major">
-                            <picture class="team__block">
-                                <img class="team__img" src="https://iqosa.com/wp-content/uploads/2021/05/IMG_3322-2-1.jpg" alt="">
-                            </picture>
-                            <div class="team__text">
-                                <p class="team__name">Krasulenko Tatiana</p>
-                                <p class="team__position">HR Consultant</p>
-                            </div>
-                        </div>
-                        <div class="team__item team__item--dos team__item--middle">
-                            <picture class="team__block">
-                                <img @click="openModal($event)" class="team__img" src="https://iqosa.com/wp-content/uploads/2021/05/IMG_4211-2-copy-1.jpg" data-src="https://iqosa.com/wp-content/uploads/2021/05/IMG_4211-2-copy.jpg" alt="">
-                            </picture>
-                            <div class="team__text" data-quote="IQOSA is ambition, striving for individuality in design. We always wanted to create something unique and that no one has pointed us what to do.">
-                                <p class="team__name">Fil Vladimir</p>
-                                <p class="team__position">Designer-Visualizer</p>
-                            </div>
-                        </div>
-                        <div ref="parallaxTitle" class="team__title team-title">
-                            <p class="team__title-text team-title__text" style="transform: translate(0px, 0px);">We form the quality of life</p>
-                            <p class="team__title-text team-title__text" style="transform: translate(0px, 0px);">By the quality of implementation</p>
-                            <nuxt-link to="/" class="team__link team-link arrow-link" @mouseover.native="findElement($event)" @mouseleave.native="animateTextHide($event)">
-                                <span class="arrow-link__change">
-                                    <span class="arrow-link__span arrow-link__span--first">Discover</span>
-                                    <span class="arrow-link__span arrow-link__span--last">Discover</span>
-                                </span>
-                                <span class="arrow-link__text">More</span>
-                                <span class="arrow-link__circle">
-                                    <svg class="arrow-link__svg" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.40039 12.4004H17.6004" stroke-linecap="square"/><path d="M13.9004 8L18.4004 12.4L13.9004 16.8" stroke-linecap="square"/></svg>
-                                </span>
-                            </nuxt-link>
-                        </div>
-                        <div class="team__item team__item--tres team__item--small">
-                            <picture class="team__block">
-                                <img class="team__img" src="https://iqosa.com/wp-content/uploads/2021/05/IMG_3068-2.jpg" alt="">
-                            </picture>
+    <section ref="parallaxScene" class="team">
+        <div class="team__shadow"></div>
+            <div type="translate" data-depth="1" ref="parallaxContainer" class="team__container">
+                <div class="team__line team__line--uno"></div>
+                <div class="team__line team__line--dos">
+                    <div class="team__item team__item--uno team__item--small">
+                        <picture class="team__block">
+                            <img class="team__img" src="https://iqosa.com/wp-content/uploads/2021/05/IMG_3433-copy-scaled.jpg" alt="">
+                        </picture>
                         <div class="team__text">
-                            <p class="team__name">Babanin Dmitry</p>
-                            <p class="team__position">Founder, Creative Director</p>
-                        </div>
-                        </div>
-                        <div  class="team__item team__item--cuatro team__item--middle">
-                            <picture class="team__block">
-                                <img class="team__img" src="https://iqosa.com/wp-content/uploads/2021/05/IMG_3622-2-1.jpg" alt="">
-                            </picture>
-                            <div class="team__text">
-                                <p class="team__name">Babanin Bogdan</p>
-                                <p class="team__position">Visualizer</p>
-                            </div>
+                            <p class="team__name">Romanchenko Kateryna</p>
+                            <p class="team__position">SMM Manager</p>
                         </div>
                     </div>
-                    <div class="team__line team__line--cuatro">
-                        <div class="team__item team__item--uno team__item--small">
-                            <picture class="team__block">
-                                <img class="team__img" src="https://iqosa.com/wp-content/uploads/2021/05/IMG_3060-2.jpg" alt="">
-                            </picture>
-                            <div class="team__text">
-                                <p class="team__name">Kim Nikita</p>
-                                <p class="team__position">Legal Advisor</p>
-                            </div>
-                        </div>
-                        <div class="team__item team__item--dos team__item--small">
-                            <picture class="team__block">
-                                <img class="team__img" src="https://iqosa.com/wp-content/uploads/2021/05/IMG_3185-2.jpg" alt="">
-                            </picture>
-                            <div class="team__text">
-                                <p class="team__name">Hovorukha Dana</p>
-                                <p class="team__position">Office Manager</p>
-                            </div>
-                        </div>
-                        <div class="team__item team__item--tres team__item--major">
-                            <picture class="team__block">
-                                <img class="team__img" src="https://iqosa.com/wp-content/uploads/2021/05/IMG_4412-2.jpg" alt="">
-                            </picture>
-                            <div class="team__text">
-                                <p class="team__name">Ryazhko Nikita</p>
-                                <p class="team__position">CO-Founder, Lead Designer</p>
-                            </div>
-                        </div>
-                        <div class="team__item team__item--cuatro team__item--square">
-                            <picture class="team__block">
-                                <img class="team__img" src="https://iqosa.com/wp-content/uploads/2021/05/IMG_3986-2-1.jpg" alt="">
-                            </picture>
-                            <div class="team__text">
-                                <p class="team__name">Molodets Marina</p>
-                                <p class="team__position">Purchasing Manager</p>
-                            </div>
+                    <div class="team__item team__item--dos team__item--middle">
+                        <picture class="team__block">
+                            <img class="team__img" src="https://iqosa.com/wp-content/uploads/2021/05/IMG_3816-2.jpg" alt="">
+                        </picture>
+                        <div class="team__text">
+                            <p class="team__name">Pichugina Alina</p>
+                            <p class="team__position">Designer-Visualizer</p>
                         </div>
                     </div>
-                    <div class="team__line team__line--cinco">
-                        <div  class="team__item team__item--uno team__item--major">
-                            <picture class="team__block">
-                                <img class="team__img" src="https://iqosa.com/wp-content/uploads/2020/12/IMG_4276-scaled.jpg" alt="">
-                            </picture>
-                            <div class="team__text">
-                                <p class="team__name">Maksiuk Sviatoslav</p>
-                               <p class="team__position">Architect</p>
-                            </div>
+                    <div class="team__item team__item--tres team__item--middle">
+                        <picture class="team__block">
+                            <img class="team__img" src="https://iqosa.com/wp-content/uploads/2021/05/IMG_3778-2-1.jpg" alt="">
+                        </picture>
+                        <div class="team__text">
+                            <p class="team__name">Matsiura Vladislav</p>
+                            <p class="team__position">Purchasing Manager</p>
+                        </div>
+                    </div>
+                    <div class="team__item team__item--cuatro team__item--small">
+                        <picture class="team__block">
+                            <img class="team__img" src="https://iqosa.com/wp-content/uploads/2021/05/IMG_4125-2-copy-1.jpg" alt="">
+                        </picture>
+                        <div class="team__text">
+                            <p class="team__name">Maklyakova Aleksandra</p>
+                            <p class="team__position">Co-Founder, CEO</p>
+                        </div>
+                    </div>
+                    <div  class="team__item team__item--cinco team__item--small">
+                        <picture class="team__block">
+                            <img class="team__img" src="https://iqosa.com/wp-content/uploads/2021/05/IMG_3629-2-1.jpg" alt="">
+                        </picture>
+                        <div class="team__text">
+                            <p class="team__name">Boiko Valeriа</p>
+                            <p class="team__position">Chief Architect</p>
                         </div>
                     </div>
                 </div>
-        </div>
+                <div class="team__line team__line--tres">
+                    <div  class="team__item team__item--uno team__item--major">
+                        <picture class="team__block">
+                            <img class="team__img" src="https://iqosa.com/wp-content/uploads/2021/05/IMG_3322-2-1.jpg" alt="">
+                        </picture>
+                        <div class="team__text">
+                            <p class="team__name">Krasulenko Tatiana</p>
+                            <p class="team__position">HR Consultant</p>
+                        </div>
+                    </div>
+                    <div class="team__item team__item--dos team__item--middle">
+                        <picture class="team__block">
+                            <img @click="openModal($event)" class="team__img" src="https://iqosa.com/wp-content/uploads/2021/05/IMG_4211-2-copy-1.jpg" data-src="https://iqosa.com/wp-content/uploads/2021/05/IMG_4211-2-copy.jpg" alt="">
+                        </picture>
+                        <div class="team__text" data-quote="IQOSA is ambition, striving for individuality in design. We always wanted to create something unique and that no one has pointed us what to do.">
+                            <p class="team__name">Fil Vladimir</p>
+                            <p class="team__position">Designer-Visualizer</p>
+                        </div>
+                    </div>
+                    <div ref="parallaxTitle" class="team__title team-title">
+                        <p class="team__title-text team-title__text" style="transform: translate(0px, 0px);">We form the quality of life</p>
+                        <p class="team__title-text team-title__text" style="transform: translate(0px, 0px);">By the quality of implementation</p>
+                        <nuxt-link to="/" class="team__link team-link arrow-link" @mouseover.native="findElement($event)" @mouseleave.native="animateTextHide($event)">
+                            <span class="arrow-link__change">
+                                <span class="arrow-link__span arrow-link__span--first">Discover</span>
+                                <span class="arrow-link__span arrow-link__span--last">Discover</span>
+                            </span>
+                            <span class="arrow-link__text">More</span>
+                            <span class="arrow-link__circle">
+                                <svg class="arrow-link__svg" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.40039 12.4004H17.6004" stroke-linecap="square"/><path d="M13.9004 8L18.4004 12.4L13.9004 16.8" stroke-linecap="square"/></svg>
+                            </span>
+                        </nuxt-link>
+                    </div>
+                    <div class="team__item team__item--tres team__item--small">
+                        <picture class="team__block">
+                            <img class="team__img" src="https://iqosa.com/wp-content/uploads/2021/05/IMG_3068-2.jpg" alt="">
+                        </picture>
+                    <div class="team__text">
+                        <p class="team__name">Babanin Dmitry</p>
+                        <p class="team__position">Founder, Creative Director</p>
+                    </div>
+                    </div>
+                    <div  class="team__item team__item--cuatro team__item--middle">
+                        <picture class="team__block">
+                            <img class="team__img" src="https://iqosa.com/wp-content/uploads/2021/05/IMG_3622-2-1.jpg" alt="">
+                        </picture>
+                        <div class="team__text">
+                            <p class="team__name">Babanin Bogdan</p>
+                            <p class="team__position">Visualizer</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="team__line team__line--cuatro">
+                    <div class="team__item team__item--uno team__item--small">
+                        <picture class="team__block">
+                            <img class="team__img" src="https://iqosa.com/wp-content/uploads/2021/05/IMG_3060-2.jpg" alt="">
+                        </picture>
+                        <div class="team__text">
+                            <p class="team__name">Kim Nikita</p>
+                            <p class="team__position">Legal Advisor</p>
+                        </div>
+                    </div>
+                    <div class="team__item team__item--dos team__item--small">
+                        <picture class="team__block">
+                            <img class="team__img" src="https://iqosa.com/wp-content/uploads/2021/05/IMG_3185-2.jpg" alt="">
+                        </picture>
+                        <div class="team__text">
+                            <p class="team__name">Hovorukha Dana</p>
+                            <p class="team__position">Office Manager</p>
+                        </div>
+                    </div>
+                    <div class="team__item team__item--tres team__item--major">
+                        <picture class="team__block">
+                            <img class="team__img" src="https://iqosa.com/wp-content/uploads/2021/05/IMG_4412-2.jpg" alt="">
+                        </picture>
+                        <div class="team__text">
+                            <p class="team__name">Ryazhko Nikita</p>
+                            <p class="team__position">CO-Founder, Lead Designer</p>
+                        </div>
+                    </div>
+                    <div class="team__item team__item--cuatro team__item--square">
+                        <picture class="team__block">
+                            <img class="team__img" src="https://iqosa.com/wp-content/uploads/2021/05/IMG_3986-2-1.jpg" alt="">
+                        </picture>
+                        <div class="team__text">
+                            <p class="team__name">Molodets Marina</p>
+                            <p class="team__position">Purchasing Manager</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="team__line team__line--cinco">
+                    <div  class="team__item team__item--uno team__item--major">
+                        <picture class="team__block">
+                            <img class="team__img" src="https://iqosa.com/wp-content/uploads/2020/12/IMG_4276-scaled.jpg" alt="">
+                        </picture>
+                        <div class="team__text">
+                            <p class="team__name">Maksiuk Sviatoslav</p>
+                            <p class="team__position">Architect</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
 </template>
 
 <script>
@@ -164,7 +164,8 @@ export default {
             parallax: null,
             parallaxScene: null,
             parallaxTitle: null,
-            parallaxContainer: null
+            parallaxContainer: null,
+            resizeTimer: null
         }
     },
     beforeMount() {
@@ -211,8 +212,11 @@ export default {
             }
         },
         onWindowResize() {
-			this.testSize()
-            this.configContainer()
+            clearTimeout(this.resizeTimer);
+            this.resizeTimer = setTimeout(() => {
+                this.testSize()
+                // this.configContainer()
+            }, 250);
         },
         openModal(e) {
             console.dir(e.target)

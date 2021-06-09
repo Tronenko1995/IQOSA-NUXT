@@ -1,5 +1,5 @@
 <template>
-    <div class="main">
+    <section class="main">
         <div class="main__wrap">
             <div class="main__row main__row--first">
                 <div class="motto">
@@ -37,7 +37,7 @@
                 <p class="main__title main__title--last">Design</p>
             </div>
         </div>
-    </div>
+    </section>
 </template>
 
 <script>

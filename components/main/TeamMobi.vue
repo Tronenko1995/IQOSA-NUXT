@@ -1,5 +1,5 @@
 <template>
-    <div class="team-mobi">
+    <section class="team-mobi">
         <div class="team__title team-mobi__title">
             <p class="team__title-text team-mobi__title-text">We form the quality of life</p>
             <p class="team__title-text team-mobi__title-text">By the quality of implementation</p>
@@ -40,7 +40,7 @@
                 </div>
             </swiper-slide>
         </swiper>
-    </div>
+    </section>
 </template>
 
 <script>

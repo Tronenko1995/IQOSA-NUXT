@@ -1,19 +1,23 @@
 @font-face {
     font-family: Light;
-    src: url(~assets/fonts/HelveticaNeue-Light.woff) format("woff")
+    src: url(~assets/fonts/HelveticaNeue-Light.woff) format("woff");
+    font-display: swap;
 }
 
 @font-face {
     font-family: LightItalic;
-    src: url(~assets/fonts/HelveticaNeue-LightItalic.woff) format("woff")
+    src: url(~assets/fonts/HelveticaNeue-LightItalic.woff) format("woff");
+    font-display: swap;
 }
 
 @font-face {
     font-family: ThinItalic;
-    src: url(~assets/fonts/HelveticaNeue-ThinItalic.woff) format("woff")
+    src: url(~assets/fonts/HelveticaNeue-ThinItalic.woff) format("woff");
+    font-display: swap;
 }
 
 @font-face {
     font-family: Roman;
-    src: url(~assets/fonts/HelveticaNeue.woff) format("woff")
+    src: url(~assets/fonts/HelveticaNeue.woff) format("woff");
+    font-display: swap;
 }

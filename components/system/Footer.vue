@@ -57,8 +57,13 @@
                     <p class="footer__title">Others</p>
                 </div>
                 <div class="footer__column-middle">
-                    <p class="footer__main-text">Don't be shy,</p>
-                    <p class="footer__main-text footer__main-text--italic">say hi.</p>
+                    <p class="footer__main-text">Don't be shy,
+                    <span class="footer__main-item"  @mouseover="showAnimateText($event)" @mouseleave="hideAnimateText($event)">
+                        <a href="/sayhi" class="footer__main-link">say hi.</a>
+                        <a href="/sayhi" class="footer__main-link">say hi.</a>
+                    </span>
+                    </p>
+                    <!-- <p class="footer__main-text footer__main-text--italic">say hi.</p> -->
                     <div class="footer__main-row">
                         <div class="footer__unit">
                             <a class="footer__link footer__link--line" href="https://iqosa.com/wp-content/uploads/2021/02/IQOSA-_MediaKit_EN.pdf">Media Kit</a>
@@ -72,11 +77,12 @@
             <div class="footer__bottom-item">
                 <nuxt-link to="/privaty-policy" class="footer__link">Privacy Policy</nuxt-link>
             </div>
-            <div class="footer__bottom-item footer__bottom-item--social">
+            <Social class="'social social--footer'" @showCursive="showCursive($event)" @hideCursive="hideCursive($event)"/>
+            <!-- <div class="footer__bottom-item footer__bottom-item--social">
                 <a href="https://www.facebook.com/IQOSA/" class="footer__link">Facebook,</a>
                 <a href="https://www.pinterest.com/iqosa/_created/" class="footer__link">Pinterest,</a>
                 <a href="https://www.instagram.com/iqosa/" class="footer__link">Instagram</a>
-            </div>
+            </div> -->
             <div class="footer__bottom-item footer__bottom-item--tres">
                 <p class="footer__description footer__description--opacity">&copy; Iqosa 2021.</p>
                 <p class="footer__developed">
@@ -87,6 +93,61 @@
         </div>
     </div>
 </template>
+
+<script>
+export default {
+    methods: {
+        showAnimateText(e) {
+            if (e.target.tagName === 'A') {
+                this.$gsap.to(e.target.parentElement.children[0], { 
+                    translateY: -100 + "%",
+                    duration: .5
+                })
+                this.$gsap.to(e.target.parentElement.children[1], { 
+                    translateY: -100 + "%",
+                    duration: .5
+                })
+            }
+        },
+        hideAnimateText(e) {
+            if (e.target.tagName === 'SPAN') {
+                this.$gsap.to(e.target.children[0], { 
+                    translateY: 0 + "%",
+                    duration: .5
+                })
+                this.$gsap.to(e.target.children[1], { 
+                    translateY: 0 + "%",
+                    duration: .5
+                })
+            }
+        },
+        showCursive(e) {
+            if (e.target.tagName === 'A') {
+                this.$gsap.to(e.target.parentElement.children[0], { 
+                    translateY: -100 + "%",
+                    duration: .5
+                })
+                this.$gsap.to(e.target.parentElement.children[1], { 
+                    translateY: -100 + "%",
+                    duration: .5
+                })
+            }
+        },
+        hideCursive(e) {
+            if (e.target.tagName === 'LI') {
+                this.$gsap.to(e.target.children[0], { 
+                    translateY: 0 + "%",
+                    duration: .5
+                })
+                this.$gsap.to(e.target.children[1], { 
+                    translateY: 0 + "%",
+                    duration: .5
+                })
+            }
+        },
+    }
+}
+</script>
 
 <style lang="scss">
 .footer {
@@ -207,6 +268,26 @@
     &__main-row {
         display: flex;
         margin-top: 38px;
+    }
+    &__main-item {
+        display: block;
+        width: fit-content;
+        transform: translateY(0);
+        overflow: hidden;
+    }
+    &__main-link {
+        display: block;
+        font-family: 'ThinItalic', Arial;
+        font-weight: 300;
+        font-style: italic;
+        font-size: 50px;
+        line-height: 110%;
+        text-transform: uppercase;
+        font-feature-settings: 'pnum' on, 'lnum' on, 'dnom' on, 'liga' off, 'kern' off;
+        color: #000000;
+        &:last-child {
+            position: absolute;
+        }
     }
     &__unit {
         position: relative;

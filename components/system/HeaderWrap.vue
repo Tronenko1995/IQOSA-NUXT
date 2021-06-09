@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Header :menuStatus="menuStatus" :class="[{'hideInScroll': hideInScroll}, {'open': menuStatus}]"/>
+        <Header :headerType="headerType" :menuStatus="menuStatus" :class="[{'hideInScroll': hideInScroll}, {'open': menuStatus}]"/>
         <transition
         v-if="menuStatus"
         name="fade" 
@@ -17,6 +17,9 @@ import { mapState } from 'vuex'
 import Header from '@/components/system/Header.vue' 
 import Menu from '@/components/system/Menu.vue' 
 export default {
+    props: {
+        headerType: String
+    },
     components: {
         Header,
         Menu

@@ -1,5 +1,5 @@
 <template>
-    <div class="projects">
+    <section class="projects">
         <div class="projects__info">
             <iqosaCursor></iqosaCursor>
             <div class="featured">
@@ -15,19 +15,17 @@
                 </p>
             </div>
             <div class="projects__name projects-name">
-                <template>
-                    <swiper ref="projectName" :options="projectNameSetting" class="projects-name__title">
-                        <swiper-slide class="projects-name__item">
-                            <span>IQ</span>-08-SL
-                        </swiper-slide>
-                        <swiper-slide class="projects-name__item">
-                            <span>AA</span>-99-SL
-                        </swiper-slide>
-                        <swiper-slide class="projects-name__item">
-                            <span>XL</span>-92-SL
-                        </swiper-slide>
-                    </swiper>
-                </template>
+                <swiper ref="projectName" :options="projectNameSetting" class="projects-name__title">
+                    <swiper-slide class="projects-name__item">
+                        <span>IQ</span>-08-SL
+                    </swiper-slide>
+                    <swiper-slide class="projects-name__item">
+                        <span>AA</span>-99-SL
+                    </swiper-slide>
+                    <swiper-slide class="projects-name__item">
+                        <span>XL</span>-92-SL
+                    </swiper-slide>
+                </swiper>
                 <nuxt-link to="/" class="projects__link arrow-link" @mouseover.native="findElement($event)" @mouseleave.native="animateTextHide($event)">
                     <span class="arrow-link__change">
                         <span class="arrow-link__span arrow-link__span--first">Explore</span>
@@ -39,40 +37,36 @@
                     </span>
                 </nuxt-link>
             </div>
-            <template>
-                <swiper ref="projectAddress" :options="projectAddressSetting" class="projects__address  projects-address">
-                    <swiper-slide class="projects-address__item">
-                        2019,  <span class="projects-address__span">KYIV</span>,  Ukraine,  560M2
-                    </swiper-slide>
-                    <swiper-slide class="projects-address__item">
-                        2020,  <span class="projects-address__span">Moskow</span>,  Russia,  560M2
-                    </swiper-slide>
-                    <swiper-slide class="projects-address__item">
-                        2021,  <span class="projects-address__span">Rome</span>,  Italy,  560M2
-                    </swiper-slide>
-                </swiper>
-            </template>
-        </div>
-        <template>
-            <swiper ref="projectPhotos" :options="projectPhotosSetting" class="projects__photos projects-photos" data-drag-circle>
-                <swiper-slide class="projects-photos__item">
-                    <div class="projects-photos__slide">
-                        <img class="projects-photos__img" :src="require('~/assets/img/projects/1.jpg')" alt="">
-                    </div>
+            <swiper ref="projectAddress" :options="projectAddressSetting" class="projects__address  projects-address">
+                <swiper-slide class="projects-address__item">
+                    2019,  <span class="projects-address__span">KYIV</span>,  Ukraine,  560M2
                 </swiper-slide>
-                <swiper-slide class="projects-photos__item">
-                    <div class="projects-photos__slide">
-                        <img class="projects-photos__img" :src="require('~/assets/img/projects/2.jpg')" alt="">
-                    </div>
+                <swiper-slide class="projects-address__item">
+                    2020,  <span class="projects-address__span">Moskow</span>,  Russia,  560M2
                 </swiper-slide>
-                <swiper-slide class="projects-photos__item">
-                    <div class="projects-photos__slide">
-                        <img class="projects-photos__img" :src="require('~/assets/img/projects/3.jpg')" alt="">
-                    </div>
+                <swiper-slide class="projects-address__item">
+                    2021,  <span class="projects-address__span">Rome</span>,  Italy,  560M2
                 </swiper-slide>
             </swiper>
-        </template>
-    </div>
+        </div>
+        <swiper ref="projectPhotos" :options="projectPhotosSetting" class="projects__photos projects-photos" data-drag-circle>
+            <swiper-slide class="projects-photos__item">
+                <div class="projects-photos__slide">
+                    <img class="projects-photos__img" :src="require('~/assets/img/projects/1.jpg')" alt="">
+                </div>
+            </swiper-slide>
+            <swiper-slide class="projects-photos__item">
+                <div class="projects-photos__slide">
+                    <img class="projects-photos__img" :src="require('~/assets/img/projects/2.jpg')" alt="">
+                </div>
+            </swiper-slide>
+            <swiper-slide class="projects-photos__item">
+                <div class="projects-photos__slide">
+                    <img class="projects-photos__img" :src="require('~/assets/img/projects/3.jpg')" alt="">
+                </div>
+            </swiper-slide>
+        </swiper>
+    </section>
 </template>
 
 <script>

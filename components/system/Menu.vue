@@ -32,22 +32,7 @@
                 </li>
             </ul>
         </nav>
-        <div class="social">
-            <ul class="social__list">
-                <li class="social__item" @mouseover="showCursive($event)" @mouseleave="hideCursive($event)">
-                    <a href="https://www.facebook.com/IQOSA/" class="social__link">Facebook,</a>
-                    <a href="https://www.facebook.com/IQOSA/" class="social__link social__link--cursive">Facebook,</a>
-                </li>
-                <li class="social__item" @mouseover="showCursive($event)" @mouseleave="hideCursive($event)">
-                    <a href="https://www.pinterest.com/iqosa/_created/" class="social__link">Pinterest,</a>
-                    <a href="https://www.pinterest.com/iqosa/_created/" class="social__link social__link--cursive">Pinterest,</a>
-                </li>
-                <li class="social__item" @mouseover="showCursive($event)" @mouseleave="hideCursive($event)">
-                    <a href="https://www.instagram.com/iqosa/" class="social__link">Instagram</a>
-                    <a href="https://www.instagram.com/iqosa/" class="social__link social__link--cursive">Instagram</a>
-                </li>
-            </ul>
-        </div>
+        <Social @showCursive="showCursive($event)" @hideCursive="hideCursive($event)"/>
         <div class="language">
             <ul class="language__list">
                 <li class="language__item language__item--selected">

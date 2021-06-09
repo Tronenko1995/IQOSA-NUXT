@@ -1,5 +1,5 @@
 <template>
-    <header class="header">
+    <header class="header" :class="[{'header--main': headerType === 'main'},{'header--transparent': headerType === 'transparent'}]">
         <div class="header__wrap">
             <nuxt-link to="/" class="header__logo">
                 <img src="@/static/svg/header-logo.svg" alt="" class="header__img">
@@ -64,7 +64,8 @@ export default {
         menuStatus: {
             type: Boolean,
             required: true
-        }
+        },
+        headerType: String
     },
     methods: {
         ...mapMutations({
@@ -153,8 +154,26 @@ export default {
         display: flex;
         opacity: 0;
     }
+    &--main {
+        .nav {
+            display: block;
+        }
+        .menu-button {
+            display: none;
+        }
+        .request {
+            display: none;
+        }
+        .lang {
+            display: block;
+        }
+    }
+    &--transparent {
+        background: transparent;
+    }
 }
 .nav {
+    display: none;
     width: 470px;
     &__list {
         display: flex;
@@ -180,6 +199,7 @@ export default {
     }
 }
 .lang {
+    display: none;
     width: 120px;
     &__list {
         display: flex;
@@ -213,7 +233,6 @@ export default {
     }
 }
 .menu-button {
-    display: none;
     height: 40px;
     width: 40px;
     position: absolute;
@@ -253,7 +272,7 @@ export default {
     }
 }
 .request {
-    display: none;
+    display: flex;
     white-space: nowrap;
     opacity: 0;
     &__link {
@@ -277,6 +296,20 @@ export default {
     .header {
         &-nav {
             display: none;
+        }
+        &--main {
+            .nav {
+                display: none;
+            }
+            .menu-button {
+                display: block;
+            }
+            .request {
+                display: flex;
+            }
+            .lang {
+                display: none;
+            }
         }
     }
     .menu-button {

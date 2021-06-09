@@ -26,6 +26,7 @@ export default {
 		TeamMobi,
 		Modals
     },
+	layout: 'main',
     beforeMount() {
 		window.addEventListener('resize', this.onWindowResize);
         // window.addEventListener('scroll', this.handleScroll);
@@ -44,7 +45,9 @@ export default {
 				position: 0,
 				y: 0
 			},
-			desktop: null
+			desktop: null,
+			lastWidth: null,
+			resizeTimer: null
 		}
 
 	},
@@ -53,10 +56,14 @@ export default {
 	},
 	methods: {
 		testSize() {
+			console.log('change')
             window.innerWidth > 1024 ? this.desktop = true : this.desktop = false
         },
         onWindowResize() {
-			this.testSize()
+            clearTimeout(this.resizeTimer);
+            this.resizeTimer = setTimeout(() => {
+                this.testSize()
+            }, 250);
         },
         handleScroll() {
 			// console.log(this.scroll.y)
