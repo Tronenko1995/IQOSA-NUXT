@@ -16,3 +16,69 @@
         </ul>
     </div>
 </template>
+
+<style lang="scss">
+.social {
+    position: absolute;
+    left: 64px;
+    bottom: 40px;
+    &--footer {
+        width: 30%;
+        position: unset;
+        left: unset;
+        bottom: unset;
+        .social {
+            &__link {
+                color: #000;
+                transform: unset;
+            }
+            &__item {
+                &:first-child {
+                    margin-left: 0;
+                }
+            }
+        }
+    }
+    &__list {
+        display: flex;
+    }
+    &__item {
+        display: flex;
+        transform: translateY(0);
+        margin-left: 10px;
+        padding-left: 2px;
+        padding-right: 2px;
+        overflow: hidden;
+    }
+    &__link {
+        font-family: Light,Arial;
+        font-weight: 300;
+        color: #fff;
+        font-size: 16px;
+        line-height: 140%;
+        transform: translate(0px, 100%);
+        &--cursive {
+            font-family: ThinItalic,Arial;
+            position: absolute;
+            bottom: -100%;
+        }
+    }
+}
+@media (max-width: 768px) {
+    .social {
+        &--footer {
+            width: fit-content;
+        }
+    }
+}
+@media(max-width: 690px) {
+    .social {
+        position: relative;
+        bottom: unset;
+        right: unset;
+        left: unset;
+        margin-top: auto;
+        margin-bottom: 8px;
+    }
+}
+</style>

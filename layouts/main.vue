@@ -1,6 +1,7 @@
 <template>
   <div>
     <HeaderWrap :headerType="'main'" />
+    <Plug />
     <Nuxt />
     <Footer />
   </div>

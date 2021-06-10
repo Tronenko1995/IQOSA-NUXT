@@ -1,6 +1,7 @@
 <template>
   <div>
     <HeaderWrap />
+    <Plug />
     <Nuxt />
     <Footer />
   </div>

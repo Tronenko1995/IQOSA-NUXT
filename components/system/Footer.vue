@@ -77,7 +77,7 @@
             <div class="footer__bottom-item">
                 <nuxt-link to="/privaty-policy" class="footer__link">Privacy Policy</nuxt-link>
             </div>
-            <Social class="'social social--footer'" @showCursive="showCursive($event)" @hideCursive="hideCursive($event)"/>
+            <Social class="social--footer" @showCursive="showCursive($event)" @hideCursive="hideCursive($event)"/>
             <!-- <div class="footer__bottom-item footer__bottom-item--social">
                 <a href="https://www.facebook.com/IQOSA/" class="footer__link">Facebook,</a>
                 <a href="https://www.pinterest.com/iqosa/_created/" class="footer__link">Pinterest,</a>

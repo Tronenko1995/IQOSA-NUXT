@@ -45,7 +45,7 @@
 // import { SplitText } from "gsap/dist/SplitText";
 export default {
 	mounted() {
-		this.animate()
+		setTimeout(() => this.animate(), 2500);
 		// gsap.registerPlugin(SplitText);
 	},
 	methods: {

@@ -148,35 +148,7 @@ export default {
         }
     }
 }
-.social {
-    position: absolute;
-    left: 64px;
-    bottom: 40px;
-    &__list {
-        display: flex;
-    }
-    &__item {
-        display: flex;
-        transform: translateY(0);
-        margin-left: 10px;
-        padding-left: 2px;
-        padding-right: 2px;
-        overflow: hidden;
-    }
-    &__link {
-        font-family: Light,Arial;
-        font-weight: 300;
-        color: #fff;
-        font-size: 16px;
-        line-height: 140%;
-        transform: translate(0px, 100%);
-        &--cursive {
-            font-family: ThinItalic,Arial;
-            position: absolute;
-            bottom: -100%;
-        }
-    }
-}
+
 .language {
     position: absolute;
     bottom: 40px;
@@ -269,14 +241,6 @@ export default {
             margin-bottom: 20px;
             overflow: hidden;
         }
-    }
-    .social {
-        position: relative;
-        bottom: unset;
-        right: unset;
-        left: unset;
-        margin-top: auto;
-        margin-bottom: 8px;
     }
     .language {
         position: relative;
