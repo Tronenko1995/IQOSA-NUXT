@@ -13,8 +13,8 @@
             <nav class="nav header-nav">
                 <ul class="nav__list">
                     <li class="nav__item" @mouseover="showCursive($event)" @mouseleave="hideCursive($event)">
-                        <nuxt-link to="/projects" class="nav__link">Projects</nuxt-link>
-                        <nuxt-link to="/projects" class="nav__link nav__link--cursive">Projects</nuxt-link>
+                        <a @click.prevent="goTo('projects')" href="/projects" class="nav__link">Projects</a>
+                        <a @click.prevent="goTo('projects')" href="/projects" class="nav__link nav__link--cursive">Projects</a>
                     </li>
                     <li class="nav__item" @mouseover="showCursive($event)" @mouseleave="hideCursive($event)">
                         <nuxt-link to="/about-plug-2" class="nav__link">About</nuxt-link>
@@ -69,8 +69,13 @@ export default {
     },
     methods: {
         ...mapMutations({
-            setMenuStatus: 'menu/setStatus'
+            setMenuStatus: 'menu/setStatus',
+            setPlug: 'plug/setPlug'
         }),
+        goTo(page) {
+            this.setPlug(true)
+            setTimeout(() => this.$router.push({ name: page }), 1000);
+        },
         showCursive(e) {
             if (e.target.tagName === 'A') {
                 this.$gsap.to(e.target.parentElement.children[0], { 
@@ -97,7 +102,7 @@ export default {
         },
         openMenu() {
             this.menuStatus ? this.setMenuStatus(false) : this.setMenuStatus(true)
-        }
+        },
     },
     mounted() {
         this.$gsap.to('.nav__item', { 

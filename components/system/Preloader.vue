@@ -27,6 +27,7 @@ export default {
     methods: {
         ...mapMutations({
             setPlug: 'plug/setPlug',
+            setPreloader: 'preloader/setPreloader',
         }),
         showText() {
             const animateItem = document.querySelectorAll('.preloader__change')
@@ -56,7 +57,10 @@ export default {
 
                 delay = delay + 0.25
             }
-            setTimeout(() => this.setPlug(false), 2000);
+            setTimeout(() => {
+                this.setPlug(false)
+                this.setPreloader(false)
+            }, 2000);
         }
     }
 }

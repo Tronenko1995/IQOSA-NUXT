@@ -1,10 +1,9 @@
 <template>
     <transition
-    v-if="plug"
     name="fade" 
     appear>
         <div class="plug">
-            <Preloader />
+            <Preloader v-if="preloader" />
         </div>
     </transition>
 </template>
@@ -18,7 +17,8 @@ export default {
     },
     computed: {
         ...mapState({
-            plug: (state) => state.plug.plug
+            plug: (state) => state.plug.plug,
+            preloader: (state) => state.preloader.preloader
         })
     },
 }
@@ -33,27 +33,30 @@ export default {
         width: 100%;
         height: 100%;
         opacity: 1;
-        background: #1b1b1b;
+        background: pink;
+        // background: #1b1b1b;
         z-index: 100;
         display: flex;
         justify-content: center;
         align-items: center;
     }
     .fade-enter {
-        transform: translateY(100vh);
+        transform: translateY(0);
         &-active {
-            transition: all 1s;
+            transition: all 5s;
         }
         &-to {
+        transform: translateY(100%);
         }
     }
 
     .fade-leave {
+        transform: translateY(100%);
         &-active {
-            transition: all 1s;
+            transition: all 5s;
         }
         &-to {
-            transform: translateY(-100vh);
+        transform: translateY(0);
         }
     }
 </style>
