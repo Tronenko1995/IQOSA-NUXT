@@ -33,30 +33,30 @@ export default {
         width: 100%;
         height: 100%;
         opacity: 1;
-        background: pink;
-        // background: #1b1b1b;
+        // background: pink;
+        background: #1b1b1b;
         z-index: 100;
         display: flex;
         justify-content: center;
         align-items: center;
     }
     .fade-enter {
-        transform: translateY(0);
+        transform: translateY(100%);
         &-active {
-            transition: all 5s;
+            transition: all 1s;
         }
         &-to {
-        transform: translateY(100%);
+            transform: translateY(0);
         }
     }
 
     .fade-leave {
-        transform: translateY(100%);
+        // transform: translateY(100%);
         &-active {
-            transition: all 5s;
+            transition: all 1s;
         }
         &-to {
-        transform: translateY(0);
+            transform: translateY(-100%);
         }
     }
 </style>
