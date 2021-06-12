@@ -2,6 +2,32 @@
 
 	<section class="projects-list">
 		<div class="projects-list__shadow"></div>
+    <div ref="shaderObj" class="projects-list__shader">
+      <div :data-img="require('~/assets/img/projects/shader/1.jpg')" class="multi-textures__area"></div>
+      <div :data-img="require('~/assets/img/projects/shader/2.jpg')" class="multi-textures__area"></div>
+      <div :data-img="require('~/assets/img/projects/shader/3.jpg')" class="multi-textures__area"></div>
+      <div :data-img="require('~/assets/img/projects/shader/4.jpg')" class="multi-textures__area"></div>
+
+      <!-- <div data-img="https://iqosa.com/wp-content/uploads/2021/03/1.7.jpg" class="multi-textures__area"></div>
+      <div data-img="https://iqosa.com/wp-content/uploads/2021/02/13-4.jpg" class="multi-textures__area"></div>
+      <div data-img="https://iqosa.com/wp-content/uploads/2021/02/05-2.jpg" class="multi-textures__area"></div>
+      <div data-img="https://iqosa.com/wp-content/uploads/2021/02/09.jpg" class="multi-textures__area"></div>
+      <div data-img="https://iqosa.com/wp-content/uploads/2021/02/09-1.jpg" class="multi-textures__area"></div>
+      <div data-img="https://iqosa.com/wp-content/uploads/2021/01/1.jpg" class="multi-textures__area"></div>
+      <div data-img="https://iqosa.com/wp-content/uploads/2021/01/1-1.jpg" class="multi-textures__area"></div>
+      <div data-img="https://iqosa.com/wp-content/uploads/2021/01/1-3.jpg" class="multi-textures__area"></div>
+      <div data-img="https://iqosa.com/wp-content/uploads/2021/01/1-4.jpg" class="multi-textures__area"></div>
+      <div data-img="https://iqosa.com/wp-content/uploads/2021/01/3-3.jpg" class="multi-textures__area"></div>
+      <div data-img="https://iqosa.com/wp-content/uploads/2021/01/render_2-3-e1611310593828.jpg" class="multi-textures__area"></div>
+      <div data-img="https://iqosa.com/wp-content/uploads/2020/12/1-8.jpg" class="multi-textures__area"></div>
+      <div data-img="https://iqosa.com/wp-content/uploads/2020/12/1-6.jpg" class="multi-textures__area"></div>
+      <div data-img="https://iqosa.com/wp-content/uploads/2020/12/3-4.jpg" class="multi-textures__area"></div>
+      <div data-img="https://iqosa.com/wp-content/uploads/2020/12/1-1-1.jpg" class="multi-textures__area"></div>
+      <div data-img="https://iqosa.com/wp-content/uploads/2020/12/1-3.jpg" class="multi-textures__area"></div>
+      <div data-img="https://iqosa.com/wp-content/uploads/2020/12/14-2.jpg" class="multi-textures__area"></div>
+      <div data-img="https://iqosa.com/wp-content/uploads/2020/12/13.jpg" class="multi-textures__area"></div>
+      <div data-img="https://iqosa.com/wp-content/uploads/2020/12/3-1.jpg" class="multi-textures__area"></div> -->
+    </div>
 
 		<div class="projects-list__title">
 			<p class="projects-list__title-text">Featured</p>
@@ -61,6 +87,15 @@
               2021,<span>Kyiv</span>, Ukraine, 101M2
             </p>
 				</div>
+				<div class="swiper-slide projects-slider__item" data-url="/project/iq-94-or/">
+          <nuxt-link class="projects-slider__link" to="/project/iq-94-or/"></nuxt-link>
+            <p class="projects-slider__title">
+              <span>IQ</span>-94-OR
+            </p>
+            <p class="projects-slider__description">
+              2021,<span>Kyiv</span>, Ukraine, 181M2
+            </p>
+				</div>
 			</div>
 		</div>
 
@@ -69,6 +104,9 @@
 </template>
 
 <script>
+import * as THREE from "three"
+import fragment from "~/static/projectsSlider/shader/fragment.glsl"
+import vertex from "~/static/projectsSlider/shader/vertex.glsl"
 export default {
 	data() {
 		return {
@@ -85,10 +123,28 @@ export default {
 				touchStartPreventDefault: false,
 				longSwipesMs: 1000,
 				mousewheel: { invert: false },
-			}
+			},
+      shader: {
+        item: null,
+        images: [],
+        active: 0,
+        animation: null,
+        flag: false,
+        index: null
+      },
+      texture: {
+        active: null,
+        next: null,
+      },
+      mat: null,
+      renderer: null
 		}
 	},
 	mounted() {
+    this.shader.item = this.$refs.shaderObj
+
+    this.initShader()
+
 		this.eye = this.$refs.eye
 		this.projectLink = this.$refs.projectsLink
 		window.addEventListener("mousemove", this.onMouseMove, {passive: true})
@@ -102,37 +158,148 @@ export default {
           this.projectsSlider.allowSlidePrev = true
         }, 2000)
 
+        this.changeImg(this.projectsSlider.realIndex)
+
         // let active_el = this.projectsSlider.$el[0].querySelector(`[data-swiper-slide-index="${this.projectsSlider.realIndex}"]`);
         // if (active_el) {
-          // this.link.url = active_el.dataset.url;
+          // this.link.url = active_el.dataset.url
         // }
       })
 	},
 	methods: {
+    initShader() {
+      let scene = new THREE.Scene()
+      let camera = new THREE.OrthographicCamera(
+        this.shader.item.offsetWidth / -2,
+        this.shader.item.offsetWidth / 2,
+        this.shader.item.offsetHeight / 2,
+        this.shader.item.offsetHeight / -2,
+        1,
+        1000
+      )
+      camera.position.z = 1
+
+      this.renderer = new THREE.WebGLRenderer({
+        antialias: false
+      })
+
+      this.renderer.setPixelRatio(window.devicePixelRatio)
+      this.renderer.setClearColor(0xffffff, 0.0)
+      this.shader.item.append(this.renderer.domElement)
+
+      let loader = new THREE.TextureLoader()
+      loader.crossOrigin = ''
+
+      this.shader.item.querySelectorAll('.multi-textures__area').forEach(item => {
+        this.shader.images.push(loader.load(item.dataset.img))
+      })
+
+      this.texture.active = this.shader.images[0]
+      this.texture.next = this.shader.images[1]
+
+      let disp = loader.load(require('~/assets/img/projects/shader/disp.png'))
+      disp.wrapS = disp.wrapT = THREE.RepeatWrapping
+
+      this.texture.active.magFilter = this.texture.next.magFilter = THREE.LinearFilter
+      this.texture.active.minFilter = this.texture.next.minFilter = THREE.LinearFilter
+
+      this.texture.active.anisotropy = this.renderer.getMaxAnisotropy()
+      this.texture.next.anisotropy = this.renderer.getMaxAnisotropy()
+
+      this.mat = new THREE.ShaderMaterial({
+        uniforms: {
+            effectFactor: {type: "f", value: 0.2},
+            dispFactor: {type: "f", value: 0.0},
+            texture1: {type: "t", value: this.texture.active},
+            texture2: {type: "t", value: this.texture.next},
+            disp: {type: "t", value: disp}
+        },
+
+        vertexShader: vertex,
+        fragmentShader: fragment,
+        transparent: true,
+        opacity: 1.0
+    })
+
+    let geometry = new THREE.PlaneBufferGeometry(
+      this.shader.item.offsetWidth,
+      this.shader.item.offsetHeight,
+      1
+    )
+
+    let mesh = new THREE.Mesh(geometry, this.mat)
+    scene.add(mesh)
+
+    setTimeout(() => {
+        this.renderer.setSize(this.texture.active.image.naturalWidth, this.texture.active.image.naturalHeight)
+    }, 1000)
+
+    let animate = () => {
+      requestAnimationFrame(animate)
+      this.renderer.render(scene, camera)
+    }
+    animate()
+
+    window.addEventListener("resize", this.onWindowResize)
+    },
+    changeImg(index) {
+      this.shader.index = index
+
+      if (this.shader.active != index) {
+          this.shader.active = index
+          this.texture.next = this.shader.images[this.shader.active]
+          this.mat.uniforms.disp = {type: "t", value: this.shader.images[this.shader.active]}
+          this.texture.active.magFilter = this.texture.next.magFilter = THREE.LinearFilter
+          this.texture.active.minFilter = this.texture.next.minFilter = THREE.LinearFilter
+
+          this.mat.uniforms.dispFactor.value = 0.0
+          this.mat.uniforms.texture1.value = this.texture.active
+          this.mat.uniforms.texture2.value = this.texture.next
+
+          if (this.shader.flag) {
+              this.shader.animation.paused(0)
+          }
+          this.shader.flag = true
+          this.shader.animation = this.$gsap.to(this.mat.uniforms.dispFactor, {
+              duration: 0.75,
+              value: 1,
+              onComplete: this.getActiveTexture()
+          })
+      }
+    },
+    getActiveTexture() {
+      this.texture.active =  this.shader.images[this.shader.active]
+      this.shader.flag = false
+    },
 		onMouseMove() {
-			let rect = this.eye.getBoundingClientRect();
+			let rect = this.eye.getBoundingClientRect()
 
 			let offset = {
 				top: rect.top + window.scrollY,
 				left: rect.left + window.scrollX,
-			};
-			let x = offset.left + this.eye.offsetWidth / 2;
-			let y = offset.top + this.eye.offsetHeight / 2;
-			let rad = Math.atan2(event.pageX - x, event.pageY - y);
-			let rot = rad * (180 / Math.PI) * -1 + 180;
+			}
+			let x = offset.left + this.eye.offsetWidth / 2
+			let y = offset.top + this.eye.offsetHeight / 2
+			let rad = Math.atan2(event.pageX - x, event.pageY - y)
+			let rot = rad * (180 / Math.PI) * -1 + 180
 
 			this.eye.style.cssText = `
 							-webkit-transform: rotate(${rot}deg);
 							-moz-transform: rotate(${rot}deg);
 							-ms-transform: rotate(${rot}deg);
 							transform: rotate(${rot}deg);
-					`;
+					`
 		},
+    onWindowResize() {
+      this.renderer.setSize(this.texture.active.image.naturalWidth, this.texture.active.image.naturalHeight)
+    }
+
 	},
 	beforeDestroy() {
 		window.removeEventListener("mousemove", this.onMouseMove, {passive: true})
+    window.removeEventListener("resize", this.onWindowResize)
 	},
-};
+}
 
 </script>
 
@@ -167,6 +334,11 @@ export default {
         font-weight: normal;
       }
     }
+  }
+  &__shader {
+    width: 100vw;
+    height: 100vh;
+    opacity: .5;
   }
 }
 
@@ -342,5 +514,13 @@ export default {
       z-index: 10;
     }
   }
+}
+.projects-list canvas{
+  min-width: 100% !important;
+  min-height: 100% !important;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
 }
 </style>

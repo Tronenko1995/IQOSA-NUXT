@@ -1,6 +1,6 @@
 <template>
     <main>
-        <ProjectsList />
+      <ProjectsList />
     </main>
 </template>
 

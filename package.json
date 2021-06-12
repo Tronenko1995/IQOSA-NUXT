@@ -24,7 +24,7 @@
     "sass-loader": "^10.1.1",
     "simple-input-events": "^2.0.0",
     "swiper": "^6.7.0",
-    "three": "^0.128.0",
+    "three": "^0.125.1",
     "three-dat.gui": "^2.0.7",
     "vue-awesome-swiper": "^4.1.1"
   },
