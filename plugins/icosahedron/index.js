@@ -121,15 +121,15 @@ export default class Sketch {
 
     // const camera_distance = window.innerWidth <= 600 ? 100 : 70;
     let camera_distance;
-    
+
       if (window.innerWidth <= 600) {
-        camera_distance = 110 
+        camera_distance = 110
     } else if (window.innerWidth <= 800) {
-        camera_distance = 104 
+        camera_distance = 104
     } else if (window.innerWidth <= 1100) {
-        camera_distance = 84 
+        camera_distance = 84
     } else if (window.innerWidth <= 1800) {
-        camera_distance = 70 
+        camera_distance = 70
     } else if (window.innerWidth <= 2200) {
         camera_distance = 90
     } else {

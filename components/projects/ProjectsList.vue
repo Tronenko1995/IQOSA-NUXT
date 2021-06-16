@@ -1,6 +1,7 @@
 <template>
 
 	<section class="projects-list">
+    <IqosaCursor />
 		<div class="projects-list__shadow"></div>
     <div ref="shaderObj" class="projects-list__shader">
       <div :data-img="require('~/assets/img/projects/shader/1.jpg')" class="multi-textures__area"></div>
@@ -34,32 +35,11 @@
 			<p class="projects-list__title-text projects-list__title-text--roman">cases</p>
 		</div>
 
-		<div class="switch">
+    <SwitchProjects :view="view" />
 
-			<div class="switch__eye eye">
-				<div ref="eye" class="eye__pupil"></div>
-				<img class="eye__img" :src="require('~/assets/svg/eye.svg')" width="38" height="15" alt="" />
-			</div>
-
-			<ul class="switch__list">
-				<li class="switch__item switch__item--selected">
-					<button class="switch__link">Grid</button>
-					<span class="switch__line"></span>
-				</li>
-				<li class="switch__item">
-					<p class="switch__link">,</p>
-				</li>
-				<li class="switch__item">
-					<button class="switch__link">List</button>
-					<span class="switch__line"></span>
-				</li>
-			</ul>
-
-		</div>
-
-		<div v-swiper:projectsSlider="projectsSetting" ref="projects" class="projects-slider">
+		<div v-swiper:projectsSlider="projectsSetting" ref="projects" class="projects-slider" data-cursor="eye">
 			<nuxt-link ref="linkItem" class="projects-slider__link projects-slider__link--head" :to="link.url"></nuxt-link>
-			<div class="swiper-wrapper">
+			<div class="swiper-wrapper" data-cursor="drag">
 				<div class="swiper-slide projects-slider__item" data-url="/project/iq-98-kd/">
           <nuxt-link class="projects-slider__link" to="/project/iq-98-kd/"></nuxt-link>
             <p class="projects-slider__title">
@@ -108,9 +88,14 @@ import * as THREE from "three"
 import fragment from "~/static/projectsSlider/shader/fragment.glsl"
 import vertex from "~/static/projectsSlider/shader/vertex.glsl"
 export default {
+  props: {
+    view: {
+      type: String,
+      required: true
+    }
+  },
 	data() {
 		return {
-			eye: null,
       link: {
         item: null,
         url: '/project/iq-98-kd/'
@@ -145,9 +130,7 @@ export default {
 
     this.initShader()
 
-		this.eye = this.$refs.eye
 		this.projectLink = this.$refs.projectsLink
-		window.addEventListener("mousemove", this.onMouseMove, {passive: true})
     console.log(this.projectsSlider)
     this.projectsSlider.on('slideChange', () => {
       this.projectsSlider.allowSlideNext = false
@@ -271,32 +254,15 @@ export default {
       this.texture.active =  this.shader.images[this.shader.active]
       this.shader.flag = false
     },
-		onMouseMove() {
-			let rect = this.eye.getBoundingClientRect()
-
-			let offset = {
-				top: rect.top + window.scrollY,
-				left: rect.left + window.scrollX,
-			}
-			let x = offset.left + this.eye.offsetWidth / 2
-			let y = offset.top + this.eye.offsetHeight / 2
-			let rad = Math.atan2(event.pageX - x, event.pageY - y)
-			let rot = rad * (180 / Math.PI) * -1 + 180
-
-			this.eye.style.cssText = `
-							-webkit-transform: rotate(${rot}deg);
-							-moz-transform: rotate(${rot}deg);
-							-ms-transform: rotate(${rot}deg);
-							transform: rotate(${rot}deg);
-					`
-		},
     onWindowResize() {
       this.renderer.setSize(this.texture.active.image.naturalWidth, this.texture.active.image.naturalHeight)
+    },
+    passView() {
+      console.log(e)
+      // this$emit('view')
     }
-
 	},
 	beforeDestroy() {
-		window.removeEventListener("mousemove", this.onMouseMove, {passive: true})
     window.removeEventListener("resize", this.onWindowResize)
 	},
 }
@@ -305,6 +271,7 @@ export default {
 
 <style lang="scss">
 .projects-list {
+  overflow: hidden;
   height: 100vh;
   width: 100%;
   position: relative;
@@ -348,6 +315,8 @@ export default {
   left: 50%;
   transform: translateX(-50%);
   display: flex;
+  z-index: 2;
+  padding: 20px;
   &__list {
     display: flex;
     margin-left: 9px;
@@ -361,7 +330,7 @@ export default {
       }
       &:hover {
         .switch__line {
-          animation: "under-line"1s;
+          animation: "under-line" 1s;
         }
       }
     }
@@ -403,6 +372,7 @@ export default {
 .eye {
   width: 38px;
   height: 15px;
+  position: relative;
   // object-fit: cover;
   &__pupil {
     position: relative;
@@ -480,6 +450,7 @@ export default {
     bottom: 0;
     top: 0;
     z-index: 1;
+    cursor: none;
     &--head {
       height: 100vh;
     }

@@ -35,7 +35,7 @@ export default {
 		this.testSize()
 	},
     beforeDestroy() {
-		window.addEventListener('resize', this.onWindowResize);
+		window.removeEventListener('resize', this.onWindowResize);
         // window.removeEventListener('scroll', this.handleScroll);
     },
 	data() {

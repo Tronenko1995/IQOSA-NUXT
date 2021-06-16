@@ -67,11 +67,11 @@ export default {
     methods : {
         showCursive(e) {
             if (e.target.tagName === 'A') {
-                this.$gsap.to(e.target.parentElement.children[0], { 
+                this.$gsap.to(e.target.parentElement.children[0], {
                     translateY: -100 + "%",
                     duration: .5
                 })
-                this.$gsap.to(e.target.parentElement.children[1], { 
+                this.$gsap.to(e.target.parentElement.children[1], {
                     translateY: -100 + "%",
                     duration: .5
                 })
@@ -79,17 +79,17 @@ export default {
         },
         hideCursive(e) {
             if (e.target.tagName === 'LI') {
-                this.$gsap.to(e.target.children[0], { 
+                this.$gsap.to(e.target.children[0], {
                     translateY: 0 + "%",
                     duration: .5
                 })
-                this.$gsap.to(e.target.children[1], { 
+                this.$gsap.to(e.target.children[1], {
                     translateY: 0 + "%",
                     duration: .5
                 })
             }
         },
-    }    
+    }
 }
 </script>
 
@@ -115,7 +115,7 @@ export default {
         align-items: center;
         overflow: hidden;
         &:last-child {
-            margin-top: 40px;  
+            margin-top: 40px;
         }
     }
     &__item {

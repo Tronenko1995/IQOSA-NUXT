@@ -1,7 +1,7 @@
 <template>
     <section class="projects">
         <div class="projects__info">
-            <iqosaCursor></iqosaCursor>
+            <IqosaCursor />
             <div class="featured">
                 <div class="featured__block">
                     <p class="featured__text">Featured</p>
@@ -49,7 +49,7 @@
                 </swiper-slide>
             </swiper>
         </div>
-        <swiper ref="projectPhotos" :options="projectPhotosSetting" class="projects__photos projects-photos" data-drag-circle>
+        <swiper ref="projectPhotos" :options="projectPhotosSetting" class="projects__photos projects-photos" data-cursor="drag">
             <swiper-slide class="projects-photos__item">
                 <div class="projects-photos__slide">
                     <img class="projects-photos__img" :src="require('~/assets/img/projects/1.jpg')" alt="">
@@ -70,11 +70,7 @@
 </template>
 
 <script>
-import iqosaCursor from '@/components/system/Cursor.vue'
 export default {
-    components: {
-        iqosaCursor
-    },
     data() {
         return {
             projectNameSetting: {
@@ -172,11 +168,11 @@ export default {
             }
 		},
         animateTextShow(el) {
-            this.$gsap.to(el.children[0], { 
+            this.$gsap.to(el.children[0], {
                 translateY: -100 + "%",
                 duration: .5
             })
-            this.$gsap.to(el.children[1], { 
+            this.$gsap.to(el.children[1], {
                 translateY: -100 + "%",
                 duration: .5
             })
@@ -184,11 +180,11 @@ export default {
 		animateTextHide(e) {
 			if (e.target.classList.contains('arrow-link')) {
                 const el = e.target.querySelector('.arrow-link__change')
-				this.$gsap.to(el.children[0], { 
+				this.$gsap.to(el.children[0], {
 					translateY: 0 + "%",
 					duration: .5
 				})
-				this.$gsap.to(el.children[1], { 
+				this.$gsap.to(el.children[1], {
 					translateY: 0 + "%",
 					duration: .5
 				})
