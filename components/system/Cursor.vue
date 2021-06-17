@@ -29,6 +29,7 @@ export default {
 			cursor: null,
       cursorDrag: null,
       cursorEye: null,
+      cursorLink: null,
 		}
 	},
 	beforeMount() {
@@ -39,10 +40,11 @@ export default {
 	mounted() {
 		if (window.innerWidth > 1280) {
 			this.cursor = this.$refs.cursor
+      this.projectsPage = document.querySelector(".projects-page")
 			this.cursorDrag = document.querySelectorAll("[data-cursor='drag']")
 			this.cursorEye = document.querySelectorAll("[data-cursor='eye']")
-      console.log(this.cursorDrag, 'this.cursorDrag')
-      console.log(this.cursorEye, 'this.cursorEye')
+			this.cursorLink = document.querySelectorAll("[data-cursor='link']")
+      console.dir(this.cursorLink)
 			this.raf()
       if (this.cursorDrag.length) {
         this.cursorDrag.forEach(item => {
@@ -54,6 +56,12 @@ export default {
         this.cursorEye.forEach(item => {
           item.addEventListener("mouseenter", this.mouseEnterEye)
           item.addEventListener("mouseleave", this.mouseLeaveEye)
+        })
+      }
+      if (this.cursorLink.length) {
+        this.cursorLink.forEach(item => {
+          item.addEventListener("mouseenter", this.mouseEnterLink)
+          item.addEventListener("mouseleave", this.mouseLeaveLink)
         })
       }
 		}
@@ -72,6 +80,12 @@ export default {
         this.cursorEye.forEach(item => {
           item.removeEventListener("mouseenter", this.mouseEnterEye)
           item.removeEventListener("mouseleave", this.mouseLeaveEye)
+        })
+      }
+      if (this.cursorLink.length) {
+        this.cursorLink.forEach(item => {
+          item.removeEventListener("mouseenter", this.mouseEnterLink)
+          item.removeEventListener("mouseleave", this.mouseLeaveLink)
         })
       }
 		}
@@ -129,6 +143,12 @@ export default {
     mouseLeaveEye() {
 			this.cursor.classList.remove("cursor--eye")
     },
+    mouseEnterLink() {
+		  this.cursor.classList.add("cursor--link")
+    },
+    mouseLeaveLink() {
+			this.cursor.classList.remove("cursor--link")
+    },
 	}
 }
 </script>
@@ -165,7 +185,8 @@ export default {
 			transition: opacity .5s ease .2s;
 		}
 		&--eye,
-    &--drag {
+    &--drag,
+    &--link {
 			background-color: white;
 			border-radius: 50%;
 			width: 127px;
@@ -189,6 +210,11 @@ export default {
   &--drag {
     &::after {
       background: url('~@/assets/svg/drag-cursor.svg') no-repeat center;
+    }
+  }
+  &--link {
+    &::after {
+      background: url('~@/assets/svg/link-cursor.svg') no-repeat center;
     }
   }
 }

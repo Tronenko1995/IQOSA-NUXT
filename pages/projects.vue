@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
+// import { mapMutations } from 'vuex'
 import ProjectsList from '@/components/projects/ProjectsList.vue'
 import ProjectsGrid from '@/components/projects/ProjectsGrid.vue'
 export default {
@@ -14,16 +14,16 @@ export default {
     ProjectsList, ProjectsGrid
   },
 layout: 'projects',
-  mounted() {
-    this.setPlug(false)
-  },
+  // mounted() {
+    // this.setPlug(false)
+  // },
   computed: {
     view() { return this.$store.getters['projects/view'] }
   },
-  methods: {
-    ...mapMutations({
-        setPlug: 'plug/setPlug'
-    }),
-  }
+  // methods: {
+  //   ...mapMutations({
+  //       setPlug: 'plug/setPlug'
+  //   }),
+  // }
 }
 </script>

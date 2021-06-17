@@ -4,12 +4,9 @@
 
 
 <script>
-import { mapState } from 'vuex'
 export default {
-    computed: {
-        ...mapState({
-            plug: (state) => state.plug.plug,
-        })
-    },
+  computed: {
+    plug() { return this.$store.getters['plug/visible'] }
+  },
 }
 </script>

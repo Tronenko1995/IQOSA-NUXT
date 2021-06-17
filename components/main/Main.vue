@@ -49,14 +49,31 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
 // import { gsap } from "gsap/dist/gsap";
 // import { SplitText } from "gsap/dist/SplitText";
 export default {
   mounted() {
+    if (this.preloader) {
+      setTimeout(() => {
+          this.setPlug(false)
+      }, this.duration.preloader);
+    } else {
+      setTimeout(() => {
+          this.setPlug(false)
+      }, this.duration.page);
+    }
     setTimeout(() => this.animate(), 2500);
     // gsap.registerPlugin(SplitText);
   },
+  computed: {
+    preloader() { return this.$store.getters['preloader/preloader'] },
+    duration() { return this.$store.getters['plug/duration'] }
+  },
   methods: {
+    ...mapMutations({
+        setPlug: 'plug/setVisible',
+    }),
     animate() {
       // this.$gsap.registerPlugin(this.$SplitText);
 

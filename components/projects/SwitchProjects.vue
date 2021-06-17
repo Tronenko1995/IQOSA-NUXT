@@ -8,14 +8,14 @@
 
     <ul class="switch__list">
       <li class="switch__item" :class="{'switch__item--selected': view === 'grid'}">
-        <button class="switch__link" @click="setView('grid')">Grid</button>
+        <button class="switch__link" @click="changeView('grid')">Grid</button>
         <span class="switch__line"></span>
       </li>
       <li class="switch__item">
         <p class="switch__link">,</p>
       </li>
       <li class="switch__item" :class="{'switch__item--selected': view === 'list'}">
-        <button class="switch__link" @click="setView('list')">List</button>
+        <button class="switch__link" @click="changeView('list')">List</button>
         <span class="switch__line"></span>
       </li>
     </ul>
@@ -44,8 +44,17 @@ export default {
   },
   methods: {
     ...mapMutations({
-        setView: 'projects/setView'
+        setView: 'projects/setView',
+        setPlug: 'plug/setVisible',
+        setAnimate: 'plug/setAnimate',
     }),
+    changeView(view) {
+      setTimeout(() => {
+        this.setView(view)
+      }, 1000);
+      this.setPlug(true)
+      this.setAnimate('page')
+    },
     onMouseMove() {
 			let rect = this.eye.getBoundingClientRect()
 
@@ -70,3 +79,67 @@ export default {
 	},
 }
 </script>
+
+<style lang="scss">
+.switch {
+  display: flex;
+  z-index: 2;
+  &.switch-project-list {
+    position: absolute;
+    bottom: 64px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 20px;
+  }
+  &__list {
+    display: flex;
+    margin-left: 9px;
+  }
+  &__item {
+    position: relative;
+    overflow: hidden;
+    &--selected {
+      .switch__line {
+        transform: translateX(0);
+      }
+      &:hover {
+        .switch__line {
+          animation: "under-line" 1s;
+        }
+      }
+    }
+    &:last-child {
+      margin-left: 4px;
+    }
+    &:hover {
+      .switch__line {
+        transform: translateX(0);
+      }
+    }
+  }
+
+  &__link {
+    font-family: "Light", Arial;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 100%;
+    text-transform: uppercase;
+    font-feature-settings: "pnum"on, "lnum"on, "zero"on, "hist"on, "ss12"on, "kern"off;
+    color: #ffffff;
+    background: unset;
+    cursor: pointer;
+  }
+
+  &__line {
+    position: absolute;
+    height: 1px;
+    width: 100%;
+    background: #fff;
+    transform: translateX(-100%);
+    display: block;
+    transition: 0.3s ease;
+    bottom: 0;
+  }
+}
+</style>

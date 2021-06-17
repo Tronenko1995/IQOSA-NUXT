@@ -26,15 +26,14 @@ export default {
     },
     methods: {
         ...mapMutations({
-            setPlug: 'plug/setPlug',
-            setPreloader: 'preloader/setPreloader',
+          setPreloader: 'preloader/setPreloader',
         }),
         showText() {
             const animateItem = document.querySelectorAll('.preloader__change')
             let delay = 1
 
             for (let i = 0; i < animateItem.length; i++) {
-                this.$gsap.to(animateItem[i], { 
+                this.$gsap.to(animateItem[i], {
                     delay: delay,
                     translateY: 0,
                     duration: 0.5
@@ -49,7 +48,7 @@ export default {
             let delay = 1
 
             for (let i = 0; i < animateItem.length; i++) {
-                this.$gsap.to(animateItem[i], { 
+                this.$gsap.to(animateItem[i], {
                     delay: delay,
                     translateY: -100 + '%',
                     duration: 0.5
@@ -58,9 +57,8 @@ export default {
                 delay = delay + 0.25
             }
             setTimeout(() => {
-                this.setPlug(false)
                 this.setPreloader(false)
-            }, 2000);
+            }, 1000);
         }
     }
 }
@@ -97,7 +95,7 @@ export default {
 }
 @media (max-width: 1280px) {
     .preloader {
-        &__item {   
+        &__item {
             font-size: 19px;
         }
         &__svg {
@@ -108,7 +106,7 @@ export default {
 }
 @media (max-width: 1024px) {
     .preloader {
-        &__item {   
+        &__item {
             font-size: 16px;
         }
         &__svg {
@@ -128,7 +126,7 @@ export default {
 }
 @media (max-width: 414px) {
     .preloader {
-        &__item {   
+        &__item {
             font-size: 14px;
             padding-left: 16px;
             padding-right: 16px;

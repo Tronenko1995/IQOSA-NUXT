@@ -35,7 +35,7 @@
 			<p class="projects-list__title-text projects-list__title-text--roman">cases</p>
 		</div>
 
-    <SwitchProjects :view="view" />
+    <SwitchProjects class="switch-project-list" :view="view" />
 
 		<div v-swiper:projectsSlider="projectsSetting" ref="projects" class="projects-slider" data-cursor="eye">
 			<nuxt-link ref="linkItem" class="projects-slider__link projects-slider__link--head" :to="link.url"></nuxt-link>
@@ -84,6 +84,7 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
 import * as THREE from "three"
 import fragment from "~/static/projectsSlider/shader/fragment.glsl"
 import vertex from "~/static/projectsSlider/shader/vertex.glsl"
@@ -126,6 +127,16 @@ export default {
 		}
 	},
 	mounted() {
+    if (this.preloader) {
+      setTimeout(() => {
+          this.setPlug(false)
+      }, this.duration.preloader);
+    } else {
+      setTimeout(() => {
+          this.setPlug(false)
+      }, this.duration.page);
+    }
+
     this.shader.item = this.$refs.shaderObj
 
     this.initShader()
@@ -149,7 +160,14 @@ export default {
         // }
       })
 	},
+  computed: {
+    preloader() { return this.$store.getters['preloader/preloader'] },
+    duration() { return this.$store.getters['plug/duration'] }
+  },
 	methods: {
+    ...mapMutations({
+        setPlug: 'plug/setVisible',
+    }),
     initShader() {
       let scene = new THREE.Scene()
       let camera = new THREE.OrthographicCamera(
@@ -306,66 +324,6 @@ export default {
     width: 100vw;
     height: 100vh;
     opacity: .5;
-  }
-}
-
-.switch {
-  position: absolute;
-  bottom: 64px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  z-index: 2;
-  padding: 20px;
-  &__list {
-    display: flex;
-    margin-left: 9px;
-  }
-  &__item {
-    position: relative;
-    overflow: hidden;
-    &--selected {
-      .switch__line {
-        transform: translateX(0);
-      }
-      &:hover {
-        .switch__line {
-          animation: "under-line" 1s;
-        }
-      }
-    }
-    &:last-child {
-      margin-left: 4px;
-    }
-    &:hover {
-      .switch__line {
-        transform: translateX(0);
-      }
-    }
-  }
-
-  &__link {
-    font-family: "Light", Arial;
-    font-style: normal;
-    font-weight: 300;
-    font-size: 16px;
-    line-height: 100%;
-    text-transform: uppercase;
-    font-feature-settings: "pnum"on, "lnum"on, "zero"on, "hist"on, "ss12"on, "kern"off;
-    color: #ffffff;
-    background: unset;
-    cursor: pointer;
-  }
-
-  &__line {
-    position: absolute;
-    height: 1px;
-    width: 100%;
-    background: #fff;
-    transform: translateX(-100%);
-    display: block;
-    transition: 0.3s ease;
-    bottom: 0;
   }
 }
 

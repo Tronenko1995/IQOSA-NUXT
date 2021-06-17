@@ -1,9 +1,9 @@
 <template>
     <header class="header" :class="[{'header--main': headerType === 'main'},{'header--transparent': headerType === 'transparent'}]">
         <div class="header__wrap">
-            <nuxt-link to="/" class="header__logo">
-                <img src="@/static/svg/header-logo.svg" alt="" class="header__img">
-            </nuxt-link>
+            <a @click.prevent="goTo('index')" href="/" class="header__logo">
+              <img src="@/static/svg/header-logo.svg" alt="" class="header__img">
+            </a>
             <div class="menu-button" @click="openMenu()">
                 <div class="menu-button__list">
                     <div class="menu-button__item" :class="{'menu-button__item--x' : menuStatus}"></div>
@@ -69,20 +69,27 @@ export default {
     },
     methods: {
         ...mapMutations({
-            setMenuStatus: 'menu/setStatus',
-            setPlug: 'plug/setPlug'
+          setMenuStatus: 'menu/setStatus',
+          setPlug: 'plug/setVisible',
+          setAnimate: 'plug/setAnimate',
         }),
         goTo(page) {
+          if (this.$route.name !== page) {
+            this.setAnimate('up')
             this.setPlug(true)
-            setTimeout(() => this.$router.push({ name: page }), 1000);
+            setTimeout(() => {
+              this.setAnimate('dissolve')
+              this.$router.push({ name: page })
+            }, 1000);
+          }
         },
         showCursive(e) {
             if (e.target.tagName === 'A') {
-                this.$gsap.to(e.target.parentElement.children[0], { 
+                this.$gsap.to(e.target.parentElement.children[0], {
                     translateY: -100 + "%",
                     duration: .5
                 })
-                this.$gsap.to(e.target.parentElement.children[1], { 
+                this.$gsap.to(e.target.parentElement.children[1], {
                     translateY: -100 + "%",
                     duration: .5
                 })
@@ -90,11 +97,11 @@ export default {
         },
         hideCursive(e) {
             if (e.target.tagName === 'LI') {
-                this.$gsap.to(e.target.children[0], { 
+                this.$gsap.to(e.target.children[0], {
                     translateY: 0 + "%",
                     duration: .5
                 })
-                this.$gsap.to(e.target.children[1], { 
+                this.$gsap.to(e.target.children[1], {
                     translateY: 0 + "%",
                     duration: .5
                 })
@@ -105,27 +112,27 @@ export default {
         },
     },
     mounted() {
-        this.$gsap.to('.nav__item', { 
+        this.$gsap.to('.nav__item', {
             translateY: 0,
             delay: 1,
             duration: 0.25,
         })
-        this.$gsap.to('.lang__item', { 
+        this.$gsap.to('.lang__item', {
             translateY: 0,
             delay: 1,
             duration: 0.25,
         })
-        this.$gsap.to('.header__logo', { 
+        this.$gsap.to('.header__logo', {
             opacity: 1,
             delay: 1,
             duration: 0.25,
         })
-        this.$gsap.to('.request', { 
+        this.$gsap.to('.request', {
             opacity: 1,
             delay: 1,
             duration: 0.25,
         })
-        this.$gsap.to('.menu-button', { 
+        this.$gsap.to('.menu-button', {
             opacity: 1,
             delay: 1,
             duration: 0.25,
@@ -141,6 +148,7 @@ export default {
     width: 100%;
     z-index: 3;
     position: fixed;
+    top: 0;
     transition: all .5s;
     background: #1b1b1b;
     &__wrap {

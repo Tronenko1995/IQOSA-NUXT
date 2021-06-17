@@ -1,15 +1,23 @@
 export const state = () => ({
-    plug: true
+  visible: true,
+  animate: 'start',
+  duration: {
+    preloader: 3000,
+    page: 500
+  }
 })
 
 export const mutations = {
-    setPlug(state, payload) {
-        state.plug = payload
-    }
+  setVisible(state, payload) {
+    state.visible = payload
+  },
+  setAnimate(state, payload) {
+    state.animate = payload
+  }
 }
 
 export const getters = {
-    plug (state) {
-        return state.plug;
-    }
+  visible (state) { return state.visible},
+  animate (state) { return state.animate},
+  duration (state) { return state.duration}
 }
