@@ -18,8 +18,22 @@
               <span class="projects-interior-link__address projects-interior-link__address--italic">Odessa,</span>
               <span class="projects-interior-link__address">Ukraine</span>
             </span>
-            <span class="projects-interior-link__middle"></span>
-            <span class="projects-interior-link__bottom"></span>
+            <span class="projects-interior-link__middle">
+              <span class="projects-name">
+                <span class="projects-name__item">
+                  <span>IQ</span>-08-SL
+                </span>
+              </span>
+            </span>
+            <span class="projects-interior-link__bottom">
+              <span class="projects-interior-link__bottom-left">
+                <span>Release date</span>
+                <span>2021</span>
+              </span>
+              <span class="projects-interior-link__bottom-right">
+
+              </span>
+            </span>
           </a>
         </li>
         <li class="projects-interior__item" data-cursor="link">
@@ -170,7 +184,7 @@ export default {
     }
   }
   &__middle {
-
+    text-align: center;
   }
   &__bottom {
 
