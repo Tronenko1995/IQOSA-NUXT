@@ -58,7 +58,7 @@ export default {
             }
             setTimeout(() => {
                 this.setPreloader(false)
-            }, 1000);
+            }, 2000);
         }
     }
 }

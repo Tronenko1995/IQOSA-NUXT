@@ -1,5 +1,5 @@
 export const state = () => ({
-  view: 'list'
+  view: null
 })
 
 export const mutations = {

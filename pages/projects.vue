@@ -6,24 +6,46 @@
 </template>
 
 <script>
-// import { mapMutations } from 'vuex'
+import { mapMutations } from 'vuex'
 import ProjectsList from '@/components/projects/ProjectsList.vue'
 import ProjectsGrid from '@/components/projects/ProjectsGrid.vue'
 export default {
   components: {
     ProjectsList, ProjectsGrid
   },
-layout: 'projects',
-  // mounted() {
-    // this.setPlug(false)
-  // },
+  layout: 'projects',
+  beforeMount() {
+    window.addEventListener('resize', this.onWindowResize());
+  },
   computed: {
     view() { return this.$store.getters['projects/view'] }
   },
-  // methods: {
-  //   ...mapMutations({
-  //       setPlug: 'plug/setPlug'
-  //   }),
-  // }
+  mounted() {
+    this.testSize()
+  },
+  beforeDestroy() {
+    window.removeEventListener("resize", this.onWindowResize());
+  },
+  methods: {
+    ...mapMutations({
+        setView: 'projects/setView'
+    }),
+    onWindowResize() {
+      clearTimeout(this.resizeTimer);
+      this.resizeTimer = setTimeout(() => {
+        this.testSize()
+      }, 250);
+    },
+    testSize() {
+        if (window.innerWidth >= 769) {
+          console.log(this.view)
+          this.view !== 'list' && this.view !== 'grid'
+          this.setView('list')
+      } else if (window.innerWidth <= 768) {
+          this.view !== 'grid'
+          this.setView('grid')
+      }
+    },
+  }
 }
 </script>

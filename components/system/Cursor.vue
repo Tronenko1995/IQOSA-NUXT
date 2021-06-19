@@ -34,7 +34,7 @@ export default {
 	},
 	beforeMount() {
 		if (window.innerWidth > 1280) {
-			window.addEventListener("mousemove", this.mousePos, { passive: true });
+			window.addEventListener("mousemove", this.mousePos, false);
 		}
 	},
 	mounted() {
@@ -68,7 +68,7 @@ export default {
 	},
 	beforeDestroy() {
 		if (window.innerWidth > 1280) {
-			window.removeEventListener("mousemove", this.mousePos, { passive: true });
+			window.removeEventListener("mousemove", this.mousePos, false);
 
       if (this.cursorDrag.length) {
         this.cursorDrag.forEach(item => {

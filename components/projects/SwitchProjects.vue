@@ -86,7 +86,7 @@ export default {
   z-index: 2;
   &.switch-project-list {
     position: absolute;
-    bottom: 64px;
+    bottom: 54px;
     left: 50%;
     transform: translateX(-50%);
     padding: 20px;
@@ -140,6 +140,34 @@ export default {
     display: block;
     transition: 0.3s ease;
     bottom: 0;
+  }
+}
+
+@media (max-width: 1440px) {
+  .switch {
+    &.switch-project-list {
+      bottom: 44px;
+    }
+  }
+}
+
+@media (max-width: 1280px) {
+  .switch {
+    &.switch-project-list {
+      bottom: 36px;
+    }
+  }
+}
+@media (max-width: 1024px) {
+  .switch {
+    &.switch-project-list {
+      bottom: 36px;
+    }
+  }
+}
+@media (max-width: 768px) {
+  .switch {
+    display: none;
   }
 }
 </style>

@@ -452,4 +452,71 @@ export default {
   top: 50%;
   transform: translate(-50%,-50%);
 }
+
+@media (max-width: 1440px) {
+  .projects-list {
+    &__title {
+      left: 64px;
+      bottom: 64px;
+    }
+  }
+  .projects-slider {
+    &__title {
+      margin: 98px 0 44px;
+    }
+  }
+  .switch {
+    .switch-project-list {
+      bottom: 44px;
+    }
+  }
+}
+
+@media (max-width: 1280px) {
+  .projects-list {
+    &__title {
+      left: 56px;
+      bottom: 56px;
+      &-text {
+        font-size: 52px;
+      }
+    }
+  }
+  .projects-slider {
+    &__title {
+      margin: 89px 0 46px;
+      font-size: 46px;
+    }
+  }
+  .switch {
+    .switch-project-list {
+      bottom: 36px;
+    }
+  }
+}
+@media (max-width: 1024px) {
+  .projects-list {
+    &__title {
+      left: 56px;
+      bottom: 56px;
+      &-text {
+        font-size: 52px;
+      }
+    }
+  }
+  .projects-slider {
+    &__title {
+      margin: 96px 0 58px;
+      font-size: 42px;
+    }
+    &__description {
+      font-size: 12px;
+    }
+  }
+  .switch {
+    .switch-project-list {
+      bottom: 36px;
+    }
+  }
+}
 </style>
