@@ -8,14 +8,14 @@
 
     <ul class="switch__list">
       <li class="switch__item" :class="{'switch__item--selected': view === 'grid'}">
-        <button class="switch__link" @click="$emit('changeView', 'grid')">Grid</button>
+        <button class="switch__link" @click="changeView('grid')">Grid</button>
         <span class="switch__line"></span>
       </li>
       <li class="switch__item">
         <p class="switch__link">,</p>
       </li>
       <li class="switch__item" :class="{'switch__item--selected': view === 'list'}">
-        <button class="switch__link" @click="$emit('changeView', 'list')">List</button>
+        <button class="switch__link" @click="changeView('list')">List</button>
         <span class="switch__line"></span>
       </li>
     </ul>
@@ -24,6 +24,7 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
 export default {
   props: {
     view: {
@@ -37,12 +38,23 @@ export default {
     }
   },
   mounted() {
-    console.log('switch', this.view)
 		this.eye = this.$refs.eye
 		window.addEventListener("mousemove", this.onMouseMove, {passive: true})
 
   },
   methods: {
+    ...mapMutations({
+        setView: 'projects/setView',
+        setPlug: 'plug/setVisible',
+        setAnimate: 'plug/setAnimate',
+    }),
+    changeView(view) {
+      setTimeout(() => {
+        this.setView(view)
+      }, 1000);
+      this.setPlug(true)
+      this.setAnimate('page')
+    },
     onMouseMove() {
 			let rect = this.eye.getBoundingClientRect()
 

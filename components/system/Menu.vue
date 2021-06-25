@@ -6,8 +6,8 @@
         <nav class="menu__nav">
             <ul class="menu__list">
                 <li class="menu__item" @mouseover="showCursive($event)" @mouseleave="hideCursive($event)">
-                    <nuxt-link to="/projects" class="menu__link">Projects</nuxt-link>
-                    <nuxt-link to="/projects" class="menu__link menu__link--cursive">Projects</nuxt-link>
+                    <a @click.prevent="goTo('projects')" href="/projects" class="menu__link">Projects</a>
+                    <a @click.prevent="goTo('projects')" href="/projects" class="menu__link menu__link--cursive">Projects</a>
                 </li>
                 <span class="menu__line"></span>
                 <li class="menu__item" @mouseover="showCursive($event)" @mouseleave="hideCursive($event)">
@@ -53,6 +53,7 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
 import Icosahedron from '@/components/Icosahedron.vue'
 export default {
     components: {
@@ -65,6 +66,11 @@ export default {
         document.body.style = ''
     },
     methods : {
+        ...mapMutations({
+          setMenuStatus: 'menu/setStatus',
+          setAnimate: 'plug/setAnimate',
+          setPlug: 'plug/setVisible',
+        }),
         showCursive(e) {
             if (e.target.tagName === 'A') {
                 this.$gsap.to(e.target.parentElement.children[0], {
@@ -88,6 +94,17 @@ export default {
                     duration: .5
                 })
             }
+        },
+        goTo(page) {
+          if (this.$route.name !== page) {
+            this.setAnimate('up')
+            this.setPlug(true)
+            setTimeout(() => {
+              this.setAnimate('dissolve')
+              this.$router.push({ name: page })
+              this.menuStatus ? this.setMenuStatus(false) : ''
+            }, 1000);
+          }
         },
     }
 }

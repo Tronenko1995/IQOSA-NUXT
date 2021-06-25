@@ -13,7 +13,8 @@
           <div class="projects-interior__block">
             <img  class="projects-interior__img" :src="require('~/assets/img/projects/interior/1.jpg')" alt="">
           </div>
-          <a class="projects-interior__link projects-interior-link" href="#">
+          <nuxt-link to="/project/iq-08-sl" class="projects-interior__link projects-interior-link">
+          <!-- <a class="projects-interior__link projects-interior-link" href="#"> -->
             <span class="projects-interior-link__head">
               <span class="projects-interior-link__address projects-interior-link__address--italic">Odessa,</span>
               <span class="projects-interior-link__address">Ukraine</span>
@@ -35,13 +36,15 @@
                 <span>560M2</span>
               </span>
             </span>
-          </a>
+          <!-- </a> -->
+          </nuxt-link>
         </li>
         <li class="projects-interior__item" data-cursor="link">
           <div class="projects-interior__block">
             <img  class="projects-interior__img" :src="require('~/assets/img/projects/interior/2.jpg')" alt="">
           </div>
-          <a class="projects-interior__link projects-interior-link" href="#">
+          <!-- <a class="projects-interior__link projects-interior-link" href="#"> -->
+          <nuxt-link to="/project/iq-87-or" class="projects-interior__link projects-interior-link">
             <span class="projects-interior-link__head">
               <span class="projects-interior-link__address projects-interior-link__address--italic">Kyiv,</span>
               <span class="projects-interior-link__address">Ukraine</span>
@@ -63,13 +66,15 @@
                 <span>119M2</span>
               </span>
             </span>
-          </a>
+          </nuxt-link>
+          <!-- </a> -->
         </li>
         <li class="projects-interior__item" data-cursor="link">
           <div class="projects-interior__block">
             <img  class="projects-interior__img" :src="require('~/assets/img/projects/interior/3.jpg')" alt="">
           </div>
-          <a class="projects-interior__link projects-interior-link" href="#">
+          <nuxt-link to="/project/iq-86-sl" class="projects-interior__link projects-interior-link">
+          <!-- <a class="projects-interior__link projects-interior-link" href="#"> -->
             <span class="projects-interior-link__head">
               <span class="projects-interior-link__address projects-interior-link__address--italic">Odessa,</span>
               <span class="projects-interior-link__address">Ukraine</span>
@@ -91,7 +96,8 @@
                 <span>101M2</span>
               </span>
             </span>
-          </a>
+          <!-- </a> -->
+          </nuxt-link>
         </li>
       </ul>
     </div>
@@ -131,3 +137,315 @@ export default {
 }
 </script>
 
+<style lang="scss">
+.projects-grid {
+  margin-top: 293px;
+  margin-bottom: 188px;
+  display: flex;
+  justify-content: center;
+  &__wrap {
+    width: 970px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  &__title {
+    font-family: 'ThinItalic', Arial;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 164px;
+    line-height: 90%;
+    text-align: center;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-feature-settings: 'pnum' on, 'lnum' on, 'kern' off;
+    color: #FFFFFF;
+    margin-top: 56px;
+    span {
+      font-family: 'Roman', Arial;
+      font-style: normal;
+      font-weight: normal;
+    }
+  }
+  &__description {
+    font-family: 'Light';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 22px;
+    line-height: 120%;
+    text-transform: uppercase;
+    font-feature-settings: 'pnum' on, 'lnum' on, 'kern' off;
+    color: #FFFFFF;
+    margin-top: 86px;
+    text-align: center;
+  }
+}
+.projects-interior {
+  margin-top: 164px;
+  &__item {
+    margin-bottom: 16px;
+    position: relative;
+    &:hover {
+      .projects-interior__link {
+        opacity: 1;
+      }
+      .projects-interior-link__address {
+        transform: translateY(0);
+      }
+      .projects-interior-link {
+        &__head {
+          &::after {
+            transform: scale(1);
+          }
+        }
+        &__bottom {
+          &-left,
+          &-right {
+            span {
+              transform: translateY(0)
+            }
+          }
+        }
+      }
+      .projects-name__item {
+        transform: translateY(0);
+      }
+    }
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  &__block {
+    width: 644px;
+    height: 720px;
+  }
+  &__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  &__link {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: absolute;
+    padding: 24px;
+    cursor: none;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: .5s;
+    background: rgba(0,0,0,.6);
+  }
+}
+.projects-interior-link {
+  &__head {
+      position: relative;
+      overflow: hidden;
+    &::after {
+      content: '';
+      right: 0;
+      top: 0;
+      position: absolute;
+      width: 11px;
+      height: 11px;
+      background: #fff;
+      border-radius: 50%;
+      transform: scale(0);
+      transition: .5s;
+    }
+  }
+  &__middle {
+    text-align: center;
+    overflow: hidden;
+  }
+  &__bottom {
+    display: flex;
+    justify-content: space-between;
+    overflow: hidden;
+    &-left,
+    &-right {
+      span {
+        display: inline-block;
+        transform: translateY(16px);
+        font-family: 'Light', Arial;
+        font-style: normal;
+        font-weight: 300;
+        font-size: 14px;
+        line-height: 120%;
+        text-transform: uppercase;
+        font-feature-settings: 'pnum' on, 'lnum' on, 'kern' off;
+        color: #FFFFFF;
+        transition: .5s;
+        &:last-child {
+          margin-left: 64px;
+        }
+      }
+    }
+    &-left {
+      span {
+
+      }
+    }
+    &-right {
+      span {
+        
+      }
+    }
+  }
+  &__address {
+    font-family: 'LightItalic', Arial;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 120%;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-feature-settings: 'pnum' on, 'lnum' on, 'kern' off;
+    color: #FFFFFF;
+    transform: translateY(16px);
+    transition: .5s;
+    display: inline-block;
+  }
+  .projects-name__item {
+    transform: translateY(62px);
+    display: block;
+    transition: .5s;
+  }
+}
+@media (max-width: 1440px) {
+.projects-grid {
+  margin-top: 255px;
+  margin-bottom: 156px;
+    &__title {
+      font-size: 148px;
+    }
+  }
+  .projects-interior {
+    margin-top: 156px;
+  }
+}
+@media (max-width: 1280px) {
+.projects-grid {
+  margin-top: 237px;
+  margin-bottom: 148px;
+    &__title {
+      font-size: 116px;
+    }
+    &__description {
+      font-size: 19px;
+    }
+  }
+  .projects-interior {
+    &__block {
+      width: 530px;
+      height: 596px;
+    }
+  }
+}
+@media (max-width: 1024px) {
+.projects-grid {
+  margin-top: 221px;
+  margin-bottom: 132px;
+    &__title {
+      font-size: 108px;
+    }
+    &__description {
+      font-size: 17px;
+      margin-top: 80px;
+    }
+  }
+  .projects-interior {
+    margin-top: 132px;
+    &__link {
+      opacity: 1;
+    }
+    &-link {
+      &__address {
+        font-size: 12px;
+        transform: translateY(0);
+      }
+      &__head {
+        &::after {
+          transform: scale(1);
+        }
+      }
+      &__bottom {
+        &-left span,
+        &-right span {
+        transform: translateY(0);
+        font-size: 12px;
+        }
+      }
+      .projects-name__item {
+        transform: translateY(0);
+      }
+    }
+  }
+}
+@media (max-width: 768px) {
+  .projects-grid {
+  margin-top: 205px;
+  margin-bottom: 88px;
+    &__title {
+      font-size: 88px;
+      margin-top: 49px;
+    }
+    &__description {
+      font-size: 16px;
+      margin-top: 72px;
+    }
+  }
+}
+@media (max-width: 600px) {
+  .projects-grid {
+    &__title {
+      font-size: 70px;
+    }
+  }
+  .projects-interior {
+    &__block {
+      width: 343px;
+      height: 434px;
+    }
+  }
+  .projects-interior {
+    &-link {
+      &__bottom {
+        &-left span,
+        &-right span {
+          &:last-child {
+            margin-left: 24px;
+          }
+        }
+      }
+    }
+  }
+}
+@media (max-width: 414px) {
+  .projects-grid {
+    margin-top: 160px;
+    &__title {
+      font-size: 56px;
+      margin-top: 42px;
+    }
+    &__description {
+      font-size: 15px;
+      margin-top: 64px;
+    }
+    &__wrap {
+      padding: 0 16px;
+    }
+  }
+  .projects-interior {
+    margin-top: 88px;
+    &__block {
+      width: 100%;
+    }
+  }
+}
+</style>

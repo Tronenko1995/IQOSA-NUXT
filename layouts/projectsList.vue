@@ -1,5 +1,6 @@
 <template>
   <div>
+    <HeaderWrap :headerType="'transparent'" />
     <PlugWrap />
     <Nuxt />
   </div>

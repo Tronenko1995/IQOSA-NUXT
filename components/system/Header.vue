@@ -1,5 +1,5 @@
 <template>
-    <header class="header" :class="[{'header--main': headerType === 'main'},{'header--transparent': headerType === 'transparent'}]">
+    <header class="header" :class="[{'header--main': headerType === 'main'},{'header--transparent': headerType === 'transparent' || view === 'list'}]">
         <div class="header__wrap">
             <a @click.prevent="goTo('index')" href="/" class="header__logo">
               <img src="@/static/svg/header-logo.svg" alt="" class="header__img">
@@ -65,7 +65,8 @@ export default {
             type: Boolean,
             required: true
         },
-        headerType: String
+        headerType: String,
+        view: String,
     },
     methods: {
         ...mapMutations({
@@ -80,6 +81,7 @@ export default {
             setTimeout(() => {
               this.setAnimate('dissolve')
               this.$router.push({ name: page })
+              this.menuStatus ? this.setMenuStatus(false) : ''
             }, 1000);
           }
         },
