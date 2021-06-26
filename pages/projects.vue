@@ -13,10 +13,9 @@
 import { mapMutations } from 'vuex'
 import ProjectsList from '@/components/projects/ProjectsList.vue'
 import ProjectsGrid from '@/components/projects/ProjectsGrid.vue'
-import Footer from '@/components/system/Footer.vue'
 export default {
   components: {
-    ProjectsList, ProjectsGrid, Footer
+    ProjectsList, ProjectsGrid
   },
   layout: 'projects',
   beforeMount() {
