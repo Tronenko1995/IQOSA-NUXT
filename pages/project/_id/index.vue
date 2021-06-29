@@ -62,16 +62,16 @@
                         <img :src="require('~/assets/img/project/7.jpg')" alt="">
                     </div>
                 </div>
-                <div class="project__image project__image--standart">
+                <div class="project__image project__image--margin">
                     <img :src="require('~/assets/img/project/2.jpg')" alt="">
                 </div>
-                <div class="project__image project__image--standart">
+                <div class="project__image project__image--margin">
                     <img :src="require('~/assets/img/project/3.jpg')" alt="">
                 </div>
             </div>
-            <hr class="project__line">
+            <hr class="project__line project__line--share">
             <div class="project__wrap">
-                <div class="project__info">
+                <div class="project__info project__info--share">
                     <div class="project__info-left project__info-left--share">
                         <span>Share</span>
                         <ul class="animate-text animate-text--share">
@@ -120,7 +120,7 @@
 import Modals from '@/components/system/modals/Modals.vue'
 import { mapMutations } from 'vuex'
 export default {
-  layout: 'projects',
+  layout: 'project',
   components: { Modals },
   mounted() {
     if (this.preloader) {
@@ -186,7 +186,7 @@ export default {
 
 <style lang="scss">
 .project {
-    margin-top: 230px;
+    margin-top: 279px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -243,7 +243,8 @@ export default {
     &__image {
         margin: 72px auto 0 auto;
         width: 100%;
-        height: 950px;
+        // height: 950px;
+        height: auto;
         img {
             width: 100%;
             height: 100%;
@@ -251,23 +252,30 @@ export default {
         &--standart {
             margin: 0 auto 40px auto;
         }
+        &--margin {
+            margin: 0 auto 213px auto;
+        }
         &--uno {
-            margin: 148px auto 0 auto; 
+            margin: 148px 0 0 0; 
             width: 645px;
+            // width: 516px;
+            // height: 610px;
             height: 762px;
         }
         &--dos {
-            margin: 534px auto 0 auto;
+            margin: 494px 0 0 0;
             width: 781px;
             height: 1057px;
+            // width: 625px;
+            // height: 846px;
         }
         &--tres {
-            margin: -113px auto 0 auto;
+            margin: -113px 0 0 0;
             width: 288px;
             height: 340px;
         }
         &--quatro {
-            margin: 250px auto 300px auto; 
+            margin: 250px 0 300px 0; 
             width: 665px;
             height: 785px;
         }
@@ -287,8 +295,11 @@ export default {
         width: 100%;
         height: 1px;
         opacity: .3;
-        margin-top: 48px;
+        margin-top: 72px;
         background: #FFFFFF;
+        &--share {
+            margin-top: 3px;
+        }
     }
     &__info {
         margin-top: 24px;
@@ -302,6 +313,9 @@ export default {
         font-feature-settings: 'pnum' on, 'lnum' on, 'kern' off;
         color: #FFFFFF;
         display: flex;
+        &--share {
+            margin-bottom: 0px;
+        }
         &-left {
             &--share {
                 display: flex;
@@ -316,7 +330,7 @@ export default {
             &--share {
                 display: flex;
                 flex-direction: column;
-                margin-right: 30%;
+                margin-right: 529px;
                 span {
                     &:last-child {
                         margin-left: 0;
@@ -425,5 +439,472 @@ export default {
 		bottom: 0;
 		width: 100%;
 	}
+}
+
+@media (max-width: 1643px) {
+    .project {
+            &__image {
+            &--uno {
+                width: 516px;
+                height: 610px;
+            }
+            &--dos {
+                width: 625px;
+                height: 846px;
+            }
+            &--tres {
+
+            }
+            &--quatro {
+
+            }
+        }
+    }
+}
+@media (max-width: 1440px) {
+    .project {
+        margin-top: 241px;
+        &__wrap {
+            padding: 0 64px;
+        }
+        &__title {
+            font-size: 148px;
+            &--next {
+                font-size: 140px;
+                top: -63px;
+            }
+        }
+        &__info {
+            margin-bottom: 156px;
+            &--share {
+                margin-bottom: 0px;
+            }
+            &-right {
+                margin-left: 191px;
+            }
+            &-middle {
+                &--share {
+                    margin-right: 353px;
+                }
+            }
+        }
+        &__image {
+            &--margin {
+                margin: 0 auto 181px auto;
+            }
+            &--uno {
+                margin: 116px 0 0 0;
+                width: 476px;
+                height: 562px;
+            }
+            &--dos {
+                margin: 371px 0 0 0;
+                width: 576px;
+                height: 780px;
+            }
+            &--tres {
+                margin: -113px 0 0 0;
+                width: 213px;
+                height: 251px;
+            }
+            &--quatro {
+                margin: 160px 0 275px 0;
+                width: 491px;
+                height: 579px;
+            }
+            &--next {
+                width: 639px;
+                height: 398px;
+            }
+        }
+        &__next {
+            margin: 326px auto 0 auto;
+        }
+    }
+}
+@media (max-width: 1280px) {
+    .project {
+        margin-top: 223px;
+        &__wrap {
+            padding: 0 56px;
+        }
+        &__title {
+            font-size: 116px;
+            &--next {
+                font-size: 116px;
+                top: -63px;
+            }
+        }
+        &__info {
+            margin-bottom: 148px;
+            &--share {
+                margin-bottom: 0px;
+            }
+            &-right {
+                margin-left: 120px;
+            }
+            &-middle {
+                &--share {
+                    margin-right: 245px;
+                }
+            }
+        }
+        &__image {
+            &--margin {
+                margin: 0 auto 173px auto;
+            }
+            &--uno {
+                margin: 108px 0 0 0;
+                // width: 424px;
+                // height: 501px;
+                width: 382px;
+                height: 451px;
+            }
+            &--dos {
+                margin: 335px 0 0 0;
+                // width: 513px;
+                // height: 695px;
+                width: 462px;
+                height: 626px;
+            }
+            &--tres {
+                margin: -86px 0 0 0;
+                width: 189px;
+                height: 223px;
+            }
+            &--quatro {
+                margin: 159px 0 232px 0;
+                width: 437px;
+                height: 516px;
+            }
+            &--next {
+                width: 568px;
+                height: 357px;
+            }
+        }
+        &__next {
+            margin: 272px auto 0 auto;
+        }
+    }
+}
+@media (max-width: 1024px) {
+    .project {
+        margin-top: 206px;
+        &__wrap {
+            padding: 0 56px;
+        }
+        &__address {
+            font-size: 14px;
+        }
+        &__title {
+            // font-size: 108px;
+            font-size: 90px;
+            &--next {
+                font-size: 90px;
+                top: -42px;
+            }
+        }
+        &__info {
+            font-size: 12px;
+            margin-bottom: 132px;
+            &--share {
+                margin-bottom: 0px;
+            }
+            &-right {
+                margin-left: 100px;
+            }
+            &-middle {
+                &--share {
+                    margin-right: 204px;
+                }
+            }
+        }
+        &__image {
+            margin: 64px auto 0 auto;
+            &--standart {
+                margin: 0 auto 32px auto;
+            }
+            &--margin {
+                margin: 0 auto 156px auto;
+            }
+            &--uno {
+                margin: 100px 0 0 0;
+                width: 331px;
+                height: 391px;
+            }
+            &--dos {
+                margin: 278px 0 0 0;
+                width: 401px;
+                height: 542px;
+            }
+            &--tres {
+                margin: -70px 0 0 0;
+                width: 148px;
+                height: 175px;
+            }
+            &--quatro {
+                margin: 107px 0 192px 0;
+                width: 342px;
+                height: 403px;
+            }
+            &--next {
+                width: 444px;
+                height: 280px;
+            }
+        }
+        &__next {
+            margin: 229px auto 0 auto;
+        }
+        &__line {
+            margin-top: 64px;
+            &--share {
+                margin-top: 0px;
+            }
+        }
+    }
+}
+
+@media (max-width: 890px) {
+    .project {
+        &__image {
+            &--uno {
+                width: 267px;
+                height: 316px;
+            }
+            &--dos {
+                width: 324px;
+                height: 438px;
+            }
+        }
+        &__info {
+            &-middle {
+                &--share {
+                    margin-right: 100px;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .project {
+        margin-top: 190px;
+        &__wrap {
+            padding: 0 48px;
+        }
+        &__title {
+            margin-top: 40px;
+            font-size: 88px;
+            // font-size: 50px;
+            &--next {
+                // font-size: 88px;
+                font-size: 50px;
+                top: -7px;
+            }
+        }
+        &__info {
+            margin-bottom: 132px;
+            &--share {
+                margin-bottom: 0px;
+            }
+            &-right {
+                margin-left: 24px;
+            }
+            &-middle {
+                &--share {
+                    margin-right: 204px;
+                }
+            }
+        }
+        &__image {
+            margin: 56px auto 0 auto;
+            &--standart {
+                margin: 0 auto 32px auto;
+            }
+            &--margin {
+                margin: 0 auto 154px auto;
+            }
+            &--uno {
+                margin: 100px 0 0 0;
+                width: 244px;
+                height: 288px;
+            }
+            &--dos {
+                margin: 232px 0 0 0;
+                width: 295px;
+                height: 399px;
+            }
+            &--tres {
+                margin: -70px 0 0 0;
+                width: 109px;
+                height: 129px;
+            }
+            &--quatro {
+                margin: 107px 0 124px 0;
+                width: 252px;
+                height: 297px;
+            }
+            &--next {
+                width: 324px;
+                height: 206px;
+            }
+        }
+        &__next {
+            margin: 222px auto 0 auto;
+        }
+        &__line {
+            margin-top: 56px;
+            &--share {
+                margin-top: 0px;
+            }
+        }
+    }
+}
+
+@media (max-width: 670px) {
+    .project {
+        &__images {
+            flex-direction: column;
+        }
+        &__image {
+            &--uno {
+                width: 255px;
+                height: 302px;
+            }
+            &--dos {
+                margin: 16px 0 0 0;
+                width: 100%;
+                height: auto;
+            }
+            &--tres {
+                margin: 88px 0 0 0;
+                width: 100%;
+                height: auto;
+            }
+            &--quatro {
+                margin: 16px 0 88px auto;
+                width: 255px;
+                height: 301px;
+            }
+        }
+        &__title {
+            &--text {
+                margin-top: 88px;
+            }
+        }
+    }
+}
+
+@media (max-width: 620px) {
+    .project {
+        &__title {
+            font-size: 50px;
+        }
+        &__wrap {
+            padding: 0 16px;
+        }
+        &__info {
+            font-size: 13px;
+            margin-bottom: 88px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            &--share {
+                margin-bottom: 0px;
+            }
+            &-left {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            &-right {
+                margin-left: 0px;
+                margin-top: 56px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                span {
+                    &:last-child {
+                        margin-left: 0px;
+                        margin-top: 8px;
+                    }
+                }
+            }
+            &-middle {
+                margin-top: 56px;
+                align-items: center;
+                flex-direction: column;
+                margin-left: 0;
+                &--share {
+                    margin-right: 0px;
+                }
+            }
+        }
+    }
+    .animate-text {
+        &--team {
+            margin-left: 0px;
+            margin-top: 8px;
+        }
+        &--share {
+            margin-left: 0px;
+            margin-top: 8px;
+        }
+        &__button {
+            text-align: center;
+        }
+    }
+}
+@media (max-width: 414px) {
+    .project {
+        margin-top: 145px;
+        &__address {
+            font-size: 13px;
+        }
+        &__title {
+            margin-top: 35px;
+            font-size: 56px;
+            &--text {
+                margin-top: 88px;
+            }
+            &--next {
+                margin-top: 0px;
+                top: -22px;
+                font-size: 49px;
+            }
+        }
+        &__image {
+            margin: 48px auto 0 auto;
+            &--standart {
+                margin: 0 auto 16px auto;
+            }
+            &--uno {
+                margin: 72px 0 0 0;
+            }
+            &--dos {
+                margin: 16px 0 0 0;
+            }
+            &--tres {
+                margin: 88px 0 0 0;
+            }
+            &--quatro {
+                margin: 16px 0 88px auto;
+            }
+            &--margin {
+                margin: 0 auto 108px auto;
+            }
+            &--next {
+                width: 225px;
+                height: 144px;
+                margin: 0 auto;
+            }
+        }
+        &__line {
+            margin-top: 48px;
+        }
+        &__next {
+            margin: 143px auto 0 auto;
+        }
+    }
 }
 </style>
