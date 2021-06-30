@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import gsap from "gsap"
 import { mapState } from 'vuex'
 import Header from '@/components/system/Header.vue' 
 import Menu from '@/components/system/Menu.vue' 
@@ -54,7 +55,7 @@ export default {
 
             const showLink = ((el) => {
                 el.forEach(item => {
-                    this.$gsap.timeline().to(item, { 
+                    gsap.timeline().to(item, { 
                             translateY: 0 + "%",
                             duration: 0.5,
                             delay: 1,
@@ -63,7 +64,7 @@ export default {
             })
             const showMenuLine = ((el) => {
                 el.forEach(item => {
-                    this.$gsap.timeline().to(item, { 
+                    gsap.timeline().to(item, { 
                         translateX: 0 + "%",
                         opacity: 1,
                         duration: 0.5,
@@ -73,14 +74,14 @@ export default {
             })
             const showLanguageLine = ((el) => {
                 el.forEach(item => {
-                    this.$gsap.timeline().to(item, {
+                    gsap.timeline().to(item, {
                         translateX: 0 + "%",
                         duration: 0.6,
                         delay: 1.1,
                     }, 0)
                 });
             })
-            this.$gsap.timeline().to(icosahedron, {
+            gsap.timeline().to(icosahedron, {
                 opacity: 1,
                 delay: 2,
                 complete: done

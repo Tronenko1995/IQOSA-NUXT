@@ -1,7 +1,8 @@
 export const state = () => ({
     modal: {
         show: false,
-        type: null
+        type: null,
+        animate: null
     }
 })
 
@@ -9,6 +10,7 @@ export const mutations = {
     setModal(state, payload) {
         state.modal.show = payload.show
         state.modal.type = payload.type
+        state.modal.animate = payload.animate
     },
 }
 

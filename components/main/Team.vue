@@ -72,16 +72,16 @@
                     <div ref="parallaxTitle" class="team__title team-title">
                         <p class="team__title-text team-title__text" style="transform: translate(0px, 0px);">We form the quality of life</p>
                         <p class="team__title-text team-title__text" style="transform: translate(0px, 0px);">By the quality of implementation</p>
-                        <nuxt-link to="/" class="team__link team-link arrow-link" @mouseover.native="findElement($event)" @mouseleave.native="animateTextHide($event)">
+                        <div class="team__link team-link arrow-link" @mouseover.native="findElement($event)" @mouseleave.native="animateTextHide($event)" @click="openVideo">
                             <span class="arrow-link__change">
-                                <span class="arrow-link__span arrow-link__span--first">Discover</span>
-                                <span class="arrow-link__span arrow-link__span--last">Discover</span>
+                                <span class="arrow-link__span arrow-link__span--first">Watch</span>
+                                <span class="arrow-link__span arrow-link__span--last">Watch</span>
                             </span>
-                            <span class="arrow-link__text">More</span>
+                            <span class="arrow-link__text">The film</span>
                             <span class="arrow-link__circle">
                                 <svg class="arrow-link__svg" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.40039 12.4004H17.6004" stroke-linecap="square"/><path d="M13.9004 8L18.4004 12.4L13.9004 16.8" stroke-linecap="square"/></svg>
                             </span>
-                        </nuxt-link>
+                        </div>
                     </div>
                     <div class="team__item team__item--tres team__item--small">
                         <picture class="team__block">
@@ -156,6 +156,7 @@
 </template>
 
 <script>
+import gsap from "gsap"
 import Parallax from 'parallax-js'
 import { mapMutations } from 'vuex'
 export default {
@@ -228,7 +229,15 @@ export default {
             })
             this.setModal({
                 show: true,
-                type: 'team'
+                type: 'team',
+                animate: 'fade'
+            })
+        },
+        openVideo() {
+            this.setModal({
+                show: true,
+                type: 'about',
+                animate: 'show'
             })
         },
 		findElement(e) {
@@ -240,11 +249,11 @@ export default {
             }
 		},
         animateTextShow(el) {
-            this.$gsap.to(el.children[0], { 
+            gsap.to(el.children[0], { 
                 translateY: -100 + "%",
                 duration: .5
             })
-            this.$gsap.to(el.children[1], { 
+            gsap.to(el.children[1], { 
                 translateY: -100 + "%",
                 duration: .5
             })
@@ -252,11 +261,11 @@ export default {
 		animateTextHide(e) {
 			if (e.target.classList.contains('arrow-link')) {
                 const el = e.target.querySelector('.arrow-link__change')
-				this.$gsap.to(el.children[0], { 
+				gsap.to(el.children[0], { 
 					translateY: 0 + "%",
 					duration: .5
 				})
-				this.$gsap.to(el.children[1], { 
+				gsap.to(el.children[1], { 
 					translateY: 0 + "%",
 					duration: .5
 				})
@@ -293,6 +302,7 @@ export default {
     &__link {
         width: 100%;
         justify-content: center;
+        cursor: pointer;
     }
     &__container {
         // transform: translate3d(406.4px, 70.8px, 0px);

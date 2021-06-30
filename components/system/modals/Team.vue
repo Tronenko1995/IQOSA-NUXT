@@ -12,7 +12,7 @@
                 <p class="team-modal__position">{{ team.position }}</p>
             </div>
         </div>
-        <div class="team-modal__close" @click="$emit('close')"></div>
+        <div class="close-modal" @click="$emit('close', 'fade')"></div>
     </div>
 </template>
 
@@ -77,34 +77,34 @@ export default {
         text-transform: uppercase;
         color: #fff;
     }
-    &__close {
-        position: fixed;
-        cursor: pointer;
-        right: 22px;
-        top: 22px;
-        width: 32px;
+}
+.close-modal {
+    position: fixed;
+    cursor: pointer;
+    right: 22px;
+    top: 22px;
+    width: 32px;
+    height: 26px;
+    transform: rotate(0);
+    transition: .5s;
+    &::after,
+    &::before {
+        content: '';
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
         height: 26px;
-        transform: rotate(0);
-        transition: .5s;
-        &::after,
-        &::before {
-            content: '';
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            height: 26px;
-            width: 1px;
-            background-color: #fff;
-        }
-        &::after {
-            transform: rotate(45deg);
-        }
-        &::before {
-            transform: rotate(-45deg);
-        }
-        &:hover {
-            transform: rotate(180deg);
-        }
+        width: 1px;
+        background-color: #fff;
+    }
+    &::after {
+        transform: rotate(45deg);
+    }
+    &::before {
+        transform: rotate(-45deg);
+    }
+    &:hover {
+        transform: rotate(180deg);
     }
 }
 @media (max-width: 1280px) {

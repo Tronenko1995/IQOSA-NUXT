@@ -35,9 +35,13 @@ export default {
   buildModules: ['nuxt-gsap-module'],
 
   gsap: {
-    clubPlugins: {
-      splitText: true
+    extraPlugins: {
+      scrollTo: true,
+      scrollTrigger: true
     }
+  //   clubPlugins: {
+  //     splitText: true
+  //   }
   },
 
   // Modules: https://go.nuxtjs.dev/config-modules

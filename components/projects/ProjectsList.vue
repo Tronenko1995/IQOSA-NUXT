@@ -84,6 +84,7 @@
 </template>
 
 <script>
+import gsap from "gsap"
 import { mapMutations } from 'vuex'
 import * as THREE from "three"
 import fragment from "~/static/projectsSlider/shader/fragment.glsl"
@@ -261,7 +262,7 @@ export default {
               this.shader.animation.paused(0)
           }
           this.shader.flag = true
-          this.shader.animation = this.$gsap.to(this.mat.uniforms.dispFactor, {
+          this.shader.animation = gsap.to(this.mat.uniforms.dispFactor, {
               duration: 0.75,
               value: 1,
               onComplete: this.getActiveTexture()

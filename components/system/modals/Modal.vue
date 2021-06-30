@@ -1,12 +1,14 @@
 <template>
     <div class="modal">
         <TeamModal v-if="type === 'team'" @close="closeModal()"/>
+        <AboutModal v-if="type === 'about'" @close="closeModal()"/>
     </div>
 </template>
 
 <script>
 import { mapMutations } from 'vuex'
 import TeamModal from '@/components/system/modals/Team.vue'
+import AboutModal from '@/components/system/modals/About.vue'
 export default {
     props: {
         type: {
@@ -15,16 +17,18 @@ export default {
         }
     },
     components: {
-        TeamModal
+        TeamModal,
+        AboutModal
     },
     methods: {
         ...mapMutations({
             setModal: 'modal/setModal',
         }),
-        closeModal() {
+        closeModal(type) {
             this.setModal({
                 show: false,
-                type: null
+                type: null,
+                animate: type,
             })
         }
     }

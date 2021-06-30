@@ -19,14 +19,14 @@ import Team from '@/components/main/Team.vue'
 import TeamMobi from '@/components/main/TeamMobi.vue'
 import Modals from '@/components/system/modals/Modals.vue'
 export default {
-    components: {
+	layout: 'main',
+	components: {
 		Main,
 		Projects,
 		Team,
 		TeamMobi,
 		Modals
     },
-	layout: 'main',
     beforeMount() {
 		window.addEventListener('resize', this.onWindowResize);
         // window.addEventListener('scroll', this.handleScroll);
@@ -75,7 +75,7 @@ export default {
 				// this.scroll.y = this.scroll.position;
     		// }
 
-			// this.$gsap.set('.scroll-container', {
+			// gsap.set('.scroll-container', {
             	// y: -this.scroll.y,
 				// force3D: true
        		// });

@@ -11,8 +11,8 @@
                 </li>
                 <span class="menu__line"></span>
                 <li class="menu__item" @mouseover="showCursive($event)" @mouseleave="hideCursive($event)">
-                    <nuxt-link to="/about-plug-2" class="menu__link">About</nuxt-link>
-                    <nuxt-link to="/about-plug-2" class="menu__link menu__link--cursive">About</nuxt-link>
+                    <a @click.prevent="goTo('about-us')" href="/about-us" class="menu__link">About</a>
+                    <a @click.prevent="goTo('about-us')" href="/about-us" class="menu__link menu__link--cursive">About</a>
                 </li>
                 <span class="menu__line"></span>
                 <li class="menu__item" @mouseover="showCursive($event)" @mouseleave="hideCursive($event)">
@@ -53,6 +53,7 @@
 </template>
 
 <script>
+import gsap from "gsap"
 import { mapMutations } from 'vuex'
 import Icosahedron from '@/components/Icosahedron.vue'
 export default {
@@ -73,11 +74,11 @@ export default {
         }),
         showCursive(e) {
             if (e.target.tagName === 'A') {
-                this.$gsap.to(e.target.parentElement.children[0], {
+                gsap.to(e.target.parentElement.children[0], {
                     translateY: -100 + "%",
                     duration: .5
                 })
-                this.$gsap.to(e.target.parentElement.children[1], {
+                gsap.to(e.target.parentElement.children[1], {
                     translateY: -100 + "%",
                     duration: .5
                 })
@@ -85,11 +86,11 @@ export default {
         },
         hideCursive(e) {
             if (e.target.tagName === 'LI') {
-                this.$gsap.to(e.target.children[0], {
+                gsap.to(e.target.children[0], {
                     translateY: 0 + "%",
                     duration: .5
                 })
-                this.$gsap.to(e.target.children[1], {
+                gsap.to(e.target.children[1], {
                     translateY: 0 + "%",
                     duration: .5
                 })

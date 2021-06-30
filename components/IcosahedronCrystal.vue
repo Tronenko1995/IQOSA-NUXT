@@ -3,6 +3,7 @@
 </template>
 
 <script>
+import gsap from "gsap"
 import Sketch from "~/plugins/icosahedron";
 export default {
   name: "IcosahedronCrystal",
@@ -19,7 +20,7 @@ export default {
   },
   methods: {
     animate() {
-      this.$gsap.to(this.$refs.icosahedron, { 
+      gsap.to(this.$refs.icosahedron, { 
 				opacity: 1,
 				delay: 3,
 	  })

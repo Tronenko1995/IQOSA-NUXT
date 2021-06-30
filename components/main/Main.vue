@@ -2,22 +2,7 @@
   <section class="main">
     <div class="main__wrap">
       <div class="main__row main__row--first">
-        <div class="motto">
-          <ul class="motto__list">
-            <li class="motto__item motto__item--uno">
-              <span>The water is perfect..</span>
-            </li>
-            <li class="motto__item motto__item--dos">
-              <span>It's changeable, adaptive, creates</span>
-            </li>
-            <li class="motto__item motto__item--tres">
-              <span>new forms and destroys old ones.</span>
-            </li>
-            <li class="motto__item motto__item--quatro">
-              <span>IQOSA's like water...</span>
-            </li>
-          </ul>
-        </div>
+        <Motto class="motto--main" :motto-list="mottoList"/>
         <p class="main__title main__title--first">Creates</p>
       </div>
       <div class="main__row">
@@ -49,10 +34,21 @@
 </template>
 
 <script>
+import gsap from "gsap"
 import { mapMutations } from 'vuex'
 // import { gsap } from "gsap/dist/gsap";
 // import { SplitText } from "gsap/dist/SplitText";
 export default {
+  data() {
+    return {
+      mottoList: [
+        'The water is perfect..',
+        'It\'s changeable, adaptive, creates',
+        'new forms and destroys old ones.',
+        'IQOSA\'s like water...',
+      ]
+    }
+  },
   mounted() {
     if (this.preloader) {
       setTimeout(() => {
@@ -75,46 +71,32 @@ export default {
         setPlug: 'plug/setVisible',
     }),
     animate() {
-      // this.$gsap.registerPlugin(this.$SplitText);
+      const mottoItem = document.querySelectorAll('.motto__item span')
+      let delay = 1
 
-      // let split = new SplitText('.motto__item', {type: "lines"})
-
-      this.$gsap.to(".main__title", {
+      gsap.to(".main__title", {
         delay: 0.5,
         translateX: 0,
         opacity: 1,
         duration: 0.5,
       });
-      // gsap.to(split, {
-      //     opacity: 0.5,
-      //     duration: 1,
-      // })
-      this.$gsap.to(".motto__item--uno span", {
-        translateY: 0,
-        delay: 1,
-        duration: 0.25,
-      });
-      this.$gsap.to(".motto__item--dos span", {
-        translateY: 0,
-        delay: 1.25,
-        duration: 0.25,
-      });
-      this.$gsap.to(".motto__item--tres span", {
-        translateY: 0,
-        delay: 1.5,
-        duration: 0.25,
-      });
-      this.$gsap.to(".motto__item--quatro span", {
-        translateY: 0,
-        delay: 1.75,
-        duration: 0.25,
-      });
-      this.$gsap.to(".make-request__line", {
+
+      for (let i = 0; i < mottoItem.length; i++) {
+          gsap.to(mottoItem[i], {
+              delay: delay,
+              translateY: 0,
+              duration: 0.5
+          })
+
+          delay = delay + 0.25
+      }
+
+      gsap.to(".make-request__line", {
         translateX: 0,
         delay: 2,
         duration: 0.5,
       });
-      this.$gsap.to(".make-request__link", {
+      gsap.to(".make-request__link", {
         translateY: 0,
         delay: 2.75,
         duration: 0.25,
@@ -134,22 +116,22 @@ export default {
       }
     },
     animateTextShow(el) {
-      this.$gsap.to(el.children[0], {
+      gsap.to(el.children[0], {
         translateY: -100 + "%",
         duration: 0.5,
       });
-      this.$gsap.to(el.children[1], {
+      gsap.to(el.children[1], {
         translateY: -100 + "%",
         duration: 0.5,
       });
     },
     animateTextHide(e) {
       if (e.target.classList.contains("make-request")) {
-        this.$gsap.to(e.target.children[0].children[1].children[0], {
+        gsap.to(e.target.children[0].children[1].children[0], {
           translateY: 0 + "%",
           duration: 0.5,
         });
-        this.$gsap.to(e.target.children[0].children[1].children[1], {
+        gsap.to(e.target.children[0].children[1].children[1], {
           translateY: 0 + "%",
           duration: 0.5,
         });
@@ -247,24 +229,6 @@ export default {
     width: 100%;
   }
 }
-.motto {
-  &__list {
-  }
-  &__item {
-    overflow: hidden;
-    font-size: 22px;
-    font-family: Light, Arial;
-    font-weight: 300;
-    line-height: 120%;
-    color: #fff;
-    text-transform: uppercase;
-    font-feature-settings: "pnum" on, "lnum" on, "kern" off;
-    span {
-      transform: translateY(100%);
-      display: block;
-    }
-  }
-}
 
 @media (max-width: 1440px) {
   .main {
@@ -285,11 +249,6 @@ export default {
       font-size: 120px;
     }
   }
-  .motto {
-    &__item {
-      font-size: 19px;
-    }
-  }
 }
 @media (max-width: 1024px) {
   .main {
@@ -300,11 +259,6 @@ export default {
       font-size: 84px;
     }
   }
-  .motto {
-    &__item {
-      font-size: 16px;
-    }
-  }
 }
 @media (max-width: 768px) {
   .main {
@@ -313,11 +267,6 @@ export default {
     }
     &__title {
       font-size: 70px;
-    }
-  }
-  .motto {
-    &__item {
-      font-size: 15px;
     }
   }
 }
@@ -337,14 +286,6 @@ export default {
       }
     }
   }
-  .motto {
-    position: absolute;
-    top: 100px;
-    left: 21px;
-    &__item {
-      font-size: 15px;
-    }
-  }
   .make-request {
     position: absolute;
     top: 70%;
@@ -357,14 +298,6 @@ export default {
     }
     &__title {
       font-size: 56px;
-    }
-  }
-  .motto {
-    position: absolute;
-    top: 100px;
-    left: 21px;
-    &__item {
-      font-size: 15px;
     }
   }
 }

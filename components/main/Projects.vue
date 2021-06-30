@@ -70,6 +70,7 @@
 </template>
 
 <script>
+import gsap from "gsap"
 export default {
 	data() {
 		return {
@@ -167,11 +168,11 @@ export default {
 		}
 	},
 	animateTextShow(el) {
-		this.$gsap.to(el.children[0], {
+		gsap.to(el.children[0], {
 			translateY: -100 + "%",
 			duration: .5
 		})
-		this.$gsap.to(el.children[1], {
+		gsap.to(el.children[1], {
 			translateY: -100 + "%",
 			duration: .5
 		})
@@ -179,11 +180,11 @@ export default {
 	animateTextHide(e) {
 		if (e.target.classList.contains('arrow-link')) {
 			const el = e.target.querySelector('.arrow-link__change')
-			this.$gsap.to(el.children[0], {
+			gsap.to(el.children[0], {
 				translateY: 0 + "%",
 				duration: .5
 			})
-			this.$gsap.to(el.children[1], {
+			gsap.to(el.children[1], {
 				translateY: 0 + "%",
 				duration: .5
 			})
@@ -218,67 +219,6 @@ export default {
 				font-feature-settings: 'pnum' on, 'lnum' on, 'kern' off;
 				color: #FFFFFF;
 				display: none;
-		}
-}
-.arrow-link {
-		display: flex;
-		width: fit-content;
-		align-items: center;
-		margin-top: 24px;
-	&__change {
-		display: block;
-		overflow: hidden;
-				position: relative;
-		.arrow-link__span {
-			display: block;
-			&:last-child {
-				position: absolute;
-			}
-		}
-	}
-		&__span {
-				font-family: 'LightItalic', Arial;
-				font-weight: 300;
-				color: #fff;
-				letter-spacing: 0.05em;
-				text-transform: uppercase;
-				font-feature-settings: 'pnum' on, 'lnum' on;
-				&--last {
-						font-family: 'Light', Arial;
-				}
-		}
-		&__text {
-				font-family: 'Light', Arial;
-				font-weight: 300;
-				color: #fff;
-				letter-spacing: 0.05em;
-				text-transform: uppercase;
-				font-feature-settings: 'pnum' on, 'lnum' on;
-				margin-left: 8px;
-		}
-		&__circle {
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			width: 64px;
-			height: 64px;
-			background-color: transparent;
-			border: 1px solid hsla(0,0%,100%,.1);
-			border-radius: 50%;
-			transition: background-color .5s;
-			margin-left: 24px;
-		}
-		&__svg {
-			stroke: #fff;
-			transition: stroke .5s;
-		}
-		&:hover {
-			.arrow-link__svg {
-					stroke: #000;
-			}
-			.arrow-link__circle {
-					background-color: #fff;
-			}
 		}
 }
 .projects-address {
@@ -422,14 +362,6 @@ export default {
 			font-size: 19px;
 		}
 	}
-	.arrow-link {
-		&__span {
-			font-size: 14px;
-		}
-		&__text {
-			font-size: 14px;
-		}
-	}
 }
 @media (max-width: 1024px) {
 	.featured {
@@ -438,14 +370,6 @@ export default {
 		}
 		&__link {
 				font-size: 17px;
-		}
-	}
-	.arrow-link {
-		&__span {
-				font-size: 12px;
-		}
-		&__text {
-				font-size: 12px;
 		}
 	}
 	.projects-address {
@@ -513,14 +437,6 @@ export default {
 		}
 		&__link {
 			font-size: 15px;
-		}
-	}
-	.arrow-link {
-		&__span {
-			font-size: 13px;
-		}
-		&__text {
-			font-size: 13px;
 		}
 	}
 	.projects-address {

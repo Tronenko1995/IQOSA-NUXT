@@ -27,9 +27,9 @@ export default {
 			},
 			deg: 0,
 			cursor: null,
-      cursorDrag: null,
-      cursorEye: null,
-      cursorLink: null,
+	  cursorDrag: null,
+	  cursorEye: null,
+	  cursorLink: null,
 		}
 	},
 	beforeMount() {
@@ -40,54 +40,66 @@ export default {
 	mounted() {
 		if (window.innerWidth > 1280) {
 			this.cursor = this.$refs.cursor
-      this.projectsPage = document.querySelector(".projects-page")
+	  		this.projectsPage = document.querySelector(".projects-page")
 			this.cursorDrag = document.querySelectorAll("[data-cursor='drag']")
 			this.cursorEye = document.querySelectorAll("[data-cursor='eye']")
 			this.cursorLink = document.querySelectorAll("[data-cursor='link']")
-      console.dir(this.cursorLink)
+			this.cursorPlay = document.querySelectorAll("[data-cursor='play']")
 			this.raf()
-      if (this.cursorDrag.length) {
-        this.cursorDrag.forEach(item => {
-          item.addEventListener("mouseenter", this.mouseEnterDrag)
-          item.addEventListener("mouseleave", this.mouseLeaveDrag)
-        })
-      }
-      if (this.cursorEye.length) {
-        this.cursorEye.forEach(item => {
-          item.addEventListener("mouseenter", this.mouseEnterEye)
-          item.addEventListener("mouseleave", this.mouseLeaveEye)
-        })
-      }
-      if (this.cursorLink.length) {
-        this.cursorLink.forEach(item => {
-          item.addEventListener("mouseenter", this.mouseEnterLink)
-          item.addEventListener("mouseleave", this.mouseLeaveLink)
-        })
-      }
+			if (this.cursorDrag.length) {
+				this.cursorDrag.forEach(item => {
+					item.addEventListener("mouseenter", this.mouseEnterDrag)
+					item.addEventListener("mouseleave", this.mouseLeaveDrag)
+				})
+			}
+			if (this.cursorEye.length) {
+				this.cursorEye.forEach(item => {
+					item.addEventListener("mouseenter", this.mouseEnterEye)
+					item.addEventListener("mouseleave", this.mouseLeaveEye)
+				})
+			}
+			if (this.cursorLink.length) {
+				this.cursorLink.forEach(item => {
+					item.addEventListener("mouseenter", this.mouseEnterLink)
+					item.addEventListener("mouseleave", this.mouseLeaveLink)
+				})
+			}
+			if (this.cursorPlay.length) {
+				this.cursorPlay.forEach(item => {
+					item.addEventListener("mouseenter", this.mouseEnterPlay)
+					item.addEventListener("mouseleave", this.mouseLeavePlay)
+				})
+			}
 		}
 	},
 	beforeDestroy() {
 		if (window.innerWidth > 1280) {
 			window.removeEventListener("mousemove", this.mousePos, false);
 
-      if (this.cursorDrag.length) {
-        this.cursorDrag.forEach(item => {
-          item.removeEventListener("mouseenter", this.mouseEnterDrag)
-          item.removeEventListener("mouseleave", this.mouseLeaveDrag)
-        })
-      }
-      if (this.cursorEye.length) {
-        this.cursorEye.forEach(item => {
-          item.removeEventListener("mouseenter", this.mouseEnterEye)
-          item.removeEventListener("mouseleave", this.mouseLeaveEye)
-        })
-      }
-      if (this.cursorLink.length) {
-        this.cursorLink.forEach(item => {
-          item.removeEventListener("mouseenter", this.mouseEnterLink)
-          item.removeEventListener("mouseleave", this.mouseLeaveLink)
-        })
-      }
+			if (this.cursorDrag.length) {
+				this.cursorDrag.forEach(item => {
+					item.removeEventListener("mouseenter", this.mouseEnterDrag)
+					item.removeEventListener("mouseleave", this.mouseLeaveDrag)
+				})
+			}
+			if (this.cursorEye.length) {
+				this.cursorEye.forEach(item => {
+					item.removeEventListener("mouseenter", this.mouseEnterEye)
+					item.removeEventListener("mouseleave", this.mouseLeaveEye)
+				})
+			}
+			if (this.cursorLink.length) {
+				this.cursorLink.forEach(item => {
+					item.removeEventListener("mouseenter", this.mouseEnterLink)
+					item.removeEventListener("mouseleave", this.mouseLeaveLink)
+				})
+			}
+			if (this.cursorPlay.length) {
+				this.cursorPlay.forEach(item => {
+					item.removeEventListener("mouseenter", this.mouseEnterPlay)
+					item.removeEventListener("mouseleave", this.mouseLeavePlay)
+				})
+			}
 		}
 	},
 	methods: {
@@ -131,24 +143,30 @@ export default {
 			this.current.x = e.clientX
 			this.current.y = e.clientY
 		},
-    mouseEnterDrag() {
-		  this.cursor.classList.add("cursor--drag")
-    },
-    mouseLeaveDrag() {
+		mouseEnterDrag() {
+			this.cursor.classList.add("cursor--drag")
+		},
+		mouseLeaveDrag() {
 			this.cursor.classList.remove("cursor--drag")
-    },
-    mouseEnterEye() {
-		  this.cursor.classList.add("cursor--eye")
-    },
-    mouseLeaveEye() {
+		},
+		mouseEnterEye() {
+			this.cursor.classList.add("cursor--eye")
+		},
+		mouseLeaveEye() {
 			this.cursor.classList.remove("cursor--eye")
-    },
-    mouseEnterLink() {
-		  this.cursor.classList.add("cursor--link")
-    },
-    mouseLeaveLink() {
+		},
+		mouseEnterLink() {
+			this.cursor.classList.add("cursor--link")
+		},
+		mouseLeaveLink() {
 			this.cursor.classList.remove("cursor--link")
-    },
+		},
+		mouseEnterPlay() {
+			this.cursor.classList.add("cursor--play")
+		},
+		mouseLeavePlay() {
+			this.cursor.classList.remove("cursor--play")
+		},
 	}
 }
 </script>
@@ -168,25 +186,26 @@ export default {
 	opacity: 0;
 	transition: border-radius .3s ease,width .3s ease,height .3s ease,margin .3s ease,opacity .5s ease .2s,background-color .5s ease .2s;
 	div {
-		width: 10px;
-		height: 10px;
-		transition: transform .5s ease,opacity .5s ease .2s;
+			width: 10px;
+			height: 10px;
+			transition: transform .5s ease,opacity .5s ease .2s;
 		}
-		&::after {
-			opacity: 0;
-			content: "";
-			position: absolute;
-			width: 40px;
-			height: 40px;
-			top: 50%;
-			left: 50%;
-			transform: translate(-50%,-50%);
-			z-index: 101;
-			transition: opacity .5s ease .2s;
-		}
-		&--eye,
-    &--drag,
-    &--link {
+	&::after {
+		opacity: 0;
+		content: "";
+		position: absolute;
+		width: 40px;
+		height: 40px;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%,-50%);
+		z-index: 101;
+		transition: opacity .5s ease .2s;
+	}
+	&--eye,
+	&--drag,
+	&--link,
+	&--play {
 			background-color: white;
 			border-radius: 50%;
 			width: 127px;
@@ -197,35 +216,40 @@ export default {
 			margin 0.3s ease;
 			opacity: 1;
 
-      &::after {
-        content: '';
-        opacity: 1;
-      }
+			&::after {
+				content: '';
+				opacity: 1;
+			}
 	}
-  &--eye {
-    &::after {
-      background: url('~@/assets/svg/eye-cursor.svg') no-repeat center;
-    }
-  }
-  &--drag {
-    &::after {
-      background: url('~@/assets/svg/drag-cursor.svg') no-repeat center;
-    }
-  }
-  &--link {
-    &::after {
-      background: url('~@/assets/svg/link-cursor.svg') no-repeat center;
-    }
-  }
+	&--eye {
+		&::after {
+			background: url('~@/assets/svg/eye-cursor.svg') no-repeat center;
+		}
+	}
+	&--drag {
+		&::after {
+			background: url('~@/assets/svg/drag-cursor.svg') no-repeat center;
+		}
+	}
+	&--link {
+		&::after {
+			background: url('~@/assets/svg/link-cursor.svg') no-repeat center;
+		}
+	}
+	&--play {
+		&::after {
+			background: url('~@/assets/svg/play-cursor.svg') no-repeat center;
+		}
+	}
 }
 .projects-page {
-  .cursor {
-    &--drag {
-      &::after {
-        transform: translate(-50%,-50%) rotate(-60deg);
-      }
-    }
-  }
+	.cursor {
+		&--drag {
+			&::after {
+				transform: translate(-50%,-50%) rotate(-60deg);
+			}
+		}
+	}
 }
 @media (max-width: 1280px) {
 	.cursor {

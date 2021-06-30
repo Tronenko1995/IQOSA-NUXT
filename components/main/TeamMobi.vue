@@ -70,7 +70,8 @@ export default {
             })
             this.setModal({
                 show: true,
-                type: 'team'
+                type: 'team',
+                animate: 'fade'
             })
         }
     }

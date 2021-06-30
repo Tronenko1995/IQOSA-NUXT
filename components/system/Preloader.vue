@@ -19,6 +19,7 @@
 </template>
 
 <script>
+import gsap from "gsap"
 import { mapMutations } from 'vuex'
 export default {
     mounted() {
@@ -33,7 +34,7 @@ export default {
             let delay = 1
 
             for (let i = 0; i < animateItem.length; i++) {
-                this.$gsap.to(animateItem[i], {
+                gsap.to(animateItem[i], {
                     delay: delay,
                     translateY: 0,
                     duration: 0.5
@@ -48,7 +49,7 @@ export default {
             let delay = 1
 
             for (let i = 0; i < animateItem.length; i++) {
-                this.$gsap.to(animateItem[i], {
+                gsap.to(animateItem[i], {
                     delay: delay,
                     translateY: -100 + '%',
                     duration: 0.5

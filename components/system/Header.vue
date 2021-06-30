@@ -17,8 +17,8 @@
                         <a @click.prevent="goTo('projects')" href="/projects" class="nav__link nav__link--cursive">Projects</a>
                     </li>
                     <li class="nav__item" @mouseover="showCursive($event)" @mouseleave="hideCursive($event)">
-                        <nuxt-link to="/about-plug-2" class="nav__link">About</nuxt-link>
-                        <nuxt-link to="/about-plug-2" class="nav__link nav__link--cursive">About</nuxt-link>
+                        <a @click.prevent="goTo('about-us')" href="/about-us" class="nav__link">About</a>
+                        <a @click.prevent="goTo('about-us')" href="/about-us" class="nav__link nav__link--cursive">About</a>
                     </li>
                     <li class="nav__item" @mouseover="showCursive($event)" @mouseleave="hideCursive($event)">
                         <nuxt-link to="/career" class="nav__link">Career</nuxt-link>
@@ -58,6 +58,7 @@
 </template>
 
 <script>
+import gsap from "gsap"
 import { mapMutations } from 'vuex'
 export default {
     props: {
@@ -87,11 +88,11 @@ export default {
         },
         showCursive(e) {
             if (e.target.tagName === 'A') {
-                this.$gsap.to(e.target.parentElement.children[0], {
+                gsap.to(e.target.parentElement.children[0], {
                     translateY: -100 + "%",
                     duration: .5
                 })
-                this.$gsap.to(e.target.parentElement.children[1], {
+                gsap.to(e.target.parentElement.children[1], {
                     translateY: -100 + "%",
                     duration: .5
                 })
@@ -99,11 +100,11 @@ export default {
         },
         hideCursive(e) {
             if (e.target.tagName === 'LI') {
-                this.$gsap.to(e.target.children[0], {
+                gsap.to(e.target.children[0], {
                     translateY: 0 + "%",
                     duration: .5
                 })
-                this.$gsap.to(e.target.children[1], {
+                gsap.to(e.target.children[1], {
                     translateY: 0 + "%",
                     duration: .5
                 })
@@ -114,27 +115,27 @@ export default {
         },
     },
     mounted() {
-        this.$gsap.to('.nav__item', {
+        gsap.to('.nav__item', {
             translateY: 0,
             delay: 1,
             duration: 0.25,
         })
-        this.$gsap.to('.lang__item', {
+        gsap.to('.lang__item', {
             translateY: 0,
             delay: 1,
             duration: 0.25,
         })
-        this.$gsap.to('.header__logo', {
+        gsap.to('.header__logo', {
             opacity: 1,
             delay: 1,
             duration: 0.25,
         })
-        this.$gsap.to('.request', {
+        gsap.to('.request', {
             opacity: 1,
             delay: 1,
             duration: 0.25,
         })
-        this.$gsap.to('.menu-button', {
+        gsap.to('.menu-button', {
             opacity: 1,
             delay: 1,
             duration: 0.25,

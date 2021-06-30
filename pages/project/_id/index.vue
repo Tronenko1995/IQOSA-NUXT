@@ -44,10 +44,10 @@
                     <img :src="require('~/assets/img/project/3.jpg')" alt="">
                 </div>
                 <div class="project__images">
-                    <div class="project__image project__image--uno">
+                    <div class="project__image project__image--uno project__image--parallax">
                         <img :src="require('~/assets/img/project/4.jpg')" alt="">
                     </div>
-                    <div class="project__image project__image--dos">
+                    <div class="project__image project__image--dos project__image--parallax">
                         <img :src="require('~/assets/img/project/5.jpg')" alt="">
                     </div>
                 </div>
@@ -55,10 +55,10 @@
                     Apartment<br><span>in Kiev</span>
                 </div>
                 <div class="project__images">
-                    <div class="project__image project__image--tres">
+                    <div class="project__image project__image--tres project__image--parallax">
                         <img :src="require('~/assets/img/project/6.jpg')" alt="">
                     </div>
-                    <div class="project__image project__image--quatro">
+                    <div class="project__image project__image--quatro project__image--parallax">
                         <img :src="require('~/assets/img/project/7.jpg')" alt="">
                     </div>
                 </div>
@@ -117,70 +117,105 @@
 </template>
 
 <script>
+// import { gsap } from 'gsap/dist/gsap.min.js'
+// import { ScrollTrigger } from 'gsap/dist/ScrollTrigger.min.js'
 import Modals from '@/components/system/modals/Modals.vue'
 import { mapMutations } from 'vuex'
+// if (process.client) { gsap.registerPlugin(ScrollTrigger) }
 export default {
   layout: 'project',
   components: { Modals },
-  mounted() {
-    if (this.preloader) {
-      setTimeout(() => {
-          this.setPlug(false)
-      }, this.duration.preloader);
-    } else {
-      setTimeout(() => {
-          this.setPlug(false)
-      }, this.duration.page);
-    }
-  },
+    data() {
+        return {
+            imgParallax: null
+        }
+    },
+    created() {
+        // this.$gsap.registerPlugin(this.$ScrollTrigger)
+        // gsap.registerPlugin(ScrollTrigger);
+    },
+    mounted() {
+        this.imgParallax = document.querySelectorAll('.project__image--parallax')
+        this.testSize()
+        if (this.preloader) {
+        setTimeout(() => {
+            this.setPlug(false)
+        }, this.duration.preloader);
+        } else {
+        setTimeout(() => {
+            this.setPlug(false)
+        }, this.duration.page);
+        }
+    },
   computed: {
     preloader() { return this.$store.getters['preloader/preloader'] },
     duration() { return this.$store.getters['plug/duration'] },
 	modal() { return this.$store.getters['modal/modal'] },
   },
-  methods: {
-    ...mapMutations({
-        setPlug: 'plug/setVisible',
-        setModal: 'modal/setModal',
-        setTeam: 'team/setTeam',
-    }),
-    showCursive(e) {
-        if (e.target.tagName === 'BUTTON' || e.target.tagName === 'A') {
-            this.$gsap.to(e.target.parentElement.children[0], {
-                translateY: -100 + "%",
-                duration: .5
+    methods: {
+        ...mapMutations({
+            setPlug: 'plug/setVisible',
+            setModal: 'modal/setModal',
+            setTeam: 'team/setTeam',
+        }),
+        testSize() {
+            console.log(this.imgParallax)
+            if (window.innerWidth > 480) {
+                Array.from(this.imgParallax).forEach((img) => {
+                    console.log(img)
+                    this.$ScrollTrigger.create(
+                        {
+                            trigger: img,
+                            start: "top bottom",
+                            end: "bottom top",
+                            scrub: 1.7,
+                        },
+                        this.$gsap.to(img, {
+                            translateY: 0,
+                            duration: 1,
+                        }),
+                    );
+                })
+            }
+        },
+        showCursive(e) {
+            if (e.target.tagName === 'BUTTON' || e.target.tagName === 'A') {
+                this.$gsap.to(e.target.parentElement.children[0], {
+                    translateY: -100 + "%",
+                    duration: .5
+                })
+                this.$gsap.to(e.target.parentElement.children[1], {
+                    translateY: -100 + "%",
+                    duration: .5
+                })
+            }
+        },
+        hideCursive(e) {
+            if (e.target.tagName === 'LI') {
+                this.$gsap.to(e.target.children[0], {
+                    translateY: 0 + "%",
+                    duration: .5
+                })
+                this.$gsap.to(e.target.children[1], {
+                    translateY: 0 + "%",
+                    duration: .5
+                })
+            }
+        },
+        openModal() {
+            this.setTeam({
+                name: 'Fil Vladimir',
+                position: 'Designer-Visualizer',
+                img: 'https://iqosa.com/wp-content/uploads/2021/05/IMG_4211-2-copy.jpg',
+                quote: 'IQOSA is ambition, striving for individuality in design. We always wanted to create something unique and that no one has pointed us what to do.'
             })
-            this.$gsap.to(e.target.parentElement.children[1], {
-                translateY: -100 + "%",
-                duration: .5
+            this.setModal({
+                show: true,
+                type: 'team',
+                animate: 'fade'
             })
-        }
-    },
-    hideCursive(e) {
-        if (e.target.tagName === 'LI') {
-            this.$gsap.to(e.target.children[0], {
-                translateY: 0 + "%",
-                duration: .5
-            })
-            this.$gsap.to(e.target.children[1], {
-                translateY: 0 + "%",
-                duration: .5
-            })
-        }
-    },
-    openModal() {
-        this.setTeam({
-            name: 'Fil Vladimir',
-            position: 'Designer-Visualizer',
-            img: 'https://iqosa.com/wp-content/uploads/2021/05/IMG_4211-2-copy.jpg',
-            quote: 'IQOSA is ambition, striving for individuality in design. We always wanted to create something unique and that no one has pointed us what to do.'
-        })
-        this.setModal({
-            show: true,
-            type: 'team'
-        })
-    },
-  }
+        },
+    }
 }
 </script>
 
