@@ -26,6 +26,7 @@ export default {
   plugins: [
     '~/plugins/swiper',
     '~/plugins/app-components',
+    { src: '~/plugins/aboutSlider', mode: 'client' },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

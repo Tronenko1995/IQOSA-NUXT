@@ -17,17 +17,39 @@
             <p class="scroll-text__text">CREATES A PERFECT CREATES A PERFECT CREATES A PERFECT CREATES A PERFECT CREATES A PERFECT CREATES A PERFECT CREATES A PERFECT</p>
             <p class="scroll-text__text">INTERIOR AND ARCHITECTURE DESIGN INTERIOR AND ARCHITECTURE DESIGN INTERIOR AND ARCHITECTURE DESIGN INTERIOR AND ARCHITECTURE DESIGN</p>
         </section>
+        <AboutSlider />
+        <Next />
+        <!-- <div>
+            <nuxt-link to="/"  class="project__next">
+                <div class="project__title project__title--next">
+                    <ul class="animate-text animate-text--next">
+                        <li class="animate-text__item">
+                            <a href="#" class="animate-text__button animate-text__button--cursive  animate-text__button--next">NEXT</a>
+                            <a href="#" class="animate-text__button animate-text__button--next animate-text__button--absolute">IQ-98-KD</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="project__image project__image--next">
+                    <img :src="require('~/assets/img/project/8.jpg')" alt="">
+                </div>
+            </nuxt-link>
+        </div> -->
     </div>
+
 </template>
 
 <script>
 import { mapMutations } from 'vuex'
 import Team from '@/components/main/Team.vue'
 import TeamMobi from '@/components/main/TeamMobi.vue'
+import AboutSlider from '@/components/about/AboutSlider.vue'
+import Next from '@/components/Next.vue'
 export default {
     components: {
 		Team,
 		TeamMobi,
+        AboutSlider,
+        Next
     },
     data() {
         return {

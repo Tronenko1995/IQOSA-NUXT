@@ -1,11 +1,11 @@
 <template>
     <div class="motto">
         <ul class="motto__list">
-            <li class="motto__item" v-for="(item, i) in mottoList" :key="i">
+            <li class="motto__item" v-for="item in mottoList" :key="item">
                 <span>{{ item }}</span>
             </li>
             <template v-if="mottoListExtra && mottoListExtra.length">
-            <li class="motto__item motto__item--right" v-for="(item, i) in mottoListExtra" :key="i">
+            <li class="motto__item motto__item--right" v-for="item in mottoListExtra" :key="item">
                 <span>{{ item }}</span>
             </li>
             </template>

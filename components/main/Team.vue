@@ -72,7 +72,7 @@
                     <div ref="parallaxTitle" class="team__title team-title">
                         <p class="team__title-text team-title__text" style="transform: translate(0px, 0px);">We form the quality of life</p>
                         <p class="team__title-text team-title__text" style="transform: translate(0px, 0px);">By the quality of implementation</p>
-                        <div class="team__link team-link arrow-link" @mouseover.native="findElement($event)" @mouseleave.native="animateTextHide($event)" @click="openVideo">
+                        <div class="team__link team-link arrow-link" @mouseover="findElement($event)" @mouseleave="animateTextHide($event)" @click="openVideo">
                             <span class="arrow-link__change">
                                 <span class="arrow-link__span arrow-link__span--first">Watch</span>
                                 <span class="arrow-link__span arrow-link__span--last">Watch</span>
@@ -82,6 +82,7 @@
                                 <svg class="arrow-link__svg" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.40039 12.4004H17.6004" stroke-linecap="square"/><path d="M13.9004 8L18.4004 12.4L13.9004 16.8" stroke-linecap="square"/></svg>
                             </span>
                         </div>
+
                     </div>
                     <div class="team__item team__item--tres team__item--small">
                         <picture class="team__block">
