@@ -8,14 +8,14 @@
             <Motto class="motto--about" :motto-list="mottoList" :motto-list-extra="mottoListExtra"/>
         </section>
         <section class="scroll-text">
-            <p class="scroll-text__text">CREATED IN FREEDOM FOR LIFE CREATED IN FREEDOM FOR LIFE CREATED IN FREEDOM FOR LIFE CREATED IN FREEDOM FOR LIFE</p>
-            <p class="scroll-text__text">I FEEL IQOSA PRIVATE CREATIVE ADAPTIVE SAFE I FEEL IQOSA PRIVATE CREATIVE ADAPTIVE SAFE I FEEL IQOSA PRIVATE CREATIVE ADAPTIVE SAFE I FEEL IQOSA PRIVATE CREATIVE ADAPTIVE SAFE</p>
+            <p ref="text1" class="scroll-text__text">CREATED IN FREEDOM FOR LIFE CREATED IN FREEDOM FOR LIFE CREATED IN FREEDOM FOR LIFE CREATED IN FREEDOM FOR LIFE</p>
+            <p ref="text2" class="scroll-text__text">I FEEL IQOSA PRIVATE CREATIVE ADAPTIVE SAFE I FEEL IQOSA PRIVATE CREATIVE ADAPTIVE SAFE I FEEL IQOSA PRIVATE CREATIVE ADAPTIVE SAFE I FEEL IQOSA PRIVATE CREATIVE ADAPTIVE SAFE</p>
         </section>
 			<Team v-if="desktop" />
 			<TeamMobi v-if="!desktop" />
         <section class="scroll-text">
-            <p class="scroll-text__text">CREATES A PERFECT CREATES A PERFECT CREATES A PERFECT CREATES A PERFECT CREATES A PERFECT CREATES A PERFECT CREATES A PERFECT</p>
-            <p class="scroll-text__text">INTERIOR AND ARCHITECTURE DESIGN INTERIOR AND ARCHITECTURE DESIGN INTERIOR AND ARCHITECTURE DESIGN INTERIOR AND ARCHITECTURE DESIGN</p>
+            <p ref="text3" class="scroll-text__text">CREATES A PERFECT CREATES A PERFECT CREATES A PERFECT CREATES A PERFECT CREATES A PERFECT CREATES A PERFECT CREATES A PERFECT</p>
+            <p ref="text4" class="scroll-text__text">INTERIOR AND ARCHITECTURE DESIGN INTERIOR AND ARCHITECTURE DESIGN INTERIOR AND ARCHITECTURE DESIGN INTERIOR AND ARCHITECTURE DESIGN</p>
         </section>
         <AboutSlider />
         <Next />
@@ -61,6 +61,10 @@ export default {
                 'DESIGN AND TECHNOLOGY',
             ],
 			desktop: null,
+            text1: null,
+            text2: null,
+            text3: null,
+            text4: null,
         }
     },
     beforeMount() {
@@ -72,6 +76,11 @@ export default {
         // window.removeEventListener('scroll', this.handleScroll);
     },
     mounted() {
+        this.text1 = this.$refs.text1
+        this.text2 = this.$refs.text2
+        this.text3 = this.$refs.text3
+        this.text4 = this.$refs.text4
+        this.initParallaxText()
 		this.testSize()
         if (this.preloader) {
             setTimeout(() => {
@@ -93,6 +102,53 @@ export default {
             setPlug: 'plug/setVisible',
             setModal: 'modal/setModal',
         }),
+        initParallaxText() {
+
+            const e = {
+                lerp: (e, t, n) => (1 - n) * e + n * t
+            };
+            let dataScroll = {
+                current: 0,
+                last: 0,
+                ease: .05
+            }
+            window.addEventListener('scroll', e => {
+                dataScroll.current = scrollY
+            })
+            const newHeight = 2 * innerHeight,
+                  a = .5,
+                  scatter = 200
+            let parallaxText = [{
+                el: this.text1,
+                min: this.text1.getBoundingClientRect().top - window.innerHeight - scatter,
+                max: this.text1.getBoundingClientRect().top + 2 * window.innerHeight + scatter,
+                reverse: false
+            },{
+                el: this.text2,
+                min: this.text2.getBoundingClientRect().top - window.innerHeight - scatter,
+                max: this.text2.getBoundingClientRect().top + 2 * window.innerHeight + scatter,
+                reverse: true
+            },{
+                el: this.text3,
+                min: this.text3.getBoundingClientRect().top - window.innerHeight - scatter,
+                max: this.text3.getBoundingClientRect().top + 2 * window.innerHeight + scatter,
+                reverse: false
+            },{
+                el: this.text4,
+                min: this.text4.getBoundingClientRect().top - window.innerHeight - scatter,
+                max: this.text4.getBoundingClientRect().top + 2 * window.innerHeight + scatter,
+                reverse: true
+            }]
+            !function animate() {
+                for (const item of parallaxText)
+                    if (dataScroll.current > item.min && dataScroll.current < item.max) {
+                        dataScroll.last = e.lerp(dataScroll.last, dataScroll.current, dataScroll.ease);
+                        let num = item.reverse ? -dataScroll.last * a : dataScroll.last * a - newHeight;
+                        item.el.style.transform = `translateX(${num}px)`
+                    }
+                requestAnimationFrame(animate)
+            }()
+        },
         openModal(type) {
             this.setModal({
                 show: true,

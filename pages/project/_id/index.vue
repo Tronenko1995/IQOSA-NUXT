@@ -117,11 +117,10 @@
 </template>
 
 <script>
-// import { gsap } from 'gsap/dist/gsap.min.js'
-// import { ScrollTrigger } from 'gsap/dist/ScrollTrigger.min.js'
+// import gsap from 'gsap';
+// import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import Modals from '@/components/system/modals/Modals.vue'
 import { mapMutations } from 'vuex'
-// if (process.client) { gsap.registerPlugin(ScrollTrigger) }
 export default {
   layout: 'project',
   components: { Modals },
@@ -135,6 +134,7 @@ export default {
         // gsap.registerPlugin(ScrollTrigger);
     },
     mounted() {
+        this.$gsap.registerPlugin(this.$ScrollTrigger);
         this.imgParallax = document.querySelectorAll('.project__image--parallax')
         this.testSize()
         if (this.preloader) {
@@ -161,23 +161,26 @@ export default {
         testSize() {
             console.log(this.imgParallax)
             if (window.innerWidth > 480) {
-                Array.from(this.imgParallax).forEach((img) => {
-                    console.log(img)
-                    this.$ScrollTrigger.create(
-                        {
-                            trigger: img,
-                            start: "top bottom",
-                            end: "bottom top",
-                            scrub: 1.7,
-                        },
-                        this.$gsap.to(img, {
+                this.$nextTick( () => {
+                    this.imgParallax.forEach((img) => {
+                        let hero_scroll = this.$gsap.timeline({
+                            scrollTrigger: {
+                                trigger: img,
+                                start: "top bottom",
+                                end: "bottom top",
+                                // markers:true,
+                                scrub: 1.7,
+                            },
+                        })
+                        .to(img, {
                             translateY: 0,
-                            duration: 1,
-                        }),
-                    );
+                            duration: 1
+                        })
+                    })
                 })
             }
         },
+        
         showCursive(e) {
             if (e.target.tagName === 'BUTTON' || e.target.tagName === 'A') {
                 this.$gsap.to(e.target.parentElement.children[0], {
@@ -296,11 +299,15 @@ export default {
             // width: 516px;
             // height: 610px;
             height: 762px;
+            transform: translateY(260px);
+            margin-bottom: 260px;
         }
         &--dos {
             margin: 494px 0 0 0;
             width: 781px;
             height: 1057px;
+            transform: translateY(200px);
+            margin-bottom: 200px;
             // width: 625px;
             // height: 846px;
         }
@@ -308,11 +315,15 @@ export default {
             margin: -113px 0 0 0;
             width: 288px;
             height: 340px;
+            transform: translateY(200px);
+            margin-bottom: 200px;
         }
         &--quatro {
             margin: 250px 0 300px 0; 
             width: 665px;
             height: 785px;
+            transform: translateY(120px);
+            margin-bottom: 120px;
         }
         &--next {
             width: 852px;
@@ -528,22 +539,23 @@ export default {
                 margin: 0 auto 181px auto;
             }
             &--uno {
-                margin: 116px 0 0 0;
+                margin: 116px 0 260px 0;
                 width: 476px;
                 height: 562px;
             }
             &--dos {
-                margin: 371px 0 0 0;
+                margin: 371px 0 200px 0;
                 width: 576px;
                 height: 780px;
             }
             &--tres {
-                margin: -113px 0 0 0;
+                margin: -113px 0 200px 0;
                 width: 213px;
                 height: 251px;
             }
             &--quatro {
-                margin: 160px 0 275px 0;
+                margin: 160px 0 120px 0;
+                // margin: 160px 0 275px 0;
                 width: 491px;
                 height: 579px;
             }
@@ -594,6 +606,7 @@ export default {
                 // height: 501px;
                 width: 382px;
                 height: 451px;
+                transform: translateY(0);
             }
             &--dos {
                 margin: 335px 0 0 0;
@@ -601,16 +614,19 @@ export default {
                 // height: 695px;
                 width: 462px;
                 height: 626px;
+                transform: translateY(0);
             }
             &--tres {
                 margin: -86px 0 0 0;
                 width: 189px;
                 height: 223px;
+                transform: translateY(0);
             }
             &--quatro {
                 margin: 159px 0 232px 0;
                 width: 437px;
                 height: 516px;
+                transform: translateY(0);
             }
             &--next {
                 width: 568px;

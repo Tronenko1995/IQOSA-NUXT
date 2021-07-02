@@ -16,7 +16,7 @@
     "core-js": "^3.9.1",
     "dat.gui": "^0.7.7",
     "draggabilly": "^2.3.0",
-    "gsap": "file:gsap-bonus.tgz",
+    "gsap": "^3.7.0",
     "node-sass": "^5.0.0",
     "nuxt": "^2.15.3",
     "parallax-js": "^3.1.0",
