@@ -8,7 +8,15 @@
                 <p class="job__counter">JOB 1</p>
                 <div class="job__info">
                     <p class="job__title">architecture</p>
-                    <p class="job__description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                    <div class="job__visible">
+                        <p>Итак, если ты:</p>
+                        <ul>
+                            <li>имеешь высшее профильное образование и опыт работы от 3х лет;</li>
+                            <li>мобильный, активный, в “теме” рынка современных материалов, нормы их расхода;</li>
+                            <li>знаешь процессы ремонтно-строительных работ и у тебя всегда всё под контролем.</li>
+                        </ul>
+                        <p>Ты - тот, кто нам нужен!</p>
+                    </div>
                 </div>
                 <img class="job__svg" :src="require('~/assets/svg/arrow-career.svg')" alt="" width="42" height="42">
             </li>
@@ -17,7 +25,15 @@
                 <p class="job__counter">JOB 2</p>
                 <div class="job__info">
                     <p class="job__title">3D Max Visualisator</p>
-                    <p class="job__description">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    <div class="job__visible">
+                        <p>Итак, если ты:</p>
+                        <ul>
+                            <li>имеешь высшее профильное образование и опыт работы от 3х лет;</li>
+                            <li>мобильный, активный, в “теме” рынка современных материалов, нормы их расхода;</li>
+                            <li>знаешь процессы ремонтно-строительных работ и у тебя всегда всё под контролем.</li>
+                        </ul>
+                        <p>Ты - тот, кто нам нужен!</p>
+                    </div>
                 </div>
                 <img class="job__svg" :src="require('~/assets/svg/arrow-career.svg')" alt="" width="42" height="42">
             </li>
@@ -26,7 +42,15 @@
                 <p class="job__counter">JOB 3</p>
                 <div class="job__info">
                     <p class="job__title">EnginEer</p>
-                    <p class="job__description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    <div class="job__visible">
+                        <p>Итак, если ты:</p>
+                        <ul>
+                            <li>имеешь высшее профильное образование и опыт работы от 3х лет;</li>
+                            <li>мобильный, активный, в “теме” рынка современных материалов, нормы их расхода;</li>
+                            <li>знаешь процессы ремонтно-строительных работ и у тебя всегда всё под контролем.</li>
+                        </ul>
+                        <p>Ты - тот, кто нам нужен!</p>
+                    </div>
                 </div>
                 <img class="job__svg" :src="require('~/assets/svg/arrow-career.svg')" alt="" width="42" height="42">
             </li>
@@ -146,7 +170,7 @@ export default {
         font-feature-settings: 'pnum' on, 'lnum' on, 'dnom' on, 'liga' off, 'kern' off;
         color: #FFFFFF;
     }
-    &__description {
+    &__visible {
         margin-top: 16px;
         margin-bottom: 96px;
         font-family: 'Light';
@@ -156,6 +180,16 @@ export default {
         line-height: 140%;
         font-feature-settings: 'pnum' on, 'lnum' on, 'kern' off;
         color: #FFFFFF;
+        p {
+
+        }
+        ul {
+            margin: 30px 0;
+            list-style: inside;
+        }
+        li {
+
+        }
     }
     &__svg {
         position: absolute;

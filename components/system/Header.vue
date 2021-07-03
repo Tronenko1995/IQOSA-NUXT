@@ -21,8 +21,8 @@
                         <a @click.prevent="goTo('about-us')" href="/about-us" class="nav__link nav__link--cursive">About</a>
                     </li>
                     <li class="nav__item" @mouseover="showCursive($event)" @mouseleave="hideCursive($event)">
-                        <nuxt-link to="/career" class="nav__link">Career</nuxt-link>
-                        <nuxt-link to="/career" class="nav__link nav__link--cursive">Career</nuxt-link>
+                        <a @click.prevent="goTo('career')" href="/career" class="nav__link">Career</a>
+                        <a @click.prevent="goTo('career')" href="/career" class="nav__link nav__link--cursive">Career</a>
                     </li>
                     <li class="nav__item" @mouseover="showCursive($event)" @mouseleave="hideCursive($event)">
                         <nuxt-link to="/news" class="nav__link">Media</nuxt-link>

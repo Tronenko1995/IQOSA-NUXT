@@ -16,8 +16,8 @@
                 </li>
                 <span class="menu__line"></span>
                 <li class="menu__item" @mouseover="showCursive($event)" @mouseleave="hideCursive($event)">
-                    <nuxt-link to="/career" class="menu__link">Career</nuxt-link>
-                    <nuxt-link to="/career" class="menu__link menu__link--cursive">Career</nuxt-link>
+                    <a @click.prevent="goTo('career')" href="/career" class="menu__link">Career</a>
+                    <a @click.prevent="goTo('career')" href="/career" class="menu__link menu__link--cursive">Career</a>
                 </li>
             </ul>
             <ul class="menu__list">
