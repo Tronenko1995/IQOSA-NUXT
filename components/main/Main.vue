@@ -10,7 +10,7 @@
           A perfect
         </p>
         <div
-          class="make-request"
+          class="make-request make-request--main"
           @mouseover="findElement($event)"
           @mouseleave="animateTextHide($event)"
         >
@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import gsap from "gsap"
+// import gsap from "gsap"
 import { mapMutations } from 'vuex'
 // import { gsap } from "gsap/dist/gsap";
 // import { SplitText } from "gsap/dist/SplitText";
@@ -74,7 +74,7 @@ export default {
       const mottoItem = document.querySelectorAll('.motto__item span')
       let delay = 1
 
-      gsap.to(".main__title", {
+      this.$gsap.to(".main__title", {
         delay: 0.5,
         translateX: 0,
         opacity: 1,
@@ -82,7 +82,7 @@ export default {
       });
 
       for (let i = 0; i < mottoItem.length; i++) {
-          gsap.to(mottoItem[i], {
+          this.$gsap.to(mottoItem[i], {
               delay: delay,
               translateY: 0,
               duration: 0.5
@@ -91,12 +91,12 @@ export default {
           delay = delay + 0.25
       }
 
-      gsap.to(".make-request__line", {
+      this.$gsap.to(".make-request__line", {
         translateX: 0,
         delay: 2,
         duration: 0.5,
       });
-      gsap.to(".make-request__link", {
+      this.$gsap.to(".make-request__link", {
         translateY: 0,
         delay: 2.75,
         duration: 0.25,
@@ -116,22 +116,22 @@ export default {
       }
     },
     animateTextShow(el) {
-      gsap.to(el.children[0], {
+      this.$gsap.to(el.children[0], {
         translateY: -100 + "%",
         duration: 0.5,
       });
-      gsap.to(el.children[1], {
+      this.$gsap.to(el.children[1], {
         translateY: -100 + "%",
         duration: 0.5,
       });
     },
     animateTextHide(e) {
       if (e.target.classList.contains("make-request")) {
-        gsap.to(e.target.children[0].children[1].children[0], {
+        this.$gsap.to(e.target.children[0].children[1].children[0], {
           translateY: 0 + "%",
           duration: 0.5,
         });
-        gsap.to(e.target.children[0].children[1].children[1], {
+        this.$gsap.to(e.target.children[0].children[1].children[1], {
           translateY: 0 + "%",
           duration: 0.5,
         });
@@ -182,51 +182,6 @@ export default {
     &--last {
       transform: translateX(-300px);
     }
-  }
-}
-.make-request {
-  width: 214px;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  cursor: pointer;
-  position: relative;
-  &__change {
-    display: block;
-    overflow: hidden;
-    span {
-      display: block;
-      &:last-child {
-        position: absolute;
-      }
-    }
-  }
-  &__link {
-    display: flex;
-    justify-content: space-between;
-    font-family: Light, Arial;
-    font-weight: 300;
-    color: #fff;
-    font-size: 16px;
-    line-height: 140%;
-    margin-bottom: 2px;
-    transform: translate(0px, 100%);
-    text-transform: uppercase;
-    &:hover + {
-      .make-request__line {
-        animation: "under-line" 1s;
-      }
-    }
-  }
-  &__line {
-    transform: translate(-105%, 0px);
-    position: absolute;
-    height: 1px;
-    background: #fff;
-    display: block;
-    transition: 0.3s ease;
-    bottom: 0;
-    width: 100%;
   }
 }
 
@@ -285,10 +240,6 @@ export default {
         justify-content: flex-end;
       }
     }
-  }
-  .make-request {
-    position: absolute;
-    top: 70%;
   }
 }
 @media (max-width: 414px) {

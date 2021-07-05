@@ -1,0 +1,54 @@
+.make-request {
+    width: 214px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+    &__change {
+      display: block;
+      overflow: hidden;
+      span {
+        display: block;
+        &:last-child {
+          position: absolute;
+        }
+      }
+    }
+    &__link {
+      display: flex;
+      justify-content: space-between;
+      font-family: Light, Arial;
+      font-weight: 300;
+      color: #fff;
+      font-size: 16px;
+      line-height: 140%;
+      margin-bottom: 2px;
+      transform: translate(0px, 100%);
+      text-transform: uppercase;
+      &:hover + {
+        .make-request__line {
+          animation: "under-line" 1s;
+        }
+      }
+    }
+    &__line {
+      transform: translate(-105%, 0px);
+      position: absolute;
+      height: 1px;
+      background: #fff;
+      display: block;
+      transition: 0.3s ease;
+      bottom: 0;
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 669px) {
+      .make-request {
+          &--main {
+            position: absolute;
+            top: 70%;
+          }
+      }
+  }
