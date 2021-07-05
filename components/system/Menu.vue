@@ -22,8 +22,8 @@
             </ul>
             <ul class="menu__list">
                 <li class="menu__item" @mouseover="showCursive($event)" @mouseleave="hideCursive($event)">
-                    <nuxt-link to="/news" class="menu__link">Media</nuxt-link>
-                    <nuxt-link to="/news" class="menu__link menu__link--cursive">Media</nuxt-link>
+                    <a @click.prevent="goTo('media')" href="/media" class="menu__link">Media</a>
+                    <a @click.prevent="goTo('media')" href="/media" class="menu__link menu__link--cursive">Media</a>
                 </li>
                 <span class="menu__line"></span>
                 <li class="menu__item" @mouseover="showCursive($event)" @mouseleave="hideCursive($event)">
