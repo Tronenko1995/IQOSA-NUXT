@@ -3,36 +3,36 @@
     width: fit-content;
     align-items: center;
     margin-top: 24px;
-&__change {
-    display: block;
-    overflow: hidden;
-            position: relative;
-    .arrow-link__span {
+    &__change {
         display: block;
-        &:last-child {
-            position: absolute;
+        overflow: hidden;
+        position: relative;
+        .arrow-link__span {
+            display: block;
+            &:last-child {
+                position: absolute;
+            }
         }
     }
-}
     &__span {
-            font-family: 'LightItalic', Arial;
-            font-weight: 300;
-            color: #fff;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-            font-feature-settings: 'pnum' on, 'lnum' on;
-            &--last {
-                    font-family: 'Light', Arial;
-            }
+        font-family: 'LightItalic', Arial;
+        font-weight: 300;
+        color: #fff;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        font-feature-settings: 'pnum' on, 'lnum' on;
+        &--last {
+            font-family: 'Light', Arial;
+        }
     }
     &__text {
-            font-family: 'Light', Arial;
-            font-weight: 300;
-            color: #fff;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-            font-feature-settings: 'pnum' on, 'lnum' on;
-            margin-left: 8px;
+        font-family: 'Light', Arial;
+        font-weight: 300;
+        color: #fff;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        font-feature-settings: 'pnum' on, 'lnum' on;
+        margin-left: 8px;
     }
     &__circle {
         display: flex;
@@ -52,10 +52,10 @@
     }
     &:hover {
         .arrow-link__svg {
-                stroke: #000;
+            stroke: #000;
         }
         .arrow-link__circle {
-                background-color: #fff;
+            background-color: #fff;
         }
     }
 }
@@ -87,5 +87,11 @@
 		&__text {
 			font-size: 13px;
 		}
+        &__circle {
+            &--news {
+                width: 56px;
+                height: 56px;
+            }
+        }
 	}
 }

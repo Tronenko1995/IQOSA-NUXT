@@ -53,13 +53,14 @@ export default {
     if (this.preloader) {
       setTimeout(() => {
           this.setPlug(false)
+          this.animate()
       }, this.duration.preloader);
     } else {
       setTimeout(() => {
           this.setPlug(false)
+          this.animate()
       }, this.duration.page);
     }
-    setTimeout(() => this.animate(), 2500);
     // gsap.registerPlugin(SplitText);
   },
   computed: {

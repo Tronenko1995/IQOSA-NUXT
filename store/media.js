@@ -1,5 +1,5 @@
 export const state = () => ({
-    view: 'media'
+    view: null
   })
   
   export const mutations = {

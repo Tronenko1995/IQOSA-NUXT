@@ -14,7 +14,7 @@
 
 <script>
 import gsap from "gsap"
-import { mapState } from 'vuex'
+import { mapMutations } from 'vuex'
 import Header from '@/components/system/Header.vue' 
 import Menu from '@/components/system/Menu.vue' 
 export default {
@@ -26,6 +26,9 @@ export default {
         Header,
         Menu
     },
+    created() {
+        this.setMenuStatus(false)
+    },
     beforeMount() {
         window.addEventListener('scroll', this.handleScroll);
     },
@@ -33,9 +36,7 @@ export default {
         window.removeEventListener('scroll', this.handleScroll);
     },
     computed: {
-        ...mapState({
-            menuStatus: (state) => state.menu.status
-        })
+        menuStatus() { return this.$store.getters['menu/status'] },
     },
     data() {
         return {
@@ -45,6 +46,9 @@ export default {
         }
     },
     methods: {
+        ...mapMutations({
+            setMenuStatus: 'menu/setStatus',
+        }),
         beforeEnter(el, done) {
             const menuLink = el.querySelectorAll('.menu__link'),
                   socialLink = el.querySelectorAll('.social__link'),
