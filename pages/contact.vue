@@ -1,15 +1,15 @@
 <template>
     <main>
-        <Media />
+        <Contacts />
     </main>
 </template>
 
 <script>
-import Media from '@/components/media/Media.vue'
+import Contacts from '@/components/contacts/Contacts.vue'
 export default {
     layout: 'standart',
     components: {
-		Media,
+		Contacts,
     },
 }
 </script>

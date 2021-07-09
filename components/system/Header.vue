@@ -29,8 +29,8 @@
                         <a @click.prevent="goTo('media')" href="/media" class="nav__link nav__link--cursive">Media</a>
                     </li>
                     <li class="nav__item" @mouseover="showCursive($event)" @mouseleave="hideCursive($event)">
-                        <nuxt-link to="/contacts" class="nav__link">Contacts</nuxt-link>
-                        <nuxt-link to="/contacts" class="nav__link nav__link--cursive">Contacts</nuxt-link>
+                        <a @click.prevent="goTo('contact')" href="/contact" class="nav__link">Contacts</a>
+                        <a @click.prevent="goTo('contact')" href="/contact" class="nav__link nav__link--cursive">Contacts</a>
                     </li>
                 </ul>
             </nav>
@@ -149,7 +149,7 @@ export default {
     display: flex;
     justify-content: center;
     width: 100%;
-    z-index: 3;
+    z-index: 4;
     position: fixed;
     top: 0;
     transition: all .5s;

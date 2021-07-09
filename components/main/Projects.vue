@@ -151,12 +151,12 @@ export default {
 			projectName() { return this.$refs.projectName.$swiper },
 	},
 	mounted() {
-			this.projectPhotos.controller.control = this.projectAddress
-			this.projectAddress.controller.control = this.projectName
-			this.$refs.totalSlides.textContent = this.projectPhotos.slides.length - 2
-			this.projectPhotos.on('slideChange', () => {
-				this.$refs.currentSlide.textContent = this.projectPhotos.realIndex + 1;
-			})
+		this.projectPhotos.controller.control = this.projectAddress
+		this.projectAddress.controller.control = this.projectName
+		this.$refs.totalSlides.textContent = this.projectPhotos.slides.length - 2
+		this.projectPhotos.on('slideChange', () => {
+			this.$refs.currentSlide.textContent = this.projectPhotos.realIndex + 1;
+		})
 	},
 	methods: {
 	findElement(e) {

@@ -7,6 +7,7 @@
 <script>
 import Career from '@/components/career/Career.vue'
 export default {
+    layout: 'standart',
     components: {
 		Career,
     },

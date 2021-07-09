@@ -19,37 +19,37 @@
                     <div class="news__block">
                         <img class="news__image" :src="require('~/assets/img/news/1.jpg')" alt="" width="644" height="720">
                     </div>
-                    <div class="news__link">
+                    <a @click.prevent="go('/one-article')" href="/one-article" class="news__link">
                         <div class="news__info">
                             <div class="news__info-top"><span>17 AUGUST</span> 2020</div>
                             <div class="news__info-middle">Dutch Invertuals designs Tiny Offices from corrugated aluminium plates</div>
                             <div class="news__info-bottom"><span>SHOW</span>&nbsp; MORE <span class="arrow-link__circle arrow-link__circle--news"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="arrow-link__svg"><path d="M6.40039 12.4004H17.6004" stroke-linecap="square"></path><path d="M13.9004 8L18.4004 12.4L13.9004 16.8" stroke-linecap="square"></path></svg></span></div>
                         </div>
-                    </div>
+                    </a>
                 </li>
                 <li class="news__item">
                     <div class="news__block">
                         <img class="news__image" :src="require('~/assets/img/news/1.jpg')" alt="" width="644" height="720">
                     </div>
-                    <div class="news__link">
+                    <a @click.prevent="go('/one-article')" href="/one-article" class="news__link">
                         <div class="news__info">
                             <div class="news__info-top"><span>17 AUGUST</span> 2020</div>
                             <div class="news__info-middle">Dutch Invertuals designs Tiny Offices from corrugated aluminium plates</div>
                             <div class="news__info-bottom"><span>SHOW</span>&nbsp; MORE <span class="arrow-link__circle arrow-link__circle--news"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="arrow-link__svg"><path d="M6.40039 12.4004H17.6004" stroke-linecap="square"></path><path d="M13.9004 8L18.4004 12.4L13.9004 16.8" stroke-linecap="square"></path></svg></span></div>
                         </div>
-                    </div>
+                    </a>
                 </li>
                 <li class="news__item">
                     <div class="news__block">
                         <img class="news__image" :src="require('~/assets/img/news/1.jpg')" alt="" width="644" height="720">
                     </div>
-                    <div class="news__link">
+                    <a @click.prevent="go('/one-article')" href="/one-article" class="news__link">
                         <div class="news__info">
                             <div class="news__info-top"><span>17 AUGUST</span> 2020</div>
                             <div class="news__info-middle">Dutch Invertuals designs Tiny Offices from corrugated aluminium plates</div>
                             <div class="news__info-bottom"><span>SHOW</span>&nbsp; MORE <span class="arrow-link__circle arrow-link__circle--news"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="arrow-link__svg"><path d="M6.40039 12.4004H17.6004" stroke-linecap="square"></path><path d="M13.9004 8L18.4004 12.4L13.9004 16.8" stroke-linecap="square"></path></svg></span></div>
                         </div>
-                    </div>
+                    </a>
                 </li>
             </ul>
         </section>
@@ -127,6 +127,16 @@ export default {
               this.$router.push({ name: page })
             }, 1000);
           }
+        },
+        go(link) {
+            if (this.$route.path !== link) {
+                this.setAnimate('up')
+                this.setPlug(true)
+                setTimeout(() => {
+                this.setAnimate('dissolve')
+                this.$router.push({ path: link })
+                }, 1000);
+            }
         },
     }
 }

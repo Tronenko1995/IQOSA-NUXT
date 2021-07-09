@@ -7,6 +7,7 @@
 <script>
 import News from '@/components/news/News.vue'
 export default {
+    layout: 'standart',
     components: {
 		News,
     },

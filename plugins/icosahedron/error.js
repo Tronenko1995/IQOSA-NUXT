@@ -97,7 +97,7 @@ function getBg() {
 
   // return images[page_name][lang][size];
   // return images["error"]["en"]["desktop"];
-  return images["home"]["en"][size];
+  return images["error"]["en"][size];
 
 }
 

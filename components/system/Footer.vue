@@ -9,7 +9,7 @@
                     <div class="footer__block">
                         <p class="footer__subtitle">Kyiv (Ukraine)</p>
                         <div class="footer__block-column">
-                            <a href="https://goo.gl/maps/WiShLLXx7mpxj3nV8" class="footer__link">Solomyanska st. 15a</a>
+                            <a target="_blank" href="https://goo.gl/maps/WiShLLXx7mpxj3nV8" class="footer__link">Solomyanska st. 15a</a>
                             <a href="mailto:info@iqosa.com" class="footer__link">info@iqosa.com</a>
                         </div>
 
@@ -66,7 +66,7 @@
                     <!-- <p class="footer__main-text footer__main-text--italic">say hi.</p> -->
                     <div class="footer__main-row">
                         <div class="footer__unit">
-                            <a class="footer__link footer__link--line" href="https://iqosa.com/wp-content/uploads/2021/02/IQOSA-_MediaKit_EN.pdf">Media Kit</a>
+                            <a target="_blank" class="footer__link footer__link--line" href="https://iqosa.com/wp-content/uploads/2021/02/IQOSA-_MediaKit_EN.pdf">Media Kit</a>
                             <span class="footer__line"></span>
                         </div>
                     </div>

@@ -27,8 +27,8 @@
                 </li>
                 <span class="menu__line"></span>
                 <li class="menu__item" @mouseover="showCursive($event)" @mouseleave="hideCursive($event)">
-                    <nuxt-link to="/contacts" class="menu__link">Contacts</nuxt-link>
-                    <nuxt-link to="/contacts" class="menu__link menu__link--cursive">Contacts</nuxt-link>
+                    <a @click.prevent="goTo('contact')" href="/contact" class="menu__link">Contacts</a>
+                    <a @click.prevent="goTo('contact')" href="/contact" class="menu__link menu__link--cursive">Contacts</a>
                 </li>
             </ul>
         </nav>
@@ -113,7 +113,7 @@ export default {
 
 <style lang="scss">
 .menu {
-    z-index: 2;
+    z-index: 3;
     background: #1b1b1b;
     overflow: hidden;
     position: fixed;

@@ -131,11 +131,11 @@ export default {
     if (this.preloader) {
       setTimeout(() => {
           this.setPlug(false)
-      }, this.duration.preloader);
+      }, 3500);
     } else {
       setTimeout(() => {
           this.setPlug(false)
-      }, this.duration.page);
+      }, 1000);
     }
 
     this.shader.item = this.$refs.shaderObj

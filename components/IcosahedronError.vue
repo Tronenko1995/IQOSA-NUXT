@@ -1,12 +1,12 @@
 <template>
-  <div class="icosahedron-crystal" ref="icosahedron"></div>
+  <div class="icosahedron-error" ref="icosahedron"></div>
 </template>
 
 <script>
 import gsap from "gsap"
-import Sketch from "~/plugins/icosahedron";
+import Sketch from "~/plugins/icosahedron/error.js";
 export default {
-  name: "IcosahedronCrystal",
+  name: "IcosahedronError",
   data: function () {
     return {
       icosahedron: null,
@@ -30,7 +30,7 @@ export default {
 </script>
 
 <style lang="scss">
-.icosahedron-crystal {
+.icosahedron-error {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -39,5 +39,6 @@ export default {
   left: 0;
   z-index: 1;
   pointer-events: none;
+  overflow: hidden;
 }
 </style>
