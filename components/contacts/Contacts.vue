@@ -225,7 +225,7 @@ export default {
                 color: #FFFFFF;
             }
             &--light {
-                margin-top: 2px;
+                margin-top: 4px;
                 span {
                     font-family: 'Light', Arial;
                     font-style: normal;

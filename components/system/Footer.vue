@@ -87,7 +87,7 @@
                 <p class="footer__description footer__description--opacity">&copy; Iqosa 2021.</p>
                 <p class="footer__developed">
                     <span class="footer__description footer__description--opacity">Developed by</span>
-                    <a href="https://thefirstthelast.agency/" class="footer__link">The First The Last.</a>
+                    <a target="_blank" href="https://thefirstthelast.agency/" class="footer__link">The First The Last.</a>
                 </p>
             </div>
         </div>
