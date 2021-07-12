@@ -73,4 +73,70 @@ export default {
         margin-top: 112px;
     }
 }
+@media (max-width: 1440px) {
+    .request-page {
+        &__section {
+            margin-top: 241px;
+        }
+        &__title {
+            font-size: 148px;
+        }
+    }
+}
+@media (max-width: 1280px) {
+    .request-page {
+        &__section {
+            margin-top: 223px;
+        }
+        &__title {
+            font-size: 116px;
+            margin-top: 88px;
+        }
+        &__question {
+            font-size: 19px;
+        }
+    }
+}
+@media (max-width: 1024px) {
+    .request-page {
+        &__section {
+            margin-top: 206px;
+        }
+        &__title {
+            font-size: 108px;
+            margin-top: 72px;
+        }
+        &__question {
+            font-size: 17px;
+        }
+    }
+}
+@media (max-width: 768px) {
+    .request-page {
+        &__section {
+            margin-top: 190px;
+        }
+        &__title {
+            font-size: 88px;
+            margin-top: 64px;
+        }
+        &__question {
+            font-size: 16px;
+        }
+    }
+}
+@media (max-width: 500px) {
+    .request-page {
+        &__section {
+            margin-top: 145px;
+        }
+        &__title {
+            font-size: 56px;
+            margin-top: 48px;
+        }
+        &__question {
+            font-size: 15px;
+        }
+    }
+}
 </style>

@@ -72,11 +72,20 @@
 @media (max-width: 1024px) {
 	.arrow-link {
 		&__span {
-				font-size: 12px;
+			font-size: 12px;
 		}
 		&__text {
-				font-size: 12px;
+			font-size: 12px;
 		}
+        &__circle {
+            width: 54px;
+            height: 54px;
+            margin-left: 17px;
+        }
+        &__svg {
+            width: 21px;
+            height: 21px;
+        }
 	}
 }
 @media (max-width: 414px) {

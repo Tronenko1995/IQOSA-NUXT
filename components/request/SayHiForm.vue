@@ -257,4 +257,46 @@ export default {
         }
     }
 }
+@media (max-width: 1280px) {
+    .say-hi-form {
+        margin: 180px auto 180px auto;
+        width: 482px;
+        &__title {
+            font-size: 30px;
+        }
+    }
+}
+@media (max-width: 1024px) {
+    .say-hi-form {
+        margin: 132px auto 132px auto;
+    }
+}
+@media (max-width: 768px) {
+    .say-hi-form {
+        width: 440px;
+        &__title {
+            font-size: 24px;
+            margin-bottom: 64px;
+        }
+        &__input {
+
+        }
+        &__input-wrap {
+            margin-bottom: 56px;
+        }
+    }
+}
+@media (max-width: 500px) {
+    .say-hi-form {
+        margin: 88px auto 88px auto;
+        width: 343px;
+        &__title {
+            font-size: 22px;
+            margin-bottom: 64px;
+        }
+        &__button {
+            margin: 64px auto 0 auto;
+        }
+    }
+}
 </style>

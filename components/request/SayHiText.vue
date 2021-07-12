@@ -37,4 +37,63 @@
         }
     }
 }
+
+@media (max-width: 1440px) {
+    .say-hi {
+        &__text {
+            font-size: 148px;
+        }
+        &__container {
+            margin-left: -746px;
+        }
+    }
+}
+@media (max-width: 1280px) {
+    .say-hi {
+        &__text {
+            font-size: 116px;
+            margin-right: 56px;
+        }
+        &__container {
+            margin-left: -484px;
+        }
+    }
+}
+@media (max-width: 1024px) {
+    .say-hi {
+        &__text {
+            font-size: 108px;
+            margin-right: 48px;
+        }
+        &__container {
+            margin-left: -547px;
+        }
+    }
+}
+@media (max-width: 768px) {
+    .say-hi {
+        &__text {
+            font-size: 88px;
+            margin-right: 40px;
+        }
+        &__container {
+            margin-left: -467px;
+        }
+    }
+}
+@media (max-width: 500px) {
+    .say-hi {
+        &__text {
+            font-size: 56px;
+            display: none;
+            margin-right: 0px;
+            &--active {
+                display: block;
+            }
+        }
+        &__container {
+            margin: 0 auto;
+        }
+    }
+}
 </style>
