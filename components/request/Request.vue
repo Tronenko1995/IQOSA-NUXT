@@ -3,8 +3,10 @@
         <section class="request-page__section">
             <p class="request-page__question">What do you want<br>to talk about?</p>
             <p class="request-page__title">i want to</p>
-            <SayHiText />
-            <SayHiForm />
+            <SayHiText v-if="type === 'sayHi'"/>
+            <SayHiForm v-if="type === 'sayHi'"/>
+            <WorkWithYouText v-if="type === 'workWithYou'"/>
+            <WorkWithYouForm v-if="type === 'workWithYou'"/>
         </section>
     </main>
 </template>
@@ -12,12 +14,22 @@
 <script>
 import SayHiText from '@/components/request/SayHiText.vue'
 import SayHiForm from '@/components/request/SayHiForm.vue'
+import WorkWithYouText from '@/components/request/WorkWithYouText.vue'
+import WorkWithYouForm from '@/components/request/WorkWithYouForm.vue'
 import { mapMutations } from 'vuex'
 export default {
     layout: 'standart',
     components: {
         SayHiText,
-        SayHiForm
+        SayHiForm,
+        WorkWithYouText,
+        WorkWithYouForm,
+    },
+    props: {
+        type: {
+            type: String,
+            required: true
+        }
     },
     mounted() {
         if (this.preloader) {

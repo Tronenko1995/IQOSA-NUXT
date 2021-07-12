@@ -1,6 +1,6 @@
 <template>
     <main>
-        <Request :type="'sayHi'"/>
+        <Request :type="'workWithYou'"/>
     </main>
 </template>
 
