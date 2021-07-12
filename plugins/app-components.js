@@ -3,6 +3,7 @@ import Vue from 'vue'
 import HeaderWrap from '@/components/system/HeaderWrap.vue'
 import PlugWrap from '@/components/system/PlugWrap.vue'
 import Footer from '@/components/system/Footer.vue'
+import Modals from '@/components/system/modals/Modals.vue'
 
 import Plug from '@/components/system/Plug.vue'
 import Social from '@/components/system/Social.vue'
@@ -13,6 +14,7 @@ import Motto from '@/components/Motto.vue'
 Vue.component('HeaderWrap', HeaderWrap)
 Vue.component('PlugWrap', PlugWrap)
 Vue.component('Footer', Footer)
+Vue.component('Modals', Modals)
 
 Vue.component('Plug', Plug)
 Vue.component('Social', Social)

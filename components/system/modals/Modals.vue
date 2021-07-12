@@ -16,9 +16,11 @@ export default {
     },
     beforeMount() {
         document.body.style = 'overflow: hidden'
+        document.querySelector('.header').style = 'z-index: 3;'
     },
     beforeDestroy() {
         document.body.style = ''
+        document.querySelector('.header').style = ''
     }
 }
 </script>
@@ -30,8 +32,8 @@ export default {
         &-active {
             transition: all 1s;
         }
-        &-to {
-        }
+        // &-to {
+        // }
     }
 
     .fade-leave {
@@ -48,8 +50,8 @@ export default {
         &-active {
             transition: all 1s;
         }
-        &-to {
-        }
+        // &-to {
+        // }
     }
 
     .show-leave {

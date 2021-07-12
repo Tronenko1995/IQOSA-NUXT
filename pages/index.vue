@@ -17,7 +17,6 @@ import Main from '@/components/main/Main.vue'
 import Projects from '@/components/main/Projects.vue'
 import Team from '@/components/main/Team.vue'
 import TeamMobi from '@/components/main/TeamMobi.vue'
-import Modals from '@/components/system/modals/Modals.vue'
 export default {
 	layout: 'main',
 	components: {
@@ -25,7 +24,6 @@ export default {
 		Projects,
 		Team,
 		TeamMobi,
-		Modals
     },
     beforeMount() {
 		window.addEventListener('resize', this.onWindowResize);

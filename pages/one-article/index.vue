@@ -158,11 +158,9 @@
 <script>
 // import gsap from 'gsap';
 // import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-import Modals from '@/components/system/modals/Modals.vue'
 import { mapMutations } from 'vuex'
 export default {
   layout: 'project',
-  components: { Modals },
     data() {
         return {
             imgParallax: null
@@ -993,7 +991,7 @@ export default {
         &__images {
             flex-direction: column;
         }
-        &__image {
+        // &__image {
             // &--uno {
             //     width: 255px;
             //     height: 302px;
@@ -1013,7 +1011,7 @@ export default {
             //     width: 255px;
             //     height: 301px;
             // }
-        }
+        // }
         &__title {
             width: 100%;
             // &--text {

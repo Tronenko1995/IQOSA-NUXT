@@ -47,6 +47,7 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
 export default {
     data() {
         return {
@@ -58,6 +59,9 @@ export default {
         }
     },
     methods: {
+        ...mapMutations({
+            setModal: 'modal/setModal',
+        }),
         focusInput(e) {
             e.target.parentElement.classList.add('focus')
         },
@@ -97,6 +101,13 @@ export default {
 				})
 			}
 		},
+        openModal(type) {
+            this.setModal({
+                show: true,
+                animate: 'show',
+                type
+            })
+        },
         sendForm() {
             if (!this.firstName) {
                 this.$refs.firstNameWrap.classList.add('say-hi-form__input-wrap--error')
@@ -112,6 +123,9 @@ export default {
                 this.$refs.messageWrap.classList.add('say-hi-form__textarea-wrap--error')
             } else {
                 this.$refs.messageWrap.classList.remove('say-hi-form__textarea-wrap--error')
+            }
+            if (this.firstName && this.email && this.message) {
+                this.openModal('thank')
             }
         },
     }
@@ -273,9 +287,9 @@ export default {
             font-size: 24px;
             margin-bottom: 64px;
         }
-        &__input {
+        // &__input {
 
-        }
+        // }
         &__input-wrap {
             margin-bottom: 56px;
         }

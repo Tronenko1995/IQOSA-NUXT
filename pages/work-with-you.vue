@@ -1,6 +1,7 @@
 <template>
     <main>
         <Request :type="'workWithYou'"/>
+        <Modals v-if="modal.show" :modal="modal"/>
     </main>
 </template>
 
@@ -11,5 +12,8 @@ export default {
     components: {
 		Request,
     },
+	computed: {
+		modal() { return this.$store.getters['modal/modal'] }
+	},
 }
 </script>

@@ -2,6 +2,7 @@
     <div class="modal">
         <TeamModal v-if="type === 'team'" @close="closeModal()"/>
         <AboutModal v-if="type === 'about'" @close="closeModal()"/>
+        <ThankModal v-if="type === 'thank'" @close="closeModal()"/>
     </div>
 </template>
 
@@ -9,6 +10,7 @@
 import { mapMutations } from 'vuex'
 import TeamModal from '@/components/system/modals/Team.vue'
 import AboutModal from '@/components/system/modals/About.vue'
+import ThankModal from '@/components/system/modals/Thank.vue'
 export default {
     props: {
         type: {
@@ -18,7 +20,8 @@ export default {
     },
     components: {
         TeamModal,
-        AboutModal
+        AboutModal,
+        ThankModal
     },
     methods: {
         ...mapMutations({

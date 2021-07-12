@@ -119,11 +119,9 @@
 <script>
 // import gsap from 'gsap';
 // import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-import Modals from '@/components/system/modals/Modals.vue'
 import { mapMutations } from 'vuex'
 export default {
   layout: 'project',
-  components: { Modals },
     data() {
         return {
             imgParallax: null
@@ -498,12 +496,12 @@ export default {
                 width: 625px;
                 height: 846px;
             }
-            &--tres {
+            // &--tres {
 
-            }
-            &--quatro {
+            // }
+            // &--quatro {
 
-            }
+            // }
         }
     }
 }

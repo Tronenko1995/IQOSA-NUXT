@@ -7,6 +7,8 @@
             <SayHiForm v-if="type === 'sayHi'"/>
             <WorkWithYouText v-if="type === 'workWithYou'"/>
             <WorkWithYouForm v-if="type === 'workWithYou'"/>
+            <JoinText v-if="type === 'join'"/>
+            <JoinForm v-if="type === 'join'"/>
         </section>
     </main>
 </template>
@@ -16,6 +18,8 @@ import SayHiText from '@/components/request/SayHiText.vue'
 import SayHiForm from '@/components/request/SayHiForm.vue'
 import WorkWithYouText from '@/components/request/WorkWithYouText.vue'
 import WorkWithYouForm from '@/components/request/WorkWithYouForm.vue'
+import JoinText from '@/components/request/JoinText.vue'
+import JoinForm from '@/components/request/JoinForm.vue'
 import { mapMutations } from 'vuex'
 export default {
     layout: 'standart',
@@ -24,6 +28,8 @@ export default {
         SayHiForm,
         WorkWithYouText,
         WorkWithYouForm,
+        JoinText,
+        JoinForm
     },
     props: {
         type: {
@@ -46,7 +52,8 @@ export default {
     },
     computed: {
         preloader() { return this.$store.getters['preloader/preloader'] },
-        duration() { return this.$store.getters['plug/duration'] }
+        duration() { return this.$store.getters['plug/duration'] },
+	    modal() { return this.$store.getters['modal/modal'] },
     },
     methods: {
         ...mapMutations({

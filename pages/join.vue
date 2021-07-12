@@ -1,23 +1,19 @@
 <template>
     <main>
-        <HeaderWrap :headerType="'transparent'"/>
-        <About />
+        <Request :type="'join'"/>
         <Modals v-if="modal.show" :modal="modal"/>
     </main>
 </template>
 
 <script>
-import About from '@/components/about/About.vue'
+import Request from '@/components/request/Request.vue'
 export default {
-    layout: 'projects',
+    layout: 'standart',
     components: {
-		About,
+		Request,
     },
 	computed: {
 		modal() { return this.$store.getters['modal/modal'] }
 	},
 }
 </script>
-
-<style lang="scss">
-</style>

@@ -1,6 +1,32 @@
 <template>
     <form class="say-hi-form" @submit.prevent="sendForm()">
-        <p class="say-hi-form__title">Sed ut perspiciatis unde omnis iste natus error sit voluptatem</p>
+        My <span class="say-hi-form__span say-hi-form__span--accent">name</span> is <span class="say-hi-form__span say-hi-form__span--wrap">
+            <input type="text" class="say-hi-form__input">
+        </span>
+        Lorem ipsum Lorem ipsum aliq <span class="say-hi-form__span say-hi-form__span--accent">vacancy</span>
+        <div class="say-hi-form__select" :class="{'active': vacancy !== 'VACANCY LIST'}">
+            <span @click.stop="vacancySelect == false ? vacancySelect = true : ''">{{ vacancy }}</span>
+            <ul v-if="vacancySelect" class="say-hi-form__dropdown">
+                <li class="say-hi-form__dropdown-item" v-for="(item, index) in vacancyArray" :key="index" @click="changeVacancy($event)">{{ item }}</li>
+            </ul>
+        </div>
+        dolor sit amet, consectetur adipiscing elit. sed
+        aliquip ex email <span class="say-hi-form__span say-hi-form__span--accent">address</span> <span class="say-hi-form__span say-hi-form__span--wrap">
+            <input type="text" class="say-hi-form__input">
+        </span>
+        dolor sit amet, consectetur adipiscing elit. sed
+        <span class="say-hi-form__span say-hi-form__span--accent">resume/cv</span> <span class="say-hi-form__span say-hi-form__span--wrap">
+            <input type="text" class="say-hi-form__input">
+        </span>
+        . Nemo enim
+
+        voluptatem quia <span class="say-hi-form__span say-hi-form__span--accent">linkedin</span> <span class="say-hi-form__span say-hi-form__span--wrap">
+            <input type="text" class="say-hi-form__input">
+        </span>
+        Ut enim ad minima veniam, quis nostrum exercita.
+
+
+        <!-- <p class="say-hi-form__title">Sed ut perspiciatis unde omnis iste natus error sit voluptatem</p>
         <div class="say-hi-form__input-wrap" ref="firstNameWrap">
             <p class="say-hi-form__text say-hi-form__text--placeholder">First name</p>
             <input class="say-hi-form__input" type="text" @focus="focusInput($event)" @blur="BlurInput($event)" v-model="firstName">
@@ -10,24 +36,20 @@
             <p class="say-hi-form__text say-hi-form__text--placeholder">Last name</p>
             <input class="say-hi-form__input" type="text" @focus="focusInput($event)" @blur="BlurInput($event)" v-model="lastName">
         </div>
+        <div class="say-hi-form__input-wrap">
+            <p class="say-hi-form__text say-hi-form__text--placeholder">Phone number</p>
+            <input class="say-hi-form__input" type="text" @focus="focusInput($event)" @blur="BlurInput($event)" v-model="phone">
+        </div>
         <div class="say-hi-form__input-wrap" ref="emailWrap">
             <p class="say-hi-form__text say-hi-form__text--placeholder">E-mail address</p>
             <input class="say-hi-form__input" type="text" @focus="focusInput($event)" @blur="BlurInput($event)" v-model="email">
             <p class="say-hi-form__text say-hi-form__text--error">Incorrect email</p>
         </div>
-        <div class="say-hi-form__input-wrap">
-            <p class="say-hi-form__text say-hi-form__text--placeholder">Resume/CV</p>
-            <input class="say-hi-form__input" type="text" @focus="focusInput($event)" @blur="BlurInput($event)" v-model="resume">
-        </div>
-        <div class="say-hi-form__input-wrap">
-            <p class="say-hi-form__text say-hi-form__text--placeholder">LinkedIn</p>
-            <input class="say-hi-form__input" type="text" @focus="focusInput($event)" @blur="BlurInput($event)" v-model="linkedIn">
-        </div>
         <div class="say-hi-form__textarea-wrap" ref="messageWrap">
             <p class="say-hi-form__text say-hi-form__text--placeholder say-hi-form__text--textarea">Message</p>
             <textarea class="say-hi-form__textarea" id="" cols="30" name="message" v-model="message"></textarea>
             <p class="say-hi-form__text say-hi-form__text--error">Incorrect message</p>
-        </div>
+        </div> -->
         <button class="say-hi-form__button arrow-link" @mouseover="findElement($event)" @mouseleave="animateTextHide($event)">
             <span class="arrow-link__change">
                 <span class="arrow-link__span arrow-link__span--first">send</span>
@@ -57,24 +79,26 @@ export default {
         return {
             firstName: '',
             lastName: '',
+            phone: '',
             email: '',
-            resume: '',
-            linkedIn: '',
             message: '',
+            vacancy: 'VACANCY LIST',
+            vacancySelect: false,
+            vacancyArray: ['Architecture','3D Max Visualisator','Engineer']
         }
     },
     methods: {
         ...mapMutations({
             setModal: 'modal/setModal',
         }),
-        focusInput(e) {
-            e.target.parentElement.classList.add('focus')
-        },
-        BlurInput(e) {
-            if (!e.target.value) {
-                e.target.parentElement.classList.remove('focus')
-            }
-        },
+        // focusInput(e) {
+        //     e.target.parentElement.classList.add('focus')
+        // },
+        // BlurInput(e) {
+        //     if (!e.target.value) {
+        //         e.target.parentElement.classList.remove('focus')
+        //     }
+        // },
 		findElement(e) {
 			if (e.target.classList.contains('arrow-link__text') || e.target.classList.contains('arrow-link') || e.target.classList.contains('arrow-link__circle')) {
                 const el = e.target.parentElement.querySelector('.arrow-link__change')
@@ -114,25 +138,29 @@ export default {
             })
         },
         sendForm() {
-            if (!this.firstName) {
-                this.$refs.firstNameWrap.classList.add('say-hi-form__input-wrap--error')
-            } else {
-                this.$refs.firstNameWrap.classList.remove('say-hi-form__input-wrap--error')
-            }
-            if (!this.email) {
-                this.$refs.emailWrap.classList.add('say-hi-form__input-wrap--error')
-            } else {
-                this.$refs.emailWrap.classList.remove('say-hi-form__input-wrap--error')
-            }
-            if (!this.message) {
-                this.$refs.messageWrap.classList.add('say-hi-form__textarea-wrap--error')
-            } else {
-                this.$refs.messageWrap.classList.remove('say-hi-form__textarea-wrap--error')
-            }
-            if (this.firstName && this.email && this.message) {
+            // if (!this.firstName) {
+            //     this.$refs.firstNameWrap.classList.add('say-hi-form__input-wrap--error')
+            // } else {
+            //     this.$refs.firstNameWrap.classList.remove('say-hi-form__input-wrap--error')
+            // }
+            // if (!this.email) {
+            //     this.$refs.emailWrap.classList.add('say-hi-form__input-wrap--error')
+            // } else {
+            //     this.$refs.emailWrap.classList.remove('say-hi-form__input-wrap--error')
+            // }
+            // if (!this.message) {
+            //     this.$refs.messageWrap.classList.add('say-hi-form__textarea-wrap--error')
+            // } else {
+            //     this.$refs.messageWrap.classList.remove('say-hi-form__textarea-wrap--error')
+            // }
+            // if (this.firstName && this.email && this.message) {
                 this.openModal('thank')
-            }
+            // }
         },
+        changeVacancy(e) {
+            this.vacancy = e.target.textContent
+            this.vacancySelect = false
+        }
     }
 }
 </script>
@@ -140,7 +168,95 @@ export default {
 <style lang="scss" scoped>
 .say-hi-form {
     margin: 200px auto 200px auto;
-    width: 532px;
+    width: 978px;
+    font-family: 'Roman', Arial;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 35px;
+    line-height: calc(110% + 15px);
+    text-transform: uppercase;
+    font-feature-settings: 'pnum' on, 'lnum' on;
+    color: rgba(255,255,255,.2);
+    &__span {
+        &--accent {
+            color: #fff;
+        }
+        &--wrap {
+            position: relative;
+            margin: 0 16px;
+            width: 440px;
+            display: inline-block;
+        }
+    }
+    &__select {
+        display: inline-flex;
+        flex-direction: row;
+        align-items: center;
+        margin: 0 0 0 16px;
+        width: 440px;
+        cursor: pointer;
+        position: relative;
+        border-bottom: 1px solid hsla(0,0%,100%,.5);
+        height: 40px;
+            font-family: 'Lightitalic', Arial;
+            font-style: italic;
+            font-weight: 300;
+            font-size: 35px;
+            line-height: 110%;
+            text-transform: uppercase;
+            font-feature-settings: 'pnum' on, 'lnum' on;
+        &::after {
+            content: "";
+            position: absolute;
+            background-image: url('~/static/svg/chevron.svg');
+            width: 24px;
+            height: 24px;
+            right: 0;
+            bottom: 10px;
+            transition: .5s;
+        }
+        &.active {
+            color: #FFFFFF;
+        }
+    }
+    &__dropdown {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        overflow: hidden;
+        width: 100%;
+        background: #202020;
+        z-index: 1;
+        height: auto;
+        top: 39px;
+        &-item {
+            width: 100%;
+            height: fit-content;
+            transition: .5s;
+            opacity: 1;
+            margin-bottom: unset;
+            padding: 16px 24px;
+            color: #fff;
+            margin: 0;
+            text-transform: none;
+            font-family: 'Light',Arial;
+            font-style: normal;
+            font-weight: 300;
+            font-size: 16px;
+            cursor: pointer;
+            line-height: 140%;
+            &:hover {
+                transition: .5s;
+                opacity: .5;
+            }
+            &:first-child {
+                padding-top: 24px;
+            }
+            &:last-child {
+                padding-bottom: 24px;
+            }
+        }
+    }
     &__title {
         font-family: 'Roman', Arial;
         font-style: normal;
@@ -175,17 +291,30 @@ export default {
         }
     }
     &__input {
-        padding: 11px 14px;
-        background: 0 0;
-        outline: none;
-        border: none;
-        border-bottom: 1px solid hsla(0,0%,100%,.1);
-        border-radius: 0;
+        // padding: 11px 14px;
+        // background: 0 0;
+        // outline: none;
+        // border: none;
+        // border-bottom: 1px solid hsla(0,0%,100%,.1);
+        // border-radius: 0;
+        // width: 100%;
+        // transition: .3s;
+        // color: #fff;
+        // line-height: 140%;
+        // font-size: 16px;
+        height: 40px;
         width: 100%;
-        transition: .3s;
+        background: none;
+        border: none;
+        border-bottom: 1px solid hsla(0,0%,100%,.5);
+        outline: none;
         color: #fff;
-        line-height: 140%;
-        font-size: 16px;
+        font-size: 35px;
+        line-height: 110%;
+        text-transform: uppercase;
+        font-family: 'LightItalic',Arial;
+        font-weight: 300;
+        transition: .5s;
     }
     &__text {
         font-family: 'Light';
