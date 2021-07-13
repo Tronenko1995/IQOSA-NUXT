@@ -1,9 +1,9 @@
 <template>
     <div class="say-hi">
         <div class="say-hi__container">
-            <nuxt-link to="work-with-you" class="say-hi__text">work with us</nuxt-link>
-            <p class="say-hi__text say-hi__text--active">Say hi</p>
-            <nuxt-link to="brief" class="say-hi__text">fill the breif</nuxt-link>
+            <nuxt-link to="join" class="say-hi__text">join the team</nuxt-link>
+            <p class="say-hi__text say-hi__text--active">fill the breif</p>
+            <nuxt-link to="sayhi" class="say-hi__text">Say hi</nuxt-link>
         </div>
     </div>
 </template>
@@ -17,7 +17,7 @@
         // overflow-x: scroll;
         display: flex;
         overflow: hidden;
-        margin-left: -646px;
+        margin-left: -922px;
     }
     &__text {
         font-family: 'ThinItalic', Arial;
@@ -44,7 +44,7 @@
             font-size: 148px;
         }
         &__container {
-            margin-left: -746px;
+            margin-left: -1012px;
         }
     }
 }
@@ -55,7 +55,7 @@
             margin-right: 56px;
         }
         &__container {
-            margin-left: -484px;
+            margin-left: -714px;
         }
     }
 }
@@ -66,7 +66,7 @@
             margin-right: 48px;
         }
         &__container {
-            margin-left: -547px;
+            margin-left: -755px;
         }
     }
 }
@@ -77,7 +77,7 @@
             margin-right: 40px;
         }
         &__container {
-            margin-left: -467px;
+            margin-left: -645px;
         }
     }
 }
@@ -87,6 +87,9 @@
             font-size: 56px;
             display: none;
             margin-right: 0px;
+            white-space: unset;
+            text-align: center;
+            width: 320px;
             &--active {
                 display: block;
             }

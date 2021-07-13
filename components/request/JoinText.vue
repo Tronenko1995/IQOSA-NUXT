@@ -3,7 +3,7 @@
         <div class="say-hi__container">
             <nuxt-link to="sayhi" class="say-hi__text">Say hi</nuxt-link>
             <p class="say-hi__text say-hi__text--active">join the team</p>
-            <p class="say-hi__text">fill the breif</p>
+            <nuxt-link to="brief" class="say-hi__text">fill the breif</nuxt-link>
         </div>
     </div>
 </template>
