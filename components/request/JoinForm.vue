@@ -5,19 +5,21 @@
         </span>
         Lorem ipsum Lorem ipsum aliq <span class="say-hi-form__span say-hi-form__span--accent">vacancy</span>
         <div class="say-hi-form__select" :class="{'active': vacancy !== 'VACANCY LIST'}">
-            <span @click.stop="vacancySelect == false ? vacancySelect = true : ''">{{ vacancy }}</span>
+            <div class="say-hi-form__select-head" @click.stop="vacancySelect = !vacancySelect">{{ vacancy }}</div>
             <ul v-if="vacancySelect" class="say-hi-form__dropdown">
                 <li class="say-hi-form__dropdown-item" v-for="(item, index) in vacancyArray" :key="index" @click="changeVacancy($event)">{{ item }}</li>
             </ul>
         </div>
         dolor sit amet, consectetur adipiscing elit. sed
-        aliquip ex email <span class="say-hi-form__span say-hi-form__span--accent">address</span> <span class="say-hi-form__span say-hi-form__span--wrap">
+        aliquip ex <span class="say-hi-form__span say-hi-form__span--accent">email address</span> <span class="say-hi-form__span say-hi-form__span--wrap">
             <input type="text" class="say-hi-form__input">
         </span>
         dolor sit amet, consectetur adipiscing elit. sed
-        <span class="say-hi-form__span say-hi-form__span--accent">resume/cv</span> <span class="say-hi-form__span say-hi-form__span--wrap">
-            <input type="text" class="say-hi-form__input">
+        <span class="say-hi-form__span say-hi-form__span--accent">resume/cv</span> 
+        <span class="say-hi-form__span say-hi-form__span--wrap">
+            <input type="text" class="say-hi-form__input" @focus="focusInput($event)" v-model="inputNameFile">
         </span>
+        <input class="say-hi-form__file" :disabled="cv.preloader" type="file" name="file" ref="fileInput" @change="uploadCv">
         . Nemo enim
 
         voluptatem quia <span class="say-hi-form__span say-hi-form__span--accent">linkedin</span> <span class="say-hi-form__span say-hi-form__span--wrap">
@@ -84,7 +86,12 @@ export default {
             message: '',
             vacancy: 'VACANCY LIST',
             vacancySelect: false,
-            vacancyArray: ['Architecture','3D Max Visualisator','Engineer']
+            vacancyArray: ['Architecture','3D Max Visualisator','Engineer'],
+            cv: {
+                file: '',
+                preloader: false,
+            },
+            inputNameFile: ''
         }
     },
     methods: {
@@ -160,6 +167,21 @@ export default {
         changeVacancy(e) {
             this.vacancy = e.target.textContent
             this.vacancySelect = false
+        },
+        focusInput(e) {
+            // console.log('фокус')
+            e.target.blur()
+            // console.log('снял фокус')
+            this.$refs.fileInput.click()
+            // console.log('кликнул')
+        },
+        uploadCv() {
+            this.cv.file = this.$refs.fileInput.files[0]
+            if (this.cv.file) {
+                this.cv.preloader = true
+                this.inputNameFile = this.cv.file.name
+                this.cv.preloader = false
+            }
         }
     }
 }
@@ -198,13 +220,16 @@ export default {
         position: relative;
         border-bottom: 1px solid hsla(0,0%,100%,.5);
         height: 40px;
-            font-family: 'Lightitalic', Arial;
-            font-style: italic;
-            font-weight: 300;
-            font-size: 35px;
-            line-height: 110%;
-            text-transform: uppercase;
-            font-feature-settings: 'pnum' on, 'lnum' on;
+        font-family: 'Lightitalic', Arial;
+        font-style: italic;
+        font-weight: 300;
+        font-size: 35px;
+        line-height: 110%;
+        text-transform: uppercase;
+        font-feature-settings: 'pnum' on, 'lnum' on;
+        &-head {
+            width: 100%;
+        }
         &::after {
             content: "";
             position: absolute;
@@ -399,13 +424,28 @@ export default {
             font-style: italic;
         }
     }
+    &__file {
+        display: none;
+    }
 }
 @media (max-width: 1280px) {
     .say-hi-form {
         margin: 180px auto 180px auto;
-        width: 482px;
-        &__title {
+        width: 756px;
+        font-size: 30px;
+        &__span {
+            &--wrap {
+                width: 320px;
+            }
+        }
+        &__select {
+            margin-left: 0px;
+            width: 368px;
             font-size: 30px;
+        }
+        &__input {
+            font-size: 30px;
+            height: 30px;
         }
     }
 }
@@ -416,16 +456,22 @@ export default {
 }
 @media (max-width: 768px) {
     .say-hi-form {
-        width: 440px;
-        &__title {
-            font-size: 24px;
-            margin-bottom: 64px;
+        margin: 132px auto 132px auto;
+        width: 672px;
+        font-size: 24px;
+        &__span {
+            &--wrap {
+                width: 260px;
+            }
         }
-        // &__input {
-
-        // }
-        &__input-wrap {
-            margin-bottom: 56px;
+        &__select {
+            width: 308px;
+            font-size: 24px;
+            height: 30px;
+        }
+        &__input {
+            font-size: 24px;
+            height: 30px;
         }
     }
 }
@@ -433,9 +479,21 @@ export default {
     .say-hi-form {
         margin: 88px auto 88px auto;
         width: 343px;
-        &__title {
+        font-size: 22px;
+        &__span {
+            &--wrap {
+                width: 343px;
+                margin: 0;
+            }
+        }
+        &__select {
+            width: 100%;
             font-size: 22px;
-            margin-bottom: 64px;
+            height: 30px;
+        }
+        &__input {
+            font-size: 22px;
+            height: 30px;
         }
         &__button {
             margin: 64px auto 0 auto;
