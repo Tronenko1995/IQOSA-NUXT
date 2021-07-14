@@ -4,7 +4,7 @@
             <input type="text" class="say-hi-form__input">
         </span>
         Lorem ipsum Lorem ipsum aliq <span class="say-hi-form__span say-hi-form__span--accent">vacancy</span>
-        <div class="say-hi-form__select" :class="{'active': vacancy !== 'VACANCY LIST'}">
+        <div class="say-hi-form__select" :class="[{'active': vacancy !== 'VACANCY LIST'},{'open': vacancySelect}]">
             <div class="say-hi-form__select-head" @click.stop="vacancySelect = !vacancySelect">{{ vacancy }}</div>
             <ul v-if="vacancySelect" class="say-hi-form__dropdown">
                 <li class="say-hi-form__dropdown-item" v-for="(item, index) in vacancyArray" :key="index" @click="changeVacancy($event)">{{ item }}</li>
@@ -238,10 +238,15 @@ export default {
             height: 24px;
             right: 0;
             bottom: 10px;
-            transition: .5s;
+            transition: .5s ease;
         }
         &.active {
             color: #FFFFFF;
+        }
+        &.open {
+            &::after {
+                transform: rotate(180deg);
+            }
         }
     }
     &__dropdown {
@@ -253,7 +258,7 @@ export default {
         background: #202020;
         z-index: 1;
         height: auto;
-        top: 39px;
+        top: 40px;
         &-item {
             width: 100%;
             height: fit-content;

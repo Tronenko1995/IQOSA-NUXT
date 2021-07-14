@@ -73,6 +73,51 @@
                     </div>
                 </div>
             </li>
+            <li class="say-hi-form__item">
+                <p class="say-hi-form__title">Lorem ipsum dolor sit amet?</p>
+                <div class="say-hi-form__radio-list">
+                    <label class="say-hi-form__radio-label radio__label radio__label--checkbox" @click.self="clickCheckLabel($event)" data-name="checkbox1">
+                        <input type="checkbox" class="radio__input radio__input--checkbox" value="1" v-model="checkbox1">
+                        <span class="radio__span radio__span--checkbox"></span> Dolores eos qui
+                    </label>
+                    <label class="say-hi-form__radio-label radio__label radio__label--checkbox" @click.self="clickCheckLabel($event)" data-name="checkbox1">
+                        <input type="checkbox" class="radio__input radio__input--checkbox" value="2" v-model="checkbox1">
+                        <span class="radio__span radio__span--checkbox"></span> Quis nostrum exercitationem ullam
+                    </label>
+                    <label class="say-hi-form__radio-label radio__label radio__label--checkbox" @click.self="clickCheckLabel($event)" data-name="checkbox1">
+                        <input type="checkbox" class="radio__input radio__input--checkbox" value="3" v-model="checkbox1">
+                        <span class="radio__span radio__span--checkbox"></span> Voluptas nulla pariatur
+                    </label>
+                    <label class="say-hi-form__radio-label radio__label radio__label--checkbox" @click.self="clickCheckLabel($event)" data-name="checkbox1">
+                        <input type="checkbox" class="radio__input radio__input--checkbox" value="4" v-model="checkbox1">
+                        <span class="radio__span radio__span--checkbox"></span> Aliquam quaerat voluptatem
+                    </label>
+                    <label class="say-hi-form__radio-label radio__label radio__label--checkbox" @click.self="clickCheckLabel($event)" data-name="checkbox1">
+                        <input type="checkbox" class="radio__input radio__input--checkbox" value="5" v-model="checkbox1">
+                        <span class="radio__span radio__span--checkbox"></span> Magni dolores
+                    </label>
+                    <label class="say-hi-form__radio-label radio__label radio__label--checkbox" @click.self="clickCheckLabel($event)" data-name="checkbox1">
+                        <input type="checkbox" class="radio__input radio__input--checkbox" value="6" v-model="checkbox1">
+                        <span class="radio__span radio__span--checkbox"></span> Explicabo
+                    </label>
+                    <div class="say-hi-form__input-wrap say-hi-form__input-wrap--after-radio">
+                        <p class="say-hi-form__text say-hi-form__text--placeholder">Message</p>
+                        <input class="say-hi-form__input" type="text" @focus="focusInput($event)" @blur="BlurInput($event)">
+                        <!-- <p class="say-hi-form__text say-hi-form__text--error">Incorrect name</p> -->
+                    </div>
+                </div>
+            </li>
+            <li class="say-hi-form__item">
+                <p class="say-hi-form__title">Lorem ipsum dolor sit amet?</p>
+                <div class="say-hi-form__radio-list">
+                    <div class="say-hi-form__select" :class="[{'active': vacancy !== 'VACANCY LIST'},{'open': vacancySelect}]">
+                        <div class="say-hi-form__select-head" @click.stop="vacancySelect = !vacancySelect">{{ vacancy }}</div>
+                        <ul v-if="vacancySelect" class="say-hi-form__dropdown">
+                            <li class="say-hi-form__dropdown-item" v-for="(item, index) in vacancyArray" :key="index" @click="changeVacancy($event)">{{ item }}</li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
         </ul>
         <!-- <p class="say-hi-form__title">Sed ut perspiciatis unde omnis iste natus error sit voluptatem</p>
         <div class="say-hi-form__input-wrap" ref="firstNameWrap">
@@ -131,6 +176,10 @@ export default {
         return {
             radio1: '',
             radio2: '',
+            checkbox1: [],
+            vacancy: 'Duis aute irure',
+            vacancySelect: false,
+            vacancyArray: ['Duis aute irure 1','Duis aute irure 2','Duis aute irure 3'],
             // firstName: '',
             // lastName: '',
             // email: '',
@@ -210,7 +259,7 @@ export default {
             // }
         },
         clickRadioLabel(e) {
-            console.log('data', e.target.dataset.name)
+            // console.log('data', e.target.dataset.name)
             if (!e.target.classList.contains('active')) {
             const list = document.querySelectorAll(`label[data-name='${e.target.dataset.name}']`)
             list.forEach(item => {
@@ -218,7 +267,23 @@ export default {
             })
             e.target.classList.add('active')
             }
-        }
+        },
+        clickCheckLabel(e) {
+            // console.log('data', e.target.dataset.name)
+            if (!e.target.classList.contains('active')) {
+            // const list = document.querySelectorAll(`label[data-name='${e.target.dataset.name}']`)
+            // list.forEach(item => {
+                // item.classList.remove('active')
+            // })
+            e.target.classList.add('active')
+            } else {
+                e.target.classList.remove('active')
+            }
+        },
+        changeVacancy(e) {
+            this.vacancy = e.target.textContent
+            this.vacancySelect = false
+        },
     }
 }
 </script>
@@ -265,9 +330,9 @@ export default {
     &__input-wrap {
         position: relative;
         height: 50px;
-        margin-bottom: 64px;
+        margin-bottom: 44px;
         &--after-radio {
-            margin-top: 64px;
+            margin-top: 44px;
         }
         &.focus {
             .say-hi-form__text--placeholder {
@@ -301,6 +366,85 @@ export default {
         color: #fff;
         line-height: 140%;
         font-size: 16px;
+    }
+    &__select {
+        display: inline-flex;
+        flex-direction: row;
+        align-items: center;
+        margin: 0;
+        width: 100%;
+        cursor: pointer;
+        position: relative;
+        border-bottom: 1px solid hsla(0,0%,100%,.5);
+        height: 40px;
+        font-family: 'Light', Arial;
+        font-style: normal;
+        font-weight: 300;
+        font-size: 16px;
+        line-height: 140%;
+        text-transform: uppercase;
+        font-feature-settings: 'pnum' on, 'lnum' on;
+        &-head {
+            width: 100%;
+            height: 100%;
+            padding: 9px 0 9px 16px;
+        }
+        &::after {
+            content: "";
+            position: absolute;
+            background-image: url('~/static/svg/chevron.svg');
+            width: 24px;
+            height: 24px;
+            right: 0;
+            bottom: 10px;
+            transition: .5s ease;
+        }
+        &.active {
+            color: #FFFFFF;
+        }
+        &.open {
+            &::after {
+                transform: rotate(180deg);
+            }
+        }
+    }
+    &__dropdown {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        overflow: hidden;
+        width: 100%;
+        background: #202020;
+        z-index: 1;
+        height: auto;
+        top: 40px;
+        &-item {
+            width: 100%;
+            height: fit-content;
+            transition: .5s;
+            opacity: 1;
+            margin-bottom: unset;
+            padding: 16px 24px;
+            color: #fff;
+            margin: 0;
+            text-transform: none;
+            font-family: 'Light',Arial;
+            font-style: normal;
+            font-weight: 300;
+            font-size: 16px;
+            cursor: pointer;
+            line-height: 140%;
+            &:hover {
+                transition: .5s;
+                opacity: .5;
+            }
+            &:first-child {
+                padding-top: 24px;
+            }
+            &:last-child {
+                padding-bottom: 24px;
+            }
+        }
     }
     &__text {
         font-family: 'Light';
