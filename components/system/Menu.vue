@@ -36,15 +36,15 @@
         <div class="language">
             <ul class="language__list">
                 <li class="language__item language__item--selected">
-                   <nuxt-link to="/" class="language__link">English,</nuxt-link>
+                   <nuxt-link :to="switchLocalePath('en')" class="language__link">English,</nuxt-link>
                    <span class="language__line"></span>
                 </li>
                 <li class="language__item">
-                   <nuxt-link to="/" class="language__link">Русский,</nuxt-link>
+                   <nuxt-link :to="switchLocalePath('ru')" class="language__link">Русский,</nuxt-link>
                    <span class="language__line"></span>
                 </li>
                 <li class="language__item">
-                   <nuxt-link to="/" class="language__link">Українська</nuxt-link>
+                   <nuxt-link :to="switchLocalePath('ua')" class="language__link">Українська</nuxt-link>
                    <span class="language__line"></span>
                 </li>
             </ul>
@@ -53,8 +53,8 @@
 </template>
 
 <script>
-import gsap from "gsap"
 import { mapMutations } from 'vuex'
+import gsap from "gsap"
 import Icosahedron from '@/components/Icosahedron.vue'
 export default {
     components: {
@@ -101,9 +101,9 @@ export default {
             this.setAnimate('up')
             this.setPlug(true)
             setTimeout(() => {
-              this.setAnimate('dissolve')
-              this.$router.push({ name: page })
-              this.menuStatus ? this.setMenuStatus(false) : ''
+                this.setAnimate('dissolve')
+                this.$router.push(this.localePath(page))
+                this.menuStatus ? this.setMenuStatus(false) : ''
             }, 1000);
           }
         },

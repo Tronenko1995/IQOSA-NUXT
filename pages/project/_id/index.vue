@@ -92,12 +92,12 @@
                     <div class="project__info-middle project__info-middle--share">
                         <span>LIKE THIS CASE?</span>
                         <div class="animate-line animate-line--share">
-						    <nuxt-link to="/say-hi" class="animate-line__link">LET'S TALK  ABOUT YOUR PROJECT</nuxt-link>
+						    <nuxt-link :to="localePath('/say-hi')" class="animate-line__link">LET'S TALK  ABOUT YOUR PROJECT</nuxt-link>
 						    <span class="animate-line__line"></span>
 					    </div>
                     </div>
                 </div>
-                <nuxt-link to="/project/iq-98-kd"  class="project__next">
+                <nuxt-link :to="localePath('/project/iq-98-kd')"  class="project__next">
                     <div class="project__title project__title--next">
                         <ul class="animate-text animate-text--next">
                             <li class="animate-text__item">

@@ -70,14 +70,14 @@
                         </div>
                     </div>
                     <div ref="parallaxTitle" class="team__title team-title">
-                        <p class="team__title-text team-title__text" style="transform: translate(0px, 0px);">We form the quality of life</p>
-                        <p class="team__title-text team-title__text" style="transform: translate(0px, 0px);">By the quality of implementation</p>
+                        <p class="team__title-text team-title__text" style="transform: translate(0px, 0px);">{{ data.team_text.bold_text }}</p>
+                        <p class="team__title-text team-title__text" style="transform: translate(0px, 0px);">{{ data.team_text.thin_text }}</p>
                         <div class="team__link team-link arrow-link" @mouseover="findElement($event)" @mouseleave="animateTextHide($event)" @click="openVideo">
                             <span class="arrow-link__change">
-                                <span class="arrow-link__span arrow-link__span--first">Watch</span>
-                                <span class="arrow-link__span arrow-link__span--last">Watch</span>
+                                <span class="arrow-link__span arrow-link__span--first">{{ data.team_text.team_link_text_animated }}</span>
+                                <span class="arrow-link__span arrow-link__span--last">{{ data.team_text.team_link_text_animated }}</span>
                             </span>
-                            <span class="arrow-link__text">The film</span>
+                            <span class="arrow-link__text">{{ data.team_text.team_link_text }}</span>
                             <span class="arrow-link__circle">
                                 <svg class="arrow-link__svg" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.40039 12.4004H17.6004" stroke-linecap="square"/><path d="M13.9004 8L18.4004 12.4L13.9004 16.8" stroke-linecap="square"/></svg>
                             </span>
@@ -161,6 +161,12 @@ import gsap from "gsap"
 import Parallax from 'parallax-js'
 import { mapMutations } from 'vuex'
 export default {
+	props: {
+		data: {
+			type: Object,
+			required: true
+		}
+	},
     data() {
         return {
             parallax: null,

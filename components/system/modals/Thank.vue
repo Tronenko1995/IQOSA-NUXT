@@ -115,9 +115,9 @@ export default {
             this.setAnimate('up')
             this.setPlug(true)
             setTimeout(() => {
-              this.setAnimate('dissolve')
-              this.$router.push({ name: page })
-              this.menuStatus ? this.setMenuStatus(false) : ''
+                this.setAnimate('dissolve')
+                this.$router.push(this.localePath(page))
+                this.menuStatus ? this.setMenuStatus(false) : ''
             }, 1000);
           }
         },

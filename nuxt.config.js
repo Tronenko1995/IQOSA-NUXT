@@ -24,8 +24,9 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    '~/plugins/swiper',
-    '~/plugins/app-components',
+    { src: '~/plugins/i18n.js' },
+    { src: '~/plugins/app-components' },
+    { src: '~/plugins/swiper.js' },
     { src: '~/plugins/aboutSlider', mode: 'client' },
   ],
 
@@ -47,7 +48,38 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    '@nuxtjs/axios',
+    'nuxt-i18n',
   ],
+
+  i18n: {
+    locales: ['en', 'ru', 'ua'],
+    defaultLocale: 'en',
+    vueI18n: {
+      fallbackLocale: 'en',
+      messages: {
+        en: {
+          welcome: 'Welcome'
+        },
+        ru: {
+          welcome: 'Привет'
+        },
+        ua: {
+          welcome: 'Добрий день'
+        }
+      }
+    }
+  },
+
+  // axios: {
+  //   baseURL: 'https://backiqosa.staj.fun/api', // Used as fallback if no runtime config is provided
+  // },
+
+  privateRuntimeConfig: {
+    axios: {
+      baseURL: process.env.API_BASE_URL
+    }
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
@@ -65,6 +97,8 @@ export default {
       })
     }
   },
+
+  loading: false,
 
   server: {
     port: 3008

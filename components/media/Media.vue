@@ -113,7 +113,7 @@ export default {
             this.setPlug(true)
             setTimeout(() => {
               this.setAnimate('dissolve')
-              this.$router.push({ name: page })
+              this.$router.push(this.localePath(page))
             }, 1000);
           }
         },

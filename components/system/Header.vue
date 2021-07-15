@@ -37,21 +37,21 @@
             <div class="lang">
                 <ul class="lang__list">
                     <li class="lang__item" @mouseover="showCursive($event)" @mouseleave="hideCursive($event)">
-                        <nuxt-link to="/ua" class="lang__link">UA</nuxt-link>
-                        <nuxt-link to="/ua" class="lang__link lang__link--cursive">UA</nuxt-link>
+                        <nuxt-link :to="switchLocalePath('ua')" class="lang__link">UA</nuxt-link>
+                        <nuxt-link :to="switchLocalePath('ua')" class="lang__link lang__link--cursive">UA</nuxt-link>
                     </li>
                     <li class="lang__item" @mouseover="showCursive($event)" @mouseleave="hideCursive($event)">
-                        <nuxt-link to="/ru" class="lang__link">RU</nuxt-link>
-                        <nuxt-link to="/ru" class="lang__link lang__link--cursive">RU</nuxt-link>
+                        <nuxt-link :to="switchLocalePath('ru')" class="lang__link">RU</nuxt-link>
+                        <nuxt-link :to="switchLocalePath('ru')" class="lang__link lang__link--cursive">RU</nuxt-link>
                     </li>
                     <li class="lang__item lang__item--selected">
-                        <nuxt-link to="/" class="lang__link">EN</nuxt-link>
-                        <nuxt-link to="/" class="lang__link lang__link--cursive">EN</nuxt-link>
+                        <nuxt-link :to="switchLocalePath('en')" class="lang__link">EN</nuxt-link>
+                        <nuxt-link :to="switchLocalePath('en')" class="lang__link lang__link--cursive">EN</nuxt-link>
                     </li>
                 </ul>
             </div>
             <div class="request">
-                <nuxt-link to="/sayhi" class="request__link">Send request</nuxt-link>
+                <nuxt-link :to="localePath('/sayhi')" class="request__link">Send request</nuxt-link>
             </div>
         </div>
     </header>
@@ -80,9 +80,9 @@ export default {
             this.setAnimate('up')
             this.setPlug(true)
             setTimeout(() => {
-              this.setAnimate('dissolve')
-              this.$router.push({ name: page })
-              this.menuStatus ? this.setMenuStatus(false) : ''
+                this.setAnimate('dissolve')
+                this.$router.push(this.localePath(page))
+                this.menuStatus ? this.setMenuStatus(false) : ''
             }, 1000);
           }
         },

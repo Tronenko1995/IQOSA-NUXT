@@ -262,7 +262,7 @@ export default {
                 this.setPlug(true)
                 setTimeout(() => {
                 this.setAnimate('dissolve')
-                this.$router.push({ path: link })
+                this.$router.push(this.localePath(link))
                 }, 1000);
             }
         },

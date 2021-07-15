@@ -19,7 +19,7 @@
                     <div class="job__visible" v-html="item.visible"></div>
                     <div class="job__hidden">
                     <div v-html="item.hidden"></div>
-                        <nuxt-link to="/form" class="job__link job-link arrow-link" @mouseover.native="findElement($event)" @mouseleave.native="animateTextHide($event)">
+                        <nuxt-link :to="localePath('/form')" class="job__link job-link arrow-link" @mouseover.native="findElement($event)" @mouseleave.native="animateTextHide($event)">
                             <span class="arrow-link__change">
                                 <span class="arrow-link__span arrow-link__span--first">fill</span>
                                 <span class="arrow-link__span arrow-link__span--last">fill</span>
@@ -44,7 +44,7 @@
                 @mouseover="findElement($event)"
                 @mouseleave="animateTextHide($event)"
                 >
-                <nuxt-link to="/sayhi" class="make-request__link">
+                <nuxt-link :to="localePath('/sayhi')" class="make-request__link">
                     <span class="make-request__text">get request</span>
                     <span class="make-request__change">
                     <span class="make-request__span make-request__span--first"

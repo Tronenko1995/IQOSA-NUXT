@@ -13,7 +13,7 @@
           <div class="projects-interior__block">
             <img  class="projects-interior__img" :src="require('~/assets/img/projects/interior/1.jpg')" alt="">
           </div>
-          <nuxt-link to="/project/iq-08-sl" class="projects-interior__link projects-interior-link">
+          <nuxt-link :to="localePath('/project/iq-08-sl')" class="projects-interior__link projects-interior-link">
           <!-- <a class="projects-interior__link projects-interior-link" href="#"> -->
             <span class="projects-interior-link__head">
               <span class="projects-interior-link__address projects-interior-link__address--italic">Odessa,</span>
@@ -44,7 +44,7 @@
             <img  class="projects-interior__img" :src="require('~/assets/img/projects/interior/2.jpg')" alt="">
           </div>
           <!-- <a class="projects-interior__link projects-interior-link" href="#"> -->
-          <nuxt-link to="/project/iq-87-or" class="projects-interior__link projects-interior-link">
+          <nuxt-link :to="localePath('/project/iq-87-or')" class="projects-interior__link projects-interior-link">
             <span class="projects-interior-link__head">
               <span class="projects-interior-link__address projects-interior-link__address--italic">Kyiv,</span>
               <span class="projects-interior-link__address">Ukraine</span>
@@ -73,7 +73,7 @@
           <div class="projects-interior__block">
             <img  class="projects-interior__img" :src="require('~/assets/img/projects/interior/3.jpg')" alt="">
           </div>
-          <nuxt-link to="/project/iq-86-sl" class="projects-interior__link projects-interior-link">
+          <nuxt-link :to="localePath('/project/iq-86-sl')" class="projects-interior__link projects-interior-link">
           <!-- <a class="projects-interior__link projects-interior-link" href="#"> -->
             <span class="projects-interior-link__head">
               <span class="projects-interior-link__address projects-interior-link__address--italic">Odessa,</span>

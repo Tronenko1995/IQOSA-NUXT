@@ -11,7 +11,7 @@
                         @mouseover="findElement($event)"
                         @mouseleave="animateTextHide($event)"
                         >
-                        <nuxt-link to="/" class="make-request__link">
+                        <nuxt-link :to="localePath('/')" class="make-request__link">
                             <span class="make-request__text">back to</span>
                             <span class="make-request__change">
                             <span class="make-request__span make-request__span--first"
@@ -33,6 +33,7 @@
 import IcosahedronError from '@/components/IcosahedronError.vue'
 import { mapMutations } from 'vuex'
 export default {
+    name: 'Error',
     layout: 'error',
     components: {
         IcosahedronError,

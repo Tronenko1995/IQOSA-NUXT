@@ -1,9 +1,9 @@
 <template>
     <div class="say-hi">
         <div class="say-hi__container">
-            <nuxt-link to="work-with-you" class="say-hi__text">work with us</nuxt-link>
+            <nuxt-link :to="localePath('/work-with-you')" class="say-hi__text">work with us</nuxt-link>
             <p class="say-hi__text say-hi__text--active">Say hi</p>
-            <nuxt-link to="brief" class="say-hi__text">fill the breif</nuxt-link>
+            <nuxt-link :to="localePath('/brief')" class="say-hi__text">fill the breif</nuxt-link>
         </div>
     </div>
 </template>

@@ -38,10 +38,10 @@
     <SwitchProjects class="switch-project-list" :view="view" />
 
 		<div v-swiper:projectsSlider="projectsSetting" ref="projects" class="projects-slider" data-cursor="eye">
-			<nuxt-link ref="linkItem" class="projects-slider__link projects-slider__link--head" :to="link.url"></nuxt-link>
+			<nuxt-link ref="linkItem" class="projects-slider__link projects-slider__link--head" :to="localePath(link.url)"></nuxt-link>
 			<div class="swiper-wrapper" data-cursor="drag">
 				<div class="swiper-slide projects-slider__item" data-url="/project/iq-98-kd/">
-          <nuxt-link class="projects-slider__link" to="/project/iq-98-kd/"></nuxt-link>
+          <nuxt-link class="projects-slider__link" :to="localePath('/project/iq-98-kd/')"></nuxt-link>
             <p class="projects-slider__title">
               <span>IQ</span>-98-KD
             </p>
@@ -50,7 +50,7 @@
             </p>
 				</div>
 				<div class="swiper-slide projects-slider__item" data-url="/project/iq-87-or/">
-          <nuxt-link class="projects-slider__link" to="/project/iq-87-or/"></nuxt-link>
+          <nuxt-link class="projects-slider__link" :to="localePath('/project/iq-87-or/')"></nuxt-link>
             <p class="projects-slider__title">
               <span>IQ</span>-87-OR
             </p>
@@ -59,7 +59,7 @@
             </p>
 				</div>
 				<div class="swiper-slide projects-slider__item" data-url="/project/iq-86-sl/">
-          <nuxt-link class="projects-slider__link" to="/project/iq-86-sl/"></nuxt-link>
+          <nuxt-link class="projects-slider__link" :to="localePath('/project/iq-86-sl/')"></nuxt-link>
             <p class="projects-slider__title">
               <span>IQ</span>-86-SL
             </p>
@@ -68,7 +68,7 @@
             </p>
 				</div>
 				<div class="swiper-slide projects-slider__item" data-url="/project/iq-94-or/">
-          <nuxt-link class="projects-slider__link" to="/project/iq-94-or/"></nuxt-link>
+          <nuxt-link class="projects-slider__link" :to="localePath('/project/iq-94-or/')"></nuxt-link>
             <p class="projects-slider__title">
               <span>IQ</span>-94-OR
             </p>

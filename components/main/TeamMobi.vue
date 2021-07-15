@@ -1,42 +1,31 @@
 <template>
     <section class="team-mobi">
         <div class="team__title team-mobi__title">
-            <p class="team__title-text team-mobi__title-text">We form the quality of life</p>
-            <p class="team__title-text team-mobi__title-text">By the quality of implementation</p>
-            <nuxt-link to="/" class="team-mobi__link team__link arrow-link" @mouseover.native="findElement($event)" @mouseleave.native="animateTextHide($event)">
+            <p class="team__title-text team-mobi__title-text">{{ data.team_text.bold_text }}</p>
+            <p class="team__title-text team-mobi__title-text">{{ data.team_text.thin_text }}</p>
+            <div class="team-mobi__link team__link arrow-link" @mouseover="findElement($event)" @mouseleave="animateTextHide($event)" @click="openVideo">
                 <span class="arrow-link__change">
-                    <span class="arrow-link__span arrow-link__span--first">Discover</span>
-                    <span class="arrow-link__span arrow-link__span--last">Discover</span>
+                    <span class="arrow-link__span arrow-link__span--first">{{ data.team_text.team_link_text_animated }}</span>
+                    <span class="arrow-link__span arrow-link__span--last">{{ data.team_text.team_link_text_animated }}</span>
                 </span>
-                <span class="arrow-link__text">More</span>
+                <span class="arrow-link__text">{{ data.team_text.team_link_text }}</span>
                 <span class="arrow-link__circle">
                     <svg class="arrow-link__svg" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.40039 12.4004H17.6004" stroke-linecap="square"/><path d="M13.9004 8L18.4004 12.4L13.9004 16.8" stroke-linecap="square"/></svg>
                 </span>
-            </nuxt-link>
+            </div>
         </div>
         <swiper ref="teamSlider" :options="teamSliderSetting" class="team-slider">
-            <swiper-slide class="team-slider__item">
-                <img class="team-slider__img" @click="openModal($event)" src="https://iqosa.com/wp-content/uploads/2021/05/IMG_4211-2-copy-1.jpg" data-src="https://iqosa.com/wp-content/uploads/2021/05/IMG_4211-2-copy.jpg" alt="">
-                <div class="team-slider__text" data-quote="IQOSA is ambition, striving for individuality in design. We always wanted to create something unique and that no one has pointed us what to do.">
-                    <p class="team-slider__surname">Fil</p>
-                    <p class="team-slider__name">Vladimir</p>
-                    <p class="team-slider__position">Designer-Visualizer</p>
-                </div>
-            </swiper-slide>
-            <swiper-slide class="team-slider__item">
-                <img class="team-slider__img" src="https://iqosa.com/wp-content/uploads/2021/05/IMG_4211-2-copy-1.jpg" alt="">
+            <swiper-slide class="team-slider__item" v-for="(item, i) in data.team_members" :key="i">
+                <img class="team-slider__img" @click="openModal({
+                    name: `${item.name} ${item.surname}`,
+                    position: item.position,
+                    quote: item.about,
+                    photo: item.photo,
+                })" :src="item.parallax_photo" alt="">
                 <div class="team-slider__text">
-                    <p class="team-slider__surname">Fil</p>
-                    <p class="team-slider__name">Vladimir</p>
-                    <p class="team-slider__position">Designer-Visualizer</p>
-                </div>
-            </swiper-slide>
-            <swiper-slide class="team-slider__item">
-                <img class="team-slider__img" src="https://iqosa.com/wp-content/uploads/2021/05/IMG_4211-2-copy-1.jpg" alt="">
-                <div class="team-slider__text">
-                    <p class="team-slider__surname">Fil</p>
-                    <p class="team-slider__name">Vladimir</p>
-                    <p class="team-slider__position">Designer-Visualizer</p>
+                    <p class="team-slider__surname">{{ item.surname }}</p>
+                    <p class="team-slider__name">{{ item.name }}</p>
+                    <p class="team-slider__position">{{ item.position }}</p>
                 </div>
             </swiper-slide>
         </swiper>
@@ -46,6 +35,12 @@
 <script>
 import { mapMutations } from 'vuex'
 export default {
+	props: {
+		data: {
+			type: Object,
+			required: true
+		}
+	},
     data() {
         return {
             teamSliderSetting: {
@@ -61,19 +56,26 @@ export default {
             setModal: 'modal/setModal',
             setTeam: 'team/setTeam',
         }),
-        openModal(e) {
+        openModal(data) {
             this.setTeam({
-                name: `${e.target.parentElement.querySelector('.team-slider__surname').textContent} ${e.target.parentElement.querySelector('.team-slider__name').textContent}`,
-                position: e.target.parentElement.querySelector('.team-slider__position').textContent,
-                img: e.target.dataset.src,
-                quote: e.target.parentElement.querySelector('.team-slider__text').dataset.quote
+                name: data.name,
+                position: data.position,
+                img: data.photo,
+                quote: data.quote
             })
             this.setModal({
                 show: true,
                 type: 'team',
                 animate: 'fade'
             })
-        }
+        },
+        openVideo() {
+            this.setModal({
+                show: true,
+                type: 'about',
+                animate: 'show'
+            })
+        },
     }
 }
 </script>

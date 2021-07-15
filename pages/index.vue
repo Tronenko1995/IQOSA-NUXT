@@ -3,10 +3,10 @@
 		<!-- <div class="scroll-container" ref="scrollContainer"> -->
 			<!-- <IcosahedronMain /> -->
 			<IcosahedronCrystal />
-			<Main />
-			<Projects/>
-			<Team v-if="desktop" />
-			<TeamMobi v-if="!desktop" />
+			<Main :data="data" />
+			<Projects :data="data"/>
+			<Team :data="data" v-if="desktop" />
+			<TeamMobi :data="data" v-if="!desktop" />
 			<Modals v-if="modal.show" :modal="modal"/>
 		<!-- </div> -->
 	</main>
@@ -25,6 +25,41 @@ export default {
 		Team,
 		TeamMobi,
     },
+	async asyncData({ $axios, redirect, store }) {
+		if (!store.getters['lang/main/data']) {
+			try {
+				const mainPage = await $axios.$get('/main')
+				// console.log(mainPage)
+				store.commit('lang/main/setData', mainPage.content)
+				// console.log(store)
+				// console.log(store.commit())
+			} catch(e) {
+				console.error(e)
+				// redirect(`404`);
+			}
+		}
+	},
+	// async asyncData({ $axios }) {
+		// try {
+			// const getPreloader = await $axios.$get(`https://backiqosa.staj.fun/api/parts`)
+			// return { getPreloader }
+			// console.log(getPreloader)
+		// } catch (e) {
+			// console.log(e)
+			// throw(e)
+		// }
+
+
+    //   await store.dispatch("about/getAboutAction", {
+        // apiUrl: `${i18n.locale}/about`,
+    //   });
+    // } catch (e) {
+    //   throw new Error(e);
+    // }
+		// const ip = await $axios.$get('/parts')
+		// console.log('ip', ip)
+		// return { ip }
+	// },
     beforeMount() {
 		window.addEventListener('resize', this.onWindowResize);
         // window.addEventListener('scroll', this.handleScroll);
@@ -50,7 +85,8 @@ export default {
 
 	},
 	computed: {
-		modal() { return this.$store.getters['modal/modal'] }
+		modal() { return this.$store.getters['modal/modal'] },
+		data() { return this.$store.getters['lang/main/data'] }
 	},
 	methods: {
 		testSize() {

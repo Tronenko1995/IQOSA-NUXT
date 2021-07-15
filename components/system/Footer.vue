@@ -58,9 +58,13 @@
                 </div>
                 <div class="footer__column-middle">
                     <p class="footer__main-text">Don't be shy,
-                    <span class="footer__main-item"  @mouseover="showAnimateText($event)" @mouseleave="hideAnimateText($event)">
-                        <a href="/sayhi" class="footer__main-link">say hi.</a>
-                        <a href="/sayhi" class="footer__main-link">say hi.</a>
+                    <span class="footer__main-item" @mouseover="showAnimateText($event)" @mouseleave="hideAnimateText($event)">
+                    <a @click.prevent="goPage('sayhi')" href="/sayhi" class="footer__main-link">say hi.</a>
+                    <a @click.prevent="goPage('sayhi')" href="/sayhi" class="footer__main-link">say hi.</a>
+                        <!-- <nuxt-link :to="localePath('/sayhi')"  class="footer__main-link">say hi.</nuxt-link> -->
+                        <!-- <nuxt-link :to="localePath('/sayhi')"  class="footer__main-link">say hi.</nuxt-link> -->
+                        <!-- <a href="/sayhi" class="footer__main-link">say hi.</a> -->
+                        <!-- <a href="/sayhi" class="footer__main-link">say hi.</a> -->
                     </span>
                     </p>
                     <!-- <p class="footer__main-text footer__main-text--italic">say hi.</p> -->
@@ -75,7 +79,7 @@
         </div>
         <div class="footer__row footer__row--bottom">
             <div class="footer__bottom-item">
-                <nuxt-link to="/privaty-policy" class="footer__link">Privacy Policy</nuxt-link>
+                <nuxt-link :to="localePath('/privaty-policy')" class="footer__link">Privacy Policy</nuxt-link>
             </div>
             <Social class="social--footer" @showCursive="showCursive($event)" @hideCursive="hideCursive($event)"/>
             <!-- <div class="footer__bottom-item footer__bottom-item--social">
@@ -95,9 +99,14 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
 import gsap from "gsap"
 export default {
     methods: {
+        ...mapMutations({
+          setAnimate: 'plug/setAnimate',
+          setPlug: 'plug/setVisible',
+        }),
         showAnimateText(e) {
             if (e.target.tagName === 'A') {
                 gsap.to(e.target.parentElement.children[0], { 
@@ -146,6 +155,17 @@ export default {
                 })
             }
         },
+        goPage(page) {
+            // console.log('bubu')
+          if (this.$route.name !== page) {
+            this.setAnimate('up')
+            this.setPlug(true)
+            setTimeout(() => {
+                this.setAnimate('dissolve')
+                this.$router.push(this.localePath(page))
+            }, 1000);
+          }
+        }
     }
 }
 </script>

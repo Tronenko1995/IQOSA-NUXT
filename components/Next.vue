@@ -1,5 +1,5 @@
 <template>
-    <nuxt-link to="/join"  class="next">
+    <nuxt-link :to="localePath('/join')"  class="next">
         <div class="next__title">
             <ul class="animate-text animate-text--next">
                 <li class="animate-text__item">

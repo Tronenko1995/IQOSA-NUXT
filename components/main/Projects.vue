@@ -4,9 +4,10 @@
 			<IqosaCursor />
 			<div class="featured">
 				<div class="featured__block">
-					<p class="featured__text">Featured</p>
+					<p class="featured__text">{{ data.projects_title }}</p>
 					<div class="featured__item">
-						<nuxt-link to="/" class="featured__link">Projects</nuxt-link>
+						<a @click.prevent="goPage('/projects')" href="/projects"  class="featured__link">{{ data.projects_title_animated }}</a>
+						<!-- <nuxt-link :to="localePath('/projects')" class="featured__link">{{ data.projects_title_animated }}</nuxt-link> -->
 						<span class="featured__line"></span>
 					</div>
 				</div>
@@ -16,67 +17,62 @@
 			</div>
 			<div class="projects__name projects-name">
 				<swiper ref="projectName" :options="projectNameSetting" class="projects-name__title">
-					<swiper-slide class="projects-name__item">
-						<span>IQ</span>-08-SL
-					</swiper-slide>
-					<swiper-slide class="projects-name__item">
-						<span>AA</span>-99-SL
-					</swiper-slide>
-					<swiper-slide class="projects-name__item">
-						<span>XL</span>-92-SL
+					<swiper-slide v-for="item in data.projects" :key="item.link">
+						<a @click="goPage(`/project/${item.link}`)" :href="`/project/${item.link}`" class="projects-name__item">
+						<!-- <nuxt-link :to="localePath(`/project/${item.link}`)" class="projects-name__item"> -->
+						<span>{{ item.type }}</span>-{{ item.number }}
+						<!-- </nuxt-link> -->
+						</a>
 					</swiper-slide>
 				</swiper>
-					<nuxt-link to="/" class="projects__link arrow-link" @mouseover.native="findElement($event)" @mouseleave.native="animateTextHide($event)">
+					<a @click.prevent href="#"  class="projects__link arrow-link" @mouseover="findElement($event)" @mouseleave="animateTextHide($event)">
+					<!-- <nuxt-link :to="localePath('/')" class="projects__link arrow-link" @mouseover.native="findElement($event)" @mouseleave.native="animateTextHide($event)"> -->
+					<!-- <nuxt-link :to="localePath('/')" class="projects__link arrow-link" @mouseover.native="findElement($event)" @mouseleave.native="animateTextHide($event)"> -->
 						<span class="arrow-link__change">
-							<span class="arrow-link__span arrow-link__span--first">Explore</span>
-							<span class="arrow-link__span arrow-link__span--last">Explore</span>
+							<span class="arrow-link__span arrow-link__span--first">{{ data.projects_current_text_animated }}</span>
+							<span class="arrow-link__span arrow-link__span--last">{{ data.projects_current_text_animated }}</span>
 						</span>
-						<span class="arrow-link__text">THE project</span>
+						<span class="arrow-link__text">{{ data.projects_current_text }}</span>
 						<span class="arrow-link__circle">
 							<svg class="arrow-link__svg" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.40039 12.4004H17.6004" stroke-linecap="square"/><path d="M13.9004 8L18.4004 12.4L13.9004 16.8" stroke-linecap="square"/></svg>
 						</span>
-					</nuxt-link>
+					</a>
 			</div>
 			<swiper ref="projectAddress" :options="projectAddressSetting" class="projects__address  projects-address">
-				<swiper-slide class="projects-address__item">
-					2019,  <span class="projects-address__span">KYIV</span>,  Ukraine,  560M2
-				</swiper-slide>
-				<swiper-slide class="projects-address__item">
-					2020,  <span class="projects-address__span">Moskow</span>,  Russia,  560M2
-				</swiper-slide>
-				<swiper-slide class="projects-address__item">
-					2021,  <span class="projects-address__span">Rome</span>,  Italy,  560M2
+				<swiper-slide class="projects-address__item" v-for="item in data.projects" :key="item.link">
+					{{ item.release_date }},  <span class="projects-address__span">{{ item.city }}</span>,  {{ item.country }},  {{ item.area }}М2
 				</swiper-slide>
 			</swiper>
 		</div>
 		<swiper ref="projectPhotos" :options="projectPhotosSetting" class="projects__photos projects-photos" data-cursor="drag">
-			<swiper-slide class="projects-photos__item">
-				<div class="projects-photos__slide">
-					<img class="projects-photos__img" :src="require('~/assets/img/projects/1.jpg')" alt="">
-				</div>
-			</swiper-slide>
-			<swiper-slide class="projects-photos__item">
-				<div class="projects-photos__slide">
-					<img class="projects-photos__img" :src="require('~/assets/img/projects/2.jpg')" alt="">
-				</div>
-			</swiper-slide>
-			<swiper-slide class="projects-photos__item">
-				<div class="projects-photos__slide">
-					<img class="projects-photos__img" :src="require('~/assets/img/projects/3.jpg')" alt="">
-				</div>
+			<swiper-slide class="projects-photos__item" v-for="item in data.projects" :key="item.link">
+				<!-- <div class="projects-photos__slide"> -->
+				<a @click.prevent="goPage(`/project/${item.link}`)" :href="`/project/${item.link}`"  class="projects-photos__slide">
+				<!-- <nuxt-link :to="localePath(`/project/${item.link}`)" class="projects-photos__slide"> -->
+					<img class="projects-photos__img" :src='`${baseUrl}${item.main_picture}`' alt="">
+				</a>
+				<!-- </div> -->
 			</swiper-slide>
 		</swiper>
 	</section>
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
 import gsap from "gsap"
 export default {
+	props: {
+		data: {
+			type: Object,
+			required: true
+		}
+	},
 	data() {
 		return {
+				baseUrl: process.env.BASE_URL,
 				projectNameSetting: {
 					speed: 500,
-					loop: true,
+					loop: false,
 					direction: 'vertical',
 					slidesPerView: 1,
 					dragSize: 22,
@@ -86,7 +82,7 @@ export default {
 				},
 				projectAddressSetting: {
 					speed: 700,
-					loop: true,
+					loop: false,
 					direction: 'vertical',
 					dragSize: 22,
 					slidesPerView: 1,
@@ -96,7 +92,7 @@ export default {
 				},
 				projectPhotosSetting: {
 						speed: 700,
-						loop: true,
+						loop: false,
 						touchStartPreventDefault: false,
 						watchSlidesProgress: true,
 						slidesPerView: 1,
@@ -159,37 +155,49 @@ export default {
 		})
 	},
 	methods: {
-	findElement(e) {
-		if (e.target.classList.contains('arrow-link__text') || e.target.classList.contains('arrow-link') || e.target.classList.contains('arrow-link__circle')) {
-			const el = e.target.parentElement.querySelector('.arrow-link__change')
-			this.animateTextShow(el)
-		} else if (e.target.classList.contains('arrow-link__span--first')) {
-			this.animateTextShow(e.target.parentElement)
-		}
-	},
-	animateTextShow(el) {
-		gsap.to(el.children[0], {
-			translateY: -100 + "%",
-			duration: .5
-		})
-		gsap.to(el.children[1], {
-			translateY: -100 + "%",
-			duration: .5
-		})
-	},
-	animateTextHide(e) {
-		if (e.target.classList.contains('arrow-link')) {
-			const el = e.target.querySelector('.arrow-link__change')
+		...mapMutations({
+			setAnimate: 'plug/setAnimate',
+			setPlug: 'plug/setVisible',
+		}),
+		findElement(e) {
+			if (e.target.classList.contains('arrow-link__text') || e.target.classList.contains('arrow-link') || e.target.classList.contains('arrow-link__circle')) {
+				const el = e.target.parentElement.querySelector('.arrow-link__change')
+				this.animateTextShow(el)
+			} else if (e.target.classList.contains('arrow-link__span--first')) {
+				this.animateTextShow(e.target.parentElement)
+			}
+		},
+		animateTextShow(el) {
 			gsap.to(el.children[0], {
-				translateY: 0 + "%",
+				translateY: -100 + "%",
 				duration: .5
 			})
 			gsap.to(el.children[1], {
-				translateY: 0 + "%",
+				translateY: -100 + "%",
 				duration: .5
 			})
-		}
-	},
+		},
+		animateTextHide(e) {
+			if (e.target.classList.contains('arrow-link')) {
+				const el = e.target.querySelector('.arrow-link__change')
+				gsap.to(el.children[0], {
+					translateY: 0 + "%",
+					duration: .5
+				})
+				gsap.to(el.children[1], {
+					translateY: 0 + "%",
+					duration: .5
+				})
+			}
+		},
+        goPage(page) {
+            this.setAnimate('up')
+            this.setPlug(true)
+            setTimeout(() => {
+                this.setAnimate('dissolve')
+                this.$router.push(this.localePath(page))
+            }, 1000);
+        }
 	}
 }
 </script>
