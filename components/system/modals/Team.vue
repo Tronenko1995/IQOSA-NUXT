@@ -1,11 +1,15 @@
 <template>
     <div class="team-modal">
         <div class="team-modal__block">
-            <img class="team-modal__img" :src="team.img" alt="">
+            <img class="team-modal__img" :src="getImg(team.img)" alt="">
         </div>
         <div class="team-modal__info">
             <div class="team-modal__info-top">
-                <p class="team-modal__quote"><span><img width="10" height="10" class="team-modal__svg" :src="require('~/assets/svg/quotes.svg')" alt=""></span>{{ team.quote }}<span><img width="10" height="10" class="team-modal__svg" :src="require('~/assets/svg/quotes.svg')" alt=""></span></p>
+                <p class="team-modal__quote" v-if="team.quote">
+                    <span><img width="10" height="10" class="team-modal__svg" :src="require('~/assets/svg/quotes.svg')" alt=""></span>
+                    {{ team.quote }}
+                    <span><img width="10" height="10" class="team-modal__svg" :src="require('~/assets/svg/quotes.svg')" alt=""></span>
+                </p>
             </div>
             <div class="team-modal__info-bottom">
                 <p class="team-modal__name">{{ team.name }}</p>
@@ -18,8 +22,18 @@
 
 <script>
 export default {
+    data() {
+        return {
+            baseUrl: process.env.baseUrl,
+        }
+    },
     computed: {
 		team() { return this.$store.getters['team/team'] }
+    },
+    methods: {
+        getImg(img) {
+            return `${this.baseUrl}${img}`
+        }
     },
 }
 </script>
@@ -162,6 +176,9 @@ export default {
         }
         &__quote {
             font-size: 20px;
+        }
+        &__img {
+            object-position: top;
         }
     }
 }

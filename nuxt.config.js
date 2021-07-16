@@ -1,4 +1,7 @@
 export default {
+  env: {
+    baseUrl: process.env.BASE_URL
+  },
   ssr: true,
   target: 'server',
   // Global page headers: https://go.nuxtjs.dev/config-head
@@ -35,6 +38,8 @@ export default {
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: ['nuxt-gsap-module'],
+
+
 
   gsap: {
     extraPlugins: {
@@ -77,7 +82,7 @@ export default {
 
   privateRuntimeConfig: {
     axios: {
-      baseURL: process.env.API_BASE_URL
+      baseURL: process.env.API_BASE_URL,
     }
   },
 

@@ -4,70 +4,84 @@
             <div type="translate" data-depth="1" ref="parallaxContainer" class="team__container">
                 <div class="team__line team__line--uno"></div>
                 <div class="team__line team__line--dos">
-                    <div class="team__item team__item--uno team__item--small">
-                        <picture class="team__block">
-                            <img class="team__img" src="https://iqosa.com/wp-content/uploads/2021/05/IMG_3433-copy-scaled.jpg" alt="">
-                        </picture>
-                        <div class="team__text">
-                            <p class="team__name">Romanchenko Kateryna</p>
-                            <p class="team__position">SMM Manager</p>
-                        </div>
+                    <div class="team__item team__item--uno team__item--small" data-position="13">
+                        <template v-if="data.team_members[12]">
+                            <picture class="team__block">
+                                <img class="team__img" @click="openModal(data.team_members[12])" :src="getImg(data.team_members[12].parallax_photo)" alt="">
+                            </picture>
+                            <div class="team__text">
+                                <p class="team__name">{{ data.team_members[12].name }} {{ data.team_members[12].surname }}</p>
+                                <p class="team__position">{{ data.team_members[12].position }}</p>
+                            </div>
+                        </template>
                     </div>
-                    <div class="team__item team__item--dos team__item--middle">
-                        <picture class="team__block">
-                            <img class="team__img" src="https://iqosa.com/wp-content/uploads/2021/05/IMG_3816-2.jpg" alt="">
-                        </picture>
-                        <div class="team__text">
-                            <p class="team__name">Pichugina Alina</p>
-                            <p class="team__position">Designer-Visualizer</p>
-                        </div>
+                    <div class="team__item team__item--dos team__item--middle" data-position="6">
+                        <template v-if="data.team_members[5]">
+                            <picture class="team__block">
+                                <img class="team__img" @click="openModal(data.team_members[5])" :src="getImg(data.team_members[5].parallax_photo)" alt="">
+                            </picture>
+                            <div class="team__text">
+                                <p class="team__name">{{ data.team_members[5].name }} {{ data.team_members[5].surname }}</p>
+                                <p class="team__position">{{ data.team_members[5].position }}</p>
+                            </div>
+                        </template>
                     </div>
-                    <div class="team__item team__item--tres team__item--middle">
-                        <picture class="team__block">
-                            <img class="team__img" src="https://iqosa.com/wp-content/uploads/2021/05/IMG_3778-2-1.jpg" alt="">
-                        </picture>
-                        <div class="team__text">
-                            <p class="team__name">Matsiura Vladislav</p>
-                            <p class="team__position">Purchasing Manager</p>
-                        </div>
+                    <div class="team__item team__item--tres team__item--middle" data-position="1">
+                        <template v-if="data.team_members[0]">
+                            <picture class="team__block">
+                                <img class="team__img" @click="openModal(data.team_members[0])" :src="getImg(data.team_members[0].parallax_photo)" alt="">
+                            </picture>
+                            <div class="team__text">
+                                <p class="team__name">{{ data.team_members[0].name }} {{ data.team_members[0].surname }}</p>
+                                <p class="team__position">{{ data.team_members[0].position }}</p>
+                            </div>
+                        </template>
                     </div>
-                    <div class="team__item team__item--cuatro team__item--small">
-                        <picture class="team__block">
-                            <img class="team__img" src="https://iqosa.com/wp-content/uploads/2021/05/IMG_4125-2-copy-1.jpg" alt="">
-                        </picture>
-                        <div class="team__text">
-                            <p class="team__name">Maklyakova Aleksandra</p>
-                            <p class="team__position">Co-Founder, CEO</p>
-                        </div>
+                    <div class="team__item team__item--cuatro team__item--small" data-position="7">
+                        <template v-if="data.team_members[6]">
+                            <picture class="team__block">
+                                <img class="team__img" @click="openModal(data.team_members[6])" :src="getImg(data.team_members[6].parallax_photo)" alt="">
+                            </picture>
+                            <div class="team__text">
+                                <p class="team__name">{{ data.team_members[6].name }} {{ data.team_members[6].surname }}</p>
+                                <p class="team__position">{{ data.team_members[6].position }}</p>
+                            </div>
+                        </template>
                     </div>
-                    <div  class="team__item team__item--cinco team__item--small">
-                        <picture class="team__block">
-                            <img class="team__img" src="https://iqosa.com/wp-content/uploads/2021/05/IMG_3629-2-1.jpg" alt="">
-                        </picture>
-                        <div class="team__text">
-                            <p class="team__name">Boiko Valeriа</p>
-                            <p class="team__position">Chief Architect</p>
-                        </div>
+                    <div  class="team__item team__item--cinco team__item--small" data-position="14">
+                        <template v-if="data.team_members[13]">
+                            <picture class="team__block">
+                                <img class="team__img" @click="openModal(data.team_members[13])" :src="getImg(data.team_members[13].parallax_photo)" alt="">
+                            </picture>
+                            <div class="team__text">
+                                <p class="team__name">{{ data.team_members[13].name }} {{ data.team_members[13].surname }}</p>
+                                <p class="team__position">{{ data.team_members[13].position }}</p>
+                            </div>
+                        </template>
                     </div>
                 </div>
                 <div class="team__line team__line--tres">
-                    <div  class="team__item team__item--uno team__item--major">
-                        <picture class="team__block">
-                            <img class="team__img" src="https://iqosa.com/wp-content/uploads/2021/05/IMG_3322-2-1.jpg" alt="">
-                        </picture>
-                        <div class="team__text">
-                            <p class="team__name">Krasulenko Tatiana</p>
-                            <p class="team__position">HR Consultant</p>
-                        </div>
+                    <div  class="team__item team__item--uno team__item--major" data-position="9">
+                        <template v-if="data.team_members[8]">
+                            <picture class="team__block">
+                                <img class="team__img" @click="openModal(data.team_members[8])" :src="getImg(data.team_members[8].parallax_photo)" alt="">
+                            </picture>
+                            <div class="team__text">
+                                <p class="team__name">{{ data.team_members[8].name }} {{ data.team_members[8].surname }}</p>
+                                <p class="team__position">{{ data.team_members[8].position }}</p>
+                            </div>
+                        </template>
                     </div>
-                    <div class="team__item team__item--dos team__item--middle">
-                        <picture class="team__block">
-                            <img @click="openModal($event)" class="team__img" src="https://iqosa.com/wp-content/uploads/2021/05/IMG_4211-2-copy-1.jpg" data-src="https://iqosa.com/wp-content/uploads/2021/05/IMG_4211-2-copy.jpg" alt="">
-                        </picture>
-                        <div class="team__text" data-quote="IQOSA is ambition, striving for individuality in design. We always wanted to create something unique and that no one has pointed us what to do.">
-                            <p class="team__name">Fil Vladimir</p>
-                            <p class="team__position">Designer-Visualizer</p>
-                        </div>
+                    <div class="team__item team__item--dos team__item--middle" data-position="4">
+                        <template v-if="data.team_members[3]">
+                            <picture class="team__block">
+                                <img class="team__img" @click="openModal(data.team_members[3])" :src="getImg(data.team_members[3].parallax_photo)" alt="">
+                            </picture>
+                            <div class="team__text">
+                                <p class="team__name">{{ data.team_members[3].name }} {{ data.team_members[3].surname }}</p>
+                                <p class="team__position">{{ data.team_members[3].position }}</p>
+                            </div>
+                        </template>
                     </div>
                     <div ref="parallaxTitle" class="team__title team-title">
                         <p class="team__title-text team-title__text" style="transform: translate(0px, 0px);">{{ data.team_text.bold_text }}</p>
@@ -84,72 +98,86 @@
                         </div>
 
                     </div>
-                    <div class="team__item team__item--tres team__item--small">
-                        <picture class="team__block">
-                            <img class="team__img" src="https://iqosa.com/wp-content/uploads/2021/05/IMG_3068-2.jpg" alt="">
-                        </picture>
-                    <div class="team__text">
-                        <p class="team__name">Babanin Dmitry</p>
-                        <p class="team__position">Founder, Creative Director</p>
+                    <div class="team__item team__item--tres team__item--small" data-position="2">
+                        <template v-if="data.team_members[1]">
+                            <picture class="team__block">
+                                <img class="team__img" @click="openModal(data.team_members[1])" :src="getImg(data.team_members[1].parallax_photo)" alt="">
+                            </picture>
+                            <div class="team__text">
+                                <p class="team__name">{{ data.team_members[1].name }} {{ data.team_members[1].surname }}</p>
+                                <p class="team__position">{{ data.team_members[1].position }}</p>
+                            </div>
+                         </template>
                     </div>
-                    </div>
-                    <div  class="team__item team__item--cuatro team__item--middle">
-                        <picture class="team__block">
-                            <img class="team__img" src="https://iqosa.com/wp-content/uploads/2021/05/IMG_3622-2-1.jpg" alt="">
-                        </picture>
-                        <div class="team__text">
-                            <p class="team__name">Babanin Bogdan</p>
-                            <p class="team__position">Visualizer</p>
-                        </div>
+                    <div  class="team__item team__item--cuatro team__item--middle" data-position="8">
+                        <template v-if="data.team_members[7]">
+                            <picture class="team__block">
+                                <img class="team__img" @click="openModal(data.team_members[7])" :src="getImg(data.team_members[7].parallax_photo)" alt="">
+                            </picture>
+                            <div class="team__text">
+                                <p class="team__name">{{ data.team_members[7].name }} {{ data.team_members[7].surname }}</p>
+                                <p class="team__position">{{ data.team_members[7].position }}</p>
+                            </div>
+                         </template>
                     </div>
                 </div>
                 <div class="team__line team__line--cuatro">
-                    <div class="team__item team__item--uno team__item--small">
-                        <picture class="team__block">
-                            <img class="team__img" src="https://iqosa.com/wp-content/uploads/2021/05/IMG_3060-2.jpg" alt="">
-                        </picture>
-                        <div class="team__text">
-                            <p class="team__name">Kim Nikita</p>
-                            <p class="team__position">Legal Advisor</p>
-                        </div>
+                    <div class="team__item team__item--uno team__item--small" data-position="12">
+                        <template v-if="data.team_members[11]">
+                            <picture class="team__block">
+                                <img class="team__img" @click="openModal(data.team_members[11])" :src="getImg(data.team_members[11].parallax_photo)" alt="">
+                            </picture>
+                            <div class="team__text">
+                                <p class="team__name">{{ data.team_members[11].name }} {{ data.team_members[11].surname }}</p>
+                                <p class="team__position">{{ data.team_members[11].position }}</p>
+                            </div>
+                        </template>
                     </div>
-                    <div class="team__item team__item--dos team__item--small">
-                        <picture class="team__block">
-                            <img class="team__img" src="https://iqosa.com/wp-content/uploads/2021/05/IMG_3185-2.jpg" alt="">
-                        </picture>
-                        <div class="team__text">
-                            <p class="team__name">Hovorukha Dana</p>
-                            <p class="team__position">Office Manager</p>
-                        </div>
+                    <div class="team__item team__item--dos team__item--small" data-position="5">
+                        <template v-if="data.team_members[4]">
+                            <picture class="team__block">
+                                <img class="team__img" @click="openModal(data.team_members[4])" :src="getImg(data.team_members[4].parallax_photo)" alt="">
+                            </picture>
+                            <div class="team__text">
+                                <p class="team__name">{{ data.team_members[4].name }} {{ data.team_members[4].surname }}</p>
+                                <p class="team__position">{{ data.team_members[4].position }}</p>
+                            </div>
+                        </template>
                     </div>
-                    <div class="team__item team__item--tres team__item--major">
-                        <picture class="team__block">
-                            <img class="team__img" src="https://iqosa.com/wp-content/uploads/2021/05/IMG_4412-2.jpg" alt="">
-                        </picture>
-                        <div class="team__text">
-                            <p class="team__name">Ryazhko Nikita</p>
-                            <p class="team__position">CO-Founder, Lead Designer</p>
-                        </div>
+                    <div class="team__item team__item--tres team__item--major" data-position="3">
+                        <template v-if="data.team_members[2]">
+                            <picture class="team__block">
+                                <img class="team__img" @click="openModal(data.team_members[2])" :src="getImg(data.team_members[2].parallax_photo)" alt="">
+                            </picture>
+                            <div class="team__text">
+                                <p class="team__name">{{ data.team_members[2].name }} {{ data.team_members[2].surname }}</p>
+                                <p class="team__position">{{ data.team_members[2].position }}</p>
+                            </div>
+                        </template>
                     </div>
-                    <div class="team__item team__item--cuatro team__item--square">
-                        <picture class="team__block">
-                            <img class="team__img" src="https://iqosa.com/wp-content/uploads/2021/05/IMG_3986-2-1.jpg" alt="">
-                        </picture>
-                        <div class="team__text">
-                            <p class="team__name">Molodets Marina</p>
-                            <p class="team__position">Purchasing Manager</p>
-                        </div>
+                    <div class="team__item team__item--cuatro team__item--square" data-position="10">
+                        <template v-if="data.team_members[9]">
+                            <picture class="team__block">
+                                <img class="team__img" @click="openModal(data.team_members[9])" :src="getImg(data.team_members[9].parallax_photo)" alt="">
+                            </picture>
+                            <div class="team__text">
+                                <p class="team__name">{{ data.team_members[9].name }} {{ data.team_members[9].surname }}</p>
+                                <p class="team__position">{{ data.team_members[9].position }}</p>
+                            </div>
+                        </template>
                     </div>
                 </div>
                 <div class="team__line team__line--cinco">
-                    <div  class="team__item team__item--uno team__item--major">
-                        <picture class="team__block">
-                            <img class="team__img" src="https://iqosa.com/wp-content/uploads/2020/12/IMG_4276-scaled.jpg" alt="">
-                        </picture>
-                        <div class="team__text">
-                            <p class="team__name">Maksiuk Sviatoslav</p>
-                            <p class="team__position">Architect</p>
-                        </div>
+                    <div  class="team__item team__item--uno team__item--major" data-position="11">
+                        <template v-if="data.team_members[10]">
+                            <picture class="team__block">
+                                <img class="team__img" @click="openModal(data.team_members[10])" :src="getImg(data.team_members[10].parallax_photo)" alt="">
+                            </picture>
+                            <div class="team__text">
+                                <p class="team__name">{{ data.team_members[10].name }} {{ data.team_members[10].surname }}</p>
+                                <p class="team__position">{{ data.team_members[10].position }}</p>
+                            </div>
+                        </template>
                     </div>
                 </div>
             </div>
@@ -169,6 +197,7 @@ export default {
 	},
     data() {
         return {
+            baseUrl: process.env.baseUrl,
             parallax: null,
             parallaxScene: null,
             parallaxTitle: null,
@@ -226,13 +255,12 @@ export default {
                 // this.configContainer()
             }, 250);
         },
-        openModal(e) {
-            console.dir(e.target)
+        openModal(data) {
             this.setTeam({
-                name: e.target.parentElement.parentElement.querySelector('.team__name').textContent,
-                position: e.target.parentElement.parentElement.querySelector('.team__position').textContent,
-                img: e.target.dataset.src,
-                quote: e.target.parentElement.parentElement.querySelector('.team__text').dataset.quote
+                name: `${data.name} ${data.surname}`,
+                position: data.position,
+                img: data.photo,
+                quote: data.about
             })
             this.setModal({
                 show: true,
@@ -278,6 +306,9 @@ export default {
 				})
 			}
 		},
+        getImg(img) {
+            return `${this.baseUrl}${img}`
+        }
     }
 }
 </script>

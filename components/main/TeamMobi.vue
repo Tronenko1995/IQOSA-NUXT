@@ -16,12 +16,7 @@
         </div>
         <swiper ref="teamSlider" :options="teamSliderSetting" class="team-slider">
             <swiper-slide class="team-slider__item" v-for="(item, i) in data.team_members" :key="i">
-                <img class="team-slider__img" @click="openModal({
-                    name: `${item.name} ${item.surname}`,
-                    position: item.position,
-                    quote: item.about,
-                    photo: item.photo,
-                })" :src="item.parallax_photo" alt="">
+                <img class="team-slider__img" @click="openModal(item)" :src="getImg(item.parallax_photo)" alt="">
                 <div class="team-slider__text">
                     <p class="team-slider__surname">{{ item.surname }}</p>
                     <p class="team-slider__name">{{ item.name }}</p>
@@ -43,6 +38,7 @@ export default {
 	},
     data() {
         return {
+            baseUrl: process.env.baseUrl,
             teamSliderSetting: {
                 speed: 500,
                 loop: true,
@@ -58,10 +54,10 @@ export default {
         }),
         openModal(data) {
             this.setTeam({
-                name: data.name,
+                name: `${data.name} ${data.surname}`,
                 position: data.position,
                 img: data.photo,
-                quote: data.quote
+                quote: data.about
             })
             this.setModal({
                 show: true,
@@ -76,6 +72,9 @@ export default {
                 animate: 'show'
             })
         },
+        getImg(img) {
+            return `${this.baseUrl}${img}`
+        }
     }
 }
 </script>
