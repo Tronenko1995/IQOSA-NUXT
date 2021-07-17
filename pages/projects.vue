@@ -1,12 +1,12 @@
 <template>
-<div>
-    <HeaderWrap :view="view"/>
-    <main class="projects-page">
-      <ProjectsGrid v-if="view === 'grid'" :view="view"/>
-      <ProjectsList v-if="view === 'list'" :view="view"/>
-    </main>
-    <Footer v-if="view === 'grid'" />
-</div>
+  <div>
+      <HeaderWrap :view="view"/>
+      <main class="projects-page">
+        <ProjectsGrid v-if="view === 'grid'" :view="view" :data="data" :list="list"/>
+        <ProjectsList v-if="view === 'list'" :view="view" :data="data" :list="list"/>
+      </main>
+      <Footer v-if="view === 'grid'" />
+  </div>
 </template>
 
 <script>
@@ -18,6 +18,24 @@ export default {
     ProjectsList, ProjectsGrid
   },
   layout: 'projects',
+	async asyncData({ store }) {
+		if (!store.getters['lang/projects/data']) {
+			try {
+          await store.dispatch('lang/projects/getProjectsPageContent', '/projects_page')
+			} catch(e) {
+				// redirect(`404`);
+        throw new Error(e);
+			}
+		}
+		if (!store.getters['lang/projects/list']) {
+			try {
+          await store.dispatch('lang/projects/getProjects', '/projects')
+			} catch(e) {
+        // redirect(`404`);
+        throw new Error(e);
+			}
+		}
+	},
   beforeMount() {
     window.addEventListener('resize', this.onWindowResize);
   },
@@ -25,7 +43,9 @@ export default {
     this.testSize()
   },
   computed: {
-    view() { return this.$store.getters['projects/view'] }
+    view() { return this.$store.getters['projects/view'] },
+		data() { return this.$store.getters['lang/projects/data'] },
+		list() { return this.$store.getters['lang/projects/list'] },
   },
   beforeDestroy() {
     window.removeEventListener("resize", this.onWindowResize);

@@ -9,8 +9,8 @@
             <WorkWithYouForm v-if="type === 'workWithYou'"/>
             <JoinText v-if="type === 'join'"/>
             <JoinForm v-if="type === 'join'"/>
-            <BriefText v-if="type === 'brief'"/>
-            <BriefForm v-if="type === 'brief'"/>
+            <!-- <BriefText v-if="type === 'brief'"/> -->
+            <!-- <BriefForm v-if="type === 'brief'"/> -->
         </section>
     </main>
 </template>
@@ -22,8 +22,8 @@ import WorkWithYouText from '@/components/request/WorkWithYouText.vue'
 import WorkWithYouForm from '@/components/request/WorkWithYouForm.vue'
 import JoinText from '@/components/request/JoinText.vue'
 import JoinForm from '@/components/request/JoinForm.vue'
-import BriefText from '@/components/request/BriefText.vue'
-import BriefForm from '@/components/request/BriefForm.vue'
+// import BriefText from '@/components/request/BriefText.vue'
+// import BriefForm from '@/components/request/BriefForm.vue'
 import { mapMutations } from 'vuex'
 export default {
     layout: 'standart',
@@ -34,8 +34,8 @@ export default {
         WorkWithYouForm,
         JoinText,
         JoinForm,
-        BriefText,
-        BriefForm,
+        // BriefText,
+        // BriefForm,
     },
     props: {
         type: {

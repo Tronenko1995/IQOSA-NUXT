@@ -3,7 +3,7 @@
         <div class="say-hi__container">
             <nuxt-link :to="localePath('/sayhi')" class="say-hi__text">Say hi</nuxt-link>
             <p class="say-hi__text say-hi__text--active">join the team</p>
-            <nuxt-link :to="localePath('/brief')" class="say-hi__text">fill the breif</nuxt-link>
+            <p class="say-hi__text">fill the breif</p>
         </div>
     </div>
 </template>

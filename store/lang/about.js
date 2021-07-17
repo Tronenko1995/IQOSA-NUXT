@@ -15,7 +15,7 @@ export const getters = {
 }
 
 export const actions = {
-	getMainPageContent(state, api) {
+	getAboutPageContent(state, api) {
 		return new Promise(resolve => {
 			this.$axios
 			  .$get(api, { loading: true })

@@ -4,66 +4,10 @@
         <div class="strip-inner">
             <div class="draggable"></div>
             <div class="strip">
-                <div class="strip__item">
+                <div class="strip__item" v-for="(item, i) in list" :key="i">
                     <div class="img-outer">
                         <div class="img-inner">
-                            <img src="https://iqosa.com/wp-content/uploads/2020/12/1-5.jpg" alt="">
-                        </div>
-                    </div>
-                </div>
-                <div class="strip__item">
-                    <div class="img-outer">
-                        <div class="img-inner">
-                            <img src="https://iqosa.com/wp-content/uploads/2020/12/10-4.jpg" alt="">
-                        </div>
-                    </div>
-                </div>
-                <div class="strip__item">
-                    <div class="img-outer">
-                        <div class="img-inner">
-                            <img src="https://iqosa.com/wp-content/uploads/2020/12/12-4.jpg" alt="">
-                        </div>
-                    </div>
-                </div>
-                <div class="strip__item">
-                    <div class="img-outer">
-                        <div class="img-inner">
-                            <img src="https://iqosa.com/wp-content/uploads/2020/12/1-5.jpg" alt="">
-                        </div>
-                    </div>
-                </div>
-                <div class="strip__item">
-                    <div class="img-outer">
-                        <div class="img-inner">
-                            <img src="https://iqosa.com/wp-content/uploads/2020/12/10-4.jpg" alt="">
-                        </div>
-                    </div>
-                </div>
-                <div class="strip__item">
-                    <div class="img-outer">
-                        <div class="img-inner">
-                            <img src="https://iqosa.com/wp-content/uploads/2020/12/12-4.jpg" alt="">
-                        </div>
-                    </div>
-                </div>
-                <div class="strip__item">
-                    <div class="img-outer">
-                        <div class="img-inner">
-                            <img src="https://iqosa.com/wp-content/uploads/2020/12/1-5.jpg" alt="">
-                        </div>
-                    </div>
-                </div>
-                <div class="strip__item">
-                    <div class="img-outer">
-                        <div class="img-inner">
-                            <img src="https://iqosa.com/wp-content/uploads/2020/12/10-4.jpg" alt="">
-                        </div>
-                    </div>
-                </div>
-                <div class="strip__item">
-                    <div class="img-outer">
-                        <div class="img-inner">
-                            <img src="https://iqosa.com/wp-content/uploads/2020/12/12-4.jpg" alt="">
+                            <img :src="getImg(item)" alt="">
                         </div>
                     </div>
                 </div>
@@ -76,9 +20,25 @@
 <script>
 // import Draggabilly from "draggabilly"
 export default {
+	props: {
+		list: {
+			type: Array,
+			required: true
+		}
+	},
+    data() {
+        return {
+            baseUrl: process.env.baseUrl,
+        }
+    },
     mounted() {
         // if (process.browser){
         // }
+    },
+    methods: {
+        getImg(img) {
+            return `${this.baseUrl}${img}`
+        }
     }
 }
 </script>

@@ -4,10 +4,11 @@
     <IqosaCursor />
 		<div class="projects-list__shadow"></div>
     <div ref="shaderObj" class="projects-list__shader">
-      <div :data-img="require('~/assets/img/projects/shader/1.jpg')" class="multi-textures__area"></div>
-      <div :data-img="require('~/assets/img/projects/shader/2.jpg')" class="multi-textures__area"></div>
-      <div :data-img="require('~/assets/img/projects/shader/3.jpg')" class="multi-textures__area"></div>
-      <div :data-img="require('~/assets/img/projects/shader/4.jpg')" class="multi-textures__area"></div>
+      <div v-for="(item, i) in list" :key="i" :data-img="getImg(item.main_picture)" class="multi-textures__area"></div>
+      <!-- <div :data-img="require('~/assets/img/projects/shader/1.jpg')" class="multi-textures__area"></div> -->
+      <!-- <div :data-img="require('~/assets/img/projects/shader/2.jpg')" class="multi-textures__area"></div> -->
+      <!-- <div :data-img="require('~/assets/img/projects/shader/3.jpg')" class="multi-textures__area"></div> -->
+      <!-- <div :data-img="require('~/assets/img/projects/shader/4.jpg')" class="multi-textures__area"></div> -->
 
       <!-- <div data-img="https://iqosa.com/wp-content/uploads/2021/03/1.7.jpg" class="multi-textures__area"></div>
       <div data-img="https://iqosa.com/wp-content/uploads/2021/02/13-4.jpg" class="multi-textures__area"></div>
@@ -31,25 +32,25 @@
     </div>
 
 		<div class="projects-list__title">
-			<p class="projects-list__title-text">Featured</p>
-			<p class="projects-list__title-text projects-list__title-text--roman">cases</p>
+			<p v-if="data.projects_title" class="projects-list__title-text">{{ data.projects_title.thin_text }}</p>
+			<p v-if="data.projects_title" class="projects-list__title-text projects-list__title-text--roman">{{ data.projects_title.bold_text }}</p>
 		</div>
 
-    <SwitchProjects class="switch-project-list" :view="view" />
+    <SwitchProjects class="switch-project-list" :view="view" :data="data"/>
 
 		<div v-swiper:projectsSlider="projectsSetting" ref="projects" class="projects-slider" data-cursor="eye">
 			<nuxt-link ref="linkItem" class="projects-slider__link projects-slider__link--head" :to="localePath(link.url)"></nuxt-link>
 			<div class="swiper-wrapper" data-cursor="drag">
-				<div class="swiper-slide projects-slider__item" data-url="/project/iq-98-kd/">
-          <nuxt-link class="projects-slider__link" :to="localePath('/project/iq-98-kd/')"></nuxt-link>
+				<div v-for="(item, i) in list" :key="i" class="swiper-slide projects-slider__item" :data-url="item.link">
+          <nuxt-link class="projects-slider__link" :to="localePath(item.link)"></nuxt-link>
             <p class="projects-slider__title">
-              <span>IQ</span>-98-KD
+              <span>{{ item.type }}</span>-{{ item.number }}
             </p>
             <p class="projects-slider__description">
-              2021,<span>Odessa</span>, Ukraine, 203,6M2
+              {{ item.release_date }},<span>{{ item.city }}</span>, {{ item.country }}, {{ item.area }}M2
             </p>
 				</div>
-				<div class="swiper-slide projects-slider__item" data-url="/project/iq-87-or/">
+				<!-- <div class="swiper-slide projects-slider__item" data-url="/project/iq-87-or/">
           <nuxt-link class="projects-slider__link" :to="localePath('/project/iq-87-or/')"></nuxt-link>
             <p class="projects-slider__title">
               <span>IQ</span>-87-OR
@@ -75,7 +76,7 @@
             <p class="projects-slider__description">
               2021,<span>Kyiv</span>, Ukraine, 181M2
             </p>
-				</div>
+				</div> -->
 			</div>
 		</div>
 
@@ -94,17 +95,26 @@ export default {
     view: {
       type: String,
       required: true
+    },
+    data: {
+      type: Object,
+      // required: true
+    },
+    list: {
+      type: Array,
+      // required: true
     }
   },
 	data() {
 		return {
+      baseUrl: process.env.baseUrl,
       link: {
         item: null,
         url: '/project/iq-98-kd/'
       },
 			projectsSetting: {
 				speed: 750,
-				loop: true,
+				loop: false,
 				direction: "vertical",
 				slidesPerView: "auto",
 				touchStartPreventDefault: false,
@@ -279,6 +289,9 @@ export default {
     passView() {
       console.log(e)
       // this$emit('view')
+    },
+    getImg(img) {
+      return `${this.baseUrl}${img}`
     }
 	},
 	beforeDestroy() {

@@ -69,7 +69,7 @@ export default {
 	},
 	data() {
 		return {
-				baseUrl: process.env.BASE_URL,
+				baseUrl: process.env.baseUrl,
 				projectNameSetting: {
 					speed: 500,
 					loop: false,
@@ -299,6 +299,7 @@ export default {
 		left: 0;
 		top: 0;
 		transition-timing-function: cubic-bezier(.79,.36,.34,.99)!important;
+		cursor: none;
 	}
 	&__img {
 		width: 100%;

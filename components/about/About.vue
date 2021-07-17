@@ -3,22 +3,22 @@
         <section class="about" data-cursor="play" @click="openModal('about')">
             <IqosaCursor />
             <video class="about__video" autoplay="" muted="" loop="" playsinline="" poster="">
-                <source src="https://iqosa.com/wp-content/uploads/2021/06/prw_1.mp4" type="video/mp4">
+                <source :src="getImg(data.preview_video)" type="video/mp4">
             </video>
-            <Motto class="motto--about" :motto-list="mottoList" :motto-list-extra="mottoListExtra"/>
+            <Motto class="motto--about" :motto-list="data.hero_left_text" :motto-list-extra="data.hero_right_text"/>
         </section>
         <section class="scroll-text">
-            <p ref="text1" class="scroll-text__text">CREATED IN FREEDOM FOR LIFE CREATED IN FREEDOM FOR LIFE CREATED IN FREEDOM FOR LIFE CREATED IN FREEDOM FOR LIFE</p>
-            <p ref="text2" class="scroll-text__text">I FEEL IQOSA PRIVATE CREATIVE ADAPTIVE SAFE I FEEL IQOSA PRIVATE CREATIVE ADAPTIVE SAFE I FEEL IQOSA PRIVATE CREATIVE ADAPTIVE SAFE I FEEL IQOSA PRIVATE CREATIVE ADAPTIVE SAFE</p>
+            <p ref="text1" class="scroll-text__text">{{ data.first_animated_text }}</p>
+            <p ref="text2" class="scroll-text__text">{{ data.second_animated_text }}</p>
         </section>
-			<Team v-if="desktop" />
-			<TeamMobi v-if="!desktop" />
+			<Team :data="data" v-if="desktop" />
+			<TeamMobi :data="data" v-if="!desktop" />
         <section class="scroll-text">
-            <p ref="text3" class="scroll-text__text">CREATES A PERFECT CREATES A PERFECT CREATES A PERFECT CREATES A PERFECT CREATES A PERFECT CREATES A PERFECT CREATES A PERFECT</p>
-            <p ref="text4" class="scroll-text__text">INTERIOR AND ARCHITECTURE DESIGN INTERIOR AND ARCHITECTURE DESIGN INTERIOR AND ARCHITECTURE DESIGN INTERIOR AND ARCHITECTURE DESIGN</p>
+            <p ref="text3" class="scroll-text__text">{{ data.third_animated_text }}</p>
+            <p ref="text4" class="scroll-text__text">{{ data.fourth_animated_text }}</p>
         </section>
-        <AboutSlider />
-        <Next />
+        <AboutSlider :list="data.slider_pictures" />
+        <Next :data="data"/>
         <!-- <div>
             <nuxt-link to="/"  class="project__next">
                 <div class="project__title project__title--next">
@@ -45,6 +45,12 @@ import TeamMobi from '@/components/main/TeamMobi.vue'
 import AboutSlider from '@/components/about/AboutSlider.vue'
 import Next from '@/components/Next.vue'
 export default {
+	props: {
+		data: {
+			type: Object,
+			required: true
+		}
+	},
     components: {
 		Team,
 		TeamMobi,
@@ -53,13 +59,14 @@ export default {
     },
     data() {
         return {
-            mottoList: [
-                'WE ARE A DESIGN STUDIO',
-                'CONNECTING BRANDS TO HUMANS THROUGH',
-            ],
-            mottoListExtra: [
-                'DESIGN AND TECHNOLOGY',
-            ],
+            baseUrl: process.env.baseUrl,
+            // mottoList: [
+            //     'WE ARE A DESIGN STUDIO',
+            //     'CONNECTING BRANDS TO HUMANS THROUGH',
+            // ],
+            // mottoListExtra: [
+            //     'DESIGN AND TECHNOLOGY',
+            // ],
 			desktop: null,
             text1: null,
             text2: null,
@@ -180,6 +187,9 @@ export default {
                 this.testSize()
             }, 250);
         },
+        getImg(img) {
+            return `${this.baseUrl}${img}`
+        }
     }
 }
 </script>

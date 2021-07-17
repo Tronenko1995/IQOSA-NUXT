@@ -8,14 +8,14 @@
 
     <ul class="switch__list">
       <li class="switch__item" :class="{'switch__item--selected': view === 'grid'}">
-        <button class="switch__link" @click="changeView('grid')">Grid</button>
+        <button class="switch__link" @click="changeView('grid')">{{ data.projects_block_text }}</button>
         <span class="switch__line"></span>
       </li>
       <li class="switch__item">
         <p class="switch__link">,</p>
       </li>
       <li class="switch__item" :class="{'switch__item--selected': view === 'list'}">
-        <button class="switch__link" @click="changeView('list')">List</button>
+        <button class="switch__link" @click="changeView('list')">{{ data.projects_list_text }}</button>
         <span class="switch__line"></span>
       </li>
     </ul>
@@ -30,7 +30,11 @@ export default {
     view: {
       type: String,
       required: true
-    }
+    },
+    data: {
+      type: Object,
+      // required: true
+    },
   },
   data() {
     return {

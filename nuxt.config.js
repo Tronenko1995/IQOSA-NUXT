@@ -76,15 +76,15 @@ export default {
     }
   },
 
-  // axios: {
-  //   baseURL: 'https://backiqosa.staj.fun/api', // Used as fallback if no runtime config is provided
-  // },
-
-  privateRuntimeConfig: {
-    axios: {
-      baseURL: process.env.API_BASE_URL,
-    }
+  axios: {
+    baseURL: process.env.API_BASE_URL,
   },
+
+  // privateRuntimeConfig: {
+  //   axios: {
+  //     baseURL: process.env.API_BASE_URL,
+  //   }
+  // },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {

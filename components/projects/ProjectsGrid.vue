@@ -2,101 +2,38 @@
   <section class="projects-grid">
     <div class="projects-grid__wrap">
       <IqosaCursor />
-      <SwitchProjects class="switch-project-grid" :view="view" />
-      <h1 class="projects-grid__title">Featured <span>cases</span></h1>
+      <SwitchProjects class="switch-project-grid" :view="view" :data="data"/>
+      <h1 class="projects-grid__title">{{ data.projects_title.thin_text }} <span>{{ data.projects_title.bold_text }}</span></h1>
       <div class="projects-grid__description">
-        <p>SHARE THE CLIENT'S PHILOSOPHY.</p>
-        <p>HIS SPACE - HIS CHARACTER</p>
+        <p v-for="(item, i) in data.projects_subtitle" :key="i">{{ item }}</p>
       </div>
       <ul class="projects-interior">
-        <li class="projects-interior__item" data-cursor="link">
+        <li class="projects-interior__item" data-cursor="link"  v-for="(item, i) in list" :key="i">
           <div class="projects-interior__block">
-            <img  class="projects-interior__img" :src="require('~/assets/img/projects/interior/1.jpg')" alt="">
+            <img  class="projects-interior__img" :src="getImg(item.main_picture)" alt="">
           </div>
           <nuxt-link :to="localePath('/project/iq-08-sl')" class="projects-interior__link projects-interior-link">
-          <!-- <a class="projects-interior__link projects-interior-link" href="#"> -->
             <span class="projects-interior-link__head">
-              <span class="projects-interior-link__address projects-interior-link__address--italic">Odessa,</span>
-              <span class="projects-interior-link__address">Ukraine</span>
+              <span class="projects-interior-link__address projects-interior-link__address--italic">{{ item.city }},</span>
+              <span class="projects-interior-link__address">{{ item.country }}</span>
             </span>
             <span class="projects-interior-link__middle">
               <span class="projects-name">
                 <span class="projects-name__item">
-                  <span>IQ</span>-08-SL
+                  <span>{{ item.type }}</span>-{{ item.number }}
                 </span>
               </span>
             </span>
             <span class="projects-interior-link__bottom">
               <span class="projects-interior-link__bottom-left">
-                <span>Release date</span>
-                <span>2021</span>
+                <span>{{ data.date_label }}</span>
+                <span>{{ item.release_date }}</span>
               </span>
               <span class="projects-interior-link__bottom-right">
-                <span>SQ.M.</span>
-                <span>560M2</span>
+                <span>{{ data.area_label }}</span>
+                <span>{{ item.area }}{{ data.area_unit }}</span>
               </span>
             </span>
-          <!-- </a> -->
-          </nuxt-link>
-        </li>
-        <li class="projects-interior__item" data-cursor="link">
-          <div class="projects-interior__block">
-            <img  class="projects-interior__img" :src="require('~/assets/img/projects/interior/2.jpg')" alt="">
-          </div>
-          <!-- <a class="projects-interior__link projects-interior-link" href="#"> -->
-          <nuxt-link :to="localePath('/project/iq-87-or')" class="projects-interior__link projects-interior-link">
-            <span class="projects-interior-link__head">
-              <span class="projects-interior-link__address projects-interior-link__address--italic">Kyiv,</span>
-              <span class="projects-interior-link__address">Ukraine</span>
-            </span>
-            <span class="projects-interior-link__middle">
-              <span class="projects-name">
-                <span class="projects-name__item">
-                  <span>IQ</span>-87-OR
-                </span>
-              </span>
-            </span>
-            <span class="projects-interior-link__bottom">
-              <span class="projects-interior-link__bottom-left">
-                <span>Release date</span>
-                <span>2021</span>
-              </span>
-              <span class="projects-interior-link__bottom-right">
-                <span>SQ.M.</span>
-                <span>119M2</span>
-              </span>
-            </span>
-          </nuxt-link>
-          <!-- </a> -->
-        </li>
-        <li class="projects-interior__item" data-cursor="link">
-          <div class="projects-interior__block">
-            <img  class="projects-interior__img" :src="require('~/assets/img/projects/interior/3.jpg')" alt="">
-          </div>
-          <nuxt-link :to="localePath('/project/iq-86-sl')" class="projects-interior__link projects-interior-link">
-          <!-- <a class="projects-interior__link projects-interior-link" href="#"> -->
-            <span class="projects-interior-link__head">
-              <span class="projects-interior-link__address projects-interior-link__address--italic">Odessa,</span>
-              <span class="projects-interior-link__address">Ukraine</span>
-            </span>
-            <span class="projects-interior-link__middle">
-              <span class="projects-name">
-                <span class="projects-name__item">
-                  <span>IQ</span>-86-SL
-                </span>
-              </span>
-            </span>
-            <span class="projects-interior-link__bottom">
-              <span class="projects-interior-link__bottom-left">
-                <span>Release date</span>
-                <span>2021</span>
-              </span>
-              <span class="projects-interior-link__bottom-right">
-                <span>SQ.M.</span>
-                <span>101M2</span>
-              </span>
-            </span>
-          <!-- </a> -->
           </nuxt-link>
         </li>
       </ul>
@@ -112,6 +49,19 @@ export default {
     view: {
       type: String,
       required: true
+    },
+    data: {
+      type: Object,
+      required: true
+    },
+    list: {
+      type: Array,
+      required: true
+    }
+  },
+	data() {
+		return {
+      baseUrl: process.env.baseUrl,
     }
   },
   mounted() {
@@ -133,6 +83,9 @@ export default {
     ...mapMutations({
         setPlug: 'plug/setVisible',
     }),
+    getImg(img) {
+      return `${this.baseUrl}${img}`
+    }
   }
 }
 </script>

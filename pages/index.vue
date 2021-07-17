@@ -25,41 +25,16 @@ export default {
 		Team,
 		TeamMobi,
     },
-	async asyncData({ $axios, redirect, store }) {
+	async asyncData({ store }) {
 		if (!store.getters['lang/main/data']) {
 			try {
-				const mainPage = await $axios.$get('/main')
-				// console.log(mainPage)
-				store.commit('lang/main/setData', mainPage.content)
-				// console.log(store)
-				// console.log(store.commit())
+				await store.dispatch('lang/main/getMainPageContent', '/main')
 			} catch(e) {
-				console.error(e)
-				// redirect(`404`);
+				// redsirect(`404`);
+				throw new Error(e);
 			}
 		}
 	},
-	// async asyncData({ $axios }) {
-		// try {
-			// const getPreloader = await $axios.$get(`https://backiqosa.staj.fun/api/parts`)
-			// return { getPreloader }
-			// console.log(getPreloader)
-		// } catch (e) {
-			// console.log(e)
-			// throw(e)
-		// }
-
-
-    //   await store.dispatch("about/getAboutAction", {
-        // apiUrl: `${i18n.locale}/about`,
-    //   });
-    // } catch (e) {
-    //   throw new Error(e);
-    // }
-		// const ip = await $axios.$get('/parts')
-		// console.log('ip', ip)
-		// return { ip }
-	// },
     beforeMount() {
 		window.addEventListener('resize', this.onWindowResize);
         // window.addEventListener('scroll', this.handleScroll);

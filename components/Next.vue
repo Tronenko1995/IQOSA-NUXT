@@ -1,18 +1,39 @@
-<template>
+ <template>
     <nuxt-link :to="localePath('/join')"  class="next">
         <div class="next__title">
             <ul class="animate-text animate-text--next">
                 <li class="animate-text__item">
-                    <a href="#" class="animate-text__button animate-text__button--cursive  animate-text__button--next">CAREER</a>
-                    <a href="#" class="animate-text__button animate-text__button--next animate-text__button--absolute">JOIN</a>
+                    <a href="#" class="animate-text__button animate-text__button--cursive  animate-text__button--next">{{ data.bottom_block_text }}</a>
+                    <a href="#" class="animate-text__button animate-text__button--next animate-text__button--absolute">{{ data.bottom_block_hover_text }}</a>
                 </li>
             </ul>
         </div>
         <div class="next__image">
-            <img :src="require('~/assets/img/project/8.jpg')" alt="">
+            <img :src="getImg(data.bottom_block_picture)" alt="">
         </div>
     </nuxt-link>
 </template>
+
+<script>
+    export default {
+    props: {
+        data: {
+            type: Object,
+            required: true
+        }
+    },
+    data() {
+        return {
+            baseUrl: process.env.baseUrl,
+        }
+    },
+    methods: {
+        getImg(img) {
+            return `${this.baseUrl}${img}`
+        }
+    }
+}
+</script>
 
 <style lang="scss">
 .next {
