@@ -20,29 +20,28 @@ export const getters = {
 		return state.list;
 	},
 }
-
 export const actions = {
-	getProjectsPageContent(state, api) {
+	getCareerPageContent(state, api) {
 		return new Promise(resolve => {
 			this.$axios
 			.$get(api, { loading: true })
 			.then(response => {
 				state.commit("setData", response.content);
 				resolve(response.content);
-			})
-			.catch((e) => {
+			  })
+			  .catch((e) => {
 				throw new Error(e);
-			})
-		  });
+			  })
+		});
 	},
-	getProjects(state, api) {
+	getVacancy(state, api) {
 		return new Promise(resolve => {
 			this.$axios
 			.$get(api, { loading: true })
 			.then(response => {
 				state.commit("setList", response.content);
 				resolve(response.data);
-			})
+			  })
 			.catch((e) => {
 				throw new Error(e);
 			})

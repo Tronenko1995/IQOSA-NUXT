@@ -6,28 +6,28 @@
                 <div class="contacts__row">
                     <div class="contacts__location">
                         <div class="contacts__location-text">
-                            <span> UKRAINE, </span>
+                            <span> {{ data.country }}, </span>
                         </div>
                         <div class="contacts__location-text contacts__location-text--light">
-                            <span>KYIV head office</span>
+                            <span>{{ data.address }}</span>
                         </div>
                     </div>
-                    <h1 class="contacts__title">50°25'28.6"N</h1>
+                    <h1 class="contacts__title">{{ data.latitude }}</h1>
                 </div>
                 <div class="contacts__row">
-                    <p class="contacts__description">30°28'40.3"E</p>
+                    <p class="contacts__description">{{ data.longitude }}</p>
                     <div
                         class="make-request job__request"
                         @mouseover="findElement($event)"
                         @mouseleave="animateTextHide($event)"
                         >
-                        <a href="https://goo.gl/maps/7gbtyynAFB1uizsHA" target="_blank" class="make-request__link">
-                            <span class="make-request__text">SHOW ON</span>
+                        <a :href="data.map_link" target="_blank" class="make-request__link">
+                            <span class="make-request__text">{{ data.map_link_text }}</span>
                             <span class="make-request__change">
                             <span class="make-request__span make-request__span--first"
-                                >MAP</span
+                                >{{ data.map_link_text_animated }}</span
                             >
-                            <span class="make-request__span">MAP</span>
+                            <span class="make-request__span">{{ data.map_link_text_animated }}</span>
                             </span>
                         </a>
                         <span class="make-request__line"></span>
@@ -47,6 +47,12 @@ export default {
     components: {
         IcosahedronContacts,
     },
+	props: {
+		data: {
+			type: Object,
+			required: true
+		}
+	},
     mounted() {
         if (this.preloader) {
         setTimeout(() => {

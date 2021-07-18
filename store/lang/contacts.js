@@ -15,17 +15,17 @@ export const getters = {
 }
 
 export const actions = {
-	getMainPageContent(state, api) {
+	getContactsPageContent(state, api) {
 		return new Promise(resolve => {
 			this.$axios
-			.$get(api, { loading: true })
-			.then(response => {
+			  .$get(api, { loading: true })
+			  .then(response => {
 				state.commit("setData", response.content);
 				resolve(response.content);
-			})
-			.catch((e) => {
+			  })
+			  .catch((e) => {
 				throw new Error(e);
-			})
-		});
+			  })
+		  });
 	}
 }

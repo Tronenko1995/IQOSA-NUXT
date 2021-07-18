@@ -1,22 +1,23 @@
 <template>
     <section class="career">
         <h1 class="career__title">
-            <p class="career__title-text">CAREER</p>
+            <p class="career__title-text">{{ data.title }}</p>
         </h1>
         <h2 class="career__description">
-            <p class="career__description-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit,sed do eiusmod tempor i</p>
+            <p class="career__description-text">{{ data.subtitle[0].text_line }}</p>
         </h2>
-        <ul class="career__list">
-            <li class="job" ref="job" @mouseover="hideJobs()" @mouseleave="showJobs()" @click="job(item.id)" v-for="item in jobs" :key="item.id">
+        <ul class="career__list" v-if="list">
+            <li v-for="(item, i) in list" class="job" ref="job" @mouseover="hideJobs()" @mouseleave="showJobs()" @click="job(i)"  :key="i">
                 <hr class="job__line">
                 <div class="job__for-counter">
-                    <p class="job__counter">JOB {{item.id}}</p>
+                    <p class="job__counter">{{ data.numeration_text }} {{i+1}}</p>
                 </div>
                 <div class="job__info">
                     <h2 class="job__title">
-                        <p class="job__title-text">{{ item.name }}</p>
+                        <p class="job__title-text">{{ item.vacancy_name }}</p>
                     </h2>
-                    <div class="job__visible" v-html="item.visible"></div>
+                    <!-- <div class="job__visible" v-html="item.visible"></div> -->
+                    <div class="job__visible"><p>text</p></div>
                     <div class="job__hidden">
                     <div v-html="item.hidden"></div>
                         <nuxt-link :to="localePath('/form')" class="job__link job-link arrow-link" @mouseover.native="findElement($event)" @mouseleave.native="animateTextHide($event)">
@@ -32,25 +33,25 @@
                     </div>
                 </div>
                 <img class="job__svg" :src="require('~/assets/svg/arrow-career.svg')" alt="" width="42" height="42">
-                <hr class="job__line job__line--last" v-if="item.id === jobs.length">
+                <hr class="job__line job__line--last" v-if="i === list.length">
             </li>
         </ul>
         <div class="career__no-vacancy">
-            <p class="job__title job__title--animate jsTitleAnimation">DIDN’T FIND THE VACANCY</p>
+            <p class="job__title job__title--animate jsTitleAnimation">{{ data.bottom_title_bold }}</p>
             <div class="job__descr job__descr--animate jsTitleAnimation">
-                <p class="job__title job__title--italic ">JUST DROP US A LINE </p>
+                <p class="job__title job__title--italic ">{{ data.bottom_title_thin }}</p>
                 <div
                 class="make-request job__request"
                 @mouseover="findElement($event)"
                 @mouseleave="animateTextHide($event)"
                 >
                 <nuxt-link :to="localePath('/sayhi')" class="make-request__link">
-                    <span class="make-request__text">get request</span>
+                    <span class="make-request__text">{{ data.vacancy_link_text }}</span>
                     <span class="make-request__change">
                     <span class="make-request__span make-request__span--first"
-                        >now</span
+                        >{{ data.vacancy_link_text_animated }}</span
                     >
-                    <span class="make-request__span">now</span>
+                    <span class="make-request__span">{{ data.vacancy_link_text_animated }}</span>
                     </span>
                 </nuxt-link>
                 <span class="make-request__line"></span>
@@ -63,27 +64,24 @@
 <script>
 import { mapMutations } from 'vuex'
 export default {
+	props: {
+		data: {
+			type: Object,
+			required: true
+		},
+		list: {
+			type: Array,
+		}
+	},
     data() {
         return {
             jobs: [
                 {
                     id: 1,
                     name: 'architecture',
-                    visible: '<div><p>Итак, если ты:</p></div><ul><li>имеешь высшее профильное образование и опыт работы от 3х лет;</li><li>мобильный, активный, в “теме” рынка современных материалов, нормы их расхода;</li><li>знаешь процессы ремонтно-строительных работ и у тебя всегда всё под контролем.</li></ul><p>Ты - тот, кто нам нужен!</p>',
-                    hidden: '<p>Обязанности:</p><ul><li>читать чертежи, составлять и контролировать сметную документацию по проектам;</li><li>контролировать расходование и списание материальных ресурсов;</li><li>учет и анализ взаиморасчетов с контрагентами и поставщиками, контроль выполнения договорных обязательств;</li><li>проверка актов выполненных работ (соответствия объемов выполненных работ).</li></ul><p>Что еще важно:</p><ul><li>личное авто;</li><li>контролировать расходование и списание материальных ресурсов;</li><li>организаторские навыки;</li><li>пунктуальность;</li></ul>',
-                },
-                {
-                    id: 2,
-                    name: '3D Max Visualisator',
                     visible: '<p>Итак, если ты:</p><ul><li>имеешь высшее профильное образование и опыт работы от 3х лет;</li><li>мобильный, активный, в “теме” рынка современных материалов, нормы их расхода;</li><li>знаешь процессы ремонтно-строительных работ и у тебя всегда всё под контролем.</li></ul><p>Ты - тот, кто нам нужен!</p>',
                     hidden: '<p>Обязанности:</p><ul><li>читать чертежи, составлять и контролировать сметную документацию по проектам;</li><li>контролировать расходование и списание материальных ресурсов;</li><li>учет и анализ взаиморасчетов с контрагентами и поставщиками, контроль выполнения договорных обязательств;</li><li>проверка актов выполненных работ (соответствия объемов выполненных работ).</li></ul><p>Что еще важно:</p><ul><li>личное авто;</li><li>контролировать расходование и списание материальных ресурсов;</li><li>организаторские навыки;</li><li>пунктуальность;</li></ul>',
-                },
-                {
-                    id: 3,
-                    name: 'EnginEer',
-                    visible: '<p>Итак, если ты:</p><ul><li>имеешь высшее профильное образование и опыт работы от 3х лет;</li><li>мобильный, активный, в “теме” рынка современных материалов, нормы их расхода;</li><li>знаешь процессы ремонтно-строительных работ и у тебя всегда всё под контролем.</li></ul><p>Ты - тот, кто нам нужен!</p>',
-                    hidden: '<p>Обязанности:</p><ul><li>читать чертежи, составлять и контролировать сметную документацию по проектам;</li><li>контролировать расходование и списание материальных ресурсов;</li><li>учет и анализ взаиморасчетов с контрагентами и поставщиками, контроль выполнения договорных обязательств;</li><li>проверка актов выполненных работ (соответствия объемов выполненных работ).</li></ul><p>Что еще важно:</p><ul><li>личное авто;</li><li>контролировать расходование и списание материальных ресурсов;</li><li>организаторские навыки;</li><li>пунктуальность;</li></ul>',
-                },
+                }
             ]
       }
     },
@@ -198,7 +196,7 @@ export default {
         },
         job(id) {
             console.log(id)
-            let job = this.$refs.job[id-1]
+            let job = this.$refs.job[id]
             if (!job.classList.contains("job--active")) {
                     this.$gsap.to(job.querySelector(".job__hidden"), {
                         height: "auto",
