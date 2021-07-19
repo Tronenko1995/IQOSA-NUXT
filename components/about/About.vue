@@ -8,14 +8,14 @@
             <Motto class="motto--about" :motto-list="data.hero_left_text" :motto-list-extra="data.hero_right_text"/>
         </section>
         <section class="scroll-text">
-            <p ref="text1" class="scroll-text__text">{{ data.first_animated_text }}</p>
-            <p ref="text2" class="scroll-text__text">{{ data.second_animated_text }}</p>
+            <div ref="text1" class="scroll-text__text" v-html="data.first_animated_text"></div>
+            <div ref="text2" class="scroll-text__text" v-html="data.second_animated_text"></div>
         </section>
 			<Team :data="data" v-if="desktop" />
 			<TeamMobi :data="data" v-if="!desktop" />
         <section class="scroll-text">
-            <p ref="text3" class="scroll-text__text">{{ data.third_animated_text }}</p>
-            <p ref="text4" class="scroll-text__text">{{ data.fourth_animated_text }}</p>
+            <div ref="text3" class="scroll-text__text" v-html="data.third_animated_text"></div>
+            <div ref="text4" class="scroll-text__text" v-html="data.fourth_animated_text"></div>
         </section>
         <AboutSlider :list="data.slider_pictures" />
         <Next :data="data"/>
@@ -178,7 +178,7 @@ export default {
             }
         },
 		testSize() {
-			console.log('change')
+			// console.log('change')
             window.innerWidth > 1024 ? this.desktop = true : this.desktop = false
         },
         onWindowResize() {

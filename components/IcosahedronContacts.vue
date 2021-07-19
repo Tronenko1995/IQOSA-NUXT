@@ -4,7 +4,7 @@
 
 <script>
 import gsap from "gsap"
-import Sketch from "~/plugins/icosahedron/contacts.js";
+import Sketch from "~/plugins/icosahedron/";
 export default {
   name: "IcosahedronContacts",
   data: function () {

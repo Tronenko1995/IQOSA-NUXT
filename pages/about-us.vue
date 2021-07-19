@@ -10,15 +10,32 @@
 import About from '@/components/about/About.vue'
 export default {
     layout: 'projects',
-	async asyncData({ store }) {
-		if (!store.getters['lang/about/data']) {
-			try {
-          await store.dispatch('lang/about/getAboutPageContent', '/about')
-			} catch(e) {
-				// redirect(`404`);
-        throw new Error(e);
-			}
+	async asyncData({ store, i18n }) {
+		// if (!store.getters['lang/about/data']) {
+		try {
+			await store.dispatch('lang/parts/getPartsContent', `/parts?lang=${i18n.locale}`)
+		} catch(e) {
+			// redsirect(`404`);
+			throw new Error(e);
 		}
+		try {
+			await store.dispatch('lang/about/getAboutPageContent', `/about?lang=${i18n.locale}`)
+		} catch(e) {
+			// redirect(`404`);
+		throw new Error(e);
+		}
+		// }
+	},
+    beforeMount() {
+		this.testLang()
+    },
+	methods: {
+		testLang() {
+			const html = document.getElementsByTagName('html')
+			let lang
+			this.$i18n.locale === 'ua' ? lang = 'uk' : lang = this.$i18n.locale
+			html[0].setAttribute('lang', lang)
+		}	
 	},
     components: {
 		About,

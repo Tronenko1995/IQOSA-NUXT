@@ -129,7 +129,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .privaty-policy {
 	margin-top: 367px;
 	margin-left: auto;

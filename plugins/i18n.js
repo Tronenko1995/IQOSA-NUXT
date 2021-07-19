@@ -5,6 +5,11 @@ export default function ({ app }) {
     }
     // onLanguageSwitched called right after a new locale has been set
     app.i18n.onLanguageSwitched = (oldLocale, newLocale) => {
-      console.log(oldLocale, newLocale)
+      // console.log(oldLocale, newLocale)
+      if (process.client) {
+        const DATE = new Date();
+        DATE.setTime(DATE.getTime() + 365 * 24 * 3600 * 1000);
+        document.cookie = 'lang=' + newLocale + '; path=/; expires=' + DATE.toUTCString();
+      }
     }
   }

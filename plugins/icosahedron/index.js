@@ -7,7 +7,7 @@ import fragment from "./shader/fragment.glsl";
 import fragment1 from "./shader/fragment1.glsl";
 import vertex from "./shader/vertex.glsl";
 // import * as dat from "dat.gui";
-import gsap from "gsap";
+// import gsap from "gsap";
 
 function getCookie(name) {
   const value = `; ${document.cookie}`;
@@ -18,74 +18,74 @@ function getCookie(name) {
 
 function getBg() {
   // let url = document.body.dataset.url;
-  let url = "";
+  // let url = "";
 
   let images = {
     home: {
       en: {
-        desktop: 'iqosahedron/Main en.png',
-        tablet: 'iqosahedron/Main 769-1024 en.png',
-        mobile: 'iqosahedron/Main page 375-414 en.png'
+        desktop: '/iqosahedron/Main en.png',
+        tablet: '/iqosahedron/Main 769-1024 en.png',
+        mobile: '/iqosahedron/Main page 375-414 en.png'
       },
       ru: {
-        desktop: 'iqosahedron/Main ru.png',
-        tablet: 'iqosahedron/Main 769-1024 ru.png',
-        mobile: 'iqosahedron/Main page 375-414 ru.png'
+        desktop: '/iqosahedron/Main ru.png',
+        tablet: '/iqosahedron/Main 769-1024 ru.png',
+        mobile: '/iqosahedron/Main page 375-414 ru.png'
       },
       ua: {
-        desktop: 'iqosahedron/Main ua.png',
-        tablet: 'iqosahedron/Main 769-1024 ua.png',
-        mobile: 'iqosahedron/Main page 375-414 ua.png'
+        desktop: '/iqosahedron/Main ua.png',
+        tablet: '/iqosahedron/Main 769-1024 ua.png',
+        mobile: '/iqosahedron/Main page 375-414 ua.png'
       }
     },
     contacts: {
       en: {
-        desktop: 'iqosahedron/Contacts en.png',
-        tablet: 'iqosahedron/Contacts 769-1024 en.png',
-        mobile: 'iqosahedron/Contacts 375-414 en.png',
+        desktop: '/iqosahedron/Contacts en.png',
+        tablet: '/iqosahedron/Contacts 769-1024 en.png',
+        mobile: '/iqosahedron/Contacts 375-414 en.png',
       },
       ru: {
-        desktop: 'iqosahedron/Contacts ru.png',
-        tablet: 'iqosahedron/Contacts 769-1024 ru.png',
-        mobile: 'iqosahedron/Contacts 375-414 ru.png',
+        desktop: '/iqosahedron/Contacts ru.png',
+        tablet: '/iqosahedron/Contacts 769-1024 ru.png',
+        mobile: '/iqosahedron/Contacts 375-414 ru.png',
       },
       ua: {
-        desktop: 'iqosahedron/Contacts ua.png',
-        tablet: 'iqosahedron/Contacts 769-1024 ua.png',
-        mobile: 'iqosahedron/Contacts 375-414 ua.png',
+        desktop: '/iqosahedron/Contacts ua.png',
+        tablet: '/iqosahedron/Contacts 769-1024 ua.png',
+        mobile: '/iqosahedron/Contacts 375-414 ua.png',
       }
     },
     error: {
       en: {
-        desktop: 'iqosahedron/error en.png',
-        tablet: 'iqosahedron/error page 769-1024 en.png',
-        mobile: 'iqosahedron/error page 375-414 en.png'
+        desktop: '/iqosahedron/error en.png',
+        tablet: '/iqosahedron/error page 769-1024 en.png',
+        mobile: '/iqosahedron/error page 375-414 en.png'
       },
       ru: {
-        desktop: 'iqosahedron/error ru.png',
-        tablet: 'iqosahedron/error page 769-1024 ru.png',
-        mobile: 'iqosahedron/error page 375-414 ru.png'
+        desktop: '/iqosahedron/error ru.png',
+        tablet: '/iqosahedron/error page 769-1024 ru.png',
+        mobile: '/iqosahedron/error page 375-414 ru.png'
       },
       ua: {
-        desktop: 'iqosahedron/error ua.png',
-        tablet: 'iqosahedron/error page 769-1024 ua.png',
-        mobile: 'iqosahedron/error page 375-414 ua.png'
+        desktop: '/iqosahedron/error ua.png',
+        tablet: '/iqosahedron/error page 769-1024 ua.png',
+        mobile: '/iqosahedron/error page 375-414 ua.png'
       }
     }
   }
 
   let page_name = "";
   let size = "";
-  let lang = getCookie("pll_language") || "en";
-  const container = document.querySelector(`[data-barba="container"]`);
+  let lang = getCookie("lang") || "ru";
+  const container = document.querySelector(`[data-iqosahedron]`);
 
-  // if (container.dataset.barbaNamespace === 'index') {
-  //   page_name = "home"
-  // } else if (container.dataset.barbaNamespace === 'contacts') {
-  //   page_name = "contacts"
-  // } else {
-  //   page_name = "error"
-  // }
+  if (container.dataset.iqosahedron === 'home') {
+    page_name = "home"
+  } else if (container.dataset.iqosahedron === 'contacts') {
+    page_name = "contacts"
+  } else {
+    page_name = "error"
+  }
 
   if (window.innerWidth > 1024) {
     size = "desktop"
@@ -94,10 +94,11 @@ function getBg() {
   } else {
     size = "mobile"
   }
-
   // return images[page_name][lang][size];
   // return images["error"]["en"]["desktop"];
-  return images["home"]["en"][size];
+  console.log(container)
+  console.log(images[page_name][lang][size])
+  return images[page_name][lang][size];
 
 }
 

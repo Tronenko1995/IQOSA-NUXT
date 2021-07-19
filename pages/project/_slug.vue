@@ -8,6 +8,7 @@
                 <div class="project__title">
                     <span>IQ</span>-08-SL
                 </div>
+                <p>{{ slug }}</p>
                 <div class="project__image">
                     <img :src="require('~/assets/img/project/1.jpg')" alt="">
                 </div>
@@ -122,6 +123,17 @@
 import { mapMutations } from 'vuex'
 export default {
   layout: 'project',
+    async asyncData({ store, i18n, params }) {
+        try {
+            const slug = params.slug // When calling /abc the slug will be "abc"
+			await store.dispatch('lang/parts/getPartsContent', `/projects/${slug}?lang=${i18n.locale}`)
+            return { slug }
+		} catch(e) {
+			// redsirect(`404`);
+			throw new Error(e);
+		}
+      
+    },
     data() {
         return {
             imgParallax: null

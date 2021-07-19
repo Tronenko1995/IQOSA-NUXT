@@ -1,6 +1,6 @@
 <template>
     <main class="contacts-page">
-        <IcosahedronContacts />
+        <IcosahedronCrystal />
         <section class="contacts">
             <div class="contacts__info">
                 <div class="contacts__row">
@@ -40,13 +40,9 @@
 </template>
 
 <script>
-import IcosahedronContacts from '@/components/IcosahedronContacts.vue'
 import { mapMutations } from 'vuex'
 export default {
     layout: 'contacts',
-    components: {
-        IcosahedronContacts,
-    },
 	props: {
 		data: {
 			type: Object,
@@ -214,6 +210,7 @@ export default {
         display: flex;
         flex-direction: column;
         align-self: flex-start;
+        max-width: 200px;
         &-text {
             overflow: hidden;
             span {

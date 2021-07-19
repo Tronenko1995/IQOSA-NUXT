@@ -4,7 +4,7 @@
 
 <script>
 import gsap from "gsap"
-import Sketch from "~/plugins/icosahedron/error.js";
+import Sketch from "~/plugins/icosahedron";
 export default {
   name: "IcosahedronError",
   data: function () {

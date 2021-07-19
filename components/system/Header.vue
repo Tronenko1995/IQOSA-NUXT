@@ -36,15 +36,15 @@
             </nav>
             <div class="lang">
                 <ul class="lang__list">
-                    <li class="lang__item" @mouseover="showCursive($event)" @mouseleave="hideCursive($event)">
+                    <li class="lang__item" :class="{'lang__item--selected': $i18n.locale === 'ua' }" @mouseover="showCursive($event)" @mouseleave="hideCursive($event)">
                         <nuxt-link :to="switchLocalePath('ua')" class="lang__link">UA</nuxt-link>
                         <nuxt-link :to="switchLocalePath('ua')" class="lang__link lang__link--cursive">UA</nuxt-link>
                     </li>
-                    <li class="lang__item" @mouseover="showCursive($event)" @mouseleave="hideCursive($event)">
+                    <li class="lang__item" :class="{'lang__item--selected': $i18n.locale === 'ru' }" @mouseover="showCursive($event)" @mouseleave="hideCursive($event)">
                         <nuxt-link :to="switchLocalePath('ru')" class="lang__link">RU</nuxt-link>
                         <nuxt-link :to="switchLocalePath('ru')" class="lang__link lang__link--cursive">RU</nuxt-link>
                     </li>
-                    <li class="lang__item lang__item--selected">
+                    <li class="lang__item " :class="{'lang__item--selected': $i18n.locale === 'en' }">
                         <nuxt-link :to="switchLocalePath('en')" class="lang__link">EN</nuxt-link>
                         <nuxt-link :to="switchLocalePath('en')" class="lang__link lang__link--cursive">EN</nuxt-link>
                     </li>

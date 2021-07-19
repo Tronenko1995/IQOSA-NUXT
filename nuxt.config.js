@@ -61,7 +61,7 @@ export default {
     locales: ['en', 'ru', 'ua'],
     defaultLocale: 'en',
     vueI18n: {
-      fallbackLocale: 'en',
+      fallbackLocale: 'ru',
       messages: {
         en: {
           welcome: 'Welcome'
@@ -73,7 +73,21 @@ export default {
           welcome: 'Добрий день'
         }
       }
-    }
+    },
+    detectBrowserLanguage: {
+      useCookie: true,
+      cookieKey: 'lang',
+      alwaysRedirect: true,
+      fallbackLocale: 'ru'
+    },
+    vuex: {
+      moduleName: 'i18n',
+      mutations: {
+        setLocale: 'I18N_SET_LOCALE',
+        setMessages: false
+      },
+      preserveState: false
+    },
   },
 
   axios: {

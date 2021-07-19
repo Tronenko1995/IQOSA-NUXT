@@ -1,6 +1,6 @@
 <template>
     <main class="error-page">
-        <IcosahedronError />
+        <IcosahedronCrystal />
         <section class="error">
             <div class="error__info">
                 <h1 class="error__title">OOOOOPS</h1>
@@ -30,13 +30,12 @@
 </template>
 
 <script>
-import IcosahedronError from '@/components/IcosahedronError.vue'
 import { mapMutations } from 'vuex'
 export default {
     name: 'Error',
     layout: 'error',
-    components: {
-        IcosahedronError,
+    beforeMount() {
+        this.testPage()
     },
     mounted() {
         if (this.preloader) {
@@ -132,6 +131,9 @@ export default {
                 });
             }
 		},
+		testPage() {
+			document.body.dataset.iqosahedron = 'error'
+		}
     }
 }
 </script>

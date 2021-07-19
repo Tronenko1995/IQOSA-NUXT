@@ -35,15 +35,15 @@
         <Social @showCursive="showCursive($event)" @hideCursive="hideCursive($event)"/>
         <div class="language">
             <ul class="language__list">
-                <li class="language__item language__item--selected">
+                <li class="language__item" :class="{'language__item--selected': $i18n.locale === 'en' }">
                    <nuxt-link :to="switchLocalePath('en')" class="language__link">English,</nuxt-link>
                    <span class="language__line"></span>
                 </li>
-                <li class="language__item">
+                <li class="language__item" :class="{'language__item--selected': $i18n.locale === 'ru' }">
                    <nuxt-link :to="switchLocalePath('ru')" class="language__link">Русский,</nuxt-link>
                    <span class="language__line"></span>
                 </li>
-                <li class="language__item">
+                <li class="language__item" :class="{'language__item--selected': $i18n.locale === 'ua' }">
                    <nuxt-link :to="switchLocalePath('ua')" class="language__link">Українська</nuxt-link>
                    <span class="language__line"></span>
                 </li>
