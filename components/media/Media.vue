@@ -174,6 +174,7 @@ export default {
                     opacity: 0.15;
                     .media__title-link {
                         cursor: default;
+                        pointer-events: none;
                     }
                 }
             }

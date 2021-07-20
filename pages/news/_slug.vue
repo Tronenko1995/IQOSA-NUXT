@@ -161,6 +161,35 @@
 import { mapMutations } from 'vuex'
 export default {
   layout: 'project',
+    async asyncData({ store, i18n, params }) {
+		try {
+			await store.dispatch('lang/parts/getPartsContent', `/parts?lang=${i18n.locale}`)
+		} catch(e) {
+			// redirect(`404`);
+			throw new Error(e);
+		}
+        // try {
+        //     await store.dispatch('lang/article/getArticlePageContent', `/project_page?lang=${i18n.locale}`)
+		// } catch(e) {
+		// 	// redsirect(`404`);
+		// 	throw new Error(e);
+		// }
+        try {
+          await store.dispatch('lang/articles/getArticles', '/articles')
+			} catch(e) {
+        // redirect(`404`);
+        throw new Error(e);
+        }
+        try {
+            const slug = params.slug // When calling /abc the slug will be "abc"
+			await store.dispatch('lang/article/getArticle', `/articles/${slug}?lang=${i18n.locale}`)
+            return { slug }
+		} catch(e) {
+			// redsirect(`404`);
+			throw new Error(e);
+		}
+      
+    },
     data() {
         return {
             imgParallax: null
@@ -188,6 +217,9 @@ export default {
     preloader() { return this.$store.getters['preloader/preloader'] },
     duration() { return this.$store.getters['plug/duration'] },
 	modal() { return this.$store.getters['modal/modal'] },
+    // data() { return this.$store.getters['lang/article/data'] },
+    article() { return this.$store.getters['lang/article/article'] },
+    list() { return this.$store.getters['lang/articles/list'] },
   },
     methods: {
         ...mapMutations({

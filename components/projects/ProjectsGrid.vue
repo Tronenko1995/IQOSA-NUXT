@@ -12,7 +12,7 @@
           <div class="projects-interior__block">
             <img  class="projects-interior__img" :src="getImg(item.main_picture)" alt="">
           </div>
-          <nuxt-link :to="localePath('/project/iq-08-sl')" class="projects-interior__link projects-interior-link">
+          <nuxt-link :to="localePath(`/project/${item.link}`)" class="projects-interior__link projects-interior-link">
             <span class="projects-interior-link__head">
               <span class="projects-interior-link__address projects-interior-link__address--italic">{{ item.city }},</span>
               <span class="projects-interior-link__address">{{ item.country }}</span>

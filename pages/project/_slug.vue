@@ -124,6 +124,12 @@ import { mapMutations } from 'vuex'
 export default {
   layout: 'project',
     async asyncData({ store, i18n, params }) {
+		try {
+			await store.dispatch('lang/parts/getPartsContent', `/parts?lang=${i18n.locale}`)
+		} catch(e) {
+			// redirect(`404`);
+			throw new Error(e);
+		}
         try {
             await store.dispatch('lang/project/getProjectPageContent', `/project_page?lang=${i18n.locale}`)
 		} catch(e) {

@@ -22,19 +22,18 @@ export const getters = {
 }
 
 export const actions = {
-	getNewsPageContent(state, api) {
-    return new Promise(resolve => {
-        this.$axios
-            .$get(api, { loading: true })
-            .then(response => {
-            // console.log('response', response)
-            state.commit("setData", response.content);
-            resolve(response.content);
-            })
-            .catch((e) => {
-            throw new Error(e);
-            })
-        });
+	getArticlesPageContent(state, api) {
+		return new Promise(resolve => {
+			this.$axios
+			.$get(api, { loading: true })
+			.then(response => {
+				state.commit("setData", response.content);
+				resolve(response.content);
+			})
+			.catch((e) => {
+				throw new Error(e);
+			})
+		  });
 	},
 	getArticles(state, api) {
 		return new Promise(resolve => {
@@ -48,5 +47,5 @@ export const actions = {
 				throw new Error(e);
 			})
 		});
-	},
+	}
 }
