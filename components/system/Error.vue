@@ -3,21 +3,21 @@
         <IcosahedronCrystal />
         <section class="error">
             <div class="error__info">
-                <h1 class="error__title">OOOOOPS</h1>
+                <h1 class="error__title">{{ data.title_big_bold }}</h1>
                 <div class="error__row">
-                    <p class="error__description">404 error</p>
+                    <p class="error__description">{{ data.title_big_thin }}</p>
                     <div
                         class="make-request job__request"
                         @mouseover="findElement($event)"
                         @mouseleave="animateTextHide($event)"
                         >
                         <nuxt-link :to="localePath('/')" class="make-request__link">
-                            <span class="make-request__text">back to</span>
+                            <span class="make-request__text">{{ data.link_text }}</span>
                             <span class="make-request__change">
                             <span class="make-request__span make-request__span--first"
-                                >main</span
+                                >{{ data.link_text_animated }}</span
                             >
-                            <span class="make-request__span">main</span>
+                            <span class="make-request__span">{{ data.link_text_animated }}</span>
                             </span>
                         </nuxt-link>
                         <span class="make-request__line"></span>
@@ -34,6 +34,15 @@ import { mapMutations } from 'vuex'
 export default {
     name: 'Error',
     layout: 'error',
+    async fetch() {
+        try {
+            await this.$store.dispatch('lang/error/getErrorPageContent', `/404?lang=${this.$i18n.locale}`)
+		} catch(e) {
+			// redsirect(`404`);
+			throw new Error(e);
+		}
+      
+    },
     beforeMount() {
         this.testPage()
     },
@@ -52,7 +61,8 @@ export default {
     },
     computed: {
         preloader() { return this.$store.getters['preloader/preloader'] },
-        duration() { return this.$store.getters['plug/duration'] }
+        duration() { return this.$store.getters['plug/duration'] },
+		data() { return this.$store.getters['lang/error/data'] }
     },
     methods: {
         ...mapMutations({

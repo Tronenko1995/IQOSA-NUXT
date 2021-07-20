@@ -3,112 +3,112 @@
         <section class="project">
             <div class="project__wrap">
                 <div class="project__address">
-                    <span>KYIV</span>,  Ukraine
+                    <span>{{ project.city }}</span>, {{ project.country }}
                 </div>
                 <div class="project__title">
-                    <span>IQ</span>-08-SL
+                    <span>{{ project.type }}</span>-{{ project.number }}
                 </div>
-                <p>{{ slug }}</p>
+                <!-- <p>{{ slug }}</p> -->
                 <div class="project__image">
-                    <img :src="require('~/assets/img/project/1.jpg')" alt="">
+                    <img :src="getImg(project.main_picture)" alt="">
                 </div>
             </div>
             <hr class="project__line">
             <div class="project__wrap">
                 <div class="project__info">
                     <div class="project__info-left">
-                        <span>Release date</span>
-                        <span>2019</span>
+                        <span>{{ data.date_label }}</span>
+                        <span>{{ project.release_date }}</span>
                     </div>
                     <div class="project__info-middle">
-                        <span>TEAM</span>
-                        <ul class="animate-text animate-text--team">
-                            <li class="animate-text__item" @mouseover="showCursive($event)" @mouseleave="hideCursive($event)">
-                                <button @click.prevent="openModal()" class="animate-text__button">BABANIN BOGDAN</button>
-                                <button @click.prevent="openModal()" class="animate-text__button animate-text__button--cursive animate-text__button--absolute">BABANIN BOGDAN</button>
-                            </li>
-                            <li class="animate-text__item" @mouseover="showCursive($event)" @mouseleave="hideCursive($event)">
-                                <button @click.prevent="openModal()" class="animate-text__button">RYAZHKO NIKITA</button>
-                                <button @click.prevent="openModal()" class="animate-text__button animate-text__button--cursive animate-text__button--absolute">RYAZHKO NIKITA</button>
-                            </li>
-                        </ul>
+                        <template v-if="project.team_members && project.team_members.length">
+                            <span>{{ data.team_label }}</span>
+                            <ul class="animate-text animate-text--team">
+                                <li class="animate-text__item" @mouseover="showCursive($event)" @mouseleave="hideCursive($event)" v-for="(item, i) in project.team_members" :key="i">
+                                    <button @click.prevent="openModal(item)" class="animate-text__button">{{ item.name }} {{ item.surname }}</button>
+                                    <button @click.prevent="openModal(item)" class="animate-text__button animate-text__button--cursive animate-text__button--absolute">{{ item.name }} {{ item.surname }}</button>
+                                </li>
+                            </ul>
+                        </template>
                     </div>
                     <div class="project__info-right">
-                        <span>SQ.M.</span>
-                        <span>560M2</span>
+                        <span>{{ data.area_label }}</span>
+                        <span>{{ project.area }}{{ data.area_unit }}</span>
                     </div>
                 </div>
-                <div class="project__image project__image--standart">
+                <template v-for="(item, i) in project.content">
+                    <template v-if="item && item.big_image">
+                        <div class="project__image project__image--standart" :key="i">
+                            <img :src="getImg(item.big_image)" alt="">
+                        </div>
+                    </template>
+                    <div v-if="item && item.gallery" :key="i">
+                        <div class="project__images" >
+                            <div class="project__image project__image--uno project__image--parallax">
+                                <img :src="getImg(item.gallery.first_image)" alt="">
+                            </div>
+                            <div class="project__image project__image--dos project__image--parallax">
+                                <img :src="getImg(item.gallery.second_image)" alt="">
+                            </div>
+                        </div>
+                        <div v-if="item && item.gallery && item.gallery.center_text" class="project__title project__title--text" v-html="item.gallery.center_text"></div>
+                        <div class="project__images">
+                            <div class="project__image project__image--tres project__image--parallax">
+                                <img :src="getImg(item.gallery.third_image)" alt="">
+                            </div>
+                            <div class="project__image project__image--quatro project__image--parallax">
+                                <img :src="getImg(item.gallery.fourth_image)" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </template>
+
+                <!-- <div class="project__image project__image--margin">
                     <img :src="require('~/assets/img/project/2.jpg')" alt="">
                 </div>
-                <div class="project__image project__image--standart">
-                    <img :src="require('~/assets/img/project/3.jpg')" alt="">
-                </div>
-                <div class="project__images">
-                    <div class="project__image project__image--uno project__image--parallax">
-                        <img :src="require('~/assets/img/project/4.jpg')" alt="">
-                    </div>
-                    <div class="project__image project__image--dos project__image--parallax">
-                        <img :src="require('~/assets/img/project/5.jpg')" alt="">
-                    </div>
-                </div>
-                <div class="project__title project__title--text">
-                    Apartment<br><span>in Kiev</span>
-                </div>
-                <div class="project__images">
-                    <div class="project__image project__image--tres project__image--parallax">
-                        <img :src="require('~/assets/img/project/6.jpg')" alt="">
-                    </div>
-                    <div class="project__image project__image--quatro project__image--parallax">
-                        <img :src="require('~/assets/img/project/7.jpg')" alt="">
-                    </div>
-                </div>
-                <div class="project__image project__image--margin">
-                    <img :src="require('~/assets/img/project/2.jpg')" alt="">
-                </div>
                 <div class="project__image project__image--margin">
                     <img :src="require('~/assets/img/project/3.jpg')" alt="">
-                </div>
+                </div> -->
             </div>
             <hr class="project__line project__line--share">
             <div class="project__wrap">
                 <div class="project__info project__info--share">
                     <div class="project__info-left project__info-left--share">
-                        <span>Share</span>
+                        <span>{{ data.share_title }}</span>
                         <ul class="animate-text animate-text--share">
                             <li class="animate-text__item" @mouseover="showCursive($event)" @mouseleave="hideCursive($event)">
-                                <a href="#" class="animate-text__button">Facebook</a>
-                                <a href="#" class="animate-text__button animate-text__button--cursive animate-text__button--absolute">Facebook</a>
+                                <a :href="share('facebook')" class="animate-text__button">{{ data.share_facebook }}</a>
+                                <a :href="share('facebook')" class="animate-text__button animate-text__button--cursive animate-text__button--absolute">{{ data.share_facebook }}</a>
                             </li>
                             <li class="animate-text__item" @mouseover="showCursive($event)" @mouseleave="hideCursive($event)">
-                                <a href="#" class="animate-text__button">Twitter</a>
-                                <a href="#" class="animate-text__button animate-text__button--cursive animate-text__button--absolute">Twitter</a>
+                                <a :href="share('twitter')" class="animate-text__button">{{ data.share_twitter }}</a>
+                                <a :href="share('twitter')" class="animate-text__button animate-text__button--cursive animate-text__button--absolute">{{ data.share_twitter }}</a>
                             </li>
                             <li class="animate-text__item" @mouseover="showCursive($event)" @mouseleave="hideCursive($event)">
-                                <a href="#" class="animate-text__button">LinkedIn</a>
-                                <a href="#" class="animate-text__button animate-text__button--cursive animate-text__button--absolute">LinkedIn</a>
+                                <a :href="share('linkedIn')" class="animate-text__button">{{ data.share_linkedin }}</a>
+                                <a :href="share('linkedIn')" class="animate-text__button animate-text__button--cursive animate-text__button--absolute">{{ data.share_linkedin }}</a>
                             </li>
                         </ul>
                     </div>
                     <div class="project__info-middle project__info-middle--share">
-                        <span>LIKE THIS CASE?</span>
+                        <span>{{ data.link_block_title }}</span>
                         <div class="animate-line animate-line--share">
-						    <nuxt-link :to="localePath('/say-hi')" class="animate-line__link">LET'S TALK  ABOUT YOUR PROJECT</nuxt-link>
+						    <nuxt-link :to="localePath('/say-hi')" class="animate-line__link">{{ data.link_block_text }}</nuxt-link>
 						    <span class="animate-line__line"></span>
 					    </div>
                     </div>
                 </div>
-                <nuxt-link :to="localePath('/project/iq-98-kd')"  class="project__next">
+                <nuxt-link v-if="index !== null && list[index+1]" :to="localePath(`/project/${list[index+1].link}`)"  class="project__next" >
                     <div class="project__title project__title--next">
                         <ul class="animate-text animate-text--next">
                             <li class="animate-text__item">
-                                <a href="#" class="animate-text__button animate-text__button--cursive  animate-text__button--next">NEXT</a>
-                                <a href="#" class="animate-text__button animate-text__button--next animate-text__button--absolute">IQ-98-KD</a>
+                                <a href="#" class="animate-text__button animate-text__button--cursive  animate-text__button--next">{{ data.next_project_text }}</a>
+                                <a href="#" class="animate-text__button animate-text__button--next animate-text__button--absolute">{{ list[index+1].link }}</a>
                             </li>
                         </ul>
                     </div>
                     <div class="project__image project__image--next">
-                        <img :src="require('~/assets/img/project/8.jpg')" alt="">
+                        <img :src="getImg(list[index+1].main_picture)" alt="">
                     </div>
                 </nuxt-link>
             </div>
@@ -125,8 +125,20 @@ export default {
   layout: 'project',
     async asyncData({ store, i18n, params }) {
         try {
+            await store.dispatch('lang/project/getProjectPageContent', `/project_page?lang=${i18n.locale}`)
+		} catch(e) {
+			// redsirect(`404`);
+			throw new Error(e);
+		}
+        try {
+          await store.dispatch('lang/projects/getProjects', '/projects')
+			} catch(e) {
+        // redirect(`404`);
+        throw new Error(e);
+        }
+        try {
             const slug = params.slug // When calling /abc the slug will be "abc"
-			await store.dispatch('lang/parts/getPartsContent', `/projects/${slug}?lang=${i18n.locale}`)
+			await store.dispatch('lang/project/getProject', `/projects/${slug}?lang=${i18n.locale}`)
             return { slug }
 		} catch(e) {
 			// redsirect(`404`);
@@ -136,7 +148,10 @@ export default {
     },
     data() {
         return {
-            imgParallax: null
+            imgParallax: null,
+            index: null,
+            baseUrl: process.env.baseUrl,
+            url: '',
         }
     },
     created() {
@@ -144,24 +159,39 @@ export default {
         // gsap.registerPlugin(ScrollTrigger);
     },
     mounted() {
+        this.url = window.location.href
         this.$gsap.registerPlugin(this.$ScrollTrigger);
         this.imgParallax = document.querySelectorAll('.project__image--parallax')
         this.testSize()
         if (this.preloader) {
-        setTimeout(() => {
-            this.setPlug(false)
-        }, this.duration.preloader);
+            setTimeout(() => {
+                this.setPlug(false)
+            }, this.duration.preloader);
         } else {
-        setTimeout(() => {
-            this.setPlug(false)
-        }, this.duration.page);
+            setTimeout(() => {
+                this.setPlug(false)
+            }, this.duration.page);
+        }
+        if (this.list) {
+            this.index = this.list.findIndex(item => item.link === this.project.link);
+            this.index === this.list.length-1 ? this.index = -1 : ''
         }
     },
-  computed: {
-    preloader() { return this.$store.getters['preloader/preloader'] },
-    duration() { return this.$store.getters['plug/duration'] },
-	modal() { return this.$store.getters['modal/modal'] },
-  },
+    // watch: {
+    //     list() {
+    //         if (this.list) {
+    //             this.index = this.list.findIndex(item => item.link === this.project.link);
+    //         }
+    //     }
+    // },
+    computed: {
+        preloader() { return this.$store.getters['preloader/preloader'] },
+        duration() { return this.$store.getters['plug/duration'] },
+        modal() { return this.$store.getters['modal/modal'] },
+        data() { return this.$store.getters['lang/project/data'] },
+        project() { return this.$store.getters['lang/project/project'] },
+		list() { return this.$store.getters['lang/projects/list'] },
+    },
     methods: {
         ...mapMutations({
             setPlug: 'plug/setVisible',
@@ -215,12 +245,12 @@ export default {
                 })
             }
         },
-        openModal() {
+        openModal(data) {
             this.setTeam({
-                name: 'Fil Vladimir',
-                position: 'Designer-Visualizer',
-                img: 'https://iqosa.com/wp-content/uploads/2021/05/IMG_4211-2-copy.jpg',
-                quote: 'IQOSA is ambition, striving for individuality in design. We always wanted to create something unique and that no one has pointed us what to do.'
+                name: `${data.name} ${data.surname}`,
+                position: data.position,
+                img: data.photo,
+                quote: data.about
             })
             this.setModal({
                 show: true,
@@ -228,6 +258,18 @@ export default {
                 animate: 'fade'
             })
         },
+        getImg(img) {
+            return `${this.baseUrl}${img}`
+        },
+        share(social) {
+            if (social === 'facebook') {
+                return `https://www.facebook.com/sharer.php?s=100&p[title]=${this.project.type}-${this.project.number}&u=${this.url}&p[summary]=&p[url]=${this.url}`
+            } else if (social === 'twitter') {
+                return `https://twitter.com/intent/tweet?url=${this.url}/&text=${this.project.type}-${this.project.number}`
+            } else if (social === 'linkedIn') {
+                return `https://www.linkedin.com/shareArticle?mini=true&url=${this.url}/&title=${this.project.type}-${this.project.number}`
+            }
+        }
     }
 }
 </script>
@@ -262,8 +304,8 @@ export default {
     }
     &__title {
         margin-top: 48px;
-        font-family: 'ThinItalic', Arial;
-        font-style: italic;
+        font-family: 'Roman', Arial;
+        font-style: normal;
         font-weight: 300;
         font-size: 164px;
         line-height: 90%;
@@ -272,8 +314,10 @@ export default {
         text-transform: uppercase;
         font-feature-settings: 'pnum' on, 'lnum' on, 'kern' off;
         color: #FFFFFF;
-        span {
-            font-family: 'Roman', Arial;
+        em {
+            font-family: 'ThinItalic', Arial;
+            font-style: italic;
+            font-weight: 300;
         }
         &--text {
             margin-top: 111px;

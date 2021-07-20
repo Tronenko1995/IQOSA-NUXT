@@ -42,7 +42,7 @@
 			<nuxt-link ref="linkItem" class="projects-slider__link projects-slider__link--head" :to="localePath(link.url)"></nuxt-link>
 			<div class="swiper-wrapper" data-cursor="drag">
 				<div v-for="(item, i) in list" :key="i" class="swiper-slide projects-slider__item" :data-url="item.link">
-          <nuxt-link class="projects-slider__link" :to="localePath(item.link)"></nuxt-link>
+          <nuxt-link class="projects-slider__link" :to="localePath(`/project/${item.link}`)"></nuxt-link>
             <p class="projects-slider__title">
               <span>{{ item.type }}</span>-{{ item.number }}
             </p>

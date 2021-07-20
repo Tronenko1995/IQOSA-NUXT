@@ -17,10 +17,12 @@
                         <p class="job__title-text">{{ item.vacancy_name }}</p>
                     </h2>
                     <!-- <div class="job__visible" v-html="item.visible"></div> -->
-                    <div class="job__visible"><p>text</p></div>
+                    <div class="job__visible" v-html="item.vacancy_responsibilities"></div>
                     <div class="job__hidden">
-                    <div v-html="item.hidden"></div>
-                        <nuxt-link :to="localePath('/form')" class="job__link job-link arrow-link" @mouseover.native="findElement($event)" @mouseleave.native="animateTextHide($event)">
+                    <template v-if="item.vacancy_description">
+                        <p v-for="(item,i) in item.vacancy_description" :key="i" v-html="item.paragraph"></p>
+                    </template>
+                        <nuxt-link :to="localePath('/join')" class="job__link job-link arrow-link" @mouseover.native="findElement($event)" @mouseleave.native="animateTextHide($event)">
                             <span class="arrow-link__change">
                                 <span class="arrow-link__span arrow-link__span--first">fill</span>
                                 <span class="arrow-link__span arrow-link__span--last">fill</span>
@@ -166,7 +168,7 @@ export default {
                 tl.to(item.querySelector("hr:last-child"), {width: 100 + "%", duration: 0.5})
                 tl.to(item.querySelector(".job__counter"), {translateY: 0, duration: 0.5})
                 tl.to(item.querySelector(".job__title-text"), {translateY: 0, scale: 1, duration: 0.5, delay: 0.5}, 0)
-                tl.to(item.querySelectorAll(".job__visible p"), {translateY: 0, opacity: 1, duration: 0.5, delay: 0.850}, 0)
+                tl.to(item.querySelectorAll(".job__visible div p"), {translateY: 0, opacity: 1, duration: 0.5, delay: 0.850}, 0)
                 tl.to(item.querySelectorAll(".job__visible li"), {translateY: 0, opacity: 1, duration: 0.5, delay: 0.850}, 0)
             })
 
@@ -411,6 +413,10 @@ export default {
         li {
             transform: translateY(-20%);
             opacity: 0;
+        }
+        a {
+            color: #fff;
+            text-decoration: underline;
         }
     }
     &__hidden {

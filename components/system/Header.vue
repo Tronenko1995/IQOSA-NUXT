@@ -25,8 +25,8 @@
                         <a @click.prevent="goTo('career')" href="/career" class="nav__link nav__link--cursive">Career</a>
                     </li>
                     <li class="nav__item" @mouseover="showCursive($event)" @mouseleave="hideCursive($event)">
-                        <a @click.prevent="goTo('media')" href="/media" class="nav__link">Media</a>
-                        <a @click.prevent="goTo('media')" href="/media" class="nav__link nav__link--cursive">Media</a>
+                        <a @click.prevent="goTo('news')" href="/media" class="nav__link">Media</a>
+                        <a @click.prevent="goTo('news')" href="/media" class="nav__link nav__link--cursive">Media</a>
                     </li>
                     <li class="nav__item" @mouseover="showCursive($event)" @mouseleave="hideCursive($event)">
                         <a @click.prevent="goTo('contact')" href="/contact" class="nav__link">Contacts</a>

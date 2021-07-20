@@ -3,51 +3,27 @@
         <section class="media">
             <div class="media__title">
                 <h1 class="media__title-text" :class="{'active' : view === 'news'}">
-                    <a @click.prevent="goTo('news')" href="/news" class="media__title-link">News /</a>
+                    <a @click.prevent="goTo('news')" href="/news" class="media__title-link">{{ data.blog_title }} /</a>
                 </h1>
                 <p class="media__title-text media__title-text--bold" :class="{'active' : view === 'media'}">
-                    <a @click.prevent="goTo('media')" href="/media" class="media__title-link">Media</a>
+                    <a @click.prevent="goTo('media')" href="/media" class="media__title-link">{{ data.blog_link_text }}</a>
                 </p>
             </div>
             <h2 class="media__description">
-                <p class="media__description-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit,sed do eiusmod tempor i</p>
+                <p class="media__description-text" v-for="(item, i) in data.blog_text" :key="i">{{item}}</p>
             </h2>
         </section>
         <section class="news">
-            <ul class="news__list">
-                <li class="news__item">
+            <ul class="news__list" v-if="list.length">
+                <li class="news__item" v-for="(item, i) in list" :key="i">
                     <div class="news__block">
-                        <img class="news__image" :src="require('~/assets/img/news/1.jpg')" alt="" width="644" height="720">
+                        <img class="news__image" :src="getImg(item.main_picture)" alt="" width="644" height="720">
                     </div>
-                    <a @click.prevent="go('/one-article')" href="/one-article" class="news__link">
+                    <a @click.prevent="go(`/news/${item.link}`)" :href="getUrl(item.link)" class="news__link">
                         <div class="news__info">
-                            <div class="news__info-top"><span>17 AUGUST</span> 2020</div>
-                            <div class="news__info-middle">Dutch Invertuals designs Tiny Offices from corrugated aluminium plates</div>
-                            <div class="news__info-bottom"><span>SHOW</span>&nbsp; MORE <span class="arrow-link__circle arrow-link__circle--news"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="arrow-link__svg"><path d="M6.40039 12.4004H17.6004" stroke-linecap="square"></path><path d="M13.9004 8L18.4004 12.4L13.9004 16.8" stroke-linecap="square"></path></svg></span></div>
-                        </div>
-                    </a>
-                </li>
-                <li class="news__item">
-                    <div class="news__block">
-                        <img class="news__image" :src="require('~/assets/img/news/1.jpg')" alt="" width="644" height="720">
-                    </div>
-                    <a @click.prevent="go('/one-article')" href="/one-article" class="news__link">
-                        <div class="news__info">
-                            <div class="news__info-top"><span>17 AUGUST</span> 2020</div>
-                            <div class="news__info-middle">Dutch Invertuals designs Tiny Offices from corrugated aluminium plates</div>
-                            <div class="news__info-bottom"><span>SHOW</span>&nbsp; MORE <span class="arrow-link__circle arrow-link__circle--news"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="arrow-link__svg"><path d="M6.40039 12.4004H17.6004" stroke-linecap="square"></path><path d="M13.9004 8L18.4004 12.4L13.9004 16.8" stroke-linecap="square"></path></svg></span></div>
-                        </div>
-                    </a>
-                </li>
-                <li class="news__item">
-                    <div class="news__block">
-                        <img class="news__image" :src="require('~/assets/img/news/1.jpg')" alt="" width="644" height="720">
-                    </div>
-                    <a @click.prevent="go('/one-article')" href="/one-article" class="news__link">
-                        <div class="news__info">
-                            <div class="news__info-top"><span>17 AUGUST</span> 2020</div>
-                            <div class="news__info-middle">Dutch Invertuals designs Tiny Offices from corrugated aluminium plates</div>
-                            <div class="news__info-bottom"><span>SHOW</span>&nbsp; MORE <span class="arrow-link__circle arrow-link__circle--news"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="arrow-link__svg"><path d="M6.40039 12.4004H17.6004" stroke-linecap="square"></path><path d="M13.9004 8L18.4004 12.4L13.9004 16.8" stroke-linecap="square"></path></svg></span></div>
+                            <div class="news__info-top"><span>?? AUGUST</span> ????</div>
+                            <div class="news__info-middle">{{ item.title }}</div>
+                            <div class="news__info-bottom"><span v-html="data.blog_btn_text"></span><span class="arrow-link__circle arrow-link__circle--news"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="arrow-link__svg"><path d="M6.40039 12.4004H17.6004" stroke-linecap="square"></path><path d="M13.9004 8L18.4004 12.4L13.9004 16.8" stroke-linecap="square"></path></svg></span></div>
                         </div>
                     </a>
                 </li>
@@ -59,8 +35,18 @@
 <script>
 import { mapMutations } from 'vuex'
 export default {
+	props: {
+		data: {
+			type: Object,
+			required: true
+		},
+        list: {
+            type: Array,
+        }
+	},
     data() {
         return {
+            baseUrl: process.env.baseUrl,
         }
     },
     created() {
@@ -138,6 +124,12 @@ export default {
                 }, 1000);
             }
         },
+        getUrl(url) {
+            return `/news/${url}`
+        },
+        getImg(img) {
+            return `${this.baseUrl}${img}`
+        }
     }
 }
 </script>
@@ -241,7 +233,7 @@ export default {
                 text-transform: uppercase;
                 font-feature-settings: 'pnum' on, 'lnum' on;
                 color: #FFFFFF;
-                span {
+                em {
                     font-family: 'LightItalic';
                     font-style: italic;
                 }

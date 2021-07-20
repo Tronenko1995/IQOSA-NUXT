@@ -17,7 +17,7 @@ export const getters = {
 		return state.data;
 	},
 	project(state) {
-		return state.data;
+		return state.project;
 	},
 }
 

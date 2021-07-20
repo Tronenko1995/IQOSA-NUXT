@@ -23,7 +23,7 @@ export default {
 		try {
 			await store.dispatch('lang/parts/getPartsContent', `/parts?lang=${i18n.locale}`)
 		} catch(e) {
-			// redsirect(`404`);
+			// redirect(`404`);
 			throw new Error(e);
 		}
     try {
