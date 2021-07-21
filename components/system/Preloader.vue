@@ -5,15 +5,14 @@
                 <div class="preloader__change">
                     <span class="preloader__text">Icosahedron</span>
                     <img class="preloader__svg" :src="require('~/assets/svg/icosahedron.svg')">
-                    <span class="preloader__text">— A polyhedron, one of the</span>
-                </div>
-
-            </li>
-            <li class="preloader__item">
-                <div class="preloader__change">
-                    <span class="preloader__text">platonic solids - denotes the element of water.</span>
+                    <span class="preloader__text">— A polyhedron, one of the platonic solids - denotes the element of water.</span>
                 </div>
             </li>
+            <!-- <li class="preloader__item"> -->
+                <!-- <div class="preloader__change"> -->
+                    <!-- <span class="preloader__text">platonic solids - denotes the element of water.</span> -->
+                <!-- </div> -->
+            <!-- </li> -->
         </ul>
     </div>
 </template>

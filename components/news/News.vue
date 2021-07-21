@@ -21,7 +21,7 @@
                     </div>
                     <a @click.prevent="go(`/news/${item.link}`)" :href="getUrl(item.link)" class="news__link">
                         <div class="news__info">
-                            <div class="news__info-top"><span>?? AUGUST</span> ????</div>
+                            <div class="news__info-top"><span>{{ getDate(item.created_at, 'DD MMMM') }}</span> {{ getDate(item.created_at, 'YYYY') }}</div>
                             <div class="news__info-middle">{{ item.title }}</div>
                             <div class="news__info-bottom"><span v-html="data.blog_btn_text"></span><span class="arrow-link__circle arrow-link__circle--news"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="arrow-link__svg"><path d="M6.40039 12.4004H17.6004" stroke-linecap="square"></path><path d="M13.9004 8L18.4004 12.4L13.9004 16.8" stroke-linecap="square"></path></svg></span></div>
                         </div>
@@ -129,7 +129,12 @@ export default {
         },
         getImg(img) {
             return `${this.baseUrl}${img}`
-        }
+        },
+        getDate(date, format) {
+            let locale
+            this.$i18n.locale === 'ua' ? locale = 'uk' : locale = this.$i18n.locale
+            return this.$moment(date).locale(locale).format(format)
+        },
     }
 }
 </script>
@@ -238,6 +243,13 @@ export default {
                 font-feature-settings: 'pnum' on, 'lnum' on;
                 color: #FFFFFF;
                 em {
+                    font-family: 'LightItalic';
+                    font-style: italic;
+                }
+            }
+            &-top {
+                text-transform: capitalize;
+                span {
                     font-family: 'LightItalic';
                     font-style: italic;
                 }

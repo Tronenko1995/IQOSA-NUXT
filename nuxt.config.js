@@ -37,7 +37,15 @@ export default {
   components: true,
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-  buildModules: ['nuxt-gsap-module'],
+  buildModules: [
+    'nuxt-gsap-module',
+    '@nuxtjs/moment',
+  ],
+
+  moment: {
+    defaultLocale: 'ru',
+    locales: ['ru', 'uk']
+  },
 
 
 
@@ -64,13 +72,25 @@ export default {
       fallbackLocale: 'ru',
       messages: {
         en: {
-          welcome: 'Welcome'
+          share: 'Share',
+          author: 'Author',
+          subject: 'Subject',
+          developed: 'Developed by',
+          next: 'Next',
         },
         ru: {
-          welcome: 'Привет'
+          share: 'Поделиться',
+          author: 'Автор',
+          subject: 'Тема',
+          developed: 'Разработан',
+          next: 'Следующий',
         },
         ua: {
-          welcome: 'Добрий день'
+          share: 'Поширити',
+          author: 'Автор',
+          subject: 'Тема',
+          developed: 'Розроблений',
+          next: 'Наступний',
         }
       }
     },
@@ -92,6 +112,7 @@ export default {
 
   axios: {
     baseURL: process.env.API_BASE_URL,
+    // debug: true,
   },
 
   // privateRuntimeConfig: {

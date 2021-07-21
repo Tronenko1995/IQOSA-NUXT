@@ -3,40 +3,40 @@
         <div class="footer__row">
             <div class="footer__column">
                 <div class="footer__column-top">
-                    <p class="footer__title">Offices</p>
+                    <p class="footer__title">{{ data.left_title }}</p>
                 </div>
                 <div class="footer__column-middle">
                     <div class="footer__block">
-                        <p class="footer__subtitle">Kyiv (Ukraine)</p>
+                        <p class="footer__subtitle">{{ data.left_city }}</p>
                         <div class="footer__block-column">
-                            <a target="_blank" href="https://goo.gl/maps/WiShLLXx7mpxj3nV8" class="footer__link">Solomyanska st. 15a</a>
-                            <a href="mailto:info@iqosa.com" class="footer__link">info@iqosa.com</a>
+                            <a target="_blank" :href="data.left_google_map_link" class="footer__link">{{ data.left_address }}</a>
+                            <a href="mailto:info@iqosa.com" class="footer__link">{{ data.left_emails }}</a>
                         </div>
 
                     </div>
-                    <div class="footer__block">
-                        <p class="footer__subject">Dmitry Babanin</p>
-                        <a href="tel:+380954003835" class="footer__link">+380954003835</a>
+                    <div class="footer__block" v-for="(item, i) in data.left_tels" :key="i">
+                        <p class="footer__subject">{{ item.person }}</p>
+                        <a :href="`tel:${item.tel}`" class="footer__link">{{ item.tel }}</a>
                     </div>
-                    <div class="footer__block">
+                    <!-- <div class="footer__block">
                         <p class="footer__subject">Aleksandra Maklyalova</p>
                         <a href="tel:+380954003835" class="footer__link">+380954003835</a>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <div class="footer__column footer__column--dos">
                 <div class="footer__column-top">
-                    <p class="footer__title">business</p>
+                    <p class="footer__title">{{ data.center_title }}</p>
                 </div>
                 <div class="footer__column-middle">
-                    <div class="footer__block">
-                        <p class="footer__subtitle">Career</p>
+                    <div class="footer__block" v-for="(item, i) in data.center_emails" :key="i">
+                        <p class="footer__subtitle">{{ item.title }}</p>
                         <div class="footer__unit">
-                            <a href="mailto:hr@iqosa.com" class="footer__link footer__link--line">hr@iqosa.com</a>
+                            <a :href="`mailto:${item.email}`" class="footer__link footer__link--line">{{ item.email }}</a>
                             <span class="footer__line"></span>
                         </div>
                     </div>
-                    <div class="footer__block">
+                    <!-- <div class="footer__block">
                         <p class="footer__subtitle">Suppliers</p>
                         <div class="footer__unit">
                             <a href="mailto:supply@iqosa.com" class="footer__link footer__link--line">supply@iqosa.com</a>
@@ -49,18 +49,18 @@
                             <a href="mailto:pr@iqosa.com" class="footer__link footer__link--line">pr@iqosa.com</a>
                             <span class="footer__line"></span>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <div class="footer__column footer__column--tres">
                 <div class="footer__column-top">
-                    <p class="footer__title">Others</p>
+                    <p class="footer__title">{{ data.right_title }}</p>
                 </div>
                 <div class="footer__column-middle">
-                    <p class="footer__main-text">Don't be shy,
+                    <p class="footer__main-text">{{ data.right_big_text }}
                     <span class="footer__main-item" @mouseover="showAnimateText($event)" @mouseleave="hideAnimateText($event)">
-                    <a @click.prevent="goPage('sayhi')" href="/sayhi" class="footer__main-link">say hi.</a>
-                    <a @click.prevent="goPage('sayhi')" href="/sayhi" class="footer__main-link">say hi.</a>
+                    <a @click.prevent="goPage('sayhi')" href="/sayhi" class="footer__main-link">{{ data.right_big_link_text }}</a>
+                    <a @click.prevent="goPage('sayhi')" href="/sayhi" class="footer__main-link">{{ data.right_big_link_text }}</a>
                         <!-- <nuxt-link :to="localePath('/sayhi')"  class="footer__main-link">say hi.</nuxt-link> -->
                         <!-- <nuxt-link :to="localePath('/sayhi')"  class="footer__main-link">say hi.</nuxt-link> -->
                         <!-- <a href="/sayhi" class="footer__main-link">say hi.</a> -->
@@ -79,18 +79,18 @@
         </div>
         <div class="footer__row footer__row--bottom">
             <div class="footer__bottom-item">
-                <nuxt-link :to="localePath('/privaty-policy')" class="footer__link">Privacy Policy</nuxt-link>
+                <nuxt-link :to="localePath('/privaty-policy')" class="footer__link">{{ data.politic_label }}</nuxt-link>
             </div>
-            <Social class="social--footer" @showCursive="showCursive($event)" @hideCursive="hideCursive($event)"/>
+            <Social :social="data.social_links" class="social--footer" @showCursive="showCursive($event)" @hideCursive="hideCursive($event)"/>
             <!-- <div class="footer__bottom-item footer__bottom-item--social">
                 <a href="https://www.facebook.com/IQOSA/" class="footer__link">Facebook,</a>
                 <a href="https://www.pinterest.com/iqosa/_created/" class="footer__link">Pinterest,</a>
                 <a href="https://www.instagram.com/iqosa/" class="footer__link">Instagram</a>
             </div> -->
             <div class="footer__bottom-item footer__bottom-item--tres">
-                <p class="footer__description footer__description--opacity">&copy; Iqosa 2021.</p>
+                <p class="footer__description footer__description--opacity">&copy; IQOSA 2021.</p>
                 <p class="footer__developed">
-                    <span class="footer__description footer__description--opacity">Developed by</span>
+                    <span class="footer__description footer__description--opacity">{{ $t('developed') }}</span>
                     <a target="_blank" href="https://thefirstthelast.agency/" class="footer__link">The First The Last.</a>
                 </p>
             </div>
@@ -102,71 +102,74 @@
 import { mapMutations } from 'vuex'
 import gsap from "gsap"
 export default {
+	computed: {
+		data() { return this.$store.getters['lang/parts/dataFooter'] }
+	},
     methods: {
-        ...mapMutations({
-          setAnimate: 'plug/setAnimate',
-          setPlug: 'plug/setVisible',
-        }),
-        showAnimateText(e) {
-            if (e.target.tagName === 'A') {
-                gsap.to(e.target.parentElement.children[0], { 
-                    translateY: -100 + "%",
-                    duration: .5
-                })
-                gsap.to(e.target.parentElement.children[1], { 
-                    translateY: -100 + "%",
-                    duration: .5
-                })
+            ...mapMutations({
+            setAnimate: 'plug/setAnimate',
+            setPlug: 'plug/setVisible',
+            }),
+            showAnimateText(e) {
+                if (e.target.tagName === 'A') {
+                    gsap.to(e.target.parentElement.children[0], { 
+                        translateY: -100 + "%",
+                        duration: .5
+                    })
+                    gsap.to(e.target.parentElement.children[1], { 
+                        translateY: -100 + "%",
+                        duration: .5
+                    })
+                }
+            },
+            hideAnimateText(e) {
+                if (e.target.tagName === 'SPAN') {
+                    gsap.to(e.target.children[0], { 
+                        translateY: 0 + "%",
+                        duration: .5
+                    })
+                    gsap.to(e.target.children[1], { 
+                        translateY: 0 + "%",
+                        duration: .5
+                    })
+                }
+            },
+            showCursive(e) {
+                if (e.target.tagName === 'A') {
+                    gsap.to(e.target.parentElement.children[0], { 
+                        translateY: -100 + "%",
+                        duration: .5
+                    })
+                    gsap.to(e.target.parentElement.children[1], { 
+                        translateY: -100 + "%",
+                        duration: .5
+                    })
+                }
+            },
+            hideCursive(e) {
+                if (e.target.tagName === 'LI') {
+                    gsap.to(e.target.children[0], { 
+                        translateY: 0 + "%",
+                        duration: .5
+                    })
+                    gsap.to(e.target.children[1], { 
+                        translateY: 0 + "%",
+                        duration: .5
+                    })
+                }
+            },
+            goPage(page) {
+                // console.log('bubu')
+            if (this.$route.name !== page) {
+                this.setAnimate('up')
+                this.setPlug(true)
+                setTimeout(() => {
+                    this.setAnimate('dissolve')
+                    this.$router.push(this.localePath(page))
+                }, 1000);
             }
-        },
-        hideAnimateText(e) {
-            if (e.target.tagName === 'SPAN') {
-                gsap.to(e.target.children[0], { 
-                    translateY: 0 + "%",
-                    duration: .5
-                })
-                gsap.to(e.target.children[1], { 
-                    translateY: 0 + "%",
-                    duration: .5
-                })
             }
-        },
-        showCursive(e) {
-            if (e.target.tagName === 'A') {
-                gsap.to(e.target.parentElement.children[0], { 
-                    translateY: -100 + "%",
-                    duration: .5
-                })
-                gsap.to(e.target.parentElement.children[1], { 
-                    translateY: -100 + "%",
-                    duration: .5
-                })
-            }
-        },
-        hideCursive(e) {
-            if (e.target.tagName === 'LI') {
-                gsap.to(e.target.children[0], { 
-                    translateY: 0 + "%",
-                    duration: .5
-                })
-                gsap.to(e.target.children[1], { 
-                    translateY: 0 + "%",
-                    duration: .5
-                })
-            }
-        },
-        goPage(page) {
-            // console.log('bubu')
-          if (this.$route.name !== page) {
-            this.setAnimate('up')
-            this.setPlug(true)
-            setTimeout(() => {
-                this.setAnimate('dissolve')
-                this.$router.push(this.localePath(page))
-            }, 1000);
-          }
         }
-    }
 }
 </script>
 

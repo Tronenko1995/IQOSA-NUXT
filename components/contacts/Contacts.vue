@@ -6,10 +6,10 @@
                 <div class="contacts__row">
                     <div class="contacts__location">
                         <div class="contacts__location-text">
-                            <span> {{ data.country }}, </span>
+                            <span v-html="data.address"></span>
                         </div>
                         <div class="contacts__location-text contacts__location-text--light">
-                            <span>{{ data.address }}</span>
+                            <span v-html="data.address_two"></span>
                         </div>
                     </div>
                     <h1 class="contacts__title">{{ data.latitude }}</h1>

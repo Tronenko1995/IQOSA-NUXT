@@ -30,18 +30,18 @@ export const getters = {
 
 export const actions = {
 	getPartsContent(state, api) {
-		// return new Promise(resolve => {
-		// 	this.$axios
-		// 	.$get(api, { loading: true })
-		// 	.then(response => {
-		// 		state.commit("setDataPreloader", response.content.preloader);
-		// 		state.commit("setDataHeader", response.content.header);
-		// 		state.commit("setDataFooter", response.content.footer);
-		// 		resolve(response.content);
-		// 	})
-		// 	.catch((e) => {
-		// 		throw new Error(e);
-		// 	})
-		// });
+		return new Promise(resolve => {
+			this.$axios
+			.$get(api, { loading: true })
+			.then(response => {
+				state.commit("setDataPreloader", response.preloader);
+				state.commit("setDataHeader", response.header);
+				state.commit("setDataFooter", response.footer);
+				resolve(response.content);
+			})
+			.catch((e) => {
+				throw new Error(e);
+			})
+		});
 	}
 }

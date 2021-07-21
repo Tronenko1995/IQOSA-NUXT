@@ -3,18 +3,18 @@
         <section class="one-news">
             <div class="one-news__wrap">
                 <div class="one-news__date">
-                    <span>17 AUGUST</span>2020
+                    <span>{{ getDate(article.created_at, 'DD MMMM') }} </span>{{ getDate(article.created_at, 'YYYY') }}
                 </div>
-                <div class="one-news__title">Personal information is data that can be used to identify or contact a single person</div>
+                <h1 class="one-news__title">{{ article.title }}</h1>
                 <div class="one-news__image one-news__image--main">
-                    <img :src="require('~/assets/img/one-news/1.jpg')" alt="">
+                    <img :src="getImg(article.main_picture)" alt="">
                 </div>
             </div>
             <hr class="one-news__line">
             <div class="one-news__wrap">
                 <div class="one-news__info">
                     <div class="one-news__info-left one-news__info-left--share">
-                        <span>Share</span>
+                        <span>{{ $t('share') }}</span>
                         <ul class="animate-text animate-text--share">
                             <li class="animate-text__item" @mouseover="showCursive($event)" @mouseleave="hideCursive($event)">
                                 <a href="#" class="animate-text__button">Facebook</a>
@@ -31,20 +31,44 @@
                         </ul>
                     </div>
                     <div class="one-news__info-middle">
-                        <span>author</span>
-                        <ul class="animate-text animate-text--team">
-                            <li class="animate-text__item" @mouseover="showCursive($event)" @mouseleave="hideCursive($event)">
-                                <button @click.prevent="openModal()" class="animate-text__button">BABANIN BOGDAN</button>
-                                <button @click.prevent="openModal()" class="animate-text__button animate-text__button--cursive animate-text__button--absolute">BABANIN BOGDAN</button>
-                            </li>
-                        </ul>
+                        <template v-if="article && article.authors && article.authors.length">
+                            <span>{{ $t('author') }}</span>
+                            <ul class="animate-text animate-text--team">
+                                <li class="animate-text__item" v-for="(item, i) in article.authors" :key="i">
+                                    <span class="animate-text__button animate-text__button--text">{{ item }}</span>
+                                </li>
+                            </ul>
+                        </template>
                     </div>
-                    <div class="one-news__info-right">
-                        <span>subject</span>
-                        <span>interior design</span>
+                    <div class="one-news__info-right" v-if="article.subjects">
+                        <span>{{ $t('subject') }}</span>
+                        <span>{{ article.subjects }}</span>
                     </div>
                 </div>
-                <div class="one-news__block">
+                <template v-for="(item, i) in article.content">
+                    <div v-if="item && item.text_block" class="one-news__block" :key="i">
+                        <div class="one-news__text" v-html="item.text_block">
+
+                        </div>
+                        <!-- <p class="one-news__text">It’s not easy to choose a particular style to work with for any studio. Why? With the abundance of materials, trends, requests, and decoration available now, it might seem like the only way out is to succumb to the omnipresent eclecticism. While it might be an option for some, it’s not the one for IQOSA. In our industry, there is an idea that a great studio focuses on one-two styles, creates the projects in those styles only and only for those people, who share the philosophy behind them. For IQOSA, these styles are modern and modern classic.</p>
+                        <blockquote class="one-news__text one-news__text--quote">
+                            <span>
+                                <svg width="22" height="23" viewBox="0 0 22 23" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21.212 0.457998L20.6 3.10999C18.084 4.538 16.316 7.666 15.296 12.494L13.154 22.694H11.012L13.154 12.494C13.834 9.09399 14.65 6.57799 15.602 4.946C16.622 3.246 18.492 1.75 21.212 0.457998ZM10.91 0.457998L10.298 3.10999C7.782 4.538 6.014 7.666 4.994 12.494L2.852 22.694H0.71L2.852 12.494C3.532 9.09399 4.348 6.57799 5.3 4.946C6.32 3.246 8.19 1.75 10.91 0.457998Z"/></svg>
+                            </span>
+                                Each of these styles uses many similar techniques, materials, and color solutions to, well, create the same thing – interior design. However, they do have differences, twists, and formulas that make them stand out independently.
+                        </blockquote>
+                        <p class="one-news__text one-news__text--standart">And in this article, we’ll tell you why we decided to work with the modern and modern classic styles, what’s the difference between them, and why you might consider them for your future home. Let’s start with a review of both.</p> -->
+                    </div>
+                    <div v-if="item && item.gallery && item.gallery.length == 1" class="one-news__image one-news__image--main" :key="i">
+                        <img :src="getImg(item.gallery[0].picture)" alt="">
+                    </div>
+                    <div v-if="item && item.gallery && item.gallery.length == 2" class="one-news__images" :key="i">
+                        <div class="one-news__image" v-for="(obj, y) in item.gallery" :key="y">
+                            <img :src="getImg(obj.picture)" alt="">
+                        </div>
+                    </div>
+                </template>
+                <!-- <div class="one-news__block">
                     <p class="one-news__text">It’s not easy to choose a particular style to work with for any studio. Why? With the abundance of materials, trends, requests, and decoration available now, it might seem like the only way out is to succumb to the omnipresent eclecticism. While it might be an option for some, it’s not the one for IQOSA. In our industry, there is an idea that a great studio focuses on one-two styles, creates the projects in those styles only and only for those people, who share the philosophy behind them. For IQOSA, these styles are modern and modern classic.</p>
                     <blockquote class="one-news__text one-news__text--quote">
                         <span>
@@ -52,26 +76,26 @@
                         </span>
                         Each of these styles uses many similar techniques, materials, and color solutions to, well, create the same thing – interior design. However, they do have differences, twists, and formulas that make them stand out independently.</blockquote>
                     <p class="one-news__text one-news__text--standart">And in this article, we’ll tell you why we decided to work with the modern and modern classic styles, what’s the difference between them, and why you might consider them for your future home. Let’s start with a review of both.</p>
-                </div>
+                </div> -->
                 <!-- <div class="one-news__image one-news__image--standart">
                     <img :src="require('~/assets/img/project/2.jpg')" alt="">
                 </div>
                 <div class="one-news__image one-news__image--standart">
                     <img :src="require('~/assets/img/project/3.jpg')" alt="">
                 </div> -->
-                <div class="one-news__images">
+                <!-- <div class="one-news__images">
                     <div class="one-news__image">
                         <img :src="require('~/assets/img/one-news/3.jpg')" alt="">
                     </div>
                     <div class="one-news__image">
                         <img :src="require('~/assets/img/one-news/4.jpg')" alt="">
                     </div>
-                </div>
-                <div class="one-news__block">
+                </div> -->
+                <!-- <div class="one-news__block">
                     <h2 class="one-news__subject">Materials</h2>
                     <p class="one-news__text one-news__text--normal">One of the main characteristics of the modern classic is the choice of the materials for furniture, decoration, or fit-out. This is where it tends to classical interior more, emphasizing the use of natural marble, high-quality wood, brass details, leather, branded textile, glass, etc. It is slightly different with the modern interior as it relies heavily on the use of technologies, novel materials with different textures and finishes, especially contrasting ones mixed together.</p>
-                </div>
-                <div class="one-news__block one-news__block--next">
+                </div> -->
+                <!-- <div class="one-news__block one-news__block--next">
                     <h2 class="one-news__subject">Color Palette</h2>
                     <ul class="one-news__list">
                         <li class="one-news__item one-news__text">With a modern classic, it’s easy.</li>
@@ -80,54 +104,54 @@
                         <li class="one-news__item one-news__text">With the modern, however, it’s a bit complicated, as it uses bold, intense colors as accents and builds the whole color look around them.</li>
                         <li class="one-news__item one-news__text">Here you can spot bright accents in the furniture parts or upholstering but they will look organic to the place as they will be well-balanced with the lighter tones of the same color.</li>
                     </ul>
-                </div>
-                <div class="one-news__image one-news__image--main">
+                </div> -->
+                <!-- <div class="one-news__image one-news__image--main">
                     <img :src="require('~/assets/img/one-news/2.jpg')" alt="">
-                </div>
-                <div class="one-news__block">
+                </div> -->
+                <!-- <div class="one-news__block">
                     <h2 class="one-news__subject">Geometry</h2>
                     <p class="one-news__text one-news__text--normal">Modern classic favors the traditional geometric forms, symmetry, and balanced proportions. However, it does allow asymmetry in details to freshen the space up. Modern, on the other hand, is more flexible in terms of the lines, shapes, and forms. Here, irregularity and transformation can take a lead as if reflecting the fast-paced lifestyle.</p>
-                </div>
-                <div class="one-news__block one-news__block--next">
+                </div> -->
+                <!-- <div class="one-news__block one-news__block--next">
                     <h2 class="one-news__subject">Contrasts</h2>
                     <p class="one-news__text one-news__text--normal">The contrast in textures is what makes a difference between the classic and modern classic. Why? Because the modern classic loves adding elements that would contradict while complimenting each other. For example, mixing various patterns of the marble slabs in the bathroom and dividing them with metal profiles. Or making the classical moldings on the textured marble panels. Classical? Yes. Modern? Absolutely!<br>The modern style, however, takes it all to the next level. While in modern classic the contrasts aren’t too vivid and more harmonious, here they might be more visible and include more things to combine. For example, matte plaster wall panes with ribbed ones made of micro concrete can be found together with marble and mirror blocks in one room.</p>
-                </div>
-                <div class="one-news__images">
+                </div> -->
+                <!-- <div class="one-news__images">
                     <div class="one-news__image">
                         <img :src="require('~/assets/img/one-news/3.jpg')" alt="">
                     </div>
                     <div class="one-news__image">
                         <img :src="require('~/assets/img/one-news/4.jpg')" alt="">
                     </div>
-                </div>
-                <div class="one-news__block">
+                </div> -->
+                <!-- <div class="one-news__block">
                     <h2 class="one-news__subject">Functionality</h2>
                     <p class="one-news__text one-news__text--normal">Both modern and modern classic interiors are known for their admiration of furniture and decorative elements being functional first. The simple furniture forms, various lighting solutions, curtains, etc – if used in these designs, they are never for the view only. And this is the reason for choosing minimalism, too.</p>
-                </div>
-                <div class="one-news__block one-news__block--next">
+                </div> -->
+                <!-- <div class="one-news__block one-news__block--next">
                     <h2 class="one-news__subject">Minimalism</h2>
                     <p class="one-news__text one-news__text--normal">The quality, inherent to both styles. Modern and modern classic avoid the exuberance of decorative elements and create beauty with a carefully picked combination of materials, textures, and forms. For these styles, the less is always more.</p>
-                </div>
-                <div class="one-news__image one-news__image--main">
+                </div> -->
+                <!-- <div class="one-news__image one-news__image--main">
                     <img :src="require('~/assets/img/one-news/2.jpg')" alt="">
-                </div>
-                <div class="one-news__block">
+                </div> -->
+                <!-- <div class="one-news__block">
                     <h2 class="one-news__subject">Brands</h2>
                     <p class="one-news__text one-news__text--normal">Another thing that unites these styles is that they put a heavy accent on the craftsmanship and quality of the materials and furniture they include as a part of the interior. From this perspective, you will always see famous, luxury brands in everything – from flooring solutions to sofas. In the case of the modern style, it can also be custom-made, exclusive niche furniture to fit the mood of the space.<br>Now, as we’ve covered the major similarities and differences, it’s time to reveal why modern and modern classic are the styles we decided to work with.</p>
-                </div>
-                <div class="one-news__block one-news__block--next">
+                </div> -->
+                <!-- <div class="one-news__block one-news__block--next">
                     <h2 class="one-news__subject">Minimalism</h2>
                     <p class="one-news__text one-news__text--normal">The quality, inherent to both styles. Modern and modern classic avoid the exuberance of decorative elements and create beauty with a carefully picked combination of materials, textures, and forms. For these styles, the less is always more.</p>
-                </div>
-                <div class="one-news__images">
+                </div> -->
+                <!-- <div class="one-news__images">
                     <div class="one-news__image">
                         <img :src="require('~/assets/img/one-news/3.jpg')" alt="">
                     </div>
                     <div class="one-news__image">
                         <img :src="require('~/assets/img/one-news/4.jpg')" alt="">
                     </div>
-                </div>
-                <div class="one-news__block">
+                </div> -->
+                <!-- <div class="one-news__block">
                     <h2 class="one-news__subject">And the Main Question in Why</h2>
                     <p class="one-news__text one-news__text--normal">The reason is simple: because it takes the best of both worlds, allowing us to combine their elements and create a timeless, yet interesting look. We love balance and we find it in the classical tradition but we also like making statements – and this is what modern design is about.<br>Besides, the interior and architecture is something that can’t go in different directions. For instance, an apartment in a newly-built complex needs an interior to emphasize the building’s modern architecture. However, a renovated apartment in a historical building has to preserve what was valued for years and be suitable for modern life.</p>
                     <blockquote class="one-news__text one-news__text--quote">
@@ -135,18 +159,18 @@
                             <svg width="22" height="23" viewBox="0 0 22 23" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21.212 0.457998L20.6 3.10999C18.084 4.538 16.316 7.666 15.296 12.494L13.154 22.694H11.012L13.154 12.494C13.834 9.09399 14.65 6.57799 15.602 4.946C16.622 3.246 18.492 1.75 21.212 0.457998ZM10.91 0.457998L10.298 3.10999C7.782 4.538 6.014 7.666 4.994 12.494L2.852 22.694H0.71L2.852 12.494C3.532 9.09399 4.348 6.57799 5.3 4.946C6.32 3.246 8.19 1.75 10.91 0.457998Z"/></svg>
                         </span>
                         Each of these styles uses many similar techniques, materials, and color solutions to, well, create the same thing – interior design. However, they do have differences, twists, and formulas that make them stand out independently.</blockquote>
-                </div>
-                <a @click.prevent="go('/news/article-2')" href="/news/article-2" class="one-news__next">
+                </div> -->
+                <a v-if="index !== null && list[index+1]" @click.prevent="go(`/news/${list[index+1].link}`)" href="/news/article-2" class="one-news__next">
                     <div class="one-news__title one-news__title--next">
                         <ul class="animate-text animate-text--next">
                             <li class="animate-text__item">
-                                <a href="#" class="animate-text__button animate-text__button--cursive  animate-text__button--next">NEXT</a>
-                                <a href="#" class="animate-text__button animate-text__button--next animate-text__button--absolute">Article 2</a>
+                                <a href="#" class="animate-text__button animate-text__button--cursive  animate-text__button--next">{{ $t('next') }}</a>
+                                <a href="#" class="animate-text__button animate-text__button--next animate-text__button--absolute">{{ list[index+1].link }}</a>
                             </li>
                         </ul>
                     </div>
                     <div class="one-news__image one-news__image--next">
-                        <img :src="require('~/assets/img/project/8.jpg')" alt="">
+                        <img :src="getImg(list[index+1].main_picture)" alt="">
                     </div>
                 </a>
             </div>
@@ -192,7 +216,9 @@ export default {
     },
     data() {
         return {
-            imgParallax: null
+            baseUrl: process.env.baseUrl,
+            imgParallax: null,
+            index: null,
         }
     },
     created() {
@@ -204,14 +230,18 @@ export default {
         this.imgParallax = document.querySelectorAll('.one-news__image--parallax')
         this.testSize()
         if (this.preloader) {
-        setTimeout(() => {
-            this.setPlug(false)
-        }, this.duration.preloader);
+            setTimeout(() => {
+                this.setPlug(false)
+            }, this.duration.preloader);
         } else {
         setTimeout(() => {
-            this.setPlug(false)
-        }, this.duration.page);
+                this.setPlug(false)
+            }, this.duration.page);
         }
+        // if (this.list) {
+        //     this.index = this.list.findIndex(item => item.link === this.article.link);
+        //     this.index === this.list.length-1 ? this.index = -1 : ''
+        // }
     },
   computed: {
     preloader() { return this.$store.getters['preloader/preloader'] },
@@ -298,6 +328,14 @@ export default {
                 }, 1000);
             }
         },
+        getImg(img) {
+            return `${this.baseUrl}${img}`
+        },
+        getDate(date, format) {
+            let locale
+            this.$i18n.locale === 'ua' ? locale = 'uk' : locale = this.$i18n.locale
+            return this.$moment(date).locale(locale).format(format)
+        },
     }
 }
 </script>
@@ -318,7 +356,7 @@ export default {
     }
     &__date {
         font-family:'Light', Arial;
-        font-style: italic;
+        font-style: normal;
         font-weight: 300;
         font-size: 16px;
         line-height: 100%;
@@ -329,6 +367,7 @@ export default {
         color: #FFFFFF;
         span {
             font-family: 'LightItalic', Arial;
+            font-style: italic;
         }
     }
     &__title {
@@ -435,7 +474,7 @@ export default {
     &__info {
         width: 100%;
         margin-top: 24px;
-        // margin-bottom: 188px;
+        margin-bottom: 104px;
         font-family: 'Light', Arial;
         font-style: normal;
         font-weight: 300;
@@ -511,7 +550,7 @@ export default {
         }
     }
     &__block {
-        margin-top: 188px;
+        margin-top: 84px;
         width: 755px;
         &--next {
             margin-top: 104px;
@@ -536,6 +575,19 @@ export default {
         line-height: 140%;
         font-feature-settings: 'pnum' on, 'lnum' on;
         color: #FFFFFF;
+        strong {
+            display: block;
+            margin-top: 104px;
+            margin-bottom: 16px;
+            font-family: 'Roman', Arial;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 50px;
+            line-height: 110%;
+            text-transform: uppercase;
+            font-feature-settings: 'pnum' on, 'lnum' on, 'dnom' on, 'liga' off, 'kern' off;
+            color: #FFFFFF;
+        }
         // width: 755px;
         // margin-top: 16px;
         // &--alone {
@@ -547,22 +599,38 @@ export default {
         &--normal {
             margin-top: 16px;
         }
-        &--quote {
+        blockquote {
             color: rgba(255,255,255,0.5);
             position: relative;
-            padding-left: 64px;
+            padding-left: 57px;
             font-style: italic;
             font-family: 'LightItalic', Arial;
             margin-top: 80px;
-            span {
-                width: 29px;
-                height: 102px;
+            margin-bottom: 80px;
+            position: relative;
+            &::before {
                 position: absolute;
+                content: '';
+                background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjIiIGhlaWdodD0iMjMiIHZpZXdCb3g9IjAgMCAyMiAyMyIgZmlsbD0iI2ZmZmZmZjgwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGQ9Ik0yMS4yMTIgMC40NTc5OThMMjAuNiAzLjEwOTk5QzE4LjA4NCA0LjUzOCAxNi4zMTYgNy42NjYgMTUuMjk2IDEyLjQ5NEwxMy4xNTQgMjIuNjk0SDExLjAxMkwxMy4xNTQgMTIuNDk0QzEzLjgzNCA5LjA5Mzk5IDE0LjY1IDYuNTc3OTkgMTUuNjAyIDQuOTQ2QzE2LjYyMiAzLjI0NiAxOC40OTIgMS43NSAyMS4yMTIgMC40NTc5OThaTTEwLjkxIDAuNDU3OTk4TDEwLjI5OCAzLjEwOTk5QzcuNzgyIDQuNTM4IDYuMDE0IDcuNjY2IDQuOTk0IDEyLjQ5NEwyLjg1MiAyMi42OTRIMC43MUwyLjg1MiAxMi40OTRDMy41MzIgOS4wOTM5OSA0LjM0OCA2LjU3Nzk5IDUuMyA0Ljk0NkM2LjMyIDMuMjQ2IDguMTkgMS43NSAxMC45MSAwLjQ1Nzk5OFoiLz48L3N2Zz4=');
+                background-repeat: no-repeat;
+                // background-size: 29px 102px;
+                width: 22px;
+                height: 102px;
                 left: 0;
                 top: -20px;
-                display: flex;
-                justify-content: flex-end;
+                // display: flex;
+                // justify-content: flex-end;
+                
             }
+            // span {
+            //     width: 29px;
+            //     height: 102px;
+            //     position: absolute;
+            //     left: 0;
+            //     top: -20px;
+            //     display: flex;
+            //     justify-content: flex-end;
+            // }
             svg {
                 fill: rgba(255,255,255,0.2);
             }
@@ -613,6 +681,9 @@ export default {
             text-align: center;
             width: 100%;
             transition: .4s;
+        }
+        &--text {
+            cursor: default;
         }
     }
 }
@@ -812,6 +883,9 @@ export default {
             &--quote {
                 padding-left: 54px;
             }
+            strong {
+                font-size: 46px;
+            }
         }
         &__block {
             margin-top: 148px;
@@ -910,7 +984,8 @@ export default {
             }
         }
         &__block {
-            margin-top: 132px;
+            margin-top: 0;
+            // margin-top: 132px;
             &--next {
                 margin-top: 84px;
             }
@@ -1011,6 +1086,9 @@ export default {
         }
         &__text {
             font-size: 18px;
+            strong {
+                font-size: 36px;
+            }
             &--quote {
                 padding-left: 44px;
             }
@@ -1182,7 +1260,7 @@ export default {
             margin: 143px auto 0 auto;
         }
         &__block {
-            margin-top: 88px;
+            margin-top: 0;
             &--next {
                 margin-top: 64px;
             }

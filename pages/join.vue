@@ -12,6 +12,28 @@ export default {
     components: {
 		Request,
     },
+	async asyncData({ store, i18n }) {
+		// if (!store.getters['lang/main/data']) {
+		try {
+			await store.dispatch('lang/parts/getPartsContent', `/parts?lang=${i18n.locale}`)
+		} catch(e) {
+			// redsirect(`404`);
+			throw new Error(e);
+		}
+		try {
+			await store.dispatch('lang/request/getJoinPageContent', `/join?lang=${i18n.locale}`)
+		} catch(e) {
+			// redsirect(`404`);
+			throw new Error(e);
+		}
+		// try {
+			// await store.dispatch('lang/main/getMainPageContent', `/main?lang=${i18n.locale}`)
+		// } catch(e) {
+			// redsirect(`404`);
+			// throw new Error(e);
+		// }
+		// }
+	},
     beforeMount() {
 		this.testLang()
     },

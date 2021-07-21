@@ -6,33 +6,33 @@
         <nav class="menu__nav">
             <ul class="menu__list">
                 <li class="menu__item" @mouseover="showCursive($event)" @mouseleave="hideCursive($event)">
-                    <a @click.prevent="goTo('projects')" href="/projects" class="menu__link">Projects</a>
-                    <a @click.prevent="goTo('projects')" href="/projects" class="menu__link menu__link--cursive">Projects</a>
+                    <a @click.prevent="goTo(data.navigation[0].link)" :href="data.navigation[0].link" class="menu__link">{{ data.navigation[0].name }}</a>
+                    <a @click.prevent="goTo(data.navigation[0].link)" :href="data.navigation[0].link" class="menu__link menu__link--cursive">{{ data.navigation[0].name }}</a>
                 </li>
                 <span class="menu__line"></span>
                 <li class="menu__item" @mouseover="showCursive($event)" @mouseleave="hideCursive($event)">
-                    <a @click.prevent="goTo('about-us')" href="/about-us" class="menu__link">About</a>
-                    <a @click.prevent="goTo('about-us')" href="/about-us" class="menu__link menu__link--cursive">About</a>
+                    <a @click.prevent="goTo(data.navigation[1].link)"  :href="data.navigation[1].link" class="menu__link">{{ data.navigation[1].name }}</a>
+                    <a @click.prevent="goTo(data.navigation[1].link)"  :href="data.navigation[1].link" class="menu__link menu__link--cursive">{{ data.navigation[1].name }}</a>
                 </li>
                 <span class="menu__line"></span>
                 <li class="menu__item" @mouseover="showCursive($event)" @mouseleave="hideCursive($event)">
-                    <a @click.prevent="goTo('career')" href="/career" class="menu__link">Career</a>
-                    <a @click.prevent="goTo('career')" href="/career" class="menu__link menu__link--cursive">Career</a>
+                    <a @click.prevent="goTo(data.navigation[2].link)" :href="data.navigation[2].link" class="menu__link">{{ data.navigation[2].name }}</a>
+                    <a @click.prevent="goTo(data.navigation[2].link)" :href="data.navigation[2].link" class="menu__link menu__link--cursive">{{ data.navigation[2].name }}</a>
                 </li>
             </ul>
             <ul class="menu__list">
                 <li class="menu__item" @mouseover="showCursive($event)" @mouseleave="hideCursive($event)">
-                    <a @click.prevent="goTo('news')" href="/media" class="menu__link">Media</a>
-                    <a @click.prevent="goTo('news')" href="/media" class="menu__link menu__link--cursive">Media</a>
+                    <a @click.prevent="goTo(data.navigation[3].link)" :href="data.navigation[3].link" class="menu__link">{{ data.navigation[3].name }}</a>
+                    <a @click.prevent="goTo(data.navigation[3].link)" :href="data.navigation[3].link" class="menu__link menu__link--cursive">{{ data.navigation[3].name }}</a>
                 </li>
                 <span class="menu__line"></span>
                 <li class="menu__item" @mouseover="showCursive($event)" @mouseleave="hideCursive($event)">
-                    <a @click.prevent="goTo('contact')" href="/contact" class="menu__link">Contacts</a>
-                    <a @click.prevent="goTo('contact')" href="/contact" class="menu__link menu__link--cursive">Contacts</a>
+                    <a @click.prevent="goTo(data.navigation[4].link)" :href="data.navigation[4].link" class="menu__link">{{ data.navigation[4].name }}</a>
+                    <a @click.prevent="goTo(data.navigation[4].link)" :href="data.navigation[4].link" class="menu__link menu__link--cursive">{{ data.navigation[4].name }}</a>
                 </li>
             </ul>
         </nav>
-        <Social @showCursive="showCursive($event)" @hideCursive="hideCursive($event)"/>
+        <Social :social="data.social_links" @showCursive="showCursive($event)" @hideCursive="hideCursive($event)"/>
         <div class="language">
             <ul class="language__list">
                 <li class="language__item" :class="{'language__item--selected': $i18n.locale === 'en' }">
@@ -63,9 +63,9 @@ export default {
     beforeMount() {
         document.body.style = 'overflow: hidden'
     },
-    beforeDestroy() {
-        document.body.style = ''
-    },
+	computed: {
+		data() { return this.$store.getters['lang/parts/dataHeader'] }
+	},
     methods : {
         ...mapMutations({
           setMenuStatus: 'menu/setStatus',
@@ -97,7 +97,7 @@ export default {
             }
         },
         goTo(page) {
-          if (this.$route.name !== page) {
+          if (this.$route.path !== page) {
             this.setAnimate('up')
             this.setPlug(true)
             setTimeout(() => {
@@ -107,7 +107,10 @@ export default {
             }, 1000);
           }
         },
-    }
+    },
+    beforeDestroy() {
+        document.body.style = ''
+    },
 }
 </script>
 

@@ -1,7 +1,10 @@
 <template>
     <header class="header" :class="[{'header--main': headerType === 'main'},{'header--transparent': headerType === 'transparent' || view === 'list'}]">
         <div class="header__wrap">
-            <a @click.prevent="goTo('index')" href="/" class="header__logo">
+            <a v-if="headerType === 'main'" href="/" class="header__logo">
+              <img src="@/static/svg/header-logo.svg" alt="" class="header__img">
+            </a>
+            <a v-else @click.prevent="goTo('/')" href="/" class="header__logo">
               <img src="@/static/svg/header-logo.svg" alt="" class="header__img">
             </a>
             <div class="menu-button" @click="openMenu()">
@@ -12,11 +15,11 @@
             </div>
             <nav class="nav header-nav">
                 <ul class="nav__list">
-                    <li class="nav__item" @mouseover="showCursive($event)" @mouseleave="hideCursive($event)">
-                        <a @click.prevent="goTo('projects')" href="/projects" class="nav__link">Projects</a>
-                        <a @click.prevent="goTo('projects')" href="/projects" class="nav__link nav__link--cursive">Projects</a>
+                    <li class="nav__item" v-for="(item, i) in data.navigation" :key="i"  @mouseover="showCursive($event)" @mouseleave="hideCursive($event)">
+                        <a @click.prevent="goTo(item.link)" :href="item.link" class="nav__link">{{ item.name }}</a>
+                        <a @click.prevent="goTo(item.link)" :href="item.link" class="nav__link nav__link--cursive">{{ item.name }}</a>
                     </li>
-                    <li class="nav__item" @mouseover="showCursive($event)" @mouseleave="hideCursive($event)">
+                    <!-- <li class="nav__item" @mouseover="showCursive($event)" @mouseleave="hideCursive($event)">
                         <a @click.prevent="goTo('about-us')" href="/about-us" class="nav__link">About</a>
                         <a @click.prevent="goTo('about-us')" href="/about-us" class="nav__link nav__link--cursive">About</a>
                     </li>
@@ -31,7 +34,7 @@
                     <li class="nav__item" @mouseover="showCursive($event)" @mouseleave="hideCursive($event)">
                         <a @click.prevent="goTo('contact')" href="/contact" class="nav__link">Contacts</a>
                         <a @click.prevent="goTo('contact')" href="/contact" class="nav__link nav__link--cursive">Contacts</a>
-                    </li>
+                    </li> -->
                 </ul>
             </nav>
             <div class="lang">
@@ -51,7 +54,7 @@
                 </ul>
             </div>
             <div class="request">
-                <nuxt-link :to="localePath('/sayhi')" class="request__link">Send request</nuxt-link>
+                <nuxt-link :to="localePath('/sayhi')" class="request__link">{{ data.btn_text }}</nuxt-link>
             </div>
         </div>
     </header>
@@ -69,6 +72,9 @@ export default {
         headerType: String,
         view: String,
     },
+	computed: {
+		data() { return this.$store.getters['lang/parts/dataHeader'] }
+	},
     methods: {
         ...mapMutations({
           setMenuStatus: 'menu/setStatus',
@@ -76,7 +82,7 @@ export default {
           setAnimate: 'plug/setAnimate',
         }),
         goTo(page) {
-          if (this.$route.name !== page) {
+          if (this.$route.path !== page) {
             this.setAnimate('up')
             this.setPlug(true)
             setTimeout(() => {
