@@ -69,8 +69,8 @@
                     </p>
                     <!-- <p class="footer__main-text footer__main-text--italic">say hi.</p> -->
                     <div class="footer__main-row">
-                        <div class="footer__unit">
-                            <a target="_blank" class="footer__link footer__link--line" href="https://iqosa.com/wp-content/uploads/2021/02/IQOSA-_MediaKit_EN.pdf">Media Kit</a>
+                        <div class="footer__unit" v-for="(item, i) in data.right_links" :key="i">
+                            <a target="_blank" class="footer__link footer__link--line" :href="getImg(item.link_content)">{{ item.link_text }}</a>
                             <span class="footer__line"></span>
                         </div>
                     </div>
@@ -88,7 +88,7 @@
                 <a href="https://www.instagram.com/iqosa/" class="footer__link">Instagram</a>
             </div> -->
             <div class="footer__bottom-item footer__bottom-item--tres">
-                <p class="footer__description footer__description--opacity">&copy; IQOSA 2021.</p>
+                <p class="footer__description footer__description--opacity">&copy; IQOSA {{ data.year }}.</p>
                 <p class="footer__developed">
                     <span class="footer__description footer__description--opacity">{{ $t('developed') }}</span>
                     <a target="_blank" href="https://thefirstthelast.agency/" class="footer__link">The First The Last.</a>
@@ -102,64 +102,69 @@
 import { mapMutations } from 'vuex'
 import gsap from "gsap"
 export default {
+    data() {
+        return {
+            baseUrl: process.env.baseUrl,
+        }
+    },
 	computed: {
 		data() { return this.$store.getters['lang/parts/dataFooter'] }
 	},
     methods: {
-            ...mapMutations({
+        ...mapMutations({
             setAnimate: 'plug/setAnimate',
             setPlug: 'plug/setVisible',
-            }),
-            showAnimateText(e) {
-                if (e.target.tagName === 'A') {
-                    gsap.to(e.target.parentElement.children[0], { 
-                        translateY: -100 + "%",
-                        duration: .5
-                    })
-                    gsap.to(e.target.parentElement.children[1], { 
-                        translateY: -100 + "%",
-                        duration: .5
-                    })
-                }
-            },
-            hideAnimateText(e) {
-                if (e.target.tagName === 'SPAN') {
-                    gsap.to(e.target.children[0], { 
-                        translateY: 0 + "%",
-                        duration: .5
-                    })
-                    gsap.to(e.target.children[1], { 
-                        translateY: 0 + "%",
-                        duration: .5
-                    })
-                }
-            },
-            showCursive(e) {
-                if (e.target.tagName === 'A') {
-                    gsap.to(e.target.parentElement.children[0], { 
-                        translateY: -100 + "%",
-                        duration: .5
-                    })
-                    gsap.to(e.target.parentElement.children[1], { 
-                        translateY: -100 + "%",
-                        duration: .5
-                    })
-                }
-            },
-            hideCursive(e) {
-                if (e.target.tagName === 'LI') {
-                    gsap.to(e.target.children[0], { 
-                        translateY: 0 + "%",
-                        duration: .5
-                    })
-                    gsap.to(e.target.children[1], { 
-                        translateY: 0 + "%",
-                        duration: .5
-                    })
-                }
-            },
-            goPage(page) {
-                // console.log('bubu')
+        }),
+        showAnimateText(e) {
+            if (e.target.tagName === 'A') {
+                gsap.to(e.target.parentElement.children[0], { 
+                    translateY: -100 + "%",
+                    duration: .5
+                })
+                gsap.to(e.target.parentElement.children[1], { 
+                    translateY: -100 + "%",
+                    duration: .5
+                })
+            }
+        },
+        hideAnimateText(e) {
+            if (e.target.tagName === 'SPAN') {
+                gsap.to(e.target.children[0], { 
+                    translateY: 0 + "%",
+                    duration: .5
+                })
+                gsap.to(e.target.children[1], { 
+                    translateY: 0 + "%",
+                    duration: .5
+                })
+            }
+        },
+        showCursive(e) {
+            if (e.target.tagName === 'A') {
+                gsap.to(e.target.parentElement.children[0], { 
+                    translateY: -100 + "%",
+                    duration: .5
+                })
+                gsap.to(e.target.parentElement.children[1], { 
+                    translateY: -100 + "%",
+                    duration: .5
+                })
+            }
+        },
+        hideCursive(e) {
+            if (e.target.tagName === 'LI') {
+                gsap.to(e.target.children[0], { 
+                    translateY: 0 + "%",
+                    duration: .5
+                })
+                gsap.to(e.target.children[1], { 
+                    translateY: 0 + "%",
+                    duration: .5
+                })
+            }
+        },
+        goPage(page) {
+            // console.log('bubu')
             if (this.$route.name !== page) {
                 this.setAnimate('up')
                 this.setPlug(true)
@@ -168,8 +173,11 @@ export default {
                     this.$router.push(this.localePath(page))
                 }, 1000);
             }
-            }
+        },
+        getImg(img) {
+            return `${this.baseUrl}${img}`
         }
+    }
 }
 </script>
 

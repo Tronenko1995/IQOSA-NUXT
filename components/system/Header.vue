@@ -2,10 +2,10 @@
     <header class="header" :class="[{'header--main': headerType === 'main'},{'header--transparent': headerType === 'transparent' || view === 'list'}]">
         <div class="header__wrap">
             <a v-if="headerType === 'main'" href="/" class="header__logo">
-              <img src="@/static/svg/header-logo.svg" alt="" class="header__img">
+              <img :src="getImg(data.logo)" alt="" class="header__img">
             </a>
             <a v-else @click.prevent="goTo('/')" href="/" class="header__logo">
-              <img src="@/static/svg/header-logo.svg" alt="" class="header__img">
+              <img :src="getImg(data.logo)" alt="" class="header__img">
             </a>
             <div class="menu-button" @click="openMenu()">
                 <div class="menu-button__list">
@@ -72,6 +72,11 @@ export default {
         headerType: String,
         view: String,
     },
+    data() {
+        return {
+            baseUrl: process.env.baseUrl,
+        }
+    },
 	computed: {
 		data() { return this.$store.getters['lang/parts/dataHeader'] }
 	},
@@ -119,6 +124,9 @@ export default {
         openMenu() {
             this.menuStatus ? this.setMenuStatus(false) : this.setMenuStatus(true)
         },
+        getImg(img) {
+            return `${this.baseUrl}${img}`
+        }
     },
     mounted() {
         gsap.to('.nav__item', {

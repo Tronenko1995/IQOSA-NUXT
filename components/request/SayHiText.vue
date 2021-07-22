@@ -1,12 +1,23 @@
 <template>
     <div class="say-hi">
         <div class="say-hi__container">
-            <nuxt-link :to="localePath('/work-with-you')" class="say-hi__text">work with us</nuxt-link>
-            <p class="say-hi__text say-hi__text--active">Say hi</p>
-            <nuxt-link :to="localePath('/brief')" class="say-hi__text">fill the breif</nuxt-link>
+            <nuxt-link :to="localePath(data.prev_page_link)" class="say-hi__text">{{ data.prev_page_label }}</nuxt-link>
+            <p class="say-hi__text say-hi__text--active">{{ data.title_big_thin }}</p>
+            <nuxt-link :to="localePath(data.next_page_link)" class="say-hi__text">{{ data.next_page_label }}</nuxt-link>
         </div>
     </div>
 </template>
+
+<script>
+export default {
+    props: {
+        data: {
+            type: Object,
+            required: true
+        },
+    },
+}
+</script>
 
 <style lang="scss" scoped>
 .say-hi {

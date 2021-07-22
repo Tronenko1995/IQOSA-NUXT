@@ -1,14 +1,16 @@
 <template>
     <main class="request-page">
         <section class="request-page__section">
-            <p class="request-page__question">What do you want<br>to talk about?</p>
-            <p class="request-page__title">i want to</p>
-            <SayHiText v-if="type === 'sayHi'"/>
-            <SayHiForm v-if="type === 'sayHi'"/>
-            <WorkWithYouText v-if="type === 'workWithYou'"/>
-            <WorkWithYouForm v-if="type === 'workWithYou'"/>
-            <JoinText v-if="type === 'join'"/>
-            <JoinForm v-if="type === 'join'"/>
+    <div class="request-page__question">
+        <p v-for="(item, i) in data.title_small" :key="i">{{ item }}</p>
+    </div>
+            <p class="request-page__title">{{ data.title_big_bold }}</p>
+            <SayHiText v-if="type === 'sayHi'" :data="data"/>
+            <SayHiForm v-if="type === 'sayHi'" :data="data"/>
+            <WorkWithYouText v-if="type === 'workWithYou'" :data="data"/>
+            <WorkWithYouForm v-if="type === 'workWithYou'" :data="data"/>
+            <JoinText v-if="type === 'join'" :data="data"/>
+            <JoinForm v-if="type === 'join'" :data="data"/>
             <!-- <BriefText v-if="type === 'brief'"/> -->
             <!-- <BriefForm v-if="type === 'brief'"/> -->
         </section>
@@ -41,7 +43,11 @@ export default {
         type: {
             type: String,
             required: true
-        }
+        },
+        data: {
+            type: Object,
+            required: true
+        },
     },
     mounted() {
         if (this.preloader) {

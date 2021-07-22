@@ -1,35 +1,37 @@
 <template>
     <form class="say-hi-form" @submit.prevent="sendForm()">
-        <p class="say-hi-form__title">Sed ut perspiciatis unde omnis iste natus error sit voluptatem</p>
+        <div class="say-hi-form__title">
+            <p v-for="(item, i) in data.form_title" :key="i">{{ item }}</p>
+        </div>
         <div class="say-hi-form__input-wrap" ref="firstNameWrap">
-            <p class="say-hi-form__text say-hi-form__text--placeholder">First name</p>
+            <p class="say-hi-form__text say-hi-form__text--placeholder">{{ data.firstname_input_placeholder }}</p>
             <input class="say-hi-form__input" type="text" @focus="focusInput($event)" @blur="BlurInput($event)" v-model="firstName">
-            <p class="say-hi-form__text say-hi-form__text--error">Incorrect name</p>
+            <p class="say-hi-form__text say-hi-form__text--error">{{ $t('IncorrectName') }}</p>
         </div>
         <div class="say-hi-form__input-wrap">
-            <p class="say-hi-form__text say-hi-form__text--placeholder">Last name</p>
+            <p class="say-hi-form__text say-hi-form__text--placeholder">{{ data.lastname_input_placeholder }}</p>
             <input class="say-hi-form__input" type="text" @focus="focusInput($event)" @blur="BlurInput($event)" v-model="lastName">
         </div>
         <div class="say-hi-form__input-wrap">
-            <p class="say-hi-form__text say-hi-form__text--placeholder">Phone number</p>
-            <input class="say-hi-form__input" type="text" @focus="focusInput($event)" @blur="BlurInput($event)" v-model="phone">
+            <p class="say-hi-form__text say-hi-form__text--placeholder">{{ data.portfolio_input_placeholder }}</p>
+            <input class="say-hi-form__input" type="text" @focus="focusInput($event)" @blur="BlurInput($event)" v-model="portfolio">
         </div>
         <div class="say-hi-form__input-wrap" ref="emailWrap">
-            <p class="say-hi-form__text say-hi-form__text--placeholder">E-mail address</p>
+            <p class="say-hi-form__text say-hi-form__text--placeholder">{{ data.email_input_placeholder }}</p>
             <input class="say-hi-form__input" type="text" @focus="focusInput($event)" @blur="BlurInput($event)" v-model="email">
-            <p class="say-hi-form__text say-hi-form__text--error">Incorrect email</p>
+            <p class="say-hi-form__text say-hi-form__text--error">{{ $t('IncorrectEmail') }}</p>
         </div>
         <div class="say-hi-form__textarea-wrap" ref="messageWrap">
-            <p class="say-hi-form__text say-hi-form__text--placeholder say-hi-form__text--textarea">Message</p>
+            <p class="say-hi-form__text say-hi-form__text--placeholder say-hi-form__text--textarea">{{ data.message_input_placeholder }}</p>
             <textarea class="say-hi-form__textarea" id="" cols="30" name="message" v-model="message"></textarea>
-            <p class="say-hi-form__text say-hi-form__text--error">Incorrect message</p>
+            <p class="say-hi-form__text say-hi-form__text--error">{{ $t('IncorrectMessage') }}</p>
         </div>
-        <button class="say-hi-form__button arrow-link" @mouseover="findElement($event)" @mouseleave="animateTextHide($event)">
+        <button :disabled="dispatchForm" class="say-hi-form__button arrow-link" @mouseover="findElement($event)" @mouseleave="animateTextHide($event)">
             <span class="arrow-link__change">
-                <span class="arrow-link__span arrow-link__span--first">send</span>
-                <span class="arrow-link__span arrow-link__span--last">send</span>
+                <span class="arrow-link__span arrow-link__span--first">{{ data.submit_text_animated }}</span>
+                <span class="arrow-link__span arrow-link__span--last">{{ data.submit_text_animated }}</span>
             </span>
-            <span class="arrow-link__text">THE form</span>
+            <span class="arrow-link__text">{{ data.submit_text }}</span>
             <span class="arrow-link__circle">
                 <svg class="arrow-link__svg" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.40039 12.4004H17.6004" stroke-linecap="square"/><path d="M13.9004 8L18.4004 12.4L13.9004 16.8" stroke-linecap="square"/></svg>
             </span>
@@ -49,13 +51,21 @@
 <script>
 import { mapMutations } from 'vuex'
 export default {
+    props: {
+        data: {
+            type: Object,
+            required: true
+        },
+    },
     data() {
         return {
             firstName: '',
             lastName: '',
-            phone: '',
+            portfolio: '',
             email: '',
             message: '',
+            regMail: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+            dispatchForm: false,
         }
     },
     methods: {
@@ -114,18 +124,46 @@ export default {
             } else {
                 this.$refs.firstNameWrap.classList.remove('say-hi-form__input-wrap--error')
             }
-            if (!this.email) {
+
+            if (!this.email || !this.regMail.test(this.email)) {
                 this.$refs.emailWrap.classList.add('say-hi-form__input-wrap--error')
             } else {
                 this.$refs.emailWrap.classList.remove('say-hi-form__input-wrap--error')
             }
+
             if (!this.message) {
                 this.$refs.messageWrap.classList.add('say-hi-form__textarea-wrap--error')
             } else {
                 this.$refs.messageWrap.classList.remove('say-hi-form__textarea-wrap--error')
             }
-            if (this.firstName && this.email && this.message) {
-                this.openModal('thank')
+
+            if (this.firstName && this.email && this.regMail.test(this.email) && this.message) {
+                this.dispatchForm = true
+                this.$axios.post('/work_with_you_popup_send', {
+                    first_name: this.firstName,
+                    last_name: this.lastName,
+                    phone_number: this.portfolio,
+                    email: this.email,
+                    message: this.message
+                })
+                .then((response) => {
+                        this.firstName = ''
+                        this.lastName = ''
+                        this.portfolio = ''
+                        this.email = ''
+                        this.message = ''
+						this.openModal('thank')
+                        this.dispatchForm = false
+					}, reject => {
+						if (reject.response.status === 422) {
+							if (Object.keys(reject.response.data.errors).length) {
+								for (let key in reject.response.data.errors) {
+                                    alert(reject.response.data.errors[key][0])
+								}
+							}
+						}
+						this.dispatchForm = false
+					})
             }
         },
     }

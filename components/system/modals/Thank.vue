@@ -1,27 +1,75 @@
 <template>
     <div class="thank-modal">
-        <p class="thank-modal__title">thanks for</p>
-        <div class="thank-modal__row">
-            <p class="thank-modal__subtitle">your request</p>
+        <template v-if="data">
+            <p class="thank-modal__title">{{ data.thanks_title_bold }}</p>
+            <div class="thank-modal__row">
+                <p class="thank-modal__subtitle">{{ data.thanks_title_thin }}</p>
                     <div
                         class="make-request thank-modal__request"
                         @mouseover="findElement($event)"
                         @mouseleave="animateTextHide($event)"
                         >
                         <a @click.prevent="goTo('index')" href="/" class="make-request__link">
-                            <span class="make-request__text">back to</span>
+                            <span class="make-request__text">{{ data.thanks_link_text }}</span>
                             <span class="make-request__change">
                             <span class="make-request__span make-request__span--first"
-                                >main</span
+                                >{{ data.thanks_link_text_animated }}</span
                             >
-                            <span class="make-request__span">main</span>
+                            <span class="make-request__span">{{ data.thanks_link_text_animated }}</span>
                             </span>
                         </a>
                         <span class="make-request__line"></span>
                     </div>
+            </div>
+            <div class="close-modal" @click="$emit('close', 'show')"></div>
+        </template>
+        <template v-else-if="data2">
+            <p class="thank-modal__title">{{ data2.thanks_title_bold }}</p>
+            <div class="thank-modal__row">
+                <p class="thank-modal__subtitle">{{ data2.thanks_title_thin }}</p>
+                    <div
+                        class="make-request thank-modal__request"
+                        @mouseover="findElement($event)"
+                        @mouseleave="animateTextHide($event)"
+                        >
+                        <a @click.prevent="goTo('index')" href="/" class="make-request__link">
+                            <span class="make-request__text">{{ data2.thanks_link_text }}</span>
+                            <span class="make-request__change">
+                            <span class="make-request__span make-request__span--first"
+                                >{{ data2.thanks_link_text_animated }}</span
+                            >
+                            <span class="make-request__span">{{ data2.thanks_link_text_animated }}</span>
+                            </span>
+                        </a>
+                        <span class="make-request__line"></span>
+                    </div>
+            </div>
+            <div class="close-modal" @click="$emit('close', 'show')"></div>
+        </template>
+        <template v-else-if="data3">
+            <p class="thank-modal__title">{{ data3.thanks_title_bold }}</p>
+            <div class="thank-modal__row">
+                <p class="thank-modal__subtitle">{{ data3.thanks_title_thin }}</p>
+                    <div
+                        class="make-request thank-modal__request"
+                        @mouseover="findElement($event)"
+                        @mouseleave="animateTextHide($event)"
+                        >
+                        <a @click.prevent="goTo('index')" href="/" class="make-request__link">
+                            <span class="make-request__text">{{ data3.thanks_link_text }}</span>
+                            <span class="make-request__change">
+                            <span class="make-request__span make-request__span--first"
+                                >{{ data3.thanks_link_text_animated }}</span
+                            >
+                            <span class="make-request__span">{{ data3.thanks_link_text_animated }}</span>
+                            </span>
+                        </a>
+                        <span class="make-request__line"></span>
+                    </div>
+            </div>
+            <div class="close-modal" @click="$emit('close', 'show')"></div>
+        </template>
 
-        </div>
-        <div class="close-modal" @click="$emit('close', 'show')"></div>
     </div>
 </template>
 
@@ -31,6 +79,11 @@ export default {
     mounted() {
         this.animate()
     },
+	computed: {
+		data() { return this.$store.getters['lang/request/dataSayHi'] },
+		data2() { return this.$store.getters['lang/request/dataJoin'] },
+		data3() { return this.$store.getters['lang/request/dataWorkWithYou'] },
+	},
     methods: {
         ...mapMutations({
           setAnimate: 'plug/setAnimate',

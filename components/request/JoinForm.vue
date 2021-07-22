@@ -1,111 +1,112 @@
 <template>
-    <form class="say-hi-form" @submit.prevent="sendForm()">
-        My <span class="say-hi-form__span say-hi-form__span--accent">name</span> is <span class="say-hi-form__span say-hi-form__span--wrap">
-            <input type="text" class="say-hi-form__input">
+    <form class="say-hi-form join-form" @submit.prevent="sendForm()">
+        <div class="join-form__inner-text" v-html="data.text_before_name"></div>
+
+        <span class="say-hi-form__span say-hi-form__span--wrap" ref="nameWrap">
+            <input type="text" class="say-hi-form__input" v-model="name" @focus="focusInput($event)" @blur="BlurInput($event)">
+            <span class="say-hi-form__placeholder">{{ data.name_input_placeholder }}</span>
         </span>
-        Lorem ipsum Lorem ipsum aliq <span class="say-hi-form__span say-hi-form__span--accent">vacancy</span>
-        <div class="say-hi-form__select" :class="[{'active': vacancy !== 'VACANCY LIST'},{'open': vacancySelect}]">
+
+        <div class="join-form__inner-text" v-html="data.text_before_vacancy"></div>
+
+        <div class="say-hi-form__select" :class="[{'active': vacancy !== data.vacancy_input_placeholder},{'open': vacancySelect}]">
             <div class="say-hi-form__select-head" @click.stop="vacancySelect = !vacancySelect">{{ vacancy }}</div>
             <ul v-if="vacancySelect" class="say-hi-form__dropdown">
-                <li class="say-hi-form__dropdown-item" v-for="(item, index) in vacancyArray" :key="index" @click="changeVacancy($event)">{{ item }}</li>
+                <li class="say-hi-form__dropdown-item" v-for="(item, index) in data.vacancy" :key="index" @click="changeVacancy($event)">{{ item }}</li>
             </ul>
         </div>
-        dolor sit amet, consectetur adipiscing elit. sed
-        aliquip ex <span class="say-hi-form__span say-hi-form__span--accent">email address</span> <span class="say-hi-form__span say-hi-form__span--wrap">
-            <input type="text" class="say-hi-form__input">
-        </span>
-        dolor sit amet, consectetur adipiscing elit. sed
-        <span class="say-hi-form__span say-hi-form__span--accent">resume/cv</span> 
-        <span class="say-hi-form__span say-hi-form__span--wrap">
-            <input type="text" class="say-hi-form__input" @focus="focusInput($event)" v-model="inputNameFile">
-        </span>
-        <input class="say-hi-form__file" :disabled="cv.preloader" type="file" name="file" ref="fileInput" @change="uploadCv">
-        . Nemo enim
 
-        voluptatem quia <span class="say-hi-form__span say-hi-form__span--accent">linkedin</span> <span class="say-hi-form__span say-hi-form__span--wrap">
-            <input type="text" class="say-hi-form__input">
+        <div class="join-form__inner-text" v-html="data.text_before_file"></div>
+
+        <span class="say-hi-form__span say-hi-form__span--wrap" :class="{'focus': inputNameFile}" ref="fileWrap">
+            <input type="text" class="say-hi-form__input" @focus="focusFileInput($event)" v-model="inputNameFile">
+            <span class="say-hi-form__placeholder">{{ data.file_input_placeholder }}</span>
         </span>
-        Ut enim ad minima veniam, quis nostrum exercita.
+        <input class="say-hi-form__file" :disabled="cv.preloader" type="file" name="file" ref="fileInput" accept=".doc, .docx, .pdf" @change="uploadCv">
+
+        <div class="join-form__inner-text" v-html="data.text_before_portfolio"></div>
+
+        <span class="say-hi-form__span say-hi-form__span--wrap" ref="portfolioWrap">
+            <input @focus="focusInput($event)" @blur="BlurInput($event)" type="text" class="say-hi-form__input" v-model="portfolio">
+            <span class="say-hi-form__placeholder">{{ data.portfolio_input_placeholder }}</span>
+        </span>
+
+        <div class="join-form__inner-text" v-html="data.text_before_email"></div>
+
+        <span class="say-hi-form__span say-hi-form__span--wrap" ref="emailWrap">
+            <input @focus="focusInput($event)" @blur="BlurInput($event)" type="text" class="say-hi-form__input" v-model="email">
+            <span class="say-hi-form__placeholder">{{ data.email_input_placeholder }}</span>
+        </span>
+
+        <ul class="join-form__error" :class="{'active': errors}">
+            <li v-if="!this.name && !this.cv.file && !this.portfolio && (!this.email || !regMail.test(this.email))" class="join-form__error-item">{{ $t('FillTheForm') }}</li>
+            <template v-else>
+                <li v-if="this.vacancy === this.data.vacancy_input_placeholder" class="join-form__error-item">{{ $t('IncorrectVacancy') }}</li>
+                <li v-if="!this.cv.file" class="join-form__error-item">{{ $t('IncorrectCV') }}</li>
+                <li v-if="!this.portfolio" class="join-form__error-item">{{ $t('IncorrectLink') }}</li>
+                <li v-if="!this.email || !regMail.test(this.email)" class="join-form__error-item">{{ $t('IncorrectEmail') }}</li>
+                <li v-if="!this.name" class="join-form__error-item">{{ $t('IncorrectName') }}</li>
+            </template>
+
+        </ul>
 
 
-        <!-- <p class="say-hi-form__title">Sed ut perspiciatis unde omnis iste natus error sit voluptatem</p>
-        <div class="say-hi-form__input-wrap" ref="firstNameWrap">
-            <p class="say-hi-form__text say-hi-form__text--placeholder">First name</p>
-            <input class="say-hi-form__input" type="text" @focus="focusInput($event)" @blur="BlurInput($event)" v-model="firstName">
-            <p class="say-hi-form__text say-hi-form__text--error">Incorrect name</p>
-        </div>
-        <div class="say-hi-form__input-wrap">
-            <p class="say-hi-form__text say-hi-form__text--placeholder">Last name</p>
-            <input class="say-hi-form__input" type="text" @focus="focusInput($event)" @blur="BlurInput($event)" v-model="lastName">
-        </div>
-        <div class="say-hi-form__input-wrap">
-            <p class="say-hi-form__text say-hi-form__text--placeholder">Phone number</p>
-            <input class="say-hi-form__input" type="text" @focus="focusInput($event)" @blur="BlurInput($event)" v-model="phone">
-        </div>
-        <div class="say-hi-form__input-wrap" ref="emailWrap">
-            <p class="say-hi-form__text say-hi-form__text--placeholder">E-mail address</p>
-            <input class="say-hi-form__input" type="text" @focus="focusInput($event)" @blur="BlurInput($event)" v-model="email">
-            <p class="say-hi-form__text say-hi-form__text--error">Incorrect email</p>
-        </div>
-        <div class="say-hi-form__textarea-wrap" ref="messageWrap">
-            <p class="say-hi-form__text say-hi-form__text--placeholder say-hi-form__text--textarea">Message</p>
-            <textarea class="say-hi-form__textarea" id="" cols="30" name="message" v-model="message"></textarea>
-            <p class="say-hi-form__text say-hi-form__text--error">Incorrect message</p>
-        </div> -->
-        <button class="say-hi-form__button arrow-link" @mouseover="findElement($event)" @mouseleave="animateTextHide($event)">
+        <button class="say-hi-form__button arrow-link" :disabled="dispatchForm" @mouseover="findElement($event)" @mouseleave="animateTextHide($event)">
             <span class="arrow-link__change">
-                <span class="arrow-link__span arrow-link__span--first">send</span>
-                <span class="arrow-link__span arrow-link__span--last">send</span>
+                <span class="arrow-link__span arrow-link__span--first">{{ data.submit_text_animated }}</span>
+                <span class="arrow-link__span arrow-link__span--last">{{ data.submit_text_animated }}</span>
             </span>
-            <span class="arrow-link__text">THE form</span>
+            <span class="arrow-link__text">{{ data.submit_text }}</span>
             <span class="arrow-link__circle">
                 <svg class="arrow-link__svg" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.40039 12.4004H17.6004" stroke-linecap="square"/><path d="M13.9004 8L18.4004 12.4L13.9004 16.8" stroke-linecap="square"/></svg>
             </span>
         </button>
-        <!-- <div class="say-hi-form__button">
-            <span>SHOW</span>&nbsp; MORE 
-            <span class="arrow-link__circle arrow-link__circle--news">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="arrow-link__svg">
-                    <path d="M6.40039 12.4004H17.6004" stroke-linecap="square"></path>
-                    <path d="M13.9004 8L18.4004 12.4L13.9004 16.8" stroke-linecap="square"></path>
-                </svg>
-            </span>
-        </div> -->
     </form>
 </template>
 
 <script>
 import { mapMutations } from 'vuex'
 export default {
+    props: {
+        data: {
+            type: Object,
+            required: true
+        },
+    },
     data() {
         return {
-            firstName: '',
-            lastName: '',
-            phone: '',
+            name: '',
+            portfolio: '',
             email: '',
-            message: '',
             vacancy: 'VACANCY LIST',
             vacancySelect: false,
-            vacancyArray: ['Architecture','3D Max Visualisator','Engineer'],
+            // vacancyArray: ['Architecture','3D Max Visualisator','Engineer'],
             cv: {
                 file: '',
                 preloader: false,
             },
-            inputNameFile: ''
+            inputNameFile: '',
+            errors: false,
+            regMail: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+            dispatchForm: false,
         }
+    },
+    mounted() {
+        this.vacancy = this.data.vacancy_input_placeholder
     },
     methods: {
         ...mapMutations({
             setModal: 'modal/setModal',
         }),
-        // focusInput(e) {
-        //     e.target.parentElement.classList.add('focus')
-        // },
-        // BlurInput(e) {
-        //     if (!e.target.value) {
-        //         e.target.parentElement.classList.remove('focus')
-        //     }
-        // },
+        focusInput(e) {
+            e.target.parentElement.classList.add('focus')
+            e.target.parentElement.classList.remove('say-hi-form__span--wrap--error')
+        },
+        BlurInput(e) {
+            if (!e.target.value) {
+                e.target.parentElement.classList.remove('focus')
+            }
+        },
 		findElement(e) {
 			if (e.target.classList.contains('arrow-link__text') || e.target.classList.contains('arrow-link') || e.target.classList.contains('arrow-link__circle')) {
                 const el = e.target.parentElement.querySelector('.arrow-link__change')
@@ -145,31 +146,73 @@ export default {
             })
         },
         sendForm() {
-            // if (!this.firstName) {
-            //     this.$refs.firstNameWrap.classList.add('say-hi-form__input-wrap--error')
-            // } else {
-            //     this.$refs.firstNameWrap.classList.remove('say-hi-form__input-wrap--error')
-            // }
-            // if (!this.email) {
-            //     this.$refs.emailWrap.classList.add('say-hi-form__input-wrap--error')
-            // } else {
-            //     this.$refs.emailWrap.classList.remove('say-hi-form__input-wrap--error')
-            // }
-            // if (!this.message) {
-            //     this.$refs.messageWrap.classList.add('say-hi-form__textarea-wrap--error')
-            // } else {
-            //     this.$refs.messageWrap.classList.remove('say-hi-form__textarea-wrap--error')
-            // }
-            // if (this.firstName && this.email && this.message) {
-                this.openModal('thank')
-            // }
+            if (!this.name) {
+                this.$refs.nameWrap.classList.add('say-hi-form__span--wrap--error')
+            } else {
+                this.$refs.nameWrap.classList.remove('say-hi-form__span--wrap--error')
+            }
+
+            if (!this.portfolio) {
+                this.$refs.portfolioWrap.classList.add('say-hi-form__span--wrap--error')
+            } else {
+                this.$refs.portfolioWrap.classList.remove('say-hi-form__span--wrap--error')
+            }
+
+            if (!this.email || !this.regMail.test(this.email)) {
+                this.$refs.emailWrap.classList.add('say-hi-form__span--wrap--error')
+            } else {
+                this.$refs.emailWrap.classList.remove('say-hi-form__span--wrap--error')
+            }
+
+            if (!this.cv.file) {
+                this.$refs.fileWrap.classList.add('say-hi-form__span--wrap--error')
+            } else {
+                this.$refs.fileWrap.classList.remove('say-hi-form__span--wrap--error')
+            }
+
+            if (this.name && this.cv.file && this.portfolio && this.email && this.regMail.test(this.email) && this.vacancy !== this.data.vacancy_input_placeholder) {
+                this.errors = false
+                this.dispatchForm = true
+                // this.openModal('thank')
+                let formData = new FormData()
+                formData.append('name', this.name)
+                formData.append('vacancy', this.vacancy)
+                formData.append('email', this.email)
+                formData.append('linkedin', this.portfolio)
+                formData.append('file', this.cv.file)
+                this.$axios.post('/join_popup_send', formData)
+					.then((response) => {
+                        this.name = ''
+                        this.portfolio = ''
+                        this.email = ''
+                        this.vacancy = this.data.vacancy_input_placeholder
+                        this.inputNameFile = ''
+                        this.cv.file = ''
+                        this.cv.preloader = false
+                        formData = new FormData()
+						this.openModal('thank')
+                        this.dispatchForm = false
+					}, reject => {
+						if (reject.response.status === 422) {
+							if (Object.keys(reject.response.data.errors).length) {
+								for (let key in reject.response.data.errors) {
+                                    alert(reject.response.data.errors[key][0])
+								}
+							}
+						}
+						this.dispatchForm = false
+					})
+            } else {
+                this.errors = true
+            }
         },
         changeVacancy(e) {
             this.vacancy = e.target.textContent
             this.vacancySelect = false
         },
-        focusInput(e) {
+        focusFileInput(e) {
             // console.log('фокус')
+            // e.target.parentElement.classList.add('focus')
             e.target.blur()
             // console.log('снял фокус')
             this.$refs.fileInput.click()
@@ -208,6 +251,16 @@ export default {
             margin: 0 16px;
             width: 440px;
             display: inline-block;
+            &.focus {
+                .say-hi-form__placeholder {
+                    opacity: 0;
+                }
+            }
+            &--error {
+                .say-hi-form__input {
+                    border-bottom: 1px solid rgba(255,73,73,.4);
+                }
+            }
         }
     }
     &__select {
@@ -431,6 +484,15 @@ export default {
     }
     &__file {
         display: none;
+    }
+    &__placeholder {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        font-family: 'LightItalic';
+        font-style: italic;
+        pointer-events: none;
+        transition: .2s;
     }
 }
 @media (max-width: 1280px) {

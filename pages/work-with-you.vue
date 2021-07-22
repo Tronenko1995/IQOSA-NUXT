@@ -1,6 +1,6 @@
 <template>
     <main>
-        <Request :type="'workWithYou'"/>
+        <Request :type="'workWithYou'" :data="data"/>
         <Modals v-if="modal.show" :modal="modal"/>
     </main>
 </template>
@@ -12,11 +12,26 @@ export default {
     components: {
 		Request,
     },
+	async asyncData({ store, i18n }) {
+		try {
+			await store.dispatch('lang/parts/getPartsContent', `/parts?lang=${i18n.locale}`)
+		} catch(e) {
+			// redsirect(`404`);
+			throw new Error(e);
+		}
+		try {
+			await store.dispatch('lang/request/getDataWorkWithYouPageContent', `/work_with_you?lang=${i18n.locale}`)
+		} catch(e) {
+			// redsirect(`404`);
+			throw new Error(e);
+		}
+	},
     beforeMount() {
 		this.testLang()
     },
 	computed: {
-		modal() { return this.$store.getters['modal/modal'] }
+		modal() { return this.$store.getters['modal/modal'] },
+		data() { return this.$store.getters['lang/request/dataWorkWithYou'] },
 	},
 	methods: {
 		testLang() {

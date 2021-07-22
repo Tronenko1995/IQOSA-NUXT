@@ -1,6 +1,6 @@
 <template>
     <main>
-        <Request :type="'join'"/>
+        <Request :type="'join'" :data="data"/>
         <Modals v-if="modal.show" :modal="modal"/>
     </main>
 </template>
@@ -38,7 +38,8 @@ export default {
 		this.testLang()
     },
 	computed: {
-		modal() { return this.$store.getters['modal/modal'] }
+		modal() { return this.$store.getters['modal/modal'] },
+		data() { return this.$store.getters['lang/request/dataJoin'] },
 	},
 	methods: {
 		testLang() {
