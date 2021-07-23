@@ -105,6 +105,8 @@ function getBg() {
 export default class Sketch {
   constructor(options) {
     this.scene = new THREE.Scene();
+    this.has_image = options.has_image;
+    this.color = options.color;
 
     this.container = options.dom;
     this.width = this.container.offsetWidth;
@@ -189,7 +191,7 @@ export default class Sketch {
     this.orthoCamera.layers.set(1);
 
     // const tex = new THREE.TextureLoader().load(bg);
-    this.tex = new THREE.TextureLoader().load(getBg(), () => {
+    this.tex = new THREE.TextureLoader().load(this.has_image ? getBg() : '', () => {
       this.resize();
     });
     // tex.needsUpdate = true;
@@ -249,7 +251,7 @@ export default class Sketch {
     let that = this;
     this.settings = {
       progress: 0,
-      color: 0x333333
+      color: this.color
     };
     // this.gui = new dat.GUI();
     // this.gui.add(this.settings, "progress", 0, 1, 0.01);
@@ -349,7 +351,7 @@ export default class Sketch {
         time: { value: 0 },
         ratio: { value: this.ratio },
         envMap: { value: this.envFBO.texture },
-        color: { value: new THREE.Color(0x333333) },
+        color: { value: new THREE.Color(this.color) },
         backMap: { value: this.backFBO.texture },
         resolution: { value: new THREE.Vector4() },
       },

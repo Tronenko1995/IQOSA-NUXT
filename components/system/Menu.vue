@@ -1,7 +1,7 @@
 <template>
     <div class="menu">
         <div>
-            <Icosahedron />
+            <IcosahedronCrystal :has_image="false" :color="0x333333" />
         </div>
         <nav class="menu__nav">
             <ul class="menu__list">
@@ -55,10 +55,10 @@
 <script>
 import { mapMutations } from 'vuex'
 import gsap from "gsap"
-import Icosahedron from '@/components/Icosahedron.vue'
+import IcosahedronCrystal from '@/components/IcosahedronCrystal.vue'
 export default {
     components: {
-        Icosahedron
+        IcosahedronCrystal
     },
     beforeMount() {
         document.body.style = 'overflow: hidden'
@@ -115,6 +115,10 @@ export default {
 </script>
 
 <style lang="scss">
+.menu__nav {
+  position: relative;
+  z-index: 5;
+}
 .menu {
     z-index: 3;
     background: #1b1b1b;

@@ -138,11 +138,11 @@ export default {
             }
 		},
         animateTextShow(el) {
-            this.$gsap.to(el.children[0], { 
+            this.$gsap.to(el.children[0], {
                 translateY: -100 + "%",
                 duration: .5
             })
-            this.$gsap.to(el.children[1], { 
+            this.$gsap.to(el.children[1], {
                 translateY: -100 + "%",
                 duration: .5
             })

@@ -7,6 +7,16 @@ import gsap from "gsap"
 import Sketch from "~/plugins/icosahedron";
 export default {
   name: "IcosahedronCrystal",
+  props: {
+    has_image:{
+      type: Boolean,
+      default: true
+    },
+    color: {
+      type: Number,
+      default: 0x222222
+    },
+  },
   data: function () {
     return {
       icosahedron: null,
@@ -14,13 +24,15 @@ export default {
   },
   mounted() {
     this.icosahedron = new Sketch({
-      dom: this.$refs.icosahedron
+      dom: this.$refs.icosahedron,
+      has_image: this.has_image,
+      color: this.color
     });
     setTimeout(() => this.animate(), 2000);
   },
   methods: {
     animate() {
-      gsap.to(this.$refs.icosahedron, { 
+      gsap.to(this.$refs.icosahedron, {
 				opacity: 1,
 				delay: 2,
 	  })
