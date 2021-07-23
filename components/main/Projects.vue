@@ -15,17 +15,17 @@
 					<span ref="currentSlide">1</span>/<span ref="totalSlides">1</span>
 				</p>
 			</div>
-			<div class="projects__name projects-name">
+			<div class="projects__name projects-name" ref="pa">
 				<swiper ref="projectName" :options="projectNameSetting" class="projects-name__title">
 					<swiper-slide v-for="item in data.projects" :key="item.link">
-						<a @click="goPage(`/project/${item.link}`)" :href="`/project/${item.link}`" class="projects-name__item">
+						<a @click="goPage(`/project/${item.link}`)" :href="`/project/${item.link}`" class="projects-name__item" :data-href="item.link">
 						<!-- <nuxt-link :to="localePath(`/project/${item.link}`)" class="projects-name__item"> -->
 						<span>{{ item.type }}</span>-{{ item.number }}
 						<!-- </nuxt-link> -->
 						</a>
 					</swiper-slide>
 				</swiper>
-					<a @click.prevent href="#"  class="projects__link arrow-link" @mouseover="findElement($event)" @mouseleave="animateTextHide($event)">
+					<a @click.prevent @click="goPage(`/project/${projectLink}`)" :href="`/project/${projectLink}`"  class="projects__link arrow-link" @mouseover="findElement($event)" @mouseleave="animateTextHide($event)">
 					<!-- <nuxt-link :to="localePath('/')" class="projects__link arrow-link" @mouseover.native="findElement($event)" @mouseleave.native="animateTextHide($event)"> -->
 					<!-- <nuxt-link :to="localePath('/')" class="projects__link arrow-link" @mouseover.native="findElement($event)" @mouseleave.native="animateTextHide($event)"> -->
 						<span class="arrow-link__change">
@@ -44,16 +44,20 @@
 				</swiper-slide>
 			</swiper>
 		</div>
-		<swiper ref="projectPhotos" :options="projectPhotosSetting" class="projects__photos projects-photos" data-cursor="drag">
-			<swiper-slide class="projects-photos__item" v-for="item in data.projects" :key="item.link">
-				<!-- <div class="projects-photos__slide"> -->
-				<a @click.prevent="goPage(`/project/${item.link}`)" :href="`/project/${item.link}`"  class="projects-photos__slide">
-				<!-- <nuxt-link :to="localePath(`/project/${item.link}`)" class="projects-photos__slide"> -->
-					<img class="projects-photos__img" :src='`${baseUrl}${item.main_picture}`' alt="">
-				</a>
-				<!-- </div> -->
-			</swiper-slide>
-		</swiper>
+		<div class="projects-photos-wrap">
+			<div class="black-friend" ref="blackFriend"></div>
+			<swiper ref="projectPhotos" :options="projectPhotosSetting" class="projects__photos projects-photos" data-cursor="drag">
+				<swiper-slide class="projects-photos__item" :data-link="item.link" v-for="item in data.projects" :key="item.link">
+					<!-- <div class="projects-photos__slide"> -->
+					<a @click.prevent="goPage(`/project/${item.link}`)" :href="`/project/${item.link}`"  class="projects-photos__slide">
+					<!-- <nuxt-link :to="localePath(`/project/${item.link}`)" class="projects-photos__slide"> -->
+						<img class="projects-photos__img" :src='`${baseUrl}${item.main_picture}`' alt="">
+					</a>
+					<!-- </div> -->
+				</swiper-slide>
+			</swiper>
+		</div>
+
 	</section>
 </template>
 
@@ -70,9 +74,10 @@ export default {
 	data() {
 		return {
 				baseUrl: process.env.baseUrl,
+				projectLink: '',
 				projectNameSetting: {
 					speed: 500,
-					loop: false,
+					loop: true,
 					direction: 'vertical',
 					slidesPerView: 1,
 					dragSize: 22,
@@ -82,7 +87,7 @@ export default {
 				},
 				projectAddressSetting: {
 					speed: 700,
-					loop: false,
+					loop: true,
 					direction: 'vertical',
 					dragSize: 22,
 					slidesPerView: 1,
@@ -92,7 +97,7 @@ export default {
 				},
 				projectPhotosSetting: {
 						speed: 700,
-						loop: false,
+						loop: true,
 						touchStartPreventDefault: false,
 						watchSlidesProgress: true,
 						slidesPerView: 1,
@@ -147,11 +152,23 @@ export default {
 			projectName() { return this.$refs.projectName.$swiper },
 	},
 	mounted() {
+		this.animate()
+		this.projectLink = this.data.projects[0].link
 		this.projectPhotos.controller.control = this.projectAddress
 		this.projectAddress.controller.control = this.projectName
 		this.$refs.totalSlides.textContent = this.projectPhotos.slides.length - 2
 		this.projectPhotos.on('slideChange', () => {
 			this.$refs.currentSlide.textContent = this.projectPhotos.realIndex + 1;
+			// console.log(this.projectPhotos.realIndex) this.projectPhotos.activeIndex
+			this.projectLink = this.projectPhotos.$el[0].children[0].children[this.projectPhotos.activeIndex].dataset.link
+			// console.dir(e)
+			// console.dir(this.$refs.projectName)
+			// console.log(this.$refs.projectName.querySelector(`[data-swiper-slide-index="${this.projectPhotos.realIndex}"]`))
+			// this.projectLink = this.container.querySelector(`[data-swiper-slide-index="${this.projectPhotos.realIndex}"] a`).dataset.href
+			
+			// console.log(document.querySelector(`[data-swiper-slide-index="${this.projectPhotos.realIndex}"] a`).dataset.href)
+			// console.log(this.projectLink)
+
 		})
 	},
 	methods: {
@@ -159,6 +176,24 @@ export default {
 			setAnimate: 'plug/setAnimate',
 			setPlug: 'plug/setVisible',
 		}),
+		animate() {
+			// let tl,
+        	// 	bf = this.$refs.blackFriend,
+        	// 	// pa = this.$refs.pa
+        	// 	pa = document.querySelector('.team')
+
+            // this.$ScrollTrigger.create(
+            //     {
+            //         trigger: pa,
+            //         start: "top bottom",
+            //     },
+            //     tl = this.$gsap.timeline()
+            // );
+            // this.$gsap.to(bf, {
+			// 		height: 0 + '%',
+			// 		duration: 1,
+			// 	})
+		},
 		findElement(e) {
 			if (e.target.classList.contains('arrow-link__text') || e.target.classList.contains('arrow-link') || e.target.classList.contains('arrow-link__circle')) {
 				const el = e.target.parentElement.querySelector('.arrow-link__change')
@@ -269,8 +304,8 @@ export default {
 	list-style: none;
 	padding: 0;
 	z-index: 1;
-	width: 60%;
-	height: 80vh;
+	width: 100%;
+	height: 100%;
 	padding-top: 1px;
 	overflow-y: hidden;
 	cursor: none;
@@ -353,6 +388,20 @@ export default {
 		width: 100%;
 	}
 }
+.projects-photos-wrap {
+	width: 60%;
+	height: 80vh;
+	position: relative;
+}
+.black-friend {
+    position: absolute;
+    z-index: 20;
+    top: 0;
+    left: -1px;
+    height: 100%;
+    width: calc(100% + 1px);
+    background-color: #1b1b1b;
+}
 @media (max-width: 1440px) {
 	.projects {
 		&__info {
@@ -413,6 +462,11 @@ export default {
 		}
 }
 @media (max-width: 700px) {
+.projects-photos-wrap {
+	width: 100%;
+	height: 330px;
+	position: relative;
+}
 	.projects-photos {
 		width: 100%;
 		height: 330px;

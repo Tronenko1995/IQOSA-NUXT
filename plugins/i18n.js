@@ -9,7 +9,8 @@ export default function ({ app }) {
       if (process.client) {
         const DATE = new Date();
         DATE.setTime(DATE.getTime() + 365 * 24 * 3600 * 1000);
-        document.cookie = 'lang=' + newLocale + '; path=/; expires=' + DATE.toUTCString();
+        document.cookie = 'i18n_redirected=' + newLocale + '; path=/; expires=' + DATE.toUTCString();
+        console.log('смена локали')
       }
     }
   }

@@ -3,10 +3,16 @@
 		<div class="main__wrap">
 			<div class="main__row main__row--first">
 				<Motto class="motto--main" :motto-list="data.hero_text"/>
-				<p class="main__title main__title--first">{{ data.hero_title[0] }}</p>
+				<p class="main__title main__title--first" :class="[
+					{'main__title--ru': $i18n.locale === 'ru'},
+					{'main__title--ua': $i18n.locale === 'ua'},
+				]">{{ data.hero_title[0] }}</p>
 			</div>
 			<div class="main__row">
-				<p class="main__title main__title--second main__title--italic">{{ data.hero_title[1] }}</p>
+				<p class="main__title main__title--second main__title--italic" :class="[
+					{'main__title--ru': $i18n.locale === 'ru'},
+					{'main__title--ua': $i18n.locale === 'ua'},
+				]">{{ data.hero_title[1] }}</p>
 				<div
 					class="make-request make-request--main"
 					@mouseover="findElement($event)"
@@ -25,7 +31,10 @@
 				</div>
 			</div>
 			<div class="main__row main__row--last">
-				<p class="main__title main__title--last">{{ data.hero_title[2] }}</p>
+				<p class="main__title main__title--last" :class="[
+					{'main__title--ru': $i18n.locale === 'ru'},
+					{'main__title--ua': $i18n.locale === 'ua'},
+				]">{{ data.hero_title[2] }}</p>
 			</div>
 		</div>
 	</section>
@@ -96,6 +105,30 @@ export default {
 				delay: 2.75,
 				duration: 0.25,
 			});
+
+			let bf = document.querySelector('.black-friend')
+
+			this.$gsap.to(bf, 0.3, {
+				scrollTrigger: {
+                    trigger: bf,
+                    start: "top bottom-=200px",
+				},
+				height: 0 + '%',
+				duration: 0.3,
+			});
+
+
+            // this.$ScrollTrigger.create(
+            //     {
+            //         trigger: bf,
+            //         start: "top bottom-=200px",
+            //     },
+            //     tl = this.$gsap.timeline()
+            // );
+            // this.$gsap.to(bf, {
+			// 		height: 0 + '%',
+			// 		duration: 1,
+			// 	})
 		},
 		findElement(e) {
 			if (
@@ -144,6 +177,7 @@ export default {
 	width: 100%;
 	height: 100vh;
 	padding: 35px 0 0;
+	margin-bottom: 190px;
 	&__wrap {
 		width: 100%;
 		max-width: 1326px;
@@ -157,14 +191,18 @@ export default {
 		}
 	}
 	&__title {
-		font-size: 180px;
-		line-height: 90%;
+   		font-size: 172px;
+    	line-height: 115%;
 		text-transform: uppercase;
 		font-weight: 400;
 		font-family: Roman, Arial;
 		color: #fff;
 		font-feature-settings: "pnum" on, "lnum" on, "kern" off;
 		opacity: 0;
+		&--ru,
+		&--ua {
+			font-size: 116px;
+		}
 		&--italic {
 			letter-spacing: 0.05em;
 			font-weight: 300;
@@ -218,6 +256,11 @@ export default {
 		&__title {
 			font-size: 70px;
 		}
+	}
+}
+@media (max-width: 700px) {
+	.main {
+		margin-bottom: 0px;
 	}
 }
 @media (max-width: 669px) {

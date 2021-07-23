@@ -76,7 +76,7 @@ function getBg() {
 
   let page_name = "";
   let size = "";
-  let lang = getCookie("lang") || "ru";
+  let lang = getCookie("i18n_redirected") || "ru";
   const container = document.querySelector(`[data-iqosahedron]`);
 
   if (container.dataset.iqosahedron === 'home') {

@@ -31,8 +31,9 @@ export default {
     { src: '~/plugins/app-components' },
     { src: '~/plugins/swiper.js' },
     { src: '~/plugins/aboutSlider', mode: 'client' },
+    { src: '~/plugins/directives', mode: 'client' },
   ],
-
+  
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
 
@@ -66,10 +67,35 @@ export default {
   ],
 
   i18n: {
-    locales: ['en', 'ru', 'ua'],
-    defaultLocale: 'en',
+    detectBrowserLanguage: {
+      useCookie: true,
+      cookieKey: 'i18n_redirected',
+      alwaysRedirect: true,
+      fallbackLocale: 'en',
+      onlyOnRoot: true,
+    },
+    locales: [
+        {
+          name: 'English',
+          code: 'en',
+          iso: 'en-US',
+        },
+        {
+          name: 'Russian',
+          code: 'ru',
+          iso: 'ru-RU',
+        },
+        {
+          name: 'Ukrainian',
+          code: 'ua',
+          iso: 'uk-UA',
+        }
+      ],
+      // lazy: true,
+      // langDir: 'lang/',
+      defaultLocale: 'en',
     vueI18n: {
-      fallbackLocale: 'ru',
+      // fallbackLocale: 'ru',
       messages: {
         en: {
           share: 'Share',
@@ -115,20 +141,14 @@ export default {
         }
       }
     },
-    detectBrowserLanguage: {
-      useCookie: true,
-      cookieKey: 'lang',
-      alwaysRedirect: true,
-      fallbackLocale: 'ru'
-    },
-    vuex: {
-      moduleName: 'i18n',
-      mutations: {
-        setLocale: 'I18N_SET_LOCALE',
-        setMessages: false
-      },
-      preserveState: false
-    },
+    // vuex: {
+      // moduleName: 'i18n',
+      // mutations: {
+        // setLocale: 'I18N_SET_LOCALE',
+        // setMessages: false
+      // },
+      // preserveState: false
+    // },
   },
 
   axios: {
@@ -164,4 +184,5 @@ export default {
   server: {
     port: 3008
   }
+
 }

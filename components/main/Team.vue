@@ -241,9 +241,11 @@ export default {
         },
         testSize() {
              if (window.innerWidth >= 1920) {
-                this.parallax.scalar(30, 75);
+                this.parallax.scalar(35, 80)
+                this.parallax.origin(.55,.25)
             } else if (window.innerWidth >= 1440) {
-                this.parallax.scalar(50, 90);
+                this.parallax.scalar(55, 100)
+                this.parallax.origin(.55,.3)
             } else {
                 this.parallax.scalar(40, 80);
             }
@@ -397,14 +399,18 @@ export default {
                     margin-bottom: auto;
                 }
                 &--tres {
+                    // margin-top: auto;
+                    // margin-left: 276px;
+                    // margin-bottom: 123px;
                     margin-top: auto;
-                    margin-left: 276px;
-                    margin-bottom: 123px;
+                    margin-left: 16px;
+                    margin-bottom: auto;
                 }
                 &--cuatro {
-                    margin-top: auto;
-                    margin-left: 280px;
-                    margin-bottom: 90px;
+                    // margin-top: auto;
+                    // margin-left: 280px;
+                    // margin-bottom: 90px;
+                    margin: auto 446px 3px 113px;
                 }
                 &--cinco {
                     

@@ -31,10 +31,12 @@ export default {
     }
     &__item {
     overflow: hidden;
-    font-size: 22px;
+    // font-size: 22px;
+    font-size: 20px;
+    line-height: 140%;
     font-family: Light, Arial;
     font-weight: 300;
-    line-height: 120%;
+    // line-height: 120%;
     color: #fff;
     text-transform: uppercase;
     font-feature-settings: "pnum" on, "lnum" on, "kern" off;

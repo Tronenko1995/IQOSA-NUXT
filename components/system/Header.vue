@@ -1,5 +1,5 @@
 <template>
-    <header class="header" :class="[{'header--main': headerType === 'main'},{'header--transparent': headerType === 'transparent' || view === 'list'}]">
+    <header class="header" :class="[{'header--main': headerType === 'main'},{'header--transparent': headerType === 'transparent' || view === 'list'}]" v-scroll="handleScroll">
         <div class="header__wrap">
             <a v-if="headerType === 'main'" href="/" class="header__logo">
               <img :src="getImg(data.logo)" alt="" class="header__img">
@@ -40,16 +40,16 @@
             <div class="lang">
                 <ul class="lang__list">
                     <li class="lang__item" :class="{'lang__item--selected': $i18n.locale === 'ua' }" @mouseover="showCursive($event)" @mouseleave="hideCursive($event)">
-                        <nuxt-link :to="switchLocalePath('ua')" class="lang__link">UA</nuxt-link>
-                        <nuxt-link :to="switchLocalePath('ua')" class="lang__link lang__link--cursive">UA</nuxt-link>
+                        <a :href="switchLocalePath('ua')" class="lang__link">UA</a>
+                        <a :href="switchLocalePath('ua')" class="lang__link lang__link--cursive">UA</a>
                     </li>
                     <li class="lang__item" :class="{'lang__item--selected': $i18n.locale === 'ru' }" @mouseover="showCursive($event)" @mouseleave="hideCursive($event)">
-                        <nuxt-link :to="switchLocalePath('ru')" class="lang__link">RU</nuxt-link>
-                        <nuxt-link :to="switchLocalePath('ru')" class="lang__link lang__link--cursive">RU</nuxt-link>
+                        <a :href="switchLocalePath('ru')" class="lang__link">RU</a>
+                        <a :href="switchLocalePath('ru')" class="lang__link lang__link--cursive">RU</a>
                     </li>
-                    <li class="lang__item " :class="{'lang__item--selected': $i18n.locale === 'en' }">
-                        <nuxt-link :to="switchLocalePath('en')" class="lang__link">EN</nuxt-link>
-                        <nuxt-link :to="switchLocalePath('en')" class="lang__link lang__link--cursive">EN</nuxt-link>
+                    <li class="lang__item " :class="{'lang__item--selected': $i18n.locale === 'en' }" @mouseover="showCursive($event)" @mouseleave="hideCursive($event)">
+                        <a :href="switchLocalePath('en')" @click.prevent="changeLocale('en')" class="lang__link">EN</a>
+                        <a :href="switchLocalePath('en')" @click.prevent="changeLocale('en')" class="lang__link lang__link--cursive">EN</a>
                     </li>
                 </ul>
             </div>
@@ -126,6 +126,24 @@ export default {
         },
         getImg(img) {
             return `${this.baseUrl}${img}`
+        },
+        changeLocale(lang) {
+            this.$router.push(this.switchLocalePath(lang))
+            
+            let setEnglishLang = () => {
+                window.location.href = this.switchLocalePath('en')
+            }
+
+            setTimeout(setEnglishLang, 100)
+        },
+        handleScroll(evt, el) {
+            if (this.headerType === 'main') {
+                if (window.scrollY >= 50) {
+                    el.style ='background: rgb(27, 27, 27);'
+                } else if (window.scrollY < 50) {
+                    el.style = 'background: none;'
+                }
+            }
         }
     },
     mounted() {
@@ -185,6 +203,7 @@ export default {
         opacity: 0;
     }
     &--main {
+        background: none;
         .nav {
             display: block;
         }
@@ -249,6 +268,7 @@ export default {
         &--selected {
             opacity: 1;
             pointer-events: none;
+            order: 1;
         }
     }
     &__link {
