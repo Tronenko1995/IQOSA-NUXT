@@ -14,6 +14,12 @@ export default {
 	async asyncData({ store, i18n }) {
 		// if (!store.getters['lang/career/data']) {
 		try {
+			await store.dispatch('lang/parts/getPartsContent', `/parts?lang=${i18n.locale}`)
+		} catch(e) {
+			// redsirect(`404`);
+			throw new Error(e);
+		}
+		try {
 			await store.dispatch('lang/media/getMediaPageContent', `/media?lang=${i18n.locale}`)
 		} catch(e) {
 			// redsirect(`404`);
