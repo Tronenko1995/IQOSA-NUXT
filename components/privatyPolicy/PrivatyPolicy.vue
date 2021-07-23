@@ -2,19 +2,19 @@
 	<main class="private-policy-page">
 		<section class="privaty-policy">
 			<div class="privaty-policy__info">
-				<div class="privaty-policy__title privaty-policy__title--uno">privaty</div>
+				<div class="privaty-policy__title privaty-policy__title--uno">{{ data.title_bold }}</div>
 				<div class="privaty-policy__row">
-					<Motto class="motto motto--privaty" :motto-list="mottoList"/>
-					<div class="privaty-policy__title privaty-policy__title--dos">policy</div>
+					<Motto class="motto motto--privaty" :motto-list="data.subtitle"/>
+					<div class="privaty-policy__title privaty-policy__title--dos">{{ data.title_thin }}</div>
 				</div>
 			</div>
 
         <ul class="privaty-policy__list">
-            <li class="job" ref="job" v-for="item in privaty" :key="item.id">
+            <li class="job" ref="job" v-for="(item, i) in data.content" :key="i">
                 <hr class="job__line">
                 <div class="job__info">
-                    <h2 class="job__title">{{ item.title }}</h2>
-                    <div class="job__text" v-html="item.text"></div>
+                    <!-- <h2 class="job__title">{{ item.title }}</h2> -->
+                    <div class="job__text privaty-policy__inner-text" v-html="item.paragraph"></div>
                 </div>
                 <hr class="job__line job__line--last" v-if="item.id === privaty.length">
             </li>
@@ -32,13 +32,19 @@
 <script>
 import { mapMutations } from 'vuex'
 export default {
+	props: {
+		data: {
+			type: Object,
+			required: true
+		}
+	},
 	data() {
 		return {
-			mottoList: [
-				'Lorem ipsum dolor sit amet,',
-				'consectetur adipiscing elit,',
-				'eiusmod ut labore ',
-	  		],
+			// mottoList: [
+			// 	'Lorem ipsum dolor sit amet,',
+			// 	'consectetur adipiscing elit,',
+			// 	'eiusmod ut labore ',
+	  		// ],
             privaty: [
                 {
                     id: 1,
@@ -242,7 +248,7 @@ export default {
 		line-height: 140%;
 		font-feature-settings: 'pnum' on, 'lnum' on;
 		color: #FFFFFF;
-		margin-top: 16px;
+		// margin-top: 16px;
 	}
 }
 

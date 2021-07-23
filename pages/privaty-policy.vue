@@ -1,6 +1,6 @@
 <template>
     <main>
-        <PrivatyPolicy />
+        <PrivatyPolicy :data="data" />
     </main>
 </template>
 
@@ -8,12 +8,29 @@
 import PrivatyPolicy from '@/components/privatyPolicy/PrivatyPolicy.vue'
 export default {
     layout: 'standart',
+	async asyncData({ store, i18n }) {
+		try {
+			await store.dispatch('lang/parts/getPartsContent', `/parts?lang=${i18n.locale}`)
+		} catch(e) {
+			// redirect(`404`);
+			throw new Error(e);
+		}
+		try {
+			await store.dispatch('lang/privaty-policy/getPrivatyPolicyPageContent', `/privacy_policy?lang=${i18n.locale}`)
+		} catch(e) {
+			// redirect(`404`);
+			throw new Error(e);
+		}
+	},
     components: {
 		PrivatyPolicy,
     },
     beforeMount() {
 		this.testLang()
     },
+	computed: {
+		data() { return this.$store.getters['lang/privaty-policy/data'] },
+	},
 	methods: {
 		testLang() {
 			const html = document.getElementsByTagName('html')
@@ -22,5 +39,6 @@ export default {
 			html[0].setAttribute('lang', lang)
 		}	
 	},
+	
 }
 </script>

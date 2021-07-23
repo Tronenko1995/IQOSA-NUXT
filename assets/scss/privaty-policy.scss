@@ -1,0 +1,72 @@
+.privaty-policy {
+    &__inner-text {
+        & > div {
+			& > strong {
+				font-family: 'Roman', Arial;
+				font-style: normal;
+				font-weight: normal;
+				font-size: 50px;
+				line-height: 110%;
+				text-transform: uppercase;
+				font-feature-settings: 'pnum' on, 'lnum' on, 'dnom' on, 'liga' off, 'kern' off;
+				color: #FFFFFF;
+				overflow: hidden;
+                margin-bottom: 16px;
+                display: block;
+			}
+            
+		}
+    }
+}
+
+@media (max-width: 1280px) {
+    .privaty-policy {
+        &__inner-text {
+            & > div {
+                & > strong {
+                    font-size: 46px;
+                }
+                
+            }
+        }
+    }
+}
+
+@media (max-width: 1024px) {
+    .privaty-policy {
+        &__inner-text {
+            & > div {
+                & > strong {
+                    font-size: 42px;
+                }
+                
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .privaty-policy {
+        &__inner-text {
+            & > div {
+                & > strong {
+                    font-size: 36px;
+                }
+                
+            }
+        }
+    }
+}
+
+@media (max-width: 500px) {
+    .privaty-policy {
+        &__inner-text {
+            & > div {
+                & > strong {
+                    font-size: 32px;
+                }
+                
+            }
+        }
+    }
+}
