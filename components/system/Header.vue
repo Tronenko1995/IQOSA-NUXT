@@ -53,8 +53,9 @@
                     </li>
                 </ul>
             </div>
-            <div class="request">
+            <div class="request" @mouseover="showCursive($event)" @mouseleave="hideCursive($event)">
                 <nuxt-link :to="localePath('/sayhi')" class="request__link">{{ data.btn_text }}</nuxt-link>
+                <nuxt-link :to="localePath('/sayhi')" class="request__link request__link--cursive">{{ data.btn_text }}</nuxt-link>
             </div>
         </div>
     </header>
@@ -98,6 +99,7 @@ export default {
           }
         },
         showCursive(e) {
+            console.dir(e)
             if (e.target.tagName === 'A') {
                 gsap.to(e.target.parentElement.children[0], {
                     translateY: -100 + "%",
@@ -110,7 +112,8 @@ export default {
             }
         },
         hideCursive(e) {
-            if (e.target.tagName === 'LI') {
+            console.dir(e)
+            if (e.target.tagName === 'LI' || e.target.classList.contains('request')) {
                 gsap.to(e.target.children[0], {
                     translateY: 0 + "%",
                     duration: .5
@@ -295,10 +298,11 @@ export default {
         display: flex;
         flex-direction: column;
         width: 40px;
-        height: 7px;
+        // height: 7px;
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
+        // height: 0;
     }
     &__item {
         height: 1px;
@@ -309,6 +313,7 @@ export default {
             transition: .5s;
         }
         &--x {
+            position: absolute;
             &:first-child {
                 margin-bottom: 0;
                 transform: rotate(45deg);
@@ -321,17 +326,39 @@ export default {
         }
     }
 }
+.header {
+    &.open {
+        .menu-button {
+            &__list {
+                height: 0;
+            }
+            &:hover {
+                transform: translate(-50%) rotate(180deg);
+                transition: .5s;
+            }
+        }
+    }
+}
 .request {
     display: flex;
     white-space: nowrap;
     opacity: 0;
+    position: relative;
+    display: block;
+    transform: translateY(0);
+    overflow: hidden;
     &__link {
-        font-size: 13px;
+        font-size: 16px;
         font-family: Roman,Arial;
         font-weight: 400;
         color: #fff;
         text-transform: uppercase;
         line-height: 120%;
+        display: block;
+        &--cursive {
+            font-family: ThinItalic,Arial;
+            position: absolute;
+        }
     }
 }
 
@@ -355,7 +382,7 @@ export default {
                 display: block;
             }
             .request {
-                display: flex;
+                display: block;
             }
             .lang {
                 display: none;
@@ -367,6 +394,7 @@ export default {
     }
     .request {
         display: flex;
+        font-size: 13px;
     }
     .lang {
         display: none;

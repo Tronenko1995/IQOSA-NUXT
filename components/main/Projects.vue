@@ -25,7 +25,7 @@
 						</a>
 					</swiper-slide>
 				</swiper>
-					<a @click.prevent @click="goPage(`/project/${projectLink}`)" :href="`/project/${projectLink}`"  class="projects__link arrow-link" @mouseover="findElement($event)" @mouseleave="animateTextHide($event)">
+					<a @click.prevent="goPage(`/project/${projectLink}`)" :href="`/project/${projectLink}`"  class="projects__link arrow-link" @mouseover="findElement($event)" @mouseleave="animateTextHide($event)">
 					<!-- <nuxt-link :to="localePath('/')" class="projects__link arrow-link" @mouseover.native="findElement($event)" @mouseleave.native="animateTextHide($event)"> -->
 					<!-- <nuxt-link :to="localePath('/')" class="projects__link arrow-link" @mouseover.native="findElement($event)" @mouseleave.native="animateTextHide($event)"> -->
 						<span class="arrow-link__change">
@@ -147,9 +147,9 @@ export default {
 		}
 	},
 	computed: {
-			projectAddress() { return this.$refs.projectAddress.$swiper },
-			projectPhotos() { return this.$refs.projectPhotos.$swiper },
-			projectName() { return this.$refs.projectName.$swiper },
+		projectAddress() { return this.$refs.projectAddress.$swiper },
+		projectPhotos() { return this.$refs.projectPhotos.$swiper },
+		projectName() { return this.$refs.projectName.$swiper },
 	},
 	mounted() {
 		this.animate()

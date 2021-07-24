@@ -6,7 +6,7 @@
                     <span>{{ project.city }}</span>, {{ project.country }}
                 </div>
                 <div class="project__title">
-                    <span>{{ project.type }}</span>-{{ project.number }}
+                    {{ project.type }}<span>-{{ project.number }}</span>
                 </div>
                 <!-- <p>{{ slug }}</p> -->
                 <div class="project__image">
@@ -77,16 +77,16 @@
                         <span>{{ data.share_title }}</span>
                         <ul class="animate-text animate-text--share">
                             <li class="animate-text__item" @mouseover="showCursive($event)" @mouseleave="hideCursive($event)">
-                                <a :href="share('facebook')" class="animate-text__button">{{ data.share_facebook }}</a>
-                                <a :href="share('facebook')" class="animate-text__button animate-text__button--cursive animate-text__button--absolute">{{ data.share_facebook }}</a>
+                                <a :href="share('facebook')" class="animate-text__button" target="_blank">{{ data.share_facebook }}</a>
+                                <a :href="share('facebook')" class="animate-text__button animate-text__button--cursive animate-text__button--absolute" target="_blank">{{ data.share_facebook }}</a>
                             </li>
                             <li class="animate-text__item" @mouseover="showCursive($event)" @mouseleave="hideCursive($event)">
-                                <a :href="share('twitter')" class="animate-text__button">{{ data.share_twitter }}</a>
-                                <a :href="share('twitter')" class="animate-text__button animate-text__button--cursive animate-text__button--absolute">{{ data.share_twitter }}</a>
+                                <a :href="share('twitter')" class="animate-text__button" target="_blank">{{ data.share_twitter }}</a>
+                                <a :href="share('twitter')" class="animate-text__button animate-text__button--cursive animate-text__button--absolute" target="_blank">{{ data.share_twitter }}</a>
                             </li>
                             <li class="animate-text__item" @mouseover="showCursive($event)" @mouseleave="hideCursive($event)">
-                                <a :href="share('linkedIn')" class="animate-text__button">{{ data.share_linkedin }}</a>
-                                <a :href="share('linkedIn')" class="animate-text__button animate-text__button--cursive animate-text__button--absolute">{{ data.share_linkedin }}</a>
+                                <a :href="share('linkedIn')" class="animate-text__button" target="_blank">{{ data.share_linkedin }}</a>
+                                <a :href="share('linkedIn')" class="animate-text__button animate-text__button--cursive animate-text__button--absolute" target="_blank">{{ data.share_linkedin }}</a>
                             </li>
                         </ul>
                     </div>
@@ -282,7 +282,7 @@ export default {
 
 <style lang="scss">
 .project {
-    margin-top: 279px;
+    margin-top: 280px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -295,7 +295,7 @@ export default {
     }
     &__address {
         font-family:'Light', Arial;
-        font-style: italic;
+        font-style: normal;
         font-weight: 300;
         font-size: 16px;
         line-height: 100%;
@@ -306,21 +306,26 @@ export default {
         color: #FFFFFF;
         span {
             font-family: 'LightItalic', Arial;
+        font-style: italic;
         }
     }
     &__title {
+        margin-bottom: 72px;
+        font-size: 148px;
+        line-height: 115%;
+        letter-spacing: .05em;
         margin-top: 48px;
         font-family: 'Roman', Arial;
         font-style: normal;
         font-weight: 300;
-        font-size: 164px;
-        line-height: 90%;
+        // font-size: 164px;
+        // line-height: 90%;
         text-align: center;
-        letter-spacing: 0.05em;
+        // letter-spacing: 0.05em;
         text-transform: uppercase;
-        font-feature-settings: 'pnum' on, 'lnum' on, 'kern' off;
+        // font-feature-settings: 'pnum' on, 'lnum' on, 'kern' off;
         color: #FFFFFF;
-        em {
+        span {
             font-family: 'ThinItalic', Arial;
             font-style: italic;
             font-weight: 300;
@@ -339,10 +344,11 @@ export default {
         }
     }
     &__image {
-        margin: 72px auto 0 auto;
+        margin: 0 auto;
         width: 100%;
         // height: 950px;
         height: auto;
+        max-width: 1280px;
         img {
             width: 100%;
             height: 100%;

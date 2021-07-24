@@ -8,11 +8,13 @@
         <p v-for="(item, i) in data.projects_subtitle" :key="i">{{ item }}</p>
       </div>
       <ul class="projects-interior">
-        <li class="projects-interior__item" data-cursor="link"  v-for="(item, i) in list" :key="i">
+        <li class="projects-interior__item" ref="card" data-cursor="link"  v-for="(item, i) in list" :key="i">
           <div class="projects-interior__block">
             <img  class="projects-interior__img" :src="getImg(item.main_picture)" alt="">
           </div>
-          <nuxt-link :to="localePath(`/project/${item.link}`)" class="projects-interior__link projects-interior-link">
+          <!-- <nuxt-link :to="localePath(`/project/${item.link}`)" class="projects-interior__link projects-interior-link"> -->
+          <!-- <nuxt-link to="" class="projects-interior__link projects-interior-link"> -->
+          <a id="projectLink" @click.prevent="openProject(`/project/${item.link}`)" class="projects-interior__link projects-interior-link" :href="localePath(`/project/${item.link}`)">
             <span class="projects-interior-link__head">
               <span class="projects-interior-link__address projects-interior-link__address--italic">{{ item.city }},</span>
               <span class="projects-interior-link__address">{{ item.country }}</span>
@@ -34,7 +36,7 @@
                 <span>{{ item.area }}{{ data.area_unit }}</span>
               </span>
             </span>
-          </nuxt-link>
+          </a>
         </li>
       </ul>
     </div>
@@ -74,6 +76,7 @@ export default {
           this.setPlug(false)
       }, this.duration.page);
     }
+    this.setAnimateCard()
   },
   computed: {
     preloader() { return this.$store.getters['preloader/preloader'] },
@@ -85,7 +88,40 @@ export default {
     }),
     getImg(img) {
       return `${this.baseUrl}${img}`
-    }
+    },
+    setAnimateCard() {
+      if (this.$refs.card) {
+          Array.from(this.$refs.card).forEach((card) => {
+              card.addEventListener("click", () => {
+                  card.classList.add("this-card");
+
+                this.$gsap.to(card, {
+                    width: 100 + '%',
+                    marginTop: 590,
+                    duration: 1,
+                    // delay: 1,
+                })
+
+                  card.querySelector(".projects-interior-link").style.opacity = 0;
+                  let selectedPosX = 0;
+                  let selectedPosY = 0;
+
+                  while (card != null) {
+                      selectedPosX += card.offsetLeft;
+                      selectedPosY += card.offsetTop;
+                      card = card.offsetParent;
+                  }
+
+                  window.scrollTo(selectedPosX, selectedPosY);
+              })
+          })
+      }
+    },
+    openProject(fullLink) {
+      setTimeout(() => {
+          this.$router.push(this.localePath(fullLink))
+      }, 1000);
+    },
   }
 }
 </script>
@@ -97,7 +133,8 @@ export default {
   display: flex;
   justify-content: center;
   &__wrap {
-    width: 970px;
+    // width: 970px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -106,12 +143,15 @@ export default {
     font-family: 'ThinItalic', Arial;
     font-style: italic;
     font-weight: 300;
-    font-size: 164px;
-    line-height: 90%;
+    // font-size: 164px;
+    font-size: 148px;
+    letter-spacing: unset;
+    line-height: 115%;
     text-align: center;
     letter-spacing: 0.05em;
     text-transform: uppercase;
-    font-feature-settings: 'pnum' on, 'lnum' on, 'kern' off;
+    width: 970px;
+    // font-feature-settings: 'pnum' on, 'lnum' on, 'kern' off;
     color: #FFFFFF;
     margin-top: 56px;
     span {
@@ -125,7 +165,8 @@ export default {
     font-style: normal;
     font-weight: 300;
     font-size: 22px;
-    line-height: 120%;
+    // line-height: 120%;
+    line-height: 140%;
     text-transform: uppercase;
     font-feature-settings: 'pnum' on, 'lnum' on, 'kern' off;
     color: #FFFFFF;
@@ -135,9 +176,15 @@ export default {
 }
 .projects-interior {
   margin-top: 164px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+        width: 100%;
   &__item {
     margin-bottom: 16px;
     position: relative;
+    width: 644px;
+    max-width: 1280px;
     &:hover {
       .projects-interior__link {
         opacity: 1;
@@ -169,7 +216,7 @@ export default {
     }
   }
   &__block {
-    width: 644px;
+    width: 100%;
     height: 720px;
   }
   &__img {
@@ -306,6 +353,7 @@ export default {
   margin-bottom: 132px;
     &__title {
       font-size: 108px;
+      width: 100%;
     }
     &__description {
       font-size: 17px;

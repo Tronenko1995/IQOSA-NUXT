@@ -165,7 +165,8 @@ export default {
         color: #fff;
         font-family: Light, Arial;
         font-weight: 300;
-        font-size: 42px;
+        font-size: 50px;
+        // font-size: 42px;
         transform: translate(0px, 100%);
         &--cursive {
             font-family: ThinItalic, Arial;
@@ -231,6 +232,20 @@ export default {
         display: block;
         transition: .3s ease;
         bottom: 0;
+    }
+}
+@media (max-width: 1280px) {
+    .menu {
+        &__link {
+            font-size: 46px;
+        }
+    }
+}
+@media (max-width: 1024px) {
+    .menu {
+        &__link {
+            font-size: 42px;
+        }
     }
 }
 @media (max-width: 820px) {

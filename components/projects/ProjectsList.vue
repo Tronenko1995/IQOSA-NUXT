@@ -39,15 +39,19 @@
     <SwitchProjects class="switch-project-list" :view="view" :data="data"/>
 
 		<div v-swiper:projectsSlider="projectsSetting" ref="projects" class="projects-slider" data-cursor="eye">
-			<nuxt-link ref="linkItem" class="projects-slider__link projects-slider__link--head" :to="localePath(link.url)"></nuxt-link>
+			<!-- <nuxt-link class="projects-slider__link projects-slider__link--head" :to="localePath(projectLink)"></nuxt-link> -->
+
+
+      <a id="projectLink" @click.prevent="go($event)" class="projects-slider__link projects-slider__link--head" :href="`/${$i18n.locale}/project/${list[0].link}`" :data-link="list[0].link"></a>
 			<div class="swiper-wrapper" data-cursor="drag">
-				<div v-for="(item, i) in list" :key="i" class="swiper-slide projects-slider__item" :data-url="item.link">
-          <nuxt-link class="projects-slider__link" :to="localePath(`/project/${item.link}`)"></nuxt-link>
+				<div v-for="(item, i) in list" :key="i" class="swiper-slide projects-slider__item" :data-link="item.link">
+          <!-- <a href=""></a> -->
+          <a class="projects-slider__link" @click.prevent="goPage(`/project/${item.link}`)" :href="`/${$i18n.locale}/project/${item.link}`"></a>
             <p class="projects-slider__title">
               <span>{{ item.type }}</span>-{{ item.number }}
             </p>
             <p class="projects-slider__description">
-              {{ item.release_date }},<span>{{ item.city }}</span>, {{ item.country }}, {{ item.area }}M2
+              {{ item.release_date }}, <span>{{ item.city }}</span>, {{ item.country }}, {{ item.area }}M2
             </p>
 				</div>
 				<!-- <div class="swiper-slide projects-slider__item" data-url="/project/iq-87-or/">
@@ -108,18 +112,16 @@ export default {
 	data() {
 		return {
       baseUrl: process.env.baseUrl,
-      link: {
-        item: null,
-        url: '/project/iq-98-kd/'
-      },
 			projectsSetting: {
 				speed: 750,
-				loop: false,
+				loop: true,
 				direction: "vertical",
 				slidesPerView: "auto",
+        observer: true,
 				touchStartPreventDefault: false,
 				longSwipesMs: 1000,
 				mousewheel: { invert: false },
+        slidesOffsetBefore: 410,
 			},
       shader: {
         item: null,
@@ -138,6 +140,12 @@ export default {
 		}
 	},
 	mounted() {
+    let active_el
+    let project_slider = document.querySelector('.projects-slider');
+    let project_list_slider_link = project_slider.querySelector("#projectLink");
+
+    // let margTop = window.innerHeight/2 - project_slider.querySelector(".swiper-slide").clientHeight/2;
+
     if (this.preloader) {
       setTimeout(() => {
           this.setPlug(false)
@@ -147,20 +155,45 @@ export default {
           this.setPlug(false)
       }, 1000);
     }
+        // this.$refs.linkItem.setAttribute("href", `/project/${active_el.dataset.link}`);
+		// this.projectLink = `/${this.$i18n.locale}/project/${this.list[0].link}`
+		// this.projectDataLink = this.list[0].link
 
     this.shader.item = this.$refs.shaderObj
 
     this.initShader()
+		// this.projectLink = this.$refs.projectsLink
+    // console.log(this.projectsSlider)
 
-		this.projectLink = this.$refs.projectsLink
-    console.log(this.projectsSlider)
-    this.projectsSlider.on('slideChange', () => {
+    // setTimeout(() => {
+
+    // }, 500)
+
+    // this.projectsSlider.extendDefaults({slidesOffsetBefore: margTop})
+    this.projectsSlider.on('slideChange', (e) => {
       this.projectsSlider.allowSlideNext = false
       this.projectsSlider.allowSlidePrev = false
+
+
+      // console.log(active_el)
+      // this.projectLink = e.$el[0].children[1].children[e.activeIndex].dataset.link
+      // console.log(this.projectsSlider)
+      // console.dir(this.projectsSlider)
+
+          active_el = e.$el[0].querySelector(`[data-swiper-slide-index="${e.realIndex}"]`);
+          if (active_el) {
+        // project_list_slider_link.setAttribute("href", active_el.dataset.sliderUrl);
+        // console.log('this.projectLink', this.projectLink)
+        // console.log('active_el.dataset.link', active_el.dataset.link)
+        // this.projectLink = active_el.dataset.link
+        project_list_slider_link.setAttribute("href", `/${this.$i18n.locale}/project/${active_el.dataset.link}`);
+        project_list_slider_link.setAttribute("data-link", active_el.dataset.link);
+          }
 
         setTimeout(() => {
           this.projectsSlider.allowSlideNext = true
           this.projectsSlider.allowSlidePrev = true
+        // console.log('this.projectLink', this.projectLink)
         }, 2000)
 
         this.changeImg(this.projectsSlider.realIndex)
@@ -171,13 +204,16 @@ export default {
         // }
       })
 	},
+
+
   computed: {
     preloader() { return this.$store.getters['preloader/preloader'] },
     duration() { return this.$store.getters['plug/duration'] }
   },
 	methods: {
     ...mapMutations({
-        setPlug: 'plug/setVisible',
+			setAnimate: 'plug/setAnimate',
+      setPlug: 'plug/setVisible',
     }),
     initShader() {
       let scene = new THREE.Scene()
@@ -292,6 +328,18 @@ export default {
     },
     getImg(img) {
       return `${this.baseUrl}${img}`
+    },
+    go(e) {
+      let link = e.target.dataset.link
+      this.goPage(`/project/${link}`)
+    },
+    goPage(fullLink) {
+      this.setAnimate('up')
+      this.setPlug(true)
+      setTimeout(() => {
+          this.setAnimate('dissolve')
+          this.$router.push(this.localePath(fullLink))
+      }, 1000);
     }
 	},
 	beforeDestroy() {
@@ -381,7 +429,8 @@ export default {
   position: fixed;
   top: 0;
   &__title {
-    margin: 149px 0 98px;
+    // margin: 149px 0 98px;
+    margin: 98px 0 44px;
     opacity: .5;
     font-family: 'ThinItalic', Arial;
     font-style: italic;

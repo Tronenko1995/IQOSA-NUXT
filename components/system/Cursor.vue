@@ -46,25 +46,25 @@ export default {
 			this.cursorLink = document.querySelectorAll("[data-cursor='link']")
 			this.cursorPlay = document.querySelectorAll("[data-cursor='play']")
 			this.raf()
-			if (this.cursorDrag.length) {
+			if (this.cursorDrag && this.cursorDrag.length) {
 				this.cursorDrag.forEach(item => {
 					item.addEventListener("mouseenter", this.mouseEnterDrag)
 					item.addEventListener("mouseleave", this.mouseLeaveDrag)
 				})
 			}
-			if (this.cursorEye.length) {
+			if (this.cursorEye && this.cursorEye.length) {
 				this.cursorEye.forEach(item => {
 					item.addEventListener("mouseenter", this.mouseEnterEye)
 					item.addEventListener("mouseleave", this.mouseLeaveEye)
 				})
 			}
-			if (this.cursorLink.length) {
+			if (this.cursorLink && this.cursorLink.length) {
 				this.cursorLink.forEach(item => {
 					item.addEventListener("mouseenter", this.mouseEnterLink)
 					item.addEventListener("mouseleave", this.mouseLeaveLink)
 				})
 			}
-			if (this.cursorPlay.length) {
+			if (this.cursorPlay && this.cursorPlay.length) {
 				this.cursorPlay.forEach(item => {
 					item.addEventListener("mouseenter", this.mouseEnterPlay)
 					item.addEventListener("mouseleave", this.mouseLeavePlay)
@@ -76,25 +76,25 @@ export default {
 		if (window.innerWidth > 1280) {
 			window.removeEventListener("mousemove", this.mousePos, false);
 
-			if (this.cursorDrag.length) {
+			if (this.cursorDrag && this.cursorDrag.length) {
 				this.cursorDrag.forEach(item => {
 					item.removeEventListener("mouseenter", this.mouseEnterDrag)
 					item.removeEventListener("mouseleave", this.mouseLeaveDrag)
 				})
 			}
-			if (this.cursorEye.length) {
+			if (this.cursorEye && this.cursorEye.length) {
 				this.cursorEye.forEach(item => {
 					item.removeEventListener("mouseenter", this.mouseEnterEye)
 					item.removeEventListener("mouseleave", this.mouseLeaveEye)
 				})
 			}
-			if (this.cursorLink.length) {
+			if (this.cursorLink && this.cursorLink.length) {
 				this.cursorLink.forEach(item => {
 					item.removeEventListener("mouseenter", this.mouseEnterLink)
 					item.removeEventListener("mouseleave", this.mouseLeaveLink)
 				})
 			}
-			if (this.cursorPlay.length) {
+			if (this.cursorPlay && this.cursorPlay.length) {
 				this.cursorPlay.forEach(item => {
 					item.removeEventListener("mouseenter", this.mouseEnterPlay)
 					item.removeEventListener("mouseleave", this.mouseLeavePlay)

@@ -89,6 +89,13 @@ export default {
         }
     }
 }
+@media (max-width: 700px) {
+    .motto {
+        &__item {
+            font-size: 13px;
+        }
+    }
+}
 @media (max-width: 669px) {
     .motto {
         &--main {

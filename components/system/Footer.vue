@@ -78,7 +78,7 @@
             </div>
         </div>
         <div class="footer__row footer__row--bottom">
-            <div class="footer__bottom-item">
+            <div class="footer__bottom-item footer__bottom-item--policy">
                 <nuxt-link :to="localePath('/privaty-policy')" class="footer__link">{{ data.politic_label }}</nuxt-link>
             </div>
             <Social :social="data.social_links" class="social--footer" @showCursive="showCursive($event)" @hideCursive="hideCursive($event)"/>
@@ -443,6 +443,7 @@ export default {
 }
 @media (max-width: 550px) {
     .footer {
+        padding: 32px 16px 27px;
         &__bottom {
             &-item {
                 &--tres {
@@ -454,6 +455,23 @@ export default {
         }
     }
 }
+@media (max-width: 480px) {
+    .footer {
+        &__bottom {
+            &-item {
+                &--policy {
+                    opacity: 0.5;
+                    position: absolute;
+                    bottom: 26px;
+                }
+            }
+        }
+        &__developed {
+            margin-top: 30px;
+        }
+    }
+}
+
 @media (max-width: 414px) {
     .footer {
         padding: 32px 16px 27px 16px;
@@ -461,7 +479,8 @@ export default {
             margin-top: 80px;
             width: 100%;
             &-middle {
-                margin-top: 54px;
+                // margin-top: 54px;
+                margin-top: 0;
             }
             &--dos {
                 .footer {
@@ -476,12 +495,22 @@ export default {
                     }
                 }
             }
+            &--tres {
+                .footer {
+                    &__column {
+                        &-top {
+                            margin-bottom: 56px;
+                        }
+                     }
+                }
+            }
             &:first-child {
                 margin-top: 0;
             }
         }
         &__block {
-            margin-bottom: 40px;
+            // margin-bottom: 40px;
+            margin-bottom: 28px;
             &:last-child {
                 margin-bottom: 0;
             }

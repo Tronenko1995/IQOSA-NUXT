@@ -5,10 +5,10 @@
             <p class="team__title-text team-mobi__title-text">{{ data.team_text.thin_text }}</p>
             <div class="team-mobi__link team__link arrow-link" @mouseover="findElement($event)" @mouseleave="animateTextHide($event)" @click="openVideo">
                 <span class="arrow-link__change">
-                    <span class="arrow-link__span arrow-link__span--first">{{ data.team_text.team_link_text_animated }}</span>
-                    <span class="arrow-link__span arrow-link__span--last">{{ data.team_text.team_link_text_animated }}</span>
+                    <span class="arrow-link__span arrow-link__span--first">{{ data.team_link_text_animated }}</span>
+                    <span class="arrow-link__span arrow-link__span--last">{{ data.team_link_text_animated }}</span>
                 </span>
-                <span class="arrow-link__text">{{ data.team_text.team_link_text }}</span>
+                <span class="arrow-link__text">{{ data.team_link_text }}</span>
                 <span class="arrow-link__circle">
                     <svg class="arrow-link__svg" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.40039 12.4004H17.6004" stroke-linecap="square"/><path d="M13.9004 8L18.4004 12.4L13.9004 16.8" stroke-linecap="square"/></svg>
                 </span>
@@ -179,6 +179,13 @@ export default {
     .team-slider {
         padding-right: 15px;
         padding-left: 15px;
+        &__surname,
+        &__name {
+            font-size: 32px;
+        }
+        &__position {
+            font-size: 13px;
+        }
     }
     .team-mobi__title {
         padding-left: 16px;

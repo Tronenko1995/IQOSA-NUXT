@@ -261,6 +261,13 @@ export default {
 @media (max-width: 700px) {
 	.main {
 		margin-bottom: 0px;
+			font-size: 56px;
+		&__title {
+			&--ru,
+			&--ua {
+				font-size: 42px;
+			}
+		}
 	}
 }
 @media (max-width: 669px) {
@@ -271,7 +278,7 @@ export default {
 			padding: 0 20px;
 		}
 		&__title {
-			font-size: 69px;
+			// font-size: 69px;
 		}
 		&__row {
 			&--first {
@@ -286,7 +293,7 @@ export default {
 			padding: 0 15px;
 		}
 		&__title {
-			font-size: 56px;
+			// font-size: 56px;
 		}
 	}
 }
