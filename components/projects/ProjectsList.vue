@@ -367,7 +367,7 @@ export default {
     // z-index: 2;
     &-text {
       font-family: "ThinItalic", Arial;
-      font-style: italic;
+      // font-style: italic;
       font-weight: 300;
       font-size: 62px;
       line-height: 100%;
@@ -433,7 +433,7 @@ export default {
     margin: 98px 0 44px;
     opacity: .5;
     font-family: 'ThinItalic', Arial;
-    font-style: italic;
+    // font-style: italic;
     font-weight: 300;
     font-size: 50px;
     line-height: 120%;

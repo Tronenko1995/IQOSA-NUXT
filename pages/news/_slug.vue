@@ -184,14 +184,31 @@
 // import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import { mapMutations } from 'vuex'
 export default {
+	head() {
+		return {
+		title: this.data.seo_title,
+		meta: [
+			{
+			hid: "description",
+			name: "description",
+			content: this.data.meta_description
+			},
+			// {
+			//   hid: "keywords",
+			//   name: "keywords",
+			//   content: this.mainPage.meta_keywords
+			// }
+		],
+		};
+	},
   layout: 'project',
     async asyncData({ store, i18n, params }) {
-		try {
-			await store.dispatch('lang/parts/getPartsContent', `/parts?lang=${i18n.locale}`)
-		} catch(e) {
-			// redirect(`404`);
-			throw new Error(e);
-		}
+		// try {
+		// 	await store.dispatch('lang/parts/getPartsContent', `/parts?lang=${i18n.locale}`)
+		// } catch(e) {
+		// 	// redirect(`404`);
+		// 	throw new Error(e);
+		// }
         // try {
         //     await store.dispatch('lang/article/getArticlePageContent', `/project_page?lang=${i18n.locale}`)
 		// } catch(e) {
@@ -367,7 +384,7 @@ export default {
         color: #FFFFFF;
         span {
             font-family: 'LightItalic', Arial;
-            font-style: italic;
+            // font-style: italic;
         }
     }
     &__title {
@@ -603,7 +620,7 @@ export default {
             color: rgba(255,255,255,0.5);
             position: relative;
             padding-left: 57px;
-            font-style: italic;
+            // font-style: italic;
             font-family: 'LightItalic', Arial;
             margin-top: 80px;
             margin-bottom: 80px;

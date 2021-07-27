@@ -1,7 +1,9 @@
 <template>
-    <div class="strip-outer drag" data-cursor='drag'>
-        <div class="slider-text"></div>
-        <div class="strip-inner">
+    <div class="strip-outer drag">
+        <div class="slider-text" v-if="data && data.length">
+            <p v-for="(item, i) in data" :key="i">{{ item }}</p>
+        </div>
+        <div class="strip-inner" data-cursor="drag">
             <div class="draggable"></div>
             <div class="strip">
                 <div class="strip__item" v-for="(item, i) in list" :key="i">
@@ -21,6 +23,9 @@
 // import Draggabilly from "draggabilly"
 export default {
 	props: {
+		data: {
+			type: Array,
+		},
 		list: {
 			type: Array,
 			required: true
@@ -44,6 +49,15 @@ export default {
 </script>
 
 <style lang="scss">
+.slider-text {
+    text-align: right;
+    font-size: 22px;
+    font-family: Light, Arial;
+    font-weight: 300;
+    margin: 0 120px 134px 0;
+    color: #fff;
+    line-height: 115%
+}
 .strip-outer {
     display: flex;
     width: 100%;
@@ -73,8 +87,9 @@ export default {
 }
 .strip {
     width: fit-content;
-    align-items: start;
+    // align-items: start;
     pointer-events: none;
+    align-items: center;
     &__item {
         flex-direction: column-reverse;
         justify-content: center;

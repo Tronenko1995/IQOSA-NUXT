@@ -18,6 +18,23 @@ import Projects from '@/components/main/Projects.vue'
 import Team from '@/components/main/Team.vue'
 import TeamMobi from '@/components/main/TeamMobi.vue'
 export default {
+	head() {
+		return {
+		title: this.data.seo_title,
+		meta: [
+			{
+			hid: "description",
+			name: "description",
+			content: this.data.meta_description
+			},
+			// {
+			//   hid: "keywords",
+			//   name: "keywords",
+			//   content: this.mainPage.meta_keywords
+			// }
+		],
+		};
+	},
 	layout: 'main',
 	components: {
 		Main,
@@ -27,12 +44,12 @@ export default {
     },
 	async asyncData({ store, i18n }) {
 		// if (!store.getters['lang/main/data']) {
-		try {
-			await store.dispatch('lang/parts/getPartsContent', `/parts?lang=${i18n.locale}`)
-		} catch(e) {
+		// try {
+			// await store.dispatch('lang/parts/getPartsContent', `/parts?lang=${i18n.locale}`)
+		// } catch(e) {
 			// redsirect(`404`);
-			throw new Error(e);
-		}
+			// throw new Error(e);
+		// }
 		try {
 			await store.dispatch('lang/main/getMainPageContent', `/main?lang=${i18n.locale}`)
 		} catch(e) {

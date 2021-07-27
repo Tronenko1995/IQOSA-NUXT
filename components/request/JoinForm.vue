@@ -274,7 +274,7 @@ export default {
         border-bottom: 1px solid hsla(0,0%,100%,.5);
         height: 40px;
         font-family: 'Lightitalic', Arial;
-        font-style: italic;
+        // font-style: italic;
         font-weight: 300;
         font-size: 35px;
         line-height: 110%;
@@ -479,7 +479,7 @@ export default {
         cursor: pointer;
         span {
             font-family: 'LightItalic';
-            font-style: italic;
+            // font-style: italic;
         }
     }
     &__file {
@@ -490,7 +490,7 @@ export default {
         left: 0;
         bottom: 0;
         font-family: 'LightItalic';
-        font-style: italic;
+        // font-style: italic;
         pointer-events: none;
         transition: .2s;
     }

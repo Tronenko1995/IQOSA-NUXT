@@ -2,20 +2,23 @@
     <main class="contacts-page">
         <IcosahedronCrystal />
         <section class="contacts">
-            <div class="contacts__info">
+            <div class="contacts__info" :class="[
+					{'contacts__info--ru': $i18n.locale === 'ru'},
+					{'contacts__info--ua': $i18n.locale === 'ua'},
+				]">
                 <div class="contacts__row">
                     <div class="contacts__location">
                         <div class="contacts__location-text">
-                            <span v-html="data.address"></span>
+                            <a :href="data.map_link" target="_blank" v-html="data.address"></a>
                         </div>
                         <div class="contacts__location-text contacts__location-text--light">
-                            <span v-html="data.address_two"></span>
+                            <a :href="data.map_link" target="_blank"  v-html="data.address_two"></a>
                         </div>
                     </div>
-                    <h1 class="contacts__title">{{ data.latitude }}</h1>
+                    <a :href="data.map_link" target="_blank" class="contacts__title">{{ data.latitude }}</a>
                 </div>
                 <div class="contacts__row">
-                    <p class="contacts__description">{{ data.longitude }}</p>
+                    <a :href="data.map_link" target="_blank" class="contacts__description">{{ data.longitude }}</a>
                     <div
                         class="make-request job__request"
                         @mouseover="findElement($event)"
@@ -76,7 +79,7 @@ export default {
                 description = document.querySelector('.contacts__description'),
                 line = document.querySelector('.make-request__line'),
                 link = document.querySelector('.make-request__link'),
-                item = document.querySelectorAll('.contacts__location-text span'),
+                item = document.querySelectorAll('.contacts__location-text a'),
                 delay = 1
 
 
@@ -179,25 +182,26 @@ export default {
         font-family: 'Light', Arial;
         font-style: normal;
         font-weight: 300;
-        font-size: 164px;
-        line-height: 90%;
+        font-size: 148px;
+        line-height: 100%;
         text-transform: uppercase;
-        font-feature-settings: 'pnum' on, 'lnum' on, 'kern' off;
+        // font-feature-settings: 'pnum' on, 'lnum' on, 'kern' off;
         color: #FFFFFF;
-        margin-left: 131px;
+        // margin-left: 131px;
         transform: translateX(300px);
         opacity: 0.5;
+        letter-spacing: .05em;
     }
     &__description {
         font-family: 'ThinItalic', Arial;
         font-style: normal;
         font-weight: 300;
-        font-size: 164px;
-        line-height: 90%;
+        font-size: 148px;
+        line-height: 100%;
         text-transform: uppercase;
-        font-feature-settings: 'pnum' on, 'lnum' on, 'kern' off;
+        // font-feature-settings: 'pnum' on, 'lnum' on, 'kern' off;
         color: #FFFFFF;
-        margin-right: 56px;
+        // margin-right: 56px;
         letter-spacing: 0.05em;
         transform: translateX(-300px);
         opacity: 0.5;
@@ -205,19 +209,22 @@ export default {
     &__row {
         display: flex;
         align-items: center;
+        justify-content: space-between;
     }
     &__location {
         display: flex;
         flex-direction: column;
         align-self: flex-start;
-        max-width: 200px;
+        // max-width: 200px;
+        margin-top: 16px;
         &-text {
             overflow: hidden;
-            span {
+            a {
                 display: block;
                 transform: translateY(100%);
                 font-family: 'LightItalic', Arial;
-                font-style: italic;
+                font-style: normal;
+                // font-style: italic;
                 font-weight: 300;
                 font-size: 22px;
                 line-height: 100%;
@@ -229,13 +236,20 @@ export default {
             }
             &--light {
                 margin-top: 4px;
-                span {
+                a {
                     font-family: 'Light', Arial;
                     font-style: normal;
                 }
             }
         }
 
+    }
+    &__info {
+        max-width: 1190px;
+        &--ru,
+        &--ua {
+            max-width: 1240px;
+        }
     }
 }
 @media (max-width: 1440px) {
@@ -269,7 +283,7 @@ export default {
         }
         &__location {
             &-text {
-                span {
+                a {
                     font-size: 19px;
                 }
             }
@@ -293,7 +307,7 @@ export default {
         }
         &__location {
             &-text {
-                span {
+                a {
                     font-size: 17px;
                 }
             }
@@ -324,8 +338,9 @@ export default {
             position: absolute;
             bottom: 100%;
             margin-bottom: 32px;
+            margin-top: 0;
             &-text {
-                span {
+                a {
                     font-size: 16px;
                 }
             }
@@ -395,7 +410,7 @@ export default {
         }
         &__location {
             &-text {
-                span {
+                a {
                     font-size: 15px;
                 }
             }

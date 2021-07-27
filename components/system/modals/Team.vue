@@ -12,7 +12,7 @@
                 </p>
             </div>
             <div class="team-modal__info-bottom">
-                <p class="team-modal__name">{{ team.name }}</p>
+                <p class="team-modal__name"><span>{{ team.surname }}</span> <em>{{ team.name }}</em></p>
                 <p class="team-modal__position">{{ team.position }}</p>
             </div>
         </div>
@@ -81,6 +81,12 @@ export default {
         text-transform: uppercase;
         max-width: 718px;
         color: #fff;
+        font-style: normal;
+        em {
+        font-family: 'LightItalic', Arial;
+
+        font-weight: 300;
+        }
     }
     &__position {
         font-family: 'Light', Arial;
@@ -173,6 +179,10 @@ export default {
     .team-modal {
         &__info {
             padding: 15px 20px 65px;
+            justify-content: flex-start;
+            &-bottom {
+                margin-top: 40px;
+            }
         }
         &__quote {
             font-size: 20px;

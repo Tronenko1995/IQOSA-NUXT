@@ -14,7 +14,10 @@
 					{'main__title--ua': $i18n.locale === 'ua'},
 				]">{{ data.hero_title[1] }}</p>
 				<div
-					class="make-request make-request--main"
+					class="make-request make-request--main" :class="[
+					{'make-request--main-ru': $i18n.locale === 'ru'},
+					{'make-request--main-ua': $i18n.locale === 'ua'},
+				]"
 					@mouseover="findElement($event)"
 					@mouseleave="animateTextHide($event)"
 				>
@@ -225,6 +228,10 @@ export default {
 		}
 		&__title {
 			font-size: 172px;
+			&--ru,
+			&--ua {
+				font-size: 116px;
+			}
 		}
 	}
 }
@@ -235,6 +242,10 @@ export default {
 		}
 		&__title {
 			font-size: 120px;
+			&--ru,
+			&--ua {
+				font-size: 92px;
+			}
 		}
 	}
 }
@@ -245,11 +256,16 @@ export default {
 		}
 		&__title {
 			font-size: 84px;
+			&--ru,
+			&--ua {
+				font-size: 58px;
+			}
 		}
 	}
 }
 @media (max-width: 768px) {
 	.main {
+		position: relative;
 		&__wrap {
 			max-width: 650px;
 		}
@@ -272,7 +288,7 @@ export default {
 }
 @media (max-width: 669px) {
 	.main {
-		position: relative;
+		// position: relative;
 		&__wrap {
 			max-width: unset;
 			padding: 0 20px;

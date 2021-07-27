@@ -14,18 +14,35 @@ import { mapMutations } from 'vuex'
 import ProjectsList from '@/components/projects/ProjectsList.vue'
 import ProjectsGrid from '@/components/projects/ProjectsGrid.vue'
 export default {
+	head() {
+		return {
+		title: this.data.seo_title,
+		meta: [
+			{
+			hid: "description",
+			name: "description",
+			content: this.data.meta_description
+			},
+			// {
+			//   hid: "keywords",
+			//   name: "keywords",
+			//   content: this.mainPage.meta_keywords
+			// }
+		],
+		};
+	},
   components: {
     ProjectsList, ProjectsGrid
   },
   layout: 'projects',
 	async asyncData({ store, i18n }) {
 		// if (!store.getters['lang/projects/data']) {
-		try {
-			await store.dispatch('lang/parts/getPartsContent', `/parts?lang=${i18n.locale}`)
-		} catch(e) {
+		// try {
+			// await store.dispatch('lang/parts/getPartsContent', `/parts?lang=${i18n.locale}`)
+		// } catch(e) {
 			// redirect(`404`);
-			throw new Error(e);
-		}
+			// throw new Error(e);
+		// }
     try {
         await store.dispatch('lang/projects/getProjectsPageContent', `/projects_page?lang=${i18n.locale}`)
     } catch(e) {

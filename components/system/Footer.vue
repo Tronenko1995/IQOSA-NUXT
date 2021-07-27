@@ -195,6 +195,9 @@ export default {
         display: flex;
         flex-direction: column;
         width: 30%;
+        &--tres {
+            width: 40%;
+        }
         &-top {
 
         }
@@ -306,12 +309,13 @@ export default {
         width: fit-content;
         transform: translateY(0);
         overflow: hidden;
+        position: relative;
     }
     &__main-link {
         display: block;
         font-family: 'ThinItalic', Arial;
         font-weight: 300;
-        font-style: italic;
+        // font-style: italic;
         font-size: 50px;
         line-height: 110%;
         text-transform: uppercase;
@@ -370,8 +374,13 @@ export default {
                 margin-top: 148px;
             }
         }
-        &__main-text {
-            font-size: 38px;
+        &__main {
+            &-text {
+                font-size: 46px;
+            }
+            &-link {
+                font-size: 46px;
+            }
         }
     }
 }
@@ -379,6 +388,14 @@ export default {
 @media (max-width: 1024px) {
     .footer {
         padding: 56px 56px 49px 56px;
+        &__main {
+            &-text {
+                font-size: 42px;
+            }
+            &-link {
+                font-size: 42px;
+            }
+        }
     }
 }
 
@@ -457,6 +474,11 @@ export default {
 }
 @media (max-width: 480px) {
     .footer {
+        &__main {
+            &-link {
+                font-size: 32px;
+            }
+        }
         &__bottom {
             &-item {
                 &--policy {

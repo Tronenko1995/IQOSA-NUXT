@@ -14,7 +14,7 @@
           </div>
           <!-- <nuxt-link :to="localePath(`/project/${item.link}`)" class="projects-interior__link projects-interior-link"> -->
           <!-- <nuxt-link to="" class="projects-interior__link projects-interior-link"> -->
-          <a id="projectLink" @click.prevent="openProject(`/project/${item.link}`)" class="projects-interior__link projects-interior-link" :href="localePath(`/project/${item.link}`)">
+          <a @click.prevent="openProject(`/project/${item.link}`)" class="projects-interior__link projects-interior-link" :href="localePath(`/project/${item.link}`)">
             <span class="projects-interior-link__head">
               <span class="projects-interior-link__address projects-interior-link__address--italic">{{ item.city }},</span>
               <span class="projects-interior-link__address">{{ item.country }}</span>
@@ -148,7 +148,7 @@ export default {
     letter-spacing: unset;
     line-height: 115%;
     text-align: center;
-    letter-spacing: 0.05em;
+    // letter-spacing: 0.05em;
     text-transform: uppercase;
     width: 970px;
     // font-feature-settings: 'pnum' on, 'lnum' on, 'kern' off;
@@ -299,7 +299,7 @@ export default {
   }
   &__address {
     font-family: 'LightItalic', Arial;
-    font-style: italic;
+    // font-style: italic;
     font-weight: 300;
     font-size: 14px;
     line-height: 120%;
@@ -342,7 +342,7 @@ export default {
   }
   .projects-interior {
     &__block {
-      width: 530px;
+      // width: 530px;
       height: 596px;
     }
   }
@@ -402,6 +402,13 @@ export default {
     }
   }
 }
+@media (max-width: 644px) {
+  .projects-interior {
+    &__item {
+      width: 100%;
+    }
+  }
+}
 @media (max-width: 600px) {
   .projects-grid {
     &__title {
@@ -410,7 +417,7 @@ export default {
   }
   .projects-interior {
     &__block {
-      width: 343px;
+      // width: 343px;
       height: 434px;
     }
   }
@@ -421,6 +428,23 @@ export default {
         &-right span {
           &:last-child {
             margin-left: 24px;
+          }
+        }
+      }
+    }
+  }
+}
+@media (max-width: 470px) {
+  .projects-interior {
+    &__link {
+      padding: 15px;
+    }
+    &-link {
+      &__bottom {
+        &-left span,
+        &-right span {
+          &:last-child {
+            margin-left: 10px;
           }
         }
       }

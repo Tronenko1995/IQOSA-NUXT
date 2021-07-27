@@ -36,15 +36,18 @@
         <div class="language">
             <ul class="language__list">
                 <li class="language__item" :class="{'language__item--selected': $i18n.locale === 'en' }">
-                   <nuxt-link :to="switchLocalePath('en')" class="language__link">English,</nuxt-link>
+                    <a :href="switchLocalePath('en')" @click.prevent="changeLocale('en')" class="language__link">English,</a>
+                   <!-- <nuxt-link :to="switchLocalePath('en')" class="language__link">English,</nuxt-link> -->
                    <span class="language__line"></span>
                 </li>
                 <li class="language__item" :class="{'language__item--selected': $i18n.locale === 'ru' }">
-                   <nuxt-link :to="switchLocalePath('ru')" class="language__link">Русский,</nuxt-link>
+                    <a :href="switchLocalePath('ru')" class="language__link">Русский,</a>
+                   <!-- <nuxt-link :to="switchLocalePath('ru')" class="language__link">Русский,</nuxt-link> -->
                    <span class="language__line"></span>
                 </li>
                 <li class="language__item" :class="{'language__item--selected': $i18n.locale === 'ua' }">
-                   <nuxt-link :to="switchLocalePath('ua')" class="language__link">Українська</nuxt-link>
+                   <a :href="switchLocalePath('ua')" class="language__link">Українська</a>
+                   <!-- <nuxt-link :to="switchLocalePath('ua')" class="language__link">Українська</nuxt-link> -->
                    <span class="language__line"></span>
                 </li>
             </ul>
@@ -57,6 +60,12 @@ import { mapMutations } from 'vuex'
 import gsap from "gsap"
 import IcosahedronCrystal from '@/components/IcosahedronCrystal.vue'
 export default {
+    props: {
+        data: {
+            type: Object,
+            required: true
+        },
+    },
     components: {
         IcosahedronCrystal
     },
@@ -64,7 +73,7 @@ export default {
         document.body.style = 'overflow: hidden'
     },
 	computed: {
-		data() { return this.$store.getters['lang/parts/dataHeader'] }
+		// data() { return this.$store.getters['lang/parts/dataHeader'] }
 	},
     methods : {
         ...mapMutations({
@@ -97,15 +106,29 @@ export default {
             }
         },
         goTo(page) {
-          if (this.$route.path !== page) {
+          if (this.$route.path != page && this.$route.path != `/${this.$i18n.locale}${page}`) {
+              console.log('this.$route.path', this.$route.path)
+              console.log(`/${this.$i18n.locale}${page}`)
+            console.log('-')
             this.setAnimate('up')
             this.setPlug(true)
             setTimeout(() => {
+                this.setMenuStatus(false)
                 this.setAnimate('dissolve')
                 this.$router.push(this.localePath(page))
-                this.menuStatus ? this.setMenuStatus(false) : ''
             }, 1000);
+          } else {
+              this.setMenuStatus(false)
           }
+        },
+        changeLocale(lang) {
+            this.$router.push(this.switchLocalePath(lang))
+            
+            let setEnglishLang = () => {
+                window.location.href = this.switchLocalePath('en')
+            }
+
+            setTimeout(setEnglishLang, 100)
         },
     },
     beforeDestroy() {
@@ -280,6 +303,7 @@ export default {
         &__item {
             margin-bottom: 20px;
             overflow: hidden;
+            position: relative;
         }
     }
     .language {

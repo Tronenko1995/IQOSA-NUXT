@@ -526,7 +526,7 @@ export default {
         cursor: pointer;
         span {
             font-family: 'LightItalic';
-            font-style: italic;
+            // font-style: italic;
         }
     }
     &__radio-list {

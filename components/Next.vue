@@ -44,7 +44,7 @@
     &__title {
         margin-top: 48px;
         font-family: 'ThinItalic', Arial;
-        font-style: italic;
+        // font-style: italic;
         font-weight: 300;
         font-size: 164px;
         line-height: 90%;

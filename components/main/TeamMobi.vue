@@ -54,7 +54,8 @@ export default {
         }),
         openModal(data) {
             this.setTeam({
-                name: `${data.name} ${data.surname}`,
+                name: data.name,
+                surname: data.surname,
                 position: data.position,
                 img: data.photo,
                 quote: data.about

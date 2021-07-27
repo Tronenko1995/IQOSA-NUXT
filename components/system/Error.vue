@@ -22,8 +22,7 @@
                         </nuxt-link>
                         <span class="make-request__line"></span>
                     </div>
-            </div>
-
+                </div>
             </div>
         </section>
     </main>
@@ -32,16 +31,32 @@
 <script>
 import { mapMutations } from 'vuex'
 export default {
+	head() {
+		return {
+		title: this.data.seo_title,
+		meta: [
+			{
+			hid: "description",
+			name: "description",
+			content: this.data.meta_description
+			},
+			// {
+			//   hid: "keywords",
+			//   name: "keywords",
+			//   content: this.mainPage.meta_keywords
+			// }
+		],
+		};
+	},
     name: 'Error',
     layout: 'error',
     async fetch() {
         try {
             await this.$store.dispatch('lang/error/getErrorPageContent', `/404?lang=${this.$i18n.locale}`)
 		} catch(e) {
-			// redsirect(`404`);
+			// this.redsirect(`404`);
 			throw new Error(e);
 		}
-      
     },
     beforeMount() {
         this.testPage()

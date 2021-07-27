@@ -244,14 +244,14 @@ export default {
                 color: #FFFFFF;
                 em {
                     font-family: 'LightItalic';
-                    font-style: italic;
+                    // font-style: italic;
                 }
             }
             &-top {
                 text-transform: capitalize;
                 span {
                     font-family: 'LightItalic';
-                    font-style: italic;
+                    // font-style: italic;
                 }
             }
             &-middle {

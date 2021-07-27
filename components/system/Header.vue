@@ -70,6 +70,10 @@ export default {
             type: Boolean,
             required: true
         },
+        data: {
+            type: Object,
+            required: true
+        },
         headerType: String,
         view: String,
     },
@@ -78,9 +82,7 @@ export default {
             baseUrl: process.env.baseUrl,
         }
     },
-	computed: {
-		data() { return this.$store.getters['lang/parts/dataHeader'] }
-	},
+
     methods: {
         ...mapMutations({
           setMenuStatus: 'menu/setStatus',
@@ -140,7 +142,7 @@ export default {
             setTimeout(setEnglishLang, 100)
         },
         handleScroll(evt, el) {
-            if (this.headerType === 'main') {
+            if (this.headerType === 'main' || this.headerType === 'contacts') {
                 if (window.scrollY >= 50) {
                     el.style ='background: rgb(27, 27, 27);'
                 } else if (window.scrollY < 50) {
@@ -358,6 +360,8 @@ export default {
         &--cursive {
             font-family: ThinItalic,Arial;
             position: absolute;
+            font-weight: 300;
+            top: 100%
         }
     }
 }
@@ -394,7 +398,10 @@ export default {
     }
     .request {
         display: flex;
-        font-size: 13px;
+        flex-direction: column;
+        &__link {
+            font-size: 13px;
+        }
     }
     .lang {
         display: none;

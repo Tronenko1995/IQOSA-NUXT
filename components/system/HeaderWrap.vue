@@ -1,13 +1,13 @@
 <template>
     <div>
-        <Header :headerType="headerType" :view="view" :menuStatus="menuStatus" :class="[{'hideInScroll': hideInScroll}, {'open': menuStatus}]"/>
+        <Header :data="data" :headerType="headerType" :view="view" :menuStatus="menuStatus" :class="[{'hideInScroll': hideInScroll}, {'open': menuStatus}]"/>
         <transition
         v-if="menuStatus"
         name="fade" 
         appear
         v-on:before-enter="beforeEnter"
         >
-            <Menu />
+            <Menu :data="data" />
         </transition>
     </div>
 </template>
@@ -35,7 +35,8 @@ export default {
     beforeDestroy() {
         window.removeEventListener('scroll', this.handleScroll);
     },
-    computed: {
+	computed: {
+		data() { return this.$store.getters['lang/parts/dataHeader'] },
         menuStatus() { return this.$store.getters['menu/status'] },
     },
     data() {

@@ -7,14 +7,31 @@
 <script>
 import PrivatyPolicy from '@/components/privatyPolicy/PrivatyPolicy.vue'
 export default {
+	head() {
+		return {
+		title: this.data.seo_title,
+		meta: [
+			{
+			hid: "description",
+			name: "description",
+			content: this.data.meta_description
+			},
+			// {
+			//   hid: "keywords",
+			//   name: "keywords",
+			//   content: this.mainPage.meta_keywords
+			// }
+		],
+		};
+	},
     layout: 'standart',
 	async asyncData({ store, i18n }) {
-		try {
-			await store.dispatch('lang/parts/getPartsContent', `/parts?lang=${i18n.locale}`)
-		} catch(e) {
+		// try {
+			// await store.dispatch('lang/parts/getPartsContent', `/parts?lang=${i18n.locale}`)
+		// } catch(e) {
 			// redirect(`404`);
-			throw new Error(e);
-		}
+			// throw new Error(e);
+		// }
 		try {
 			await store.dispatch('lang/privaty-policy/getPrivatyPolicyPageContent', `/privacy_policy?lang=${i18n.locale}`)
 		} catch(e) {

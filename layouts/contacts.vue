@@ -1,6 +1,6 @@
 <template>
   <div>
-    <HeaderWrap :headerType="'main'" />
+    <HeaderWrap :headerType="'contacts'" />
     <PlugWrap />
     <Nuxt />
     <Footer />

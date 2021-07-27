@@ -383,6 +383,7 @@ export default {
         overflow: hidden;
         &-text {
             transform: translateY(100%);
+            text-align: left;
         }
         &--italic {
             font-family: 'ThinItalic', Arial;

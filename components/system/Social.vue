@@ -60,6 +60,7 @@ export default {
         padding-left: 2px;
         padding-right: 2px;
         overflow: hidden;
+        position: relative;
     }
     &__link {
         font-family: Light,Arial;

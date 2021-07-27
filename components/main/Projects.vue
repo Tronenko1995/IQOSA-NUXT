@@ -25,7 +25,7 @@
 						</a>
 					</swiper-slide>
 				</swiper>
-					<a @click.prevent="goPage(`/project/${projectLink}`)" :href="`/project/${projectLink}`"  class="projects__link arrow-link" @mouseover="findElement($event)" @mouseleave="animateTextHide($event)">
+					<a id="projectLink" @click.prevent="go($event)" :href="`/${$i18n.locale}/project/${data.projects[0].link}`"  class="projects__link arrow-link" @mouseover="findElement($event)" @mouseleave="animateTextHide($event)" :data-link="data.projects[0].link">
 					<!-- <nuxt-link :to="localePath('/')" class="projects__link arrow-link" @mouseover.native="findElement($event)" @mouseleave.native="animateTextHide($event)"> -->
 					<!-- <nuxt-link :to="localePath('/')" class="projects__link arrow-link" @mouseover.native="findElement($event)" @mouseleave.native="animateTextHide($event)"> -->
 						<span class="arrow-link__change">
@@ -74,7 +74,7 @@ export default {
 	data() {
 		return {
 				baseUrl: process.env.baseUrl,
-				projectLink: '',
+				// projectLink: '',
 				projectNameSetting: {
 					speed: 500,
 					loop: true,
@@ -152,15 +152,24 @@ export default {
 		projectName() { return this.$refs.projectName.$swiper },
 	},
 	mounted() {
+    let active_el
+    let project_slider = document.querySelector('.projects__photos');
+    let project_list_slider_link = document.querySelector("#projectLink");
+
 		this.animate()
-		this.projectLink = this.data.projects[0].link
+		// this.projectLink = this.data.projects[0].link
 		this.projectPhotos.controller.control = this.projectAddress
 		this.projectAddress.controller.control = this.projectName
 		this.$refs.totalSlides.textContent = this.projectPhotos.slides.length - 2
-		this.projectPhotos.on('slideChange', () => {
+		this.projectPhotos.on('slideChange', (e) => {
 			this.$refs.currentSlide.textContent = this.projectPhotos.realIndex + 1;
 			// console.log(this.projectPhotos.realIndex) this.projectPhotos.activeIndex
-			this.projectLink = this.projectPhotos.$el[0].children[0].children[this.projectPhotos.activeIndex].dataset.link
+			// this.projectLink = this.projectPhotos.$el[0].children[0].children[this.projectPhotos.activeIndex].dataset.link
+			active_el = e.$el[0].querySelector(`[data-swiper-slide-index="${e.realIndex}"]`);
+			if (active_el) {
+				project_list_slider_link.setAttribute("href", `/${this.$i18n.locale}/project/${active_el.dataset.link}`);
+        		project_list_slider_link.setAttribute("data-link", active_el.dataset.link);
+			}
 			// console.dir(e)
 			// console.dir(this.$refs.projectName)
 			// console.log(this.$refs.projectName.querySelector(`[data-swiper-slide-index="${this.projectPhotos.realIndex}"]`))
@@ -232,7 +241,11 @@ export default {
                 this.setAnimate('dissolve')
                 this.$router.push(this.localePath(page))
             }, 1000);
-        }
+        },
+		go(e) {
+			let link = e.target.dataset.link
+			this.goPage(`/project/${link}`)
+		},
 	}
 }
 </script>
@@ -475,6 +488,9 @@ export default {
 	}
 	.featured {
 		margin-bottom: 370px;
+		&__block {
+			align-items: center;
+		}
 	}
 	.projects {
 		margin-top: 0px;

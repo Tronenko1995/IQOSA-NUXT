@@ -17,7 +17,7 @@
             <div ref="text3" class="scroll-text__text" v-html="data.third_animated_text"></div>
             <div ref="text4" class="scroll-text__text" v-html="data.fourth_animated_text"></div>
         </section>
-        <AboutSlider :list="data.slider_pictures" />
+        <AboutSlider :list="data.slider_pictures" :data="data.slider_text" />
         <Next :data="data"/>
         <!-- <div>
             <nuxt-link to="/"  class="project__next">
@@ -225,7 +225,8 @@ export default {
         font-family: 'ThinItalic', Arial;
         font-style: italic;
         font-weight: 300;
-        font-size: 164px;
+        // font-size: 164px;
+        font-size: 100px;
         line-height: 90%;
         letter-spacing: 0.05em;
         text-transform: uppercase;

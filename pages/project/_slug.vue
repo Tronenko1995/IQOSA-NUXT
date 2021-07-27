@@ -44,19 +44,19 @@
                     </template>
                     <div v-if="item && item.gallery" :key="i">
                         <div class="project__images" >
-                            <div class="project__image project__image--uno project__image--parallax">
+                            <div v-if="item.gallery.first_image" class="project__image project__image--uno project__image--parallax">
                                 <img :src="getImg(item.gallery.first_image)" alt="">
                             </div>
-                            <div class="project__image project__image--dos project__image--parallax">
+                            <div v-if="item.gallery.second_image" class="project__image project__image--dos project__image--parallax">
                                 <img :src="getImg(item.gallery.second_image)" alt="">
                             </div>
                         </div>
                         <div v-if="item && item.gallery && item.gallery.center_text" class="project__title project__title--text" v-html="item.gallery.center_text"></div>
                         <div class="project__images">
-                            <div class="project__image project__image--tres project__image--parallax">
+                            <div v-if="item.gallery.third_image" class="project__image project__image--tres project__image--parallax">
                                 <img :src="getImg(item.gallery.third_image)" alt="">
                             </div>
-                            <div class="project__image project__image--quatro project__image--parallax">
+                            <div v-if="item.gallery.fourth_image" class="project__image project__image--quatro project__image--parallax">
                                 <img :src="getImg(item.gallery.fourth_image)" alt="">
                             </div>
                         </div>
@@ -98,19 +98,21 @@
 					    </div>
                     </div>
                 </div>
-                <nuxt-link v-if="index !== null && list[index+1]" :to="localePath(`/project/${list[index+1].link}`)"  class="project__next" >
-                    <div class="project__title project__title--next">
-                        <ul class="animate-text animate-text--next">
-                            <li class="animate-text__item">
-                                <a href="#" class="animate-text__button animate-text__button--cursive  animate-text__button--next">{{ data.next_project_text }}</a>
-                                <a href="#" class="animate-text__button animate-text__button--next animate-text__button--absolute">{{ list[index+1].link }}</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="project__image project__image--next">
-                        <img :src="getImg(list[index+1].main_picture)" alt="">
-                    </div>
-                </nuxt-link>
+                <div class="project__next-wrap">
+                    <a ref="next" @click.prevent="openProject(`/project/${list[index+1].link}`)" v-if="index !== null && list[index+1]" :href="localePath(`/project/${list[index+1].link}`)"  class="project__next" >
+                        <div ref="nextText" class="project__title project__title--next">
+                            <ul class="animate-text animate-text--next">
+                                <li class="animate-text__item">
+                                    <a href="#" ref="nextText1" class="animate-text__button animate-text__button--cursive  animate-text__button--next">{{ data.next_project_text }}</a>
+                                    <a href="#" class="animate-text__button animate-text__button--next animate-text__button--absolute">{{ list[index+1].type }}<span>-{{ list[index+1].number }} </span></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="project__image project__image--next">
+                            <img :src="getImg(list[index+1].main_picture)" alt="">
+                        </div>
+                    </a>
+                </div>
             </div>
         </section>
         <Modals v-if="modal.show" :modal="modal"/>
@@ -122,14 +124,31 @@
 // import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import { mapMutations } from 'vuex'
 export default {
+	head() {
+		return {
+		title: this.project.seo_title,
+		meta: [
+			{
+			hid: "description",
+			name: "description",
+			content: this.project.meta_description
+			},
+			// {
+			//   hid: "keywords",
+			//   name: "keywords",
+			//   content: this.mainPage.meta_keywords
+			// }
+		],
+		};
+	},
   layout: 'project',
     async asyncData({ store, i18n, params }) {
-		try {
-			await store.dispatch('lang/parts/getPartsContent', `/parts?lang=${i18n.locale}`)
-		} catch(e) {
+		// try {
+		// 	await store.dispatch('lang/parts/getPartsContent', `/parts?lang=${i18n.locale}`)
+		// } catch(e) {
 			// redirect(`404`);
-			throw new Error(e);
-		}
+		// 	throw new Error(e);
+		// }
         try {
             await store.dispatch('lang/project/getProjectPageContent', `/project_page?lang=${i18n.locale}`)
 		} catch(e) {
@@ -275,7 +294,35 @@ export default {
             } else if (social === 'linkedIn') {
                 return `https://www.linkedin.com/shareArticle?mini=true&url=${this.url}/&title=${this.project.type}-${this.project.number}`
             }
-        }
+        },
+        openProject(fullLink) {
+            this.$router.push(this.localePath(fullLink))
+            if (window.innerWidth > 600) {
+                this.$gsap.to(this.$refs.next, {
+                    width: 100 + "%",
+                    duration: 0.5
+                })
+                this.$gsap.to(this.$refs.nextText, {
+                    translateY: -150 + "px",
+                    duration: 0.5
+                })
+                this.$gsap.to(this.$refs.nextText1, {
+                    opacity: 0,
+                    // duration: 0.5
+                })
+                setTimeout(() => {
+                    window.scrollTo({
+                        top: 0,
+                        left: 0,
+                    })
+                }, 500);
+            } else {
+                window.scrollTo({
+                    top: 0,
+                    left: 0,
+                })
+            }
+        },
     }
 }
 </script>
@@ -291,7 +338,7 @@ export default {
         flex-direction: column;
         width: 100%;
         max-width: 100%;
-        padding: 0 72px;
+        // padding: 0 72px;
     }
     &__address {
         font-family:'Light', Arial;
@@ -306,10 +353,11 @@ export default {
         color: #FFFFFF;
         span {
             font-family: 'LightItalic', Arial;
-        font-style: italic;
+        // font-style: italic;
         }
     }
     &__title {
+        padding: 0 72px;
         margin-bottom: 72px;
         font-size: 148px;
         line-height: 115%;
@@ -317,7 +365,7 @@ export default {
         margin-top: 48px;
         font-family: 'Roman', Arial;
         font-style: normal;
-        font-weight: 300;
+        font-weight: 400;
         // font-size: 164px;
         // line-height: 90%;
         text-align: center;
@@ -326,29 +374,44 @@ export default {
         // font-feature-settings: 'pnum' on, 'lnum' on, 'kern' off;
         color: #FFFFFF;
         span {
-            font-family: 'ThinItalic', Arial;
-            font-style: italic;
+            font-family: 'LightItalic', Arial;
+            // font-style: italic;
             font-weight: 300;
         }
         &--text {
-            margin-top: 111px;
+            margin-top: 48px;
+            margin-bottom: 48px;
+            font-size: 120px;
+            font-family: Light, Arial;
+            font-weight: 300;
+            em {
+                font-family: ThinItalic,Arial;
+                font-style: normal;
+            }
         }
         &--next {
             position: absolute;
             margin-top: 0px;
             left: 50%;
             transform: translateX(-50%);
-            top: -75px;
+            top: -150px;
             z-index: 1;
-            width: 100%;
+            // width: 100%;
+            min-width: 710px;
+            padding: 0;
         }
     }
     &__image {
+        width: calc(100% - 128px);
+        display: flex;
+        justify-content: center;
+        overflow: hidden;
         margin: 0 auto;
-        width: 100%;
+        // width: 100%;
         // height: 950px;
-        height: auto;
-        max-width: 1280px;
+        // height: auto;
+        height: 720px;
+        max-width: 960px;
         img {
             width: 100%;
             height: 100%;
@@ -361,17 +424,21 @@ export default {
         }
         &--uno {
             margin: 148px 0 0 0; 
-            width: 645px;
+            // width: 645px;
+            width: 476px;
             // width: 516px;
             // height: 610px;
-            height: 762px;
+            // height: 762px;
+            height: fit-content;
             transform: translateY(260px);
             margin-bottom: 260px;
         }
         &--dos {
             margin: 494px 0 0 0;
-            width: 781px;
-            height: 1057px;
+            width: 576px;
+            // width: 781px;
+            // height: 1057px;
+            height: fit-content;
             transform: translateY(200px);
             margin-bottom: 200px;
             // width: 625px;
@@ -379,20 +446,24 @@ export default {
         }
         &--tres {
             margin: -113px 0 0 0;
-            width: 288px;
-            height: 340px;
+            width: 350px;
+            // width: 288px;
+            height: fit-content;
+            // height: 340px;
             transform: translateY(200px);
             margin-bottom: 200px;
         }
         &--quatro {
-            margin: 250px 0 300px 0; 
-            width: 665px;
-            height: 785px;
+            margin: 0 0 120px 0; 
+            // width: 665px;
+            width: 491px;
+            // height: 785px;
+            height: fit-content;
             transform: translateY(120px);
-            margin-bottom: 120px;
+            // margin-bottom: 120px;
         }
         &--next {
-            width: 852px;
+            width: auto;
             height: 530px;
             overflow: hidden;
             margin: 0 auto;
@@ -402,19 +473,24 @@ export default {
         display: flex;
         justify-content: space-between;
         width: 100%;
+        max-width: 1280px;
+        margin: 0 auto;
     }
     &__line {
         width: 100%;
         height: 1px;
         opacity: .3;
-        margin-top: 72px;
+        margin-top: 48px;
         background: #FFFFFF;
         &--share {
             margin-top: 3px;
         }
     }
     &__info {
-        margin-top: 24px;
+        padding: 0 72px;
+        margin: 24px auto 156px;
+        width: 1280px;
+        // margin-top: 24px;
         margin-bottom: 188px;
         font-family: 'Light', Arial;
         font-style: normal;
@@ -429,6 +505,9 @@ export default {
             margin-bottom: 0px;
         }
         &-left {
+            &:first-child {
+                margin-right: 70px;
+            }
             &--share {
                 display: flex;
             }
@@ -436,13 +515,14 @@ export default {
         &-middle {
             display: flex;
             margin-left: auto;
+            margin-right: 140px;
             span {
                 display: inline-block;
             }
             &--share {
                 display: flex;
                 flex-direction: column;
-                margin-right: 529px;
+                // margin-right: 529px;
                 span {
                     &:last-child {
                         margin-left: 0;
@@ -451,7 +531,7 @@ export default {
             }
         }
         &-right {
-            margin-left: 367px;
+            // margin-left: 367px;
             span {
                 &:last-child {
                     margin-left: 70px;
@@ -459,9 +539,18 @@ export default {
             }
         }
     }
-    &__next {
+    &__next-wrap {
+        width: 100%;
+        margin-top: 357px;
         position: relative;
-        margin: 357px auto 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    &__next {
+        // width: 852px;
+        width: 640px;
+        max-width: 100%;
         img {
             transform: scale(1.1);
             transition: .5s;
@@ -512,7 +601,7 @@ export default {
         cursor: pointer;
         text-align: left;
         &--cursive {
-            font-family: 'LightItalic', Arial;
+            font-family: 'ThinItalic', Arial;
         }
         &--absolute {
             position: absolute;
@@ -531,6 +620,7 @@ export default {
 .animate-line {
     display: flex;
     position: relative;
+    width: fit-content;
     &--share {
         margin-top: 4px;
     }
@@ -553,50 +643,53 @@ export default {
 	}
 }
 
-@media (max-width: 1643px) {
-    .project {
-            &__image {
-            &--uno {
-                width: 516px;
-                height: 610px;
-            }
-            &--dos {
-                width: 625px;
-                height: 846px;
-            }
+// @media (max-width: 1643px) {
+    // .project {
+            // &__image {
+            // &--uno {
+                // width: 516px;
+                // height: 610px;
+            // }
+            // &--dos {
+                // width: 625px;
+                // height: 846px;
+            // }
             // &--tres {
 
             // }
             // &--quatro {
 
             // }
-        }
-    }
-}
+        // }
+    // }
+// }
 @media (max-width: 1440px) {
     .project {
         margin-top: 241px;
         &__wrap {
-            padding: 0 64px;
+            // padding: 0 64px;
         }
         &__title {
+            padding: 0 64px;
             font-size: 148px;
             &--next {
                 font-size: 140px;
                 top: -63px;
+                padding: 0;
             }
         }
         &__info {
             margin-bottom: 156px;
+            padding: 0 64px;
             &--share {
                 margin-bottom: 0px;
             }
-            &-right {
-                margin-left: 191px;
-            }
+            // &-right {
+                // margin-left: 191px;
+            // }
             &-middle {
                 &--share {
-                    margin-right: 353px;
+                    // margin-right: 353px;
                 }
             }
         }
@@ -605,60 +698,76 @@ export default {
                 margin: 0 auto 181px auto;
             }
             &--uno {
-                margin: 116px 0 260px 0;
-                width: 476px;
-                height: 562px;
+                // margin: 116px 0 260px 0;
+                // width: 476px;
+                // height: 562px;
             }
             &--dos {
-                margin: 371px 0 200px 0;
-                width: 576px;
-                height: 780px;
+                // margin: 371px 0 200px 0;
+                // width: 576px;
+                // height: 780px;
             }
             &--tres {
-                margin: -113px 0 200px 0;
-                width: 213px;
-                height: 251px;
+                // margin: -113px 0 200px 0;
+                // width: 213px;
+                // height: 251px;
             }
             &--quatro {
-                margin: 160px 0 120px 0;
+                // margin: 160px 0 120px 0;
                 // margin: 160px 0 275px 0;
-                width: 491px;
-                height: 579px;
+                // width: 491px;
+                // height: 579px;
             }
             &--next {
-                width: 639px;
-                height: 398px;
+                // width: auto;
+                // height: 398px;
             }
         }
         &__next {
             margin: 326px auto 0 auto;
+            &-wrap {
+                margin-top: 0px;
+            }
         }
     }
 }
+
+@media (max-width: 1392px) {
+    .project {
+        &__info {
+            width: 100%;
+        }
+    }
+}
+
 @media (max-width: 1280px) {
     .project {
         margin-top: 223px;
-        &__wrap {
-            padding: 0 56px;
-        }
+        // &__wrap {
+            // padding: 0 56px;
+        // }
         &__title {
+            padding: 0 56px;
             font-size: 116px;
             &--next {
                 font-size: 116px;
-                top: -63px;
+                // top: -63px;
+                top: 160px;
+                padding: 0;
             }
         }
         &__info {
+            padding: 0 56px;
             margin-bottom: 148px;
             &--share {
                 margin-bottom: 0px;
             }
-            &-right {
-                margin-left: 120px;
-            }
+            // &-right {
+                // margin-left: 120px;
+            // }
             &-middle {
                 &--share {
-                    margin-right: 245px;
+                    // margin-right: 245px;
                 }
             }
         }
@@ -667,77 +776,91 @@ export default {
                 margin: 0 auto 173px auto;
             }
             &--uno {
-                margin: 108px 0 0 0;
-                // width: 424px;
-                // height: 501px;
-                width: 382px;
-                height: 451px;
+                margin: 0 0 260px 0;
+                width: 424px;
+                height: 501px;
+                // width: 382px;
+                // height: 451px;
                 transform: translateY(0);
             }
             &--dos {
-                margin: 335px 0 0 0;
-                // width: 513px;
-                // height: 695px;
-                width: 462px;
-                height: 626px;
+                margin: 0 0 170px 0;
+                width: 513px;
+                height: 695px;
+                // width: 462px;
+                // height: 626px;
                 transform: translateY(0);
             }
             &--tres {
-                margin: -86px 0 0 0;
+                margin: 0 0 260px 0;
                 width: 189px;
                 height: 223px;
                 transform: translateY(0);
             }
             &--quatro {
-                margin: 159px 0 232px 0;
+                margin: 0 0 120px 0;
                 width: 437px;
                 height: 516px;
                 transform: translateY(0);
             }
             &--next {
-                width: 568px;
-                height: 357px;
+                // width: auto;
+                // height: 357px;
+                width: 640px;
+                height: 720px;
             }
         }
         &__next {
             margin: 272px auto 0 auto;
         }
+        &__line {
+            &--share {
+                // margin-top: 148px;
+            }
+        }
     }
 }
 @media (max-width: 1024px) {
     .project {
-        margin-top: 206px;
-        &__wrap {
-            padding: 0 56px;
-        }
+        // margin-top: 206px;
+        margin-top: 280px;
+        // &__wrap {
+            // padding: 0 56px;
+        // }
         &__address {
-            font-size: 14px;
+            // font-size: 14px;
+            font-size: 16px;
         }
         &__title {
-            // font-size: 108px;
-            font-size: 90px;
+            font-size: 108px;
+            // padding: 0 56px;
+            // font-size: 90px;
             &--next {
+                // padding: 0;
                 font-size: 90px;
-                top: -42px;
+                // top: -42px;
+                top: 142px;
             }
         }
         &__info {
+            // padding: 0 56px;
             font-size: 12px;
             margin-bottom: 132px;
             &--share {
                 margin-bottom: 0px;
             }
-            &-right {
-                margin-left: 100px;
-            }
+            // &-right {
+                // margin-left: 100px;
+            // }
             &-middle {
                 &--share {
-                    margin-right: 204px;
+                    // margin-right: 204px;
                 }
             }
         }
         &__image {
-            margin: 64px auto 0 auto;
+            margin: 0 auto;
+            // margin: 64px auto 0 auto;
             &--standart {
                 margin: 0 auto 32px auto;
             }
@@ -745,27 +868,27 @@ export default {
                 margin: 0 auto 156px auto;
             }
             &--uno {
-                margin: 100px 0 0 0;
+                margin: 0 0 260px 0;
                 width: 331px;
                 height: 391px;
             }
             &--dos {
-                margin: 278px 0 0 0;
+                margin: 0 0 170px 0;
                 width: 401px;
                 height: 542px;
             }
             &--tres {
-                margin: -70px 0 0 0;
+                margin: 0 0 260px 0;
                 width: 148px;
                 height: 175px;
             }
             &--quatro {
-                margin: 107px 0 192px 0;
+                margin: 0 0 120px 0;
                 width: 342px;
                 height: 403px;
             }
             &--next {
-                width: 444px;
+                width: auto;
                 height: 280px;
             }
         }
@@ -796,7 +919,7 @@ export default {
         &__info {
             &-middle {
                 &--share {
-                    margin-right: 100px;
+                    // margin-right: 100px;
                 }
             }
         }
@@ -805,36 +928,60 @@ export default {
 
 @media (max-width: 768px) {
     .project {
-        margin-top: 190px;
-        &__wrap {
-            padding: 0 48px;
-        }
+        // margin-top: 190px;
+        margin-top: 145px;
+        // &__wrap {
+            // padding: 0 48px;
+        // }
         &__title {
-            margin-top: 40px;
+            padding: 0 48px;
+            // margin-top: 40px;
             font-size: 88px;
             // font-size: 50px;
             &--next {
                 // font-size: 88px;
                 font-size: 50px;
-                top: -7px;
+                top: 173px;
+                padding: 0;
             }
+        }
+        &__address {
+            font-size: 14px;
         }
         &__info {
             margin-bottom: 132px;
+            padding: 0 48px;
             &--share {
                 margin-bottom: 0px;
             }
-            &-right {
-                margin-left: 24px;
-            }
-            &-middle {
-                &--share {
-                    margin-right: 204px;
+            &-left {
+                &:first-child {
+                    margin-right: 10px;
                 }
             }
+            &-right {
+                margin-left: 24px;
+                span {
+                    &:last-child {
+                        margin-left: 10px;
+                    }
+                }
+            }
+            &-middle {
+                margin-right: 0px;
+                // &--share {
+                //     margin-right: 204px;
+                // }
+            }
+        }
+        &__images {
+            margin-bottom: 20px;
         }
         &__image {
-            margin: 56px auto 0 auto;
+            margin: 0 auto;
+            img {
+                width: auto;
+            }
             &--standart {
                 margin: 0 auto 32px auto;
             }
@@ -842,28 +989,28 @@ export default {
                 margin: 0 auto 154px auto;
             }
             &--uno {
-                margin: 100px 0 0 0;
-                width: 244px;
-                height: 288px;
+                // margin: 100px 0 0 0;
+                // width: 244px;
+                // height: 288px;
             }
             &--dos {
-                margin: 232px 0 0 0;
-                width: 295px;
-                height: 399px;
+                // margin: 232px 0 0 0;
+                // width: 295px;
+                // height: 399px;
             }
             &--tres {
-                margin: -70px 0 0 0;
-                width: 109px;
-                height: 129px;
+                // margin: -70px 0 0 0;
+                // width: 109px;
+                // height: 129px;
             }
             &--quatro {
-                margin: 107px 0 124px 0;
-                width: 252px;
-                height: 297px;
+                // margin: 107px 0 124px 0;
+                // width: 252px;
+                // height: 297px;
             }
             &--next {
-                width: 324px;
-                height: 206px;
+                // width: auto;
+                // height: 206px;
             }
         }
         &__next {
@@ -878,36 +1025,68 @@ export default {
     }
 }
 
+@media (max-width: 710px) {
+    .project {
+        &__title {
+            &--next {
+                min-width: 100%;
+            }
+        }
+    }
+}
+
 @media (max-width: 670px) {
     .project {
         &__images {
             flex-direction: column;
         }
         &__image {
+            width: calc(100% - 32px);
+            height: unset;
+            margin-bottom: 11px;
             &--uno {
-                width: 255px;
-                height: 302px;
+                // width: 255px;
+                // height: 302px;
             }
             &--dos {
-                margin: 16px 0 0 0;
-                width: 100%;
-                height: auto;
+                // margin: 16px 0 0 0;
+                // width: 100%;
+                // height: auto;
             }
             &--tres {
-                margin: 88px 0 0 0;
-                width: 100%;
-                height: auto;
+                // margin: 88px 0 0 0;
+                // width: 100%;
+                // height: auto;
             }
             &--quatro {
-                margin: 16px 0 88px auto;
-                width: 255px;
-                height: 301px;
+                // margin: 16px 0 88px auto;
+                // width: 255px;
+                // height: 301px;
+            }
+            &--next {
+                height: 254px;
+            }
+            img {
+                width: 100%;
             }
         }
         &__title {
+            font-size: 56px;
             &--text {
                 margin-top: 88px;
+                font-size: 32px;
             }
+            &--next {
+                font-size: 48px;
+            }
+        }
+        &__next {
+            width: 100%;
+            padding-left: 75px;
+            padding-right: 75px;
+            // &-wrap {
+            //     margin-top: 0px;
+            // }
         }
     }
 }
@@ -915,12 +1094,20 @@ export default {
 @media (max-width: 620px) {
     .project {
         &__title {
-            font-size: 50px;
+            // font-size: 50px;
+            padding: 0 16px;
+            &--next {
+                padding: 0;
+            }
+            // &--text {
+            //     font-size: 32px;
+            // }
         }
         &__wrap {
-            padding: 0 16px;
+            // padding: 0 16px;
         }
         &__info {
+            padding: 0 16px;
             font-size: 13px;
             margin-bottom: 88px;
             display: flex;
@@ -972,47 +1159,56 @@ export default {
         }
     }
 }
+@media (max-width: 480px) {
+    .project {
+        &__title {
+            margin-top: 32px;
+            margin-bottom: 48px;
+        }
+    }
+}
 @media (max-width: 414px) {
     .project {
-        margin-top: 145px;
+        // margin-top: 145px;
         &__address {
             font-size: 13px;
         }
         &__title {
-            margin-top: 35px;
-            font-size: 56px;
+            // margin-top: 35px;
+            // font-size: 56px;
             &--text {
                 margin-top: 88px;
+                // font-size: 32px;
             }
             &--next {
                 margin-top: 0px;
-                top: -22px;
-                font-size: 49px;
+                top: 87px;
+                // font-size: 49px;
             }
         }
         &__image {
-            margin: 48px auto 0 auto;
+            // margin: 48px auto 0 auto;
             &--standart {
                 margin: 0 auto 16px auto;
             }
             &--uno {
-                margin: 72px 0 0 0;
+                // margin: 72px 0 0 0;
             }
             &--dos {
-                margin: 16px 0 0 0;
+                // margin: 16px 0 0 0;
             }
             &--tres {
-                margin: 88px 0 0 0;
+                // margin: 88px 0 0 0;
             }
             &--quatro {
-                margin: 16px 0 88px auto;
+                // margin: 16px 0 88px auto;
             }
             &--margin {
                 margin: 0 auto 108px auto;
             }
             &--next {
-                width: 225px;
-                height: 144px;
+                width: auto;
+                // height: 144px;
                 margin: 0 auto;
             }
         }

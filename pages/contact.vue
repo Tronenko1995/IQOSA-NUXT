@@ -7,18 +7,35 @@
 <script>
 import Contacts from '@/components/contacts/Contacts.vue'
 export default {
-    layout: 'standart',
+	head() {
+		return {
+		title: this.data.seo_title,
+		meta: [
+			{
+			hid: "description",
+			name: "description",
+			content: this.data.meta_description
+			},
+			// {
+			//   hid: "keywords",
+			//   name: "keywords",
+			//   content: this.mainPage.meta_keywords
+			// }
+		],
+		};
+	},
+    layout: 'contacts',
     components: {
 		Contacts,
     },
 	async asyncData({ store, i18n }) {
 		// if (!store.getters['lang/contacts/data']) {
-		try {
-			await store.dispatch('lang/parts/getPartsContent', `/parts?lang=${i18n.locale}`)
-		} catch(e) {
+		// try {
+		// 	await store.dispatch('lang/parts/getPartsContent', `/parts?lang=${i18n.locale}`)
+		// } catch(e) {
 			// redsirect(`404`);
-			throw new Error(e);
-		}
+			// throw new Error(e);
+		// }
 		try {
 			await store.dispatch('lang/contacts/getContactsPageContent', `/contacts?lang=${i18n.locale}`)
 		} catch(e) {

@@ -172,21 +172,25 @@ export default {
 
 <style lang="scss" scoped>
 .say-hi-form {
-    margin: 200px auto 200px auto;
-    width: 532px;
+    margin: 125px auto 200px auto;
+    width: 45%;
     &__title {
-        font-family: 'Roman', Arial;
+        font-family: 'Light', Arial;
         font-style: normal;
         font-weight: normal;
-        font-size: 35px;
+        // font-size: 35px;
         line-height: 110%;
         text-align: center;
         text-transform: uppercase;
-        font-feature-settings: 'pnum' on, 'lnum' on;
+        // font-feature-settings: 'pnum' on, 'lnum' on;
         color: #FFFFFF;
         margin-bottom: 72px;
+        font-size: 22px;
+        font-weight: 400;
     }
     &__input-wrap {
+        width: 100%;
+        max-width: 615px;
         position: relative;
         height: 50px;
         margin-bottom: 64px;
@@ -252,6 +256,8 @@ export default {
         }
     }
     &__textarea-wrap {
+        width: 100%;
+        max-width: 615px;
         position: relative;
         width: 100%;
         padding-top: 40px;
@@ -300,7 +306,7 @@ export default {
         cursor: pointer;
         span {
             font-family: 'LightItalic';
-            font-style: italic;
+            // font-style: italic;
         }
     }
 }
