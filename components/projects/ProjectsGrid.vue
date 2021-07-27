@@ -95,9 +95,22 @@ export default {
               card.addEventListener("click", () => {
                   card.classList.add("this-card");
 
+                let marginTop = 0;
+                if (window.innerWidth <= 1280) {
+                  marginTop = 492;
+                } else if (window.innerWidth <= 1440) {
+                  marginTop = 547;
+                } else {
+                  marginTop = 586;
+                }
+
+                const width = window.innerWidth <= 1088 ? window.innerWidth - 128 : 960;
+
                 this.$gsap.to(card, {
-                    width: 100 + '%',
-                    marginTop: 590,
+                    // width: 100 + '%',
+                    // marginTop: 590,
+                    width,
+                    marginTop,
                     duration: 1,
                     // delay: 1,
                 })
@@ -293,7 +306,7 @@ export default {
     }
     &-right {
       span {
-        
+
       }
     }
   }
@@ -343,7 +356,7 @@ export default {
   .projects-interior {
     &__block {
       // width: 530px;
-      height: 596px;
+      // height: 596px;
     }
   }
 }
