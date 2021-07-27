@@ -18,7 +18,7 @@
 			<div class="projects__name projects-name" ref="pa">
 				<swiper ref="projectName" :options="projectNameSetting" class="projects-name__title">
 					<swiper-slide v-for="item in data.projects" :key="item.link">
-						<a @click="goPage(`/project/${item.link}`)" :href="`/project/${item.link}`" class="projects-name__item" :data-href="item.link">
+						<a @click="goPage(`/project/${item.link}`)" :href="localePath(`/project/${item.link}`)" class="projects-name__item" :data-href="item.link">
 						<!-- <nuxt-link :to="localePath(`/project/${item.link}`)" class="projects-name__item"> -->
 						<span>{{ item.type }}</span>-{{ item.number }}
 						<!-- </nuxt-link> -->
@@ -152,6 +152,8 @@ export default {
 		projectName() { return this.$refs.projectName.$swiper },
 	},
 	mounted() {
+		console.log(this.data.projects[0].link)
+		// console.log(this.data[0].link)
     let active_el
     let project_slider = document.querySelector('.projects__photos');
     let project_list_slider_link = document.querySelector("#projectLink");
@@ -167,8 +169,12 @@ export default {
 			// this.projectLink = this.projectPhotos.$el[0].children[0].children[this.projectPhotos.activeIndex].dataset.link
 			active_el = e.$el[0].querySelector(`[data-swiper-slide-index="${e.realIndex}"]`);
 			if (active_el) {
+				console.log(active_el)
 				project_list_slider_link.setAttribute("href", `/${this.$i18n.locale}/project/${active_el.dataset.link}`);
+				console.log(`/${this.$i18n.locale}/project/${active_el.dataset.link}`)
         		project_list_slider_link.setAttribute("data-link", active_el.dataset.link);
+				console.log(active_el.dataset.link)
+
 			}
 			// console.dir(e)
 			// console.dir(this.$refs.projectName)
@@ -235,6 +241,7 @@ export default {
 			}
 		},
         goPage(page) {
+			console.log('page222', page)
             this.setAnimate('up')
             this.setPlug(true)
             setTimeout(() => {
@@ -243,8 +250,23 @@ export default {
             }, 1000);
         },
 		go(e) {
-			let link = e.target.dataset.link
-			this.goPage(`/project/${link}`)
+			console.log(e.target)
+			if (e.target.classList.contains('arrow-link__change') || e.target.classList.contains('arrow-link__text') || e.target.classList.contains('arrow-link__circle')) {
+				let link = e.target.parentElement.dataset.link
+				this.goPage(`/project/${link}`)
+				console.log('go', link)
+				console.log('gopage', `/project/${link}`)
+			} else if (e.target.classList.contains('arrow-link')) {
+				let link = e.target.dataset.link
+				this.goPage(`/project/${link}`)
+			} else if (e.target.classList.contains('arrow-link__span') || e.target.tagName == 'svg') {
+				let link = e.target.parentElement.parentElement.dataset.link
+				this.goPage(`/project/${link}`)
+			} else if (e.target.tagName == 'path') {
+				let link = e.target.parentElement.parentElement.parentElement.dataset.link
+				this.goPage(`/project/${link}`)
+			}
+
 		},
 	}
 }

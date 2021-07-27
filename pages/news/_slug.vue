@@ -186,12 +186,12 @@ import { mapMutations } from 'vuex'
 export default {
 	head() {
 		return {
-		title: this.data.seo_title,
+		title: this.article.seo_title,
 		meta: [
 			{
 			hid: "description",
 			name: "description",
-			content: this.data.meta_description
+			content: this.article.meta_description
 			},
 			// {
 			//   hid: "keywords",

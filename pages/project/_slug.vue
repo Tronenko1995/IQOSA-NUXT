@@ -423,7 +423,7 @@ export default {
             margin: 0 auto 213px auto;
         }
         &--uno {
-            margin: 148px 0 0 0; 
+            margin: 0 0 260px 0; 
             // width: 645px;
             width: 476px;
             // width: 516px;
@@ -431,27 +431,27 @@ export default {
             // height: 762px;
             height: fit-content;
             transform: translateY(260px);
-            margin-bottom: 260px;
+            // margin-bottom: 260px;
         }
         &--dos {
-            margin: 494px 0 0 0;
+            margin: 0 0 170px 0;
             width: 576px;
             // width: 781px;
             // height: 1057px;
             height: fit-content;
             transform: translateY(200px);
-            margin-bottom: 200px;
+            // margin-bottom: 200px;
             // width: 625px;
             // height: 846px;
         }
         &--tres {
-            margin: -113px 0 0 0;
+            margin: 0 0 260px 0;
             width: 350px;
             // width: 288px;
             height: fit-content;
             // height: 340px;
-            transform: translateY(200px);
-            margin-bottom: 200px;
+            transform: translateY(260px);
+            // margin-bottom: 260px;
         }
         &--quatro {
             margin: 0 0 120px 0; 
@@ -674,7 +674,7 @@ export default {
             font-size: 148px;
             &--next {
                 font-size: 140px;
-                top: -63px;
+                top: 165px;
                 padding: 0;
             }
         }

@@ -1,17 +1,20 @@
  <template>
-    <nuxt-link :to="localePath('/join')"  class="next">
-        <div class="next__title">
-            <ul class="animate-text animate-text--next">
-                <li class="animate-text__item">
-                    <a href="#" class="animate-text__button animate-text__button--cursive  animate-text__button--next">{{ data.bottom_block_text }}</a>
-                    <a href="#" class="animate-text__button animate-text__button--next animate-text__button--absolute">{{ data.bottom_block_hover_text }}</a>
-                </li>
-            </ul>
-        </div>
-        <div class="next__image">
-            <img :src="getImg(data.bottom_block_picture)" alt="">
-        </div>
-    </nuxt-link>
+    <div class="next-wrap">
+        <nuxt-link :to="localePath('/join')"  class="next">
+            <div class="next__title">
+                <ul class="animate-text animate-text--next">
+                    <li class="animate-text__item">
+                        <a href="#" class="animate-text__button animate-text__button--cursive  animate-text__button--next">{{ data.bottom_block_text }}</a>
+                        <a href="#" class="animate-text__button animate-text__button--next animate-text__button--absolute">{{ data.bottom_block_hover_text }}</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="next__image">
+                <img :src="getImg(data.bottom_block_picture)" alt="">
+            </div>
+        </nuxt-link>
+    </div>
+
 </template>
 
 <script>
@@ -37,12 +40,25 @@
 
 <style lang="scss">
 .next {
-    width: fit-content;
-    display: block;
-    position: relative;
+    &-wrap {
     margin: 357px auto 0 auto;
+        width: 100%;
+    max-width: 100%;
+    }
+
+    width: fit-content;
+    margin: 0 auto;
+    // display: block;
+    position: relative;
+
+
+    display: flex;
+    flex-direction: column;
+
+    // margin-top: 357px;
     &__title {
-        margin-top: 48px;
+    
+        // margin-top: 48px;
         font-family: 'ThinItalic', Arial;
         // font-style: italic;
         font-weight: 300;
@@ -53,21 +69,36 @@
         text-transform: uppercase;
         font-feature-settings: 'pnum' on, 'lnum' on, 'kern' off;
         color: #FFFFFF;
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-        top: -122px;
+        // position: absolute;
+        // left: 50%;
+        // transform: translateX(-50%);
+        // top: -122px;
         z-index: 1;
         width: 100%;
         span {
             font-family: 'Roman', Arial;
         }
+
+    position: absolute;
+    margin-top: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 0;
+    z-index: 1;
+    /* min-width: 710px; */
+    padding: 0;
+    min-width: 1100px;
     }
     &__image {
-        width: 852px;
-        height: 530px;
+        width: 640px;
+        height: 720px;
         overflow: hidden;
         margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    max-height: 400px;
     }
     img {
         transform: scale(1.1);
@@ -112,22 +143,24 @@
         font-size: 14px;
         line-height: 120%;
         text-transform: uppercase;
-        font-feature-settings: 'pnum' on, 'lnum' on, 'kern' off;
+        // font-feature-settings: 'pnum' on, 'lnum' on, 'kern' off;
         color: #FFFFFF;
         background: none;
         cursor: pointer;
         text-align: left;
         &--cursive {
-            font-family: 'LightItalic', Arial;
+            font-family: 'ThinItalic', Arial;
         }
         &--absolute {
             position: absolute;
             bottom: -100%;
         }
         &--next {
-            font-size: inherit;
-            line-height: inherit;
-            font-weight: inherit;
+            font-size: 100px;
+            letter-spacing: .05em;
+            line-height: 115%;
+            // line-height: inherit;
+            // font-weight: inherit;
             text-align: center;
             width: 100%;
             transition: .4s;

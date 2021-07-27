@@ -159,13 +159,13 @@ export default {
                 text-transform: uppercase;
                 font-feature-settings: 'pnum' on, 'lnum' on, 'kern' off;
                 color: #FFFFFF;
-                opacity: 1;
+                opacity: 0.15;
                 transform: translateY(100%);
                 &--bold {
                     font-family: 'Roman', Arial;
                 }
                 &.active {
-                    opacity: 0.15;
+                    opacity: 1;
                     .media__title-link {
                         cursor: default;
                         pointer-events: none;
