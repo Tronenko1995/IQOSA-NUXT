@@ -17,7 +17,9 @@
             <div ref="text3" class="scroll-text__text" v-html="data.third_animated_text"></div>
             <div ref="text4" class="scroll-text__text" v-html="data.fourth_animated_text"></div>
         </section>
-        <AboutSlider :list="data.slider_pictures" :data="data.slider_text" />
+        <no-ssr>
+            <AboutSlider :list="data.slider_pictures" :data="data.slider_text" />
+        </no-ssr>
         <Next :data="data"/>
         <!-- <div>
             <nuxt-link to="/"  class="project__next">

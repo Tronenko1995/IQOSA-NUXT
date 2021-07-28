@@ -200,14 +200,26 @@ export default {
             console.log(id)
             let job = this.$refs.job[id]
             if (!job.classList.contains("job--active")) {
-                    this.$gsap.to(job.querySelector(".job__hidden"), {
-                        height: "auto",
-                        opacity: 1,
-                        duration: 1
+                    Array.from(this.$refs.job).forEach((item) => {
+                        item.classList.remove('job--active')
+                        item.classList.remove('job--transition')
+                        this.$gsap.to(item.querySelector(".job__hidden"), {
+                            height: 0,
+                            opacity: 0,
+                            duration: 0
+                        })
                     })
-                    job.classList.toggle('job--active')
-                    job.classList.toggle('job--transition')
-                    this.scrollToElement(job)
+                    setTimeout(() => {
+                        this.$gsap.to(job.querySelector(".job__hidden"), {
+                            height: "auto",
+                            opacity: 1,
+                            duration: 1,
+                        })
+                        job.classList.toggle('job--active')
+                        job.classList.toggle('job--transition')
+                        this.scrollToElement(job)
+                    }, 200);
+
             } else {
                 job.classList.toggle('job--active')
                 job.classList.toggle('job--transition')
@@ -294,6 +306,7 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow: hidden;
     &__title {
         font-family: 'Light', Arial;
         font-style: normal;

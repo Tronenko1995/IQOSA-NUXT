@@ -3,6 +3,8 @@
     <HeaderWrap />
     <PlugWrap />
     <Nuxt />
+    <VerticalMode />
+    <CacheBlock />
   </div>
 </template>
 

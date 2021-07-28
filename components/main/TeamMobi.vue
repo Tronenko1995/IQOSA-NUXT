@@ -75,7 +75,52 @@ export default {
         },
         getImg(img) {
             return `${this.baseUrl}${img}`
-        }
+        },
+		findElement(e) {
+			if (e.target.classList.contains('arrow-link__text') || e.target.classList.contains('arrow-link') || e.target.classList.contains('arrow-link__circle')) {
+                const el = e.target.parentElement.querySelector('.arrow-link__change')
+				this.animateTextShow(el)
+			} else if (e.target.classList.contains('arrow-link__span--first')) {
+                this.animateTextShow(e.target.parentElement)
+            } else if (e.target.classList.contains("make-request__text") || e.target.classList.contains("make-request__link")) {
+                const el = e.target.parentElement.querySelector(".make-request__change");
+                this.animateTextShow(el);
+            } else if (e.target.classList.contains("make-request__span--first")) {
+                this.animateTextShow(e.target.parentElement);
+            }
+		},
+        animateTextShow(el) {
+            this.$gsap.to(el.children[0], { 
+                translateY: -100 + "%",
+                duration: .5
+            })
+            this.$gsap.to(el.children[1], { 
+                translateY: -100 + "%",
+                duration: .5
+            })
+        },
+		animateTextHide(e) {
+			if (e.target.classList.contains('arrow-link')) {
+                const el = e.target.querySelector('.arrow-link__change')
+				this.$gsap.to(el.children[0], { 
+					translateY: 0 + "%",
+					duration: .5
+				})
+				this.$gsap.to(el.children[1], { 
+					translateY: 0 + "%",
+					duration: .5
+				})
+			} else if (e.target.classList.contains("make-request")) {
+                this.$gsap.to(e.target.children[0].children[1].children[0], {
+                translateY: 0 + "%",
+                duration: 0.5,
+                });
+                this.$gsap.to(e.target.children[0].children[1].children[1], {
+                translateY: 0 + "%",
+                duration: 0.5,
+                });
+            }
+		},
     }
 }
 </script>

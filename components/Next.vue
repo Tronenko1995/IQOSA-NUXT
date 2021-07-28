@@ -159,6 +159,7 @@
             font-size: 100px;
             letter-spacing: .05em;
             line-height: 115%;
+            font-family: 'ThinItalic', Arial;
             // line-height: inherit;
             // font-weight: inherit;
             text-align: center;
@@ -169,7 +170,9 @@
 }
 @media (max-width: 1440px) {
     .next {
-        margin: 326px auto 0 auto;
+        &-wrap {
+            margin: 326px auto 0 auto;
+        }
         &__title {
             font-size: 140px;
             top: -111px;
@@ -181,8 +184,17 @@
     }
 }
 @media (max-width: 1280px) {
+    .animate-text {
+        &__button {
+            &--next {
+                font-size: 100px;
+            }
+        }
+    }
     .next {
-        margin: 272px auto 0 auto;
+        &-wrap {
+            margin: 272px auto 0 auto;
+        }
         &__title {
             font-size: 116px;
             top: -101px;
@@ -193,9 +205,26 @@
         }
     }
 }
-@media (max-width: 1024px) {
+@media (max-width: 1100px) {
     .next {
-        margin: 229px auto 0 auto;
+        width: 100%;
+        &__title {
+            min-width: 100%;
+        }
+    }
+}
+@media (max-width: 1024px) {
+    .animate-text {
+        &__button {
+            &--next {
+                font-size: 74px;
+            }
+        }
+    }
+    .next {
+        &-wrap {
+            margin: 229px auto 0 auto;
+        }
         &__title {
             font-size: 90px;
             top: -90px;
@@ -208,7 +237,9 @@
 }
 @media (max-width: 768px) {
     .next {
-        margin: 222px auto 0 auto;
+        &-wrap {
+            margin: 222px auto 0 auto;
+        }
         &__title {
             font-size: 50px;
             top: -70px;
@@ -220,8 +251,17 @@
     }
 }
 @media (max-width: 414px) {
+    .animate-text {
+        &__button {
+            &--next {
+                font-size: 56px;
+            }
+        }
+    }
     .next {
-        margin: 143px auto 0 auto;
+        &-wrap {
+            margin: 143px auto 0 auto;
+        }
         &__title {
             font-size: 49px;
             top: -70px;

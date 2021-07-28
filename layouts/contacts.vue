@@ -4,6 +4,8 @@
     <PlugWrap />
     <Nuxt />
     <Footer />
+    <VerticalMode />
+    <CacheBlock />
   </div>
 </template>
 

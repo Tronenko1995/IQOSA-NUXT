@@ -2,6 +2,8 @@
   <div>
     <PlugWrap />
     <Nuxt />
+    <VerticalMode />
+    <CacheBlock />
   </div>
 </template>
 

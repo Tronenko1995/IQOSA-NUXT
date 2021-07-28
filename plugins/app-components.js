@@ -11,6 +11,9 @@ import IqosaCursor from '@/components/system/Cursor.vue'
 import SwitchProjects from '@/components/projects/SwitchProjects.vue'
 import Motto from '@/components/Motto.vue'
 
+import VerticalMode from '@/components/system/VerticalMode.vue'
+import CacheBlock from '@/components/system/CacheBlock.vue'
+
 Vue.component('HeaderWrap', HeaderWrap)
 Vue.component('PlugWrap', PlugWrap)
 Vue.component('Footer', Footer)
@@ -21,3 +24,6 @@ Vue.component('Social', Social)
 Vue.component('IqosaCursor', IqosaCursor)
 Vue.component('SwitchProjects', SwitchProjects)
 Vue.component('Motto', Motto)
+
+Vue.component('VerticalMode', VerticalMode)
+Vue.component('CacheBlock', CacheBlock)

@@ -3,6 +3,8 @@
     <HeaderWrap />
     <PlugWrap />
     <Error />
+    <VerticalMode />
+    <CacheBlock />
   </div>
 </template>
 

@@ -16,7 +16,7 @@ export default {
       { hid: 'description', name: 'description', content: '' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.png' }
+      { rel: 'icon', type: 'image/png', href: '/favicon.png', sizes: '16x16' }
     ]
   },
 
@@ -30,7 +30,7 @@ export default {
     { src: '~/plugins/i18n.js' },
     { src: '~/plugins/app-components' },
     { src: '~/plugins/swiper.js' },
-    { src: '~/plugins/aboutSlider', mode: 'client' },
+    // { src: '~/plugins/aboutSlider', mode: 'client' },
     { src: '~/plugins/directives', mode: 'client' },
   ],
   
@@ -110,6 +110,7 @@ export default {
           IncorrectLink: 'Incorrect Link',
           IncorrectName: 'Incorrect Name',
           IncorrectMessage: 'Incorrect Message',
+          verticalMode: 'Сhange to vertical mode',
         },
         ru: {
           share: 'Поделиться',
@@ -124,6 +125,7 @@ export default {
           IncorrectLink: 'Некорректная ссылка',
           IncorrectName: 'Некорректное имя',
           IncorrectMessage: 'Некорректное сообщение',
+          verticalMode: 'Перейти в вертикальный режим',
         },
         ua: {
           share: 'Поширити',
@@ -138,6 +140,7 @@ export default {
           IncorrectLink: 'Некорректне посилання',
           IncorrectName: 'Некорректне ім\'я',
           IncorrectMessage: 'Некоректне повідомлення',
+          verticalMode: 'Перейдіть у вертикальний режим',
         }
       }
     },
