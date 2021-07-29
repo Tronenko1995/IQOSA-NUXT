@@ -1,6 +1,6 @@
 <template>
     <transition v-if="modal.show" :name="modal.animate" appear>
-        <Modal :type="modal.type" />
+        <Modal :type="modal.type" v-scroll-lock="modal.show" />
     </transition>
 </template>
 

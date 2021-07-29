@@ -109,7 +109,7 @@ export default {
           if (this.$route.path != page && this.$route.path != `/${this.$i18n.locale}${page}`) {
             //   console.log('this.$route.path', this.$route.path)
             //   console.log(`/${this.$i18n.locale}${page}`)
-            // console.log('-')
+            // console.lgitog('-')
             this.setAnimate('up')
             this.setPlug(true)
             setTimeout(() => {

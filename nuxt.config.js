@@ -44,6 +44,7 @@ export default {
     { src: '~/plugins/i18n.js' },
     { src: '~/plugins/app-components' },
     { src: '~/plugins/swiper.js' },
+    { src: '~/plugins/scrollLock.js' },
     // { src: '~/plugins/aboutSlider', mode: 'client' },
     { src: '~/plugins/directives', mode: 'client' },
   ],
