@@ -54,8 +54,8 @@
                 </ul>
             </div>
             <div class="request" @mouseover="showCursive($event)" @mouseleave="hideCursive($event)">
-                <nuxt-link :to="localePath('/sayhi')" class="request__link">{{ data.btn_text }}</nuxt-link>
-                <nuxt-link :to="localePath('/sayhi')" class="request__link request__link--cursive">{{ data.btn_text }}</nuxt-link>
+                <a @click.prevent="goTo('/sayhi')" :href="localePath('/sayhi')" class="request__link">{{ data.btn_text }}</a>
+                <a @click.prevent="goTo('/sayhi')" :href="localePath('/sayhi')" class="request__link request__link--cursive">{{ data.btn_text }}</a>
             </div>
         </div>
     </header>
@@ -82,7 +82,33 @@ export default {
             baseUrl: process.env.baseUrl,
         }
     },
-
+    mounted() {
+        gsap.to('.nav__item', {
+            translateY: 0,
+            delay: 1,
+            duration: 0.25,
+        })
+        gsap.to('.lang__item', {
+            translateY: 0,
+            delay: 1,
+            duration: 0.25,
+        })
+        gsap.to('.header__logo', {
+            opacity: 1,
+            delay: 1,
+            duration: 0.25,
+        })
+        gsap.to('.request', {
+            opacity: 1,
+            delay: 1,
+            duration: 0.25,
+        })
+        gsap.to('.menu-button', {
+            opacity: 1,
+            delay: 1,
+            duration: 0.25,
+        })
+    },
     methods: {
         ...mapMutations({
           setMenuStatus: 'menu/setStatus',
@@ -149,35 +175,8 @@ export default {
                     el.style = 'background: none;'
                 }
             }
-        }
+        },
     },
-    mounted() {
-        gsap.to('.nav__item', {
-            translateY: 0,
-            delay: 1,
-            duration: 0.25,
-        })
-        gsap.to('.lang__item', {
-            translateY: 0,
-            delay: 1,
-            duration: 0.25,
-        })
-        gsap.to('.header__logo', {
-            opacity: 1,
-            delay: 1,
-            duration: 0.25,
-        })
-        gsap.to('.request', {
-            opacity: 1,
-            delay: 1,
-            duration: 0.25,
-        })
-        gsap.to('.menu-button', {
-            opacity: 1,
-            delay: 1,
-            duration: 0.25,
-        })
-    }
 }
 </script>
 

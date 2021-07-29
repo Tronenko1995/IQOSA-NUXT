@@ -96,8 +96,8 @@ function getBg() {
   }
   // return images[page_name][lang][size];
   // return images["error"]["en"]["desktop"];
-  console.log(container)
-  console.log(images[page_name][lang][size])
+  // console.log(container)
+  // console.log(images[page_name][lang][size])
   return images[page_name][lang][size];
 
 }

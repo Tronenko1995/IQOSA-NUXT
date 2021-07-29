@@ -1,6 +1,7 @@
 export default {
   env: {
-    baseUrl: process.env.BASE_URL
+    baseUrl: process.env.BASE_URL,
+    frontUrl: process.env.FRONT_URL,
   },
   ssr: true,
   target: 'server',
@@ -13,10 +14,23 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' }
+      { property: 'og:type', content: 'website' },
+      { property: 'og:site_name', content: 'IQOSA' },
     ],
     link: [
-      { rel: 'icon', type: 'image/png', href: '/favicon.png', sizes: '16x16' }
+      { rel: 'apple-touch-icon', href: '/favicon/apple-icon-57x57.png', sizes: '57x57' },
+      { rel: 'apple-touch-icon', href: '/favicon/apple-icon-60x60.png', sizes: '60x60' },
+      { rel: 'apple-touch-icon', href: '/favicon/apple-icon-72x72.png', sizes: '72x72' },
+      { rel: 'apple-touch-icon', href: '/favicon/apple-icon-76x76.png', sizes: '76x76' },
+      { rel: 'apple-touch-icon', href: '/favicon/apple-icon-114x114.png', sizes: '114x114' },
+      { rel: 'apple-touch-icon', href: '/favicon/apple-icon-144x144.png', sizes: '144x144' },
+      { rel: 'apple-touch-icon', href: '/favicon/apple-icon-152x152.png', sizes: '152x152' },
+      { rel: 'apple-touch-icon', href: '/favicon/apple-icon-180x180.png', sizes: '180x180' },
+      { rel: 'icon', type: 'image/png', href: '/favicon/favicon-16x16.png', sizes: '16x16' },
+      { rel: 'icon', type: 'image/png', href: '/favicon/favicon-32x32.png', sizes: '32x32' },
+      { rel: 'icon', type: 'image/png', href: '/favicon/favicon-96x96.png', sizes: '96x96' },
+      { rel: 'icon', type: 'image/png', href: '/favicon/favicon-192x192.png', sizes: '192x192' },
+      { rel: 'manifest', href: '/favicon/manifest.json'},
     ]
   },
 
@@ -111,6 +125,8 @@ export default {
           IncorrectName: 'Incorrect Name',
           IncorrectMessage: 'Incorrect Message',
           verticalMode: 'Сhange to vertical mode',
+          plugText1: 'Follow us',
+          plugText2: 'TO see it first',
         },
         ru: {
           share: 'Поделиться',
@@ -126,6 +142,8 @@ export default {
           IncorrectName: 'Некорректное имя',
           IncorrectMessage: 'Некорректное сообщение',
           verticalMode: 'Перейти в вертикальный режим',
+          plugText1: 'УЗНАЕШЬ ПЕРВЫМ,',
+          plugText2: 'ЕСЛИ ПОДПИШЕШЬСЯ',
         },
         ua: {
           share: 'Поширити',
@@ -141,6 +159,8 @@ export default {
           IncorrectName: 'Некорректне ім\'я',
           IncorrectMessage: 'Некоректне повідомлення',
           verticalMode: 'Перейдіть у вертикальний режим',
+          plugText1: 'ДІЗНАЄШСЯ ПЕРШИМ,',
+          plugText2: 'ЯКЩО ПІДПИШЕШСЯ',
         }
       }
     },

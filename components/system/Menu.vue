@@ -107,9 +107,9 @@ export default {
         },
         goTo(page) {
           if (this.$route.path != page && this.$route.path != `/${this.$i18n.locale}${page}`) {
-              console.log('this.$route.path', this.$route.path)
-              console.log(`/${this.$i18n.locale}${page}`)
-            console.log('-')
+            //   console.log('this.$route.path', this.$route.path)
+            //   console.log(`/${this.$i18n.locale}${page}`)
+            // console.log('-')
             this.setAnimate('up')
             this.setPlug(true)
             setTimeout(() => {
@@ -287,7 +287,7 @@ export default {
     .menu {
         flex-direction: column;
         padding-top: 63px;
-        padding-bottom: 80px;
+        padding-bottom: 120px;
         &__nav {
             margin-top: auto;
         }

@@ -240,6 +240,7 @@ export default {
             this.parallaxContainer.style.top = h + "px";
         },
         testSize() {
+            // console.log(window.innerWidth)
              if (window.innerWidth >= 1920) {
                 this.parallax.scalar(35, 80)
                 this.parallax.origin(.55,.25)

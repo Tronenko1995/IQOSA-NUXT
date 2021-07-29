@@ -1,11 +1,31 @@
 <template>
     <div class="about-modal">
         <video playsinline="" autoplay="" controls="" data-poster="">
-            <source src="https://iqosa.com/wp-content/uploads/2021/06/IQOSA_final7_en.mp4" type="video/mp4">
+            <source v-if="mainData && mainData.main_video" :src="getVideo(mainData.main_video)" type="video/mp4">
+            <source v-else-if="aboutData && aboutData.main_video" :src="getVideo(aboutData.main_video)" type="video/mp4">
         </video>
         <div class="close-modal" @click="$emit('close', 'show')"></div>
     </div>
 </template>
+
+<script>
+export default {
+    data() {
+        return {
+            baseUrl: process.env.baseUrl,
+        }
+    },
+    computed: {
+		mainData() { return this.$store.getters['lang/main/data'] },
+		aboutData() { return this.$store.getters['lang/about/data'] },
+    },
+    methods: {
+        getVideo(video) {
+            return `${this.baseUrl}${video}`
+        },
+    }
+}
+</script>
 
 <style lang="scss">
 .about-modal {

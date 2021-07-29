@@ -21,18 +21,41 @@ export default {
 	head() {
 		return {
 		title: this.data.seo_title,
-		meta: [
-			{
-			hid: "description",
-			name: "description",
-			content: this.data.meta_description
-			},
-			// {
-			//   hid: "keywords",
-			//   name: "keywords",
-			//   content: this.mainPage.meta_keywords
-			// }
-		],
+			meta: [
+				{
+					hid: "description",
+					name: "description",
+					content: this.data.meta_description
+				},
+				{
+					property: 'og:title',
+					content: this.data.seo_title,
+				},
+				{
+					property: 'og:description',
+					content: this.data.meta_description,
+				},
+				{
+					property: 'og:url',
+					content: this.fullUrl
+				},
+				{
+					property: 'og:image',
+					content: this.getImg(this.dataFooter.og_image),
+				},
+				{
+					property: 'og:image:width',
+					content: '1080',
+				},
+				{
+					property: 'og:image:height',
+					content: '1080',
+				},
+				{
+					property: 'twitter:card',
+					content: 'summary_large_image',
+				},
+			],
 		};
 	},
 	layout: 'main',
@@ -42,21 +65,15 @@ export default {
 		Team,
 		TeamMobi,
     },
-	async asyncData({ store, i18n }) {
-		// if (!store.getters['lang/main/data']) {
-		// try {
-			// await store.dispatch('lang/parts/getPartsContent', `/parts?lang=${i18n.locale}`)
-		// } catch(e) {
-			// redsirect(`404`);
-			// throw new Error(e);
-		// }
+	async asyncData({ store, i18n, route, env }) {
 		try {
 			await store.dispatch('lang/main/getMainPageContent', `/main?lang=${i18n.locale}`)
 		} catch(e) {
 			// redsirect(`404`);
 			throw new Error(e);
 		}
-		// }
+		let fullUrl = `${env.frontUrl}${route.path}`
+		return { fullUrl }
 	},
     beforeMount() {
 		window.addEventListener('resize', this.onWindowResize);
@@ -72,6 +89,7 @@ export default {
     },
 	data() {
 		return {
+            baseUrl: process.env.baseUrl,
 			scroll : {
 				speed: 0.07,
 				position: 0,
@@ -85,12 +103,13 @@ export default {
 	},
 	computed: {
 		modal() { return this.$store.getters['modal/modal'] },
-		data() { return this.$store.getters['lang/main/data'] }
+		data() { return this.$store.getters['lang/main/data'] },
+		dataFooter() { return this.$store.getters['lang/parts/dataFooter'] },
 	},
 	methods: {
 		testSize() {
 			// console.log('change')
-            window.innerWidth > 1024 ? this.desktop = true : this.desktop = false
+            window.innerWidth > 1280 ? this.desktop = true : this.desktop = false
         },
         onWindowResize() {
             clearTimeout(this.resizeTimer);
@@ -121,7 +140,10 @@ export default {
 		},
 		testPage() {
 			document.body.dataset.iqosahedron = 'home'
-		}
+		},
+        getImg(img) {
+            return `${this.baseUrl}${img}`
+        },
 	}
 }
 </script>

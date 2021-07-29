@@ -224,7 +224,7 @@ export default {
             setTeam: 'team/setTeam',
         }),
         testSize() {
-            console.log(this.imgParallax)
+            // console.log(this.imgParallax)
             if (window.innerWidth > 480) {
                 this.$nextTick( () => {
                     this.imgParallax.forEach((img) => {

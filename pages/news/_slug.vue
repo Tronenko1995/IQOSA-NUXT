@@ -276,7 +276,7 @@ export default {
             setAnimate: 'plug/setAnimate',
         }),
         testSize() {
-            console.log(this.imgParallax)
+            // console.log(this.imgParallax)
             if (window.innerWidth > 480) {
                 this.$nextTick( () => {
                     this.imgParallax.forEach((img) => {
@@ -360,6 +360,7 @@ export default {
 <style lang="scss">
 .one-news {
     margin-top: 256px;
+    margin-bottom: 200px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -415,7 +416,7 @@ export default {
         }
     }
     &__image {
-        margin-top: 188px;
+        margin-top: 88px;
         width: 868px;
         height: 1173px;
         // margin: 72px auto 0 auto;
@@ -491,7 +492,7 @@ export default {
     &__info {
         width: 100%;
         margin-top: 24px;
-        margin-bottom: 104px;
+        margin-bottom: 68px;
         font-family: 'Light', Arial;
         font-style: normal;
         font-weight: 300;
@@ -567,7 +568,7 @@ export default {
         }
     }
     &__block {
-        margin-top: 84px;
+        margin-top: 88px;
         width: 755px;
         &--next {
             margin-top: 104px;
@@ -594,7 +595,7 @@ export default {
         color: #FFFFFF;
         strong {
             display: block;
-            margin-top: 104px;
+            margin-top: 38px;
             margin-bottom: 16px;
             font-family: 'Roman', Arial;
             font-style: normal;
@@ -622,8 +623,8 @@ export default {
             padding-left: 57px;
             // font-style: italic;
             font-family: 'LightItalic', Arial;
-            margin-top: 80px;
-            margin-bottom: 80px;
+            margin-top: 50px;
+            margin-bottom: 50px;
             position: relative;
             &::before {
                 position: absolute;
@@ -633,7 +634,7 @@ export default {
                 // background-size: 29px 102px;
                 width: 22px;
                 height: 102px;
-                left: 0;
+                left: 10;
                 top: -20px;
                 // display: flex;
                 // justify-content: flex-end;
@@ -744,6 +745,7 @@ export default {
 @media (max-width: 1440px) {
     .one-news {
         margin-top: 217px;
+        margin-bottom: 150px;
         &__wrap {
             padding: 0 64px;
         }
@@ -819,6 +821,7 @@ export default {
 @media (max-width: 1280px) {
     .one-news {
         margin-top: 223px;
+        margin-bottom: 100px;
         &__wrap {
             padding: 0 56px;
         }
@@ -1054,6 +1057,7 @@ export default {
             }
         }
         &__info {
+            margin-bottom: 32px;
             // margin-bottom: 132px;
             // &--share {
             //     margin-bottom: 0px;
@@ -1105,9 +1109,18 @@ export default {
             font-size: 18px;
             strong {
                 font-size: 36px;
+                margin-top: 32px;
             }
             &--quote {
                 padding-left: 44px;
+            }
+            blockquote {
+                margin-top: 32px;
+                margin-bottom: 32px;
+                &::before {
+                    left: 10px;
+                    top: -15px;
+                }
             }
         }
     }
@@ -1214,6 +1227,7 @@ export default {
 @media (max-width: 414px) {
     .one-news {
         margin-top: 145px;
+        margin-bottom: 50px;
         &__date {
             font-size: 13px;
         }
@@ -1239,7 +1253,7 @@ export default {
         &__image {
             margin-top: 88px;
             width: 100%;
-            height: 464px;
+            height: auto;
             &--main {
                 margin-top: 48px;
                 width: 100%;

@@ -47,7 +47,7 @@
                 @mouseover="findElement($event)"
                 @mouseleave="animateTextHide($event)"
                 >
-                <nuxt-link :to="localePath('/sayhi')" class="make-request__link">
+                <a @click.prevent="goPage('/sayhi')" :href="localePath('/sayhi')"  class="make-request__link">
                     <span class="make-request__text">{{ data.vacancy_link_text }}</span>
                     <span class="make-request__change">
                     <span class="make-request__span make-request__span--first"
@@ -55,7 +55,7 @@
                     >
                     <span class="make-request__span">{{ data.vacancy_link_text_animated }}</span>
                     </span>
-                </nuxt-link>
+                </a>
                 <span class="make-request__line"></span>
                 </div>
             </div>
@@ -107,6 +107,7 @@ export default {
     },
     methods: {
         ...mapMutations({
+			setAnimate: 'plug/setAnimate',
             setPlug: 'plug/setVisible',
             setModal: 'modal/setModal',
         }),
@@ -197,7 +198,7 @@ export default {
             }
         },
         job(id) {
-            console.log(id)
+            // console.log(id)
             let job = this.$refs.job[id]
             if (!job.classList.contains("job--active")) {
                     Array.from(this.$refs.job).forEach((item) => {
@@ -294,6 +295,14 @@ export default {
                 });
             }
 		},
+        goPage(page) {
+            this.setAnimate('up')
+            this.setPlug(true)
+            setTimeout(() => {
+                this.setAnimate('dissolve')
+                this.$router.push(this.localePath(page))
+            }, 1000);
+        },
     }
 }
 </script>

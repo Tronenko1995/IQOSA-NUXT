@@ -79,7 +79,7 @@ export default {
         this.setView('media')
     },
     mounted() {
-        console.log(this.view)
+        // console.log(this.view)
         if (this.preloader) {
             setTimeout(() => {
                 this.setPlug(false)

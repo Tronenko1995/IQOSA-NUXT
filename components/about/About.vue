@@ -181,7 +181,7 @@ export default {
         },
 		testSize() {
 			// console.log('change')
-            window.innerWidth > 1024 ? this.desktop = true : this.desktop = false
+            window.innerWidth > 1280 ? this.desktop = true : this.desktop = false
         },
         onWindowResize() {
             clearTimeout(this.resizeTimer);
@@ -222,17 +222,17 @@ export default {
     width: 100%;
     overflow: hidden;
     position: relative;
-    margin: 240px 0 209px 0;
+    margin: 200px 0;
     &__text {
-        font-family: 'ThinItalic', Arial;
-        font-style: italic;
+        font-family: 'Light', Arial;
+        font-style: normal;
         font-weight: 300;
         // font-size: 164px;
         font-size: 100px;
-        line-height: 90%;
+        line-height: 115%;
         letter-spacing: 0.05em;
         text-transform: uppercase;
-        font-feature-settings: 'pnum' on, 'lnum' on, 'kern' off;
+        // font-feature-settings: 'pnum' on, 'lnum' on, 'kern' off;
         color: #FFFFFF;
         margin-bottom: 32px;
         white-space: nowrap;

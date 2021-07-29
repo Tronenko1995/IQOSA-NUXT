@@ -39,37 +39,39 @@ export default {
 	},
 	mounted() {
 		if (window.innerWidth > 1280) {
-			this.cursor = this.$refs.cursor
-	  		this.projectsPage = document.querySelector(".projects-page")
-			this.cursorDrag = document.querySelectorAll("[data-cursor='drag']")
-			this.cursorEye = document.querySelectorAll("[data-cursor='eye']")
-			this.cursorLink = document.querySelectorAll("[data-cursor='link']")
-			this.cursorPlay = document.querySelectorAll("[data-cursor='play']")
-			this.raf()
-			if (this.cursorDrag && this.cursorDrag.length) {
-				this.cursorDrag.forEach(item => {
-					item.addEventListener("mouseenter", this.mouseEnterDrag)
-					item.addEventListener("mouseleave", this.mouseLeaveDrag)
-				})
-			}
-			if (this.cursorEye && this.cursorEye.length) {
-				this.cursorEye.forEach(item => {
-					item.addEventListener("mouseenter", this.mouseEnterEye)
-					item.addEventListener("mouseleave", this.mouseLeaveEye)
-				})
-			}
-			if (this.cursorLink && this.cursorLink.length) {
-				this.cursorLink.forEach(item => {
-					item.addEventListener("mouseenter", this.mouseEnterLink)
-					item.addEventListener("mouseleave", this.mouseLeaveLink)
-				})
-			}
-			if (this.cursorPlay && this.cursorPlay.length) {
-				this.cursorPlay.forEach(item => {
-					item.addEventListener("mouseenter", this.mouseEnterPlay)
-					item.addEventListener("mouseleave", this.mouseLeavePlay)
-				})
-			}
+			setTimeout(() => {
+				this.cursor = this.$refs.cursor
+				this.projectsPage = document.querySelector(".projects-page")
+				this.cursorDrag = document.querySelectorAll("[data-cursor='drag']")
+				this.cursorEye = document.querySelectorAll("[data-cursor='eye']")
+				this.cursorLink = document.querySelectorAll("[data-cursor='link']")
+				this.cursorPlay = document.querySelectorAll("[data-cursor='play']")
+				this.raf()
+				if (this.cursorDrag && this.cursorDrag.length) {
+					this.cursorDrag.forEach(item => {
+						item.addEventListener("mouseenter", this.mouseEnterDrag)
+						item.addEventListener("mouseleave", this.mouseLeaveDrag)
+					})
+				}
+				if (this.cursorEye && this.cursorEye.length) {
+					this.cursorEye.forEach(item => {
+						item.addEventListener("mouseenter", this.mouseEnterEye)
+						item.addEventListener("mouseleave", this.mouseLeaveEye)
+					})
+				}
+				if (this.cursorLink && this.cursorLink.length) {
+					this.cursorLink.forEach(item => {
+						item.addEventListener("mouseenter", this.mouseEnterLink)
+						item.addEventListener("mouseleave", this.mouseLeaveLink)
+					})
+				}
+				if (this.cursorPlay && this.cursorPlay.length) {
+					this.cursorPlay.forEach(item => {
+						item.addEventListener("mouseenter", this.mouseEnterPlay)
+						item.addEventListener("mouseleave", this.mouseLeavePlay)
+					})
+				}
+			}, 200);
 		}
 	},
 	beforeDestroy() {

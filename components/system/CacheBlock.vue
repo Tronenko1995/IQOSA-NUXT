@@ -17,7 +17,7 @@ export default {
     },
     mounted() {
         let acceptCookies = this.getcookie("acceptCookies");
-        console.log(acceptCookies)
+        // console.log(acceptCookies)
         if (acceptCookies != "true") {
             this.visible = true
         } else {

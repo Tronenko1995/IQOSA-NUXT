@@ -51,8 +51,8 @@ export default {
 
             function initSlider() {
                 let cursorich = document.querySelector('.cursor')
-                console.log(cursorich)
-                console.dir(cursorich)
+                // console.log(cursorich)
+                // console.dir(cursorich)
                 // const body = document.body;
                 // imagesLoaded(document.querySelectorAll('.img-inner'), { background: true }, () => document.body.classList.remove('loading'));
             
