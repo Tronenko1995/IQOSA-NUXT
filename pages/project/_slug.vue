@@ -169,7 +169,7 @@ export default {
 			// redsirect(`404`);
 			throw new Error(e);
 		}
-      
+
     },
     data() {
         return {
@@ -245,7 +245,7 @@ export default {
                 })
             }
         },
-        
+
         showCursive(e) {
             if (e.target.tagName === 'BUTTON' || e.target.tagName === 'A') {
                 this.$gsap.to(e.target.parentElement.children[0], {
@@ -415,6 +415,7 @@ export default {
         img {
             width: 100%;
             height: 100%;
+            object-fit: cover;
         }
         &--standart {
             margin: 0 auto 40px auto;
@@ -423,7 +424,7 @@ export default {
             margin: 0 auto 213px auto;
         }
         &--uno {
-            margin: 0 0 260px 0; 
+            margin: 0 0 260px 0;
             // width: 645px;
             width: 476px;
             // width: 516px;
@@ -454,7 +455,7 @@ export default {
             // margin-bottom: 260px;
         }
         &--quatro {
-            margin: 0 0 120px 0; 
+            margin: 0 0 120px 0;
             // width: 665px;
             width: 491px;
             // height: 785px;
