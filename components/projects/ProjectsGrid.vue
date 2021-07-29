@@ -8,7 +8,12 @@
         <p v-for="(item, i) in data.projects_subtitle" :key="i">{{ item }}</p>
       </div>
       <ul class="projects-interior">
-        <li class="projects-interior__item" ref="card" data-cursor="link"  v-for="(item, i) in list" :key="i">
+        <li class="projects-interior__item"
+          ref="card" data-cursor="link"
+          v-for="(item, i) in list" :key="i"
+          @click="setChosen(i)"
+          :class="{'projects-interior__item__is-visible': i == chosed_project_index, 'projects-interior__item__is-hidden': chosed_project_index != null}"
+        >
           <div class="projects-interior__block">
             <img  class="projects-interior__img" :src="getImg(item.main_picture)" alt="">
           </div>
@@ -45,6 +50,7 @@
 
 
 <script>
+import { log } from 'three';
 import { mapMutations } from 'vuex'
 export default {
   props: {
@@ -64,6 +70,7 @@ export default {
 	data() {
 		return {
       baseUrl: process.env.baseUrl,
+      chosed_project_index: null,
     }
   },
   mounted() {
@@ -83,6 +90,10 @@ export default {
     duration() { return this.$store.getters['plug/duration'] }
   },
   methods: {
+    setChosen(index) {
+      console.log(index);
+      this.chosed_project_index = index;
+    },
     ...mapMutations({
         setPlug: 'plug/setVisible',
     }),
@@ -93,47 +104,60 @@ export default {
       if (this.$refs.card) {
           Array.from(this.$refs.card).forEach((card) => {
               card.addEventListener("click", () => {
+
+                if (window.innerWidth >= 768) {
+
+
                   card.classList.add("this-card");
 
-                let marginTop = 0;
-                if (window.innerWidth <= 1280) {
-                  marginTop = 492;
-                } else if (window.innerWidth <= 1440) {
-                  marginTop = 547;
-                } else {
-                  marginTop = 586;
-                }
-
-                const width = window.innerWidth <= 1088 ? window.innerWidth - 128 : 960;
-
-                this.$gsap.to(card, {
-                    // width: 100 + '%',
-                    // marginTop: 590,
-                    width,
-                    marginTop,
-                    duration: 1,
-                    // delay: 1,
-                })
-
-                  card.querySelector(".projects-interior-link").style.opacity = 0;
-                  let selectedPosX = 0;
-                  let selectedPosY = 0;
-
-                  while (card != null) {
-                      selectedPosX += card.offsetLeft;
-                      selectedPosY += card.offsetTop;
-                      card = card.offsetParent;
+                  let marginTop = 0;
+                  if (window.innerWidth <= 768) {
+                    marginTop = 380;
+                  } else if (window.innerWidth <= 1024) {
+                    marginTop = 540;
+                  } else if (window.innerWidth <= 1280) {
+                    marginTop = 492;
+                  } else if (window.innerWidth <= 1440) {
+                    marginTop = 547;
+                  } else {
+                    marginTop = 586;
                   }
 
-                  window.scrollTo(selectedPosX, selectedPosY);
+                  const width = window.innerWidth <= 1088 ? window.innerWidth - 128 : 960;
+
+                  let elementTop = card.getBoundingClientRect().top;
+
+
+                  this.$gsap.to(card, {
+                      // width: 100 + '%',
+                      // marginTop: 590,
+                      width,
+                      // marginTop,
+                      y: marginTop - elementTop,
+                      duration: 1,
+                      // delay: 1,
+                  })
+
+                    card.querySelector(".projects-interior-link").style.opacity = 0;
+                    let selectedPosX = 0;
+                    let selectedPosY = 0;
+
+                    while (card != null) {
+                        selectedPosX += card.offsetLeft;
+                        selectedPosY += card.offsetTop;
+                        card = card.offsetParent;
+                    }
+                  }
+                  // window.scrollTo(selectedPosX, selectedPosY);
               })
           })
       }
     },
     openProject(fullLink) {
+      const timeout = window.innerWidth >= 768 ? 1000 : 0;
       setTimeout(() => {
           this.$router.push(this.localePath(fullLink))
-      }, 1000);
+      }, timeout);
     },
   }
 }
@@ -484,6 +508,17 @@ export default {
     &__block {
       width: 100%;
     }
+  }
+}
+@media (min-width: 767px) {
+  .projects-interior__item__is-hidden {
+    opacity: 0;
+    transition: opacity .5s ease;
+  }
+
+  .projects-interior__item__is-visible {
+    opacity: 1;
+    z-index: 10;
   }
 }
 </style>
