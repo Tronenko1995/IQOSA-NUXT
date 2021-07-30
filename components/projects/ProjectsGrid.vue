@@ -91,7 +91,7 @@ export default {
   },
   methods: {
     setChosen(index) {
-      console.log(index);
+      // console.log(index);
       this.chosed_project_index = index;
     },
     ...mapMutations({

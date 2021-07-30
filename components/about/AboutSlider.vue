@@ -341,11 +341,16 @@ export default {
         object-position: center;
     }
 }
+
 @media (max-width: 1440px) {
-    .strip-outer {
-        // min-height: unset;
+    .slider-text {
+        margin: 0;
+        right: 120px;
+        top: 18px;
+        z-index: 1;
     }
 }
+
 @media (max-width: 1360px) {
     .strip {
         &__item {
@@ -442,10 +447,17 @@ export default {
         min-height: 406px;
     }
 }
+@media (max-width: 768px) {
+    .slider-text {
+        margin-right: 20px;
+        // max-width: 85%;
+        position: unset;
+    }
+}
 @media (max-width: 767px) {
     .slider-text {
         font-size: 17px;
-        margin: 10px;
+        margin: 10px 20px 10px 0;
     }
     .strip {
         &__item {

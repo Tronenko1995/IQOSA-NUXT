@@ -121,7 +121,6 @@ export default {
 				touchStartPreventDefault: false,
 				longSwipesMs: 1000,
 				mousewheel: { invert: false },
-        slidesOffsetBefore: 410,
 			},
       shader: {
         item: null,
@@ -139,10 +138,23 @@ export default {
       renderer: null
 		}
 	},
+  beforeMount() {
+
+  },
 	mounted() {
     let active_el
     let project_slider = document.querySelector('.projects-slider');
     let project_list_slider_link = project_slider.querySelector("#projectLink");
+
+    let margTop = window.innerHeight/2 - project_slider.querySelector(".swiper-slide").clientHeight/2
+    // console.log(margTop)
+    // this.projectsSetting.slidesOffsetBefore = margTop
+    this.projectsSlider.params.slidesOffsetBefore = margTop
+
+    // this.projectsSlider.init()
+    this.projectsSlider.update()
+    // console.log(this.projectsSlider)
+    // console.log(this.projectsSetting)
 
     // let margTop = window.innerHeight/2 - project_slider.querySelector(".swiper-slide").clientHeight/2;
 
@@ -323,7 +335,7 @@ export default {
       this.renderer.setSize(this.texture.active.image.naturalWidth, this.texture.active.image.naturalHeight)
     },
     passView() {
-      console.log(e)
+      // console.log(e)
       // this$emit('view')
     },
     getImg(img) {

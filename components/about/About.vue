@@ -7,13 +7,13 @@
             </video>
             <Motto class="motto--about" :motto-list="data.hero_left_text" :motto-list-extra="data.hero_right_text"/>
         </section>
-        <section class="scroll-text">
+        <section class="scroll-text scroll-text--first">
             <div ref="text1" class="scroll-text__text" v-html="data.first_animated_text"></div>
             <div ref="text2" class="scroll-text__text" v-html="data.second_animated_text"></div>
         </section>
 			<Team :data="data" v-if="desktop" />
 			<TeamMobi :data="data" v-if="!desktop" />
-        <section class="scroll-text">
+        <section class="scroll-text scroll-text--second">
             <div ref="text3" class="scroll-text__text" v-html="data.third_animated_text"></div>
             <div ref="text4" class="scroll-text__text" v-html="data.fourth_animated_text"></div>
         </section>
@@ -234,48 +234,54 @@ export default {
         text-transform: uppercase;
         // font-feature-settings: 'pnum' on, 'lnum' on, 'kern' off;
         color: #FFFFFF;
-        margin-bottom: 32px;
+        // margin-bottom: 32px;
         white-space: nowrap;
-        &:last-child {
-            margin-bottom: 0px;
-        }
+        // &:last-child {
+            // margin-bottom: 0px;
+        // }
     }
 }
-@media (max-width: 1440px) {
-    .scroll-text {
-        margin: 200px 0 170px 0;
-        &__text {
-            font-size: 148px;
-        }
-    }
-}
+// @media (max-width: 1440px) {
+//     .scroll-text {
+//         // margin: 200px 0 170px 0;
+//         &__text {
+//             font-size: 148px;
+//         }
+//     }
+// }
 @media (max-width: 1280px) {
     .scroll-text {
-        margin: 200px 0 179px 0;
+        // margin: 200px 0 179px 0;
         &__text {
-            font-size: 116px;
+            font-size: 100px;
         }
     }
 }
 @media (max-width: 1024px) {
     .scroll-text {
-        margin: 180px 0 160px 0;
+        // margin: 180px 0 160px 0;
         &__text {
-            font-size: 108px;
+            font-size: 74px;
         }
     }
 }
-@media (max-width: 768px) {
-    .scroll-text {
-        margin: 156px 0 140px 0;
-        &__text {
-            font-size: 88px;
-        }
-    }
-}
+// @media (max-width: 768px) {
+//     .scroll-text {
+//         // margin: 156px 0 140px 0;
+//         &__text {
+//             font-size: 74px;
+//         }
+//     }
+// }
 @media (max-width: 414px) {
     .scroll-text {
-        margin: 124px 0 114px 0;
+        // margin: 200px 0 70px 0;
+        &--first {
+            margin-top: 100px;
+        }
+        &--second {
+            margin-bottom: 70px;
+        }
         &__text {
             font-size: 56px;
         }
