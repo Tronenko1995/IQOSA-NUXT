@@ -99,7 +99,8 @@
                     </div>
                 </div>
                 <div class="project__next-wrap">
-                    <a ref="next" @click.prevent="openProject(`/project/${list[index+1].link}`)" v-if="index !== null && list[index+1]" :href="localePath(`/project/${list[index+1].link}`)"  class="project__next" >
+                    <div ref="next" @click.prevent="openProject(`/project/${list[index+1].link}`)" v-if="index !== null && list[index+1]"  class="project__next" >
+                    <!-- :href="localePath(`/project/${list[index+1].link}`)"  -->
                         <div ref="nextText" class="project__title project__title--next">
                             <ul class="animate-text animate-text--next">
                                 <li class="animate-text__item">
@@ -109,9 +110,11 @@
                             </ul>
                         </div>
                         <div class="project__image project__image--next">
-                            <img :src="getImg(list[index+1].main_picture)" alt="">
+                          <div class="project__image--wrapper">
+                            <img ref="next_img" :src="getImg(list[index+1].main_picture)" alt="">
+                          </div>
                         </div>
-                    </a>
+                    </div>
                 </div>
             </div>
         </section>
@@ -141,6 +144,8 @@ export default {
 		],
 		};
 	},
+  scrollToTop: true,
+  transition: "project-page",
   layout: 'project',
     async asyncData({ store, i18n, params }) {
 		// try {
@@ -296,31 +301,73 @@ export default {
             }
         },
         openProject(fullLink) {
-            this.$router.push(this.localePath(fullLink))
-            if (window.innerWidth > 600) {
-                this.$gsap.to(this.$refs.next, {
-                    width: 100 + "%",
-                    duration: 0.5
-                })
-                this.$gsap.to(this.$refs.nextText, {
-                    translateY: -150 + "px",
-                    duration: 0.5
-                })
-                this.$gsap.to(this.$refs.nextText1, {
+            if (window.innerWidth >= 1024) {
+
+                  const card = this.$refs.next;
+
+                  let marginTop = 0;
+                  if (window.innerWidth <= 768) {
+                    marginTop = 380;
+                  } else if (window.innerWidth <= 1024) {
+                    marginTop = 540;
+                  } else if (window.innerWidth <= 1280) {
+                    marginTop = 492;
+                  } else if (window.innerWidth <= 1440) {
+                    marginTop = 547;
+                  } else {
+                    marginTop = 586;
+                  }
+
+                  const width = window.innerWidth <= 1088 ? window.innerWidth - 128 : 960;
+
+                  let elementTop = card.getBoundingClientRect().top;
+
+                  let tl = this.$gsap.timeline();
+
+                  tl.to(this.$refs.nextText, {
                     opacity: 0,
-                    // duration: 0.5
-                })
+                  }, 0)
+
+                  tl.to(this.$refs.next_img, {
+                    scale: 1,
+                  }, 0)
+
+                  tl.to(card, {
+                      width,
+                      y: marginTop - elementTop,
+                      duration: 1,
+                  })
+
+
+
+                // this.$gsap.to(this.$refs.next, {
+                //     width: 100 + "%",
+                //     duration: 0.5
+                // })
+                // this.$gsap.to(this.$refs.nextText, {
+                //     translateY: -150 + "px",
+                //     duration: 0.5
+                // })
+                // this.$gsap.to(this.$refs.nextText1, {
+                //     opacity: 0,
+                //     // duration: 0.5
+                // })
+
+                // setTimeout(() => {
+                //     window.scrollTo({
+                //         top: 0,
+                //         left: 0,
+                //     })
+                // }, 500);
                 setTimeout(() => {
-                    window.scrollTo({
-                        top: 0,
-                        left: 0,
-                    })
-                }, 500);
+                  this.$router.push(this.localePath(fullLink))
+                }, 1500);
             } else {
-                window.scrollTo({
-                    top: 0,
-                    left: 0,
-                })
+                this.$router.push(this.localePath(fullLink))
+                // window.scrollTo({
+                //     top: 0,
+                //     left: 0,
+                // })
             }
         },
     }
@@ -466,8 +513,13 @@ export default {
         &--next {
             width: auto;
             height: 530px;
+            // height: 720px;
             overflow: hidden;
             margin: 0 auto;
+        }
+        &--wrapper {
+          height: 720px;
+          overflow: hidden;
         }
     }
     &__images {
@@ -552,22 +604,26 @@ export default {
         // width: 852px;
         width: 640px;
         max-width: 100%;
+        cursor: pointer;
         img {
             transform: scale(1.1);
             transition: .5s;
         }
+
         &:hover {
-            img {
-                transform: scale(1);
-            }
-            .animate-text__button {
-                &:first-child {
-                    transform: translateY(-100%);
-                }
-                &:last-child {
-                    transform: translateY(-100%);
-                }
-            }
+          @media (hover: hover) {
+              img {
+                  transform: scale(1);
+              }
+              .animate-text__button {
+                  &:first-child {
+                      transform: translateY(-100%);
+                  }
+                  &:last-child {
+                      transform: translateY(-100%);
+                  }
+              }
+          }
         }
     }
 }
@@ -807,8 +863,10 @@ export default {
             &--next {
                 // width: auto;
                 // height: 357px;
-                width: 640px;
-                height: 720px;
+                // comment width for page transition
+                // width: 640px;
+                // height: 720px;
+                height: 530px;
             }
         }
         &__next {

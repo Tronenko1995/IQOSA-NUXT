@@ -129,24 +129,13 @@ export default {
 
 
                   this.$gsap.to(card, {
-                      // width: 100 + '%',
-                      // marginTop: 590,
+
                       width,
-                      // marginTop,
                       y: marginTop - elementTop,
                       duration: 1,
-                      // delay: 1,
                   })
 
                     card.querySelector(".projects-interior-link").style.opacity = 0;
-                    let selectedPosX = 0;
-                    let selectedPosY = 0;
-
-                    while (card != null) {
-                        selectedPosX += card.offsetLeft;
-                        selectedPosY += card.offsetTop;
-                        card = card.offsetParent;
-                    }
                   }
                   // window.scrollTo(selectedPosX, selectedPosY);
               })
