@@ -98,7 +98,7 @@
 					    </div>
                     </div>
                 </div>
-                <div class="project__next-wrap">
+                <div ref="next__wrap" class="project__next-wrap">
                     <div ref="next" @click.prevent="openProject(`/project/${list[index+1].link}`)" v-if="index !== null && list[index+1]"  class="project__next" >
                     <!-- :href="localePath(`/project/${list[index+1].link}`)"  -->
                         <div ref="nextText" class="project__title project__title--next">
@@ -304,6 +304,9 @@ export default {
             if (window.innerWidth >= 1024) {
 
                   const card = this.$refs.next;
+                  const next__wrap = this.$refs.next__wrap;
+
+
 
                   let marginTop = 0;
                   if (window.innerWidth <= 768) {
@@ -320,6 +323,10 @@ export default {
 
                   const width = window.innerWidth <= 1088 ? window.innerWidth - 128 : 960;
 
+                  let style = window.getComputedStyle(card, null);
+                  console.log(Number.parseInt(style['margin-top']));
+
+
                   let elementTop = card.getBoundingClientRect().top;
 
                   let tl = this.$gsap.timeline();
@@ -334,10 +341,10 @@ export default {
 
                   tl.to(card, {
                       width,
-                      y: marginTop - elementTop,
+                      // y: marginTop - elementTop,
+                      marginTop: Number.parseInt(style['margin-top']) + marginTop - elementTop,
                       duration: 1,
                   })
-
 
 
                 // this.$gsap.to(this.$refs.next, {
@@ -359,6 +366,11 @@ export default {
                 //         left: 0,
                 //     })
                 // }, 500);
+
+
+
+
+
                 setTimeout(() => {
                   this.$router.push(this.localePath(fullLink))
                 }, 1500);
@@ -605,6 +617,7 @@ export default {
         width: 640px;
         max-width: 100%;
         cursor: pointer;
+        // position: relative;
         img {
             transform: scale(1.1);
             transition: .5s;
