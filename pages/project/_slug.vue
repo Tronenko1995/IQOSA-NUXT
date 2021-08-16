@@ -346,31 +346,6 @@ export default {
                       duration: 1,
                   })
 
-
-                // this.$gsap.to(this.$refs.next, {
-                //     width: 100 + "%",
-                //     duration: 0.5
-                // })
-                // this.$gsap.to(this.$refs.nextText, {
-                //     translateY: -150 + "px",
-                //     duration: 0.5
-                // })
-                // this.$gsap.to(this.$refs.nextText1, {
-                //     opacity: 0,
-                //     // duration: 0.5
-                // })
-
-                // setTimeout(() => {
-                //     window.scrollTo({
-                //         top: 0,
-                //         left: 0,
-                //     })
-                // }, 500);
-
-
-
-
-
                 setTimeout(() => {
                   this.$router.push(this.localePath(fullLink))
                 }, 1500);
