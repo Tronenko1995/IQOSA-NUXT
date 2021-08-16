@@ -54,8 +54,8 @@
                 </ul>
             </div>
             <div class="request" @mouseover="showCursive($event)" @mouseleave="hideCursive($event)">
-                <a @click.prevent="goTo('/sayhi')" :href="localePath('/sayhi')" class="request__link">{{ data.btn_text }}</a>
-                <a @click.prevent="goTo('/sayhi')" :href="localePath('/sayhi')" class="request__link request__link--cursive">{{ data.btn_text }}</a>
+                <a @click.prevent="goTo('/forms/sayhi')" :href="localePath('/forms/sayhi')" class="request__link">{{ data.btn_text }}</a>
+                <a @click.prevent="goTo('/forms/sayhi')" :href="localePath('/forms/sayhi')" class="request__link request__link--cursive">{{ data.btn_text }}</a>
             </div>
         </div>
     </header>
@@ -160,7 +160,7 @@ export default {
         },
         changeLocale(lang) {
             this.$router.push(this.switchLocalePath(lang))
-            
+
             let setEnglishLang = () => {
                 window.location.href = this.switchLocalePath('en')
             }

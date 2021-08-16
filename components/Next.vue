@@ -1,6 +1,6 @@
  <template>
     <div class="next-wrap">
-        <nuxt-link :to="localePath('/join')"  class="next">
+        <nuxt-link :to="localePath('/forms/join')"  class="next">
             <div class="next__title">
                 <ul class="animate-text animate-text--next">
                     <li class="animate-text__item">
@@ -57,7 +57,7 @@
 
     // margin-top: 357px;
     &__title {
-    
+
         // margin-top: 48px;
         font-family: 'ThinItalic', Arial;
         // font-style: italic;
