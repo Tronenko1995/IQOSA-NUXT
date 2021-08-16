@@ -4,7 +4,7 @@
 		margin-bottom: 24px;
 		height: 72px;
 		overflow: hidden;
-		pointer-events: none;
+		// pointer-events: none;
 	}
 	.swiper-wrapper {
 		position: relative;
@@ -50,7 +50,7 @@
 @media (max-width: 768px) {
 	.projects-name {
 		&__title {
-			height: 47px;
+			height: 56px;
 			margin-bottom: 8px;
 			}
 			&__item {
