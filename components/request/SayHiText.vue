@@ -156,14 +156,14 @@ export default {
   }
   &__text {
     font-family: "ThinItalic", Arial;
-    font-style: italic;
+    // font-style: italic;
     font-weight: 300;
     // font-size: 164px;
     font-size: 78px;
     line-height: 110%;
     letter-spacing: 0.05em;
     text-transform: uppercase;
-    font-feature-settings: "pnum" on, "lnum" on, "kern" off;
+    // font-feature-settings: "pnum" on, "lnum" on, "kern" off;
     color: #ffffff;
     opacity: 0.15;
     white-space: nowrap;

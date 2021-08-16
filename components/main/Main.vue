@@ -200,7 +200,7 @@ export default {
 		font-weight: 400;
 		font-family: Roman, Arial;
 		color: #fff;
-		font-feature-settings: "pnum" on, "lnum" on, "kern" off;
+		// font-feature-settings: "pnum" on, "lnum" on, "kern" off;
 		opacity: 0;
 		&--ru,
 		&--ua {

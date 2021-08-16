@@ -230,7 +230,7 @@ export default {
         font-weight: 300;
         font-size: 16px;
         line-height: 140%;
-        font-feature-settings: 'pnum' on, 'lnum' on, 'kern' off;
+        // font-feature-settings: 'pnum' on, 'lnum' on, 'kern' off;
         color: #FFFFFF;
         &--placeholder {
             position: absolute;
@@ -300,7 +300,7 @@ export default {
         line-height: 120%;
         letter-spacing: 0.05em;
         text-transform: uppercase;
-        font-feature-settings: 'pnum' on, 'lnum' on;
+        // font-feature-settings: 'pnum' on, 'lnum' on;
         color: #FFFFFF;
         background: none;
         cursor: pointer;

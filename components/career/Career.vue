@@ -323,7 +323,7 @@ export default {
         font-size: 164px;
         line-height: 90%;
         text-transform: uppercase;
-        font-feature-settings: 'pnum' on, 'lnum' on, 'kern' off;
+        // font-feature-settings: 'pnum' on, 'lnum' on, 'kern' off;
         color: #FFFFFF;
         overflow: hidden;
         &-text {
@@ -338,7 +338,7 @@ export default {
         font-size: 22px;
         line-height: 120%;
         text-transform: uppercase;
-        font-feature-settings: 'pnum' on, 'lnum' on, 'kern' off;
+        // font-feature-settings: 'pnum' on, 'lnum' on, 'kern' off;
         color: #FFFFFF;
         width: 516px;
         text-align: center;
@@ -375,7 +375,7 @@ export default {
         font-size: 16px;
         line-height: 100%;
         text-transform: uppercase;
-        font-feature-settings: 'pnum' on, 'lnum' on, 'zero' on, 'hist' on, 'ss12' on, 'kern' off;
+        // font-feature-settings: 'pnum' on, 'lnum' on, 'zero' on, 'hist' on, 'ss12' on, 'kern' off;
         color: #FFFFFF;
         transform: translateY(-100%);
     }
@@ -400,7 +400,7 @@ export default {
         line-height: 110%;
         text-align: center;
         text-transform: uppercase;
-        font-feature-settings: 'pnum' on, 'lnum' on, 'dnom' on, 'liga' off, 'kern' off;
+        // font-feature-settings: 'pnum' on, 'lnum' on, 'dnom' on, 'liga' off, 'kern' off;
         color: #FFFFFF;
         overflow: hidden;
         &-text {
@@ -423,7 +423,7 @@ export default {
         font-weight: 300;
         font-size: 16px;
         line-height: 140%;
-        font-feature-settings: 'pnum' on, 'lnum' on, 'kern' off;
+        // font-feature-settings: 'pnum' on, 'lnum' on, 'kern' off;
         color: #FFFFFF;
         p {
             transform: translateY(-20%);
@@ -452,7 +452,7 @@ export default {
         font-weight: 300;
         font-size: 16px;
         line-height: 140%;
-        font-feature-settings: 'pnum' on, 'lnum' on, 'kern' off;
+        // font-feature-settings: 'pnum' on, 'lnum' on, 'kern' off;
         color: #FFFFFF;
         p {}
         ul {

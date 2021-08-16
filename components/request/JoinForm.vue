@@ -240,7 +240,7 @@ export default {
     font-size: 35px;
     line-height: calc(110% + 15px);
     text-transform: uppercase;
-    font-feature-settings: 'pnum' on, 'lnum' on;
+    // font-feature-settings: 'pnum' on, 'lnum' on;
     color: rgba(255,255,255,.2);
     &__span {
         &--accent {
@@ -279,7 +279,7 @@ export default {
         font-size: 35px;
         line-height: 110%;
         text-transform: uppercase;
-        font-feature-settings: 'pnum' on, 'lnum' on;
+        // font-feature-settings: 'pnum' on, 'lnum' on;
         &-head {
             width: 100%;
         }
@@ -348,7 +348,7 @@ export default {
         line-height: 110%;
         text-align: center;
         text-transform: uppercase;
-        font-feature-settings: 'pnum' on, 'lnum' on;
+        // font-feature-settings: 'pnum' on, 'lnum' on;
         color: #FFFFFF;
         margin-bottom: 72px;
     }
@@ -405,7 +405,7 @@ export default {
         font-weight: 300;
         font-size: 16px;
         line-height: 140%;
-        font-feature-settings: 'pnum' on, 'lnum' on, 'kern' off;
+        // font-feature-settings: 'pnum' on, 'lnum' on, 'kern' off;
         color: #FFFFFF;
         &--placeholder {
             position: absolute;
@@ -473,7 +473,7 @@ export default {
         line-height: 120%;
         letter-spacing: 0.05em;
         text-transform: uppercase;
-        font-feature-settings: 'pnum' on, 'lnum' on;
+        // font-feature-settings: 'pnum' on, 'lnum' on;
         color: #FFFFFF;
         background: none;
         cursor: pointer;

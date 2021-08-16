@@ -383,7 +383,7 @@ export default {
         text-align: center;
         letter-spacing: 0.05em;
         text-transform: uppercase;
-        font-feature-settings: 'pnum' on, 'lnum' on;
+        // font-feature-settings: 'pnum' on, 'lnum' on;
         color: #FFFFFF;
         span {
             font-family: 'LightItalic', Arial;
@@ -538,7 +538,7 @@ export default {
         font-size: 14px;
         line-height: 120%;
         text-transform: uppercase;
-        font-feature-settings: 'pnum' on, 'lnum' on, 'kern' off;
+        // font-feature-settings: 'pnum' on, 'lnum' on, 'kern' off;
         color: #FFFFFF;
         display: flex;
         &--share {
@@ -645,7 +645,7 @@ export default {
         font-size: 14px;
         line-height: 120%;
         text-transform: uppercase;
-        font-feature-settings: 'pnum' on, 'lnum' on, 'kern' off;
+        // font-feature-settings: 'pnum' on, 'lnum' on, 'kern' off;
         color: #FFFFFF;
         background: none;
         cursor: pointer;

@@ -150,14 +150,14 @@ export default {
             overflow: hidden;
             &-text {
                 font-family: 'ThinItalic', Arial;
-                font-style: italic;
+                // font-style: italic;
                 font-weight: 300;
                 font-size: 164px;
                 line-height: 90%;
                 text-align: center;
                 letter-spacing: 0.05em;
                 text-transform: uppercase;
-                font-feature-settings: 'pnum' on, 'lnum' on, 'kern' off;
+                // font-feature-settings: 'pnum' on, 'lnum' on, 'kern' off;
                 color: #FFFFFF;
                 opacity: 0.15;
                 transform: translateY(100%);
@@ -184,7 +184,7 @@ export default {
             font-size: 22px;
             line-height: 120%;
             text-transform: uppercase;
-            font-feature-settings: 'pnum' on, 'lnum' on, 'kern' off;
+            // font-feature-settings: 'pnum' on, 'lnum' on, 'kern' off;
             color: #FFFFFF;
             width: 516px;
             text-align: center;
@@ -240,7 +240,7 @@ export default {
                 line-height: 120%;
                 letter-spacing: 0.05em;
                 text-transform: uppercase;
-                font-feature-settings: 'pnum' on, 'lnum' on;
+                // font-feature-settings: 'pnum' on, 'lnum' on;
                 color: #FFFFFF;
                 em {
                     font-family: 'LightItalic';
@@ -264,7 +264,7 @@ export default {
                 line-height: 110%;
                 text-align: center;
                 text-transform: uppercase;
-                font-feature-settings: 'pnum' on, 'lnum' on;
+                // font-feature-settings: 'pnum' on, 'lnum' on;
                 color: #FFFFFF;
             }
             &-bottom {

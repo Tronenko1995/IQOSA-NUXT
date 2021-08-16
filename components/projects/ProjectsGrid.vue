@@ -167,7 +167,7 @@ export default {
   }
   &__title {
     font-family: 'ThinItalic', Arial;
-    font-style: italic;
+    // font-style: italic;
     font-weight: 300;
     // font-size: 164px;
     font-size: 148px;
@@ -194,7 +194,7 @@ export default {
     // line-height: 120%;
     line-height: 140%;
     text-transform: uppercase;
-    font-feature-settings: 'pnum' on, 'lnum' on, 'kern' off;
+    // font-feature-settings: 'pnum' on, 'lnum' on, 'kern' off;
     color: #FFFFFF;
     margin-top: 86px;
     text-align: center;
@@ -304,7 +304,7 @@ export default {
         font-size: 14px;
         line-height: 120%;
         text-transform: uppercase;
-        font-feature-settings: 'pnum' on, 'lnum' on, 'kern' off;
+        // font-feature-settings: 'pnum' on, 'lnum' on, 'kern' off;
         color: #FFFFFF;
         transition: .5s;
         &:last-child {
@@ -331,7 +331,7 @@ export default {
     line-height: 120%;
     letter-spacing: 0.05em;
     text-transform: uppercase;
-    font-feature-settings: 'pnum' on, 'lnum' on, 'kern' off;
+    // font-feature-settings: 'pnum' on, 'lnum' on, 'kern' off;
     color: #FFFFFF;
     transform: translateY(16px);
     transition: .5s;

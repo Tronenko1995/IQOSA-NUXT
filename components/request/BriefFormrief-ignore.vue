@@ -309,7 +309,7 @@ export default {
             line-height: 0;
             text-align: center;
             text-transform: uppercase;
-            font-feature-settings: 'pnum' on, 'lnum' on, 'zero' on, 'hist' on, 'ss12' on, 'kern' off;
+            // font-feature-settings: 'pnum' on, 'lnum' on, 'zero' on, 'hist' on, 'ss12' on, 'kern' off;
             color: #FFFFFF;
             font-family: 'Light', Arial;
             margin-bottom: 32px;
@@ -323,7 +323,7 @@ export default {
         line-height: 110%;
         text-align: center;
         text-transform: uppercase;
-        font-feature-settings: 'pnum' on, 'lnum' on;
+        // font-feature-settings: 'pnum' on, 'lnum' on;
         color: #FFFFFF;
         margin-bottom: 72px;
     }
@@ -383,7 +383,7 @@ export default {
         font-size: 16px;
         line-height: 140%;
         text-transform: uppercase;
-        font-feature-settings: 'pnum' on, 'lnum' on;
+        // font-feature-settings: 'pnum' on, 'lnum' on;
         &-head {
             width: 100%;
             height: 100%;
@@ -452,7 +452,7 @@ export default {
         font-weight: 300;
         font-size: 16px;
         line-height: 140%;
-        font-feature-settings: 'pnum' on, 'lnum' on, 'kern' off;
+        // font-feature-settings: 'pnum' on, 'lnum' on, 'kern' off;
         color: #FFFFFF;
         &--placeholder {
             position: absolute;
@@ -520,7 +520,7 @@ export default {
         line-height: 120%;
         letter-spacing: 0.05em;
         text-transform: uppercase;
-        font-feature-settings: 'pnum' on, 'lnum' on;
+        // font-feature-settings: 'pnum' on, 'lnum' on;
         color: #FFFFFF;
         background: none;
         cursor: pointer;
@@ -539,7 +539,7 @@ export default {
         font-weight: 300;
         font-size: 16px;
         line-height: 140%;
-        font-feature-settings: 'pnum' on, 'lnum' on, 'kern' off;
+        // font-feature-settings: 'pnum' on, 'lnum' on, 'kern' off;
         color: #FFFFFF;
         margin-bottom: 16px;
         &:last-child {

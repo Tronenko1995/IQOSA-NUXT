@@ -158,7 +158,7 @@ export default {
 		opacity: 0.5;
 		&--dos {
 			font-family: 'ThinItalic', Arial;
-			font-style: italic;
+			// font-style: italic;
 			font-weight: 300;
 			letter-spacing: 0.05em;
 			align-self: flex-end;
