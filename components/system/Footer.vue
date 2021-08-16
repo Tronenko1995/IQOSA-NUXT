@@ -196,7 +196,7 @@ export default {
         flex-direction: column;
         width: 30%;
         &--uno {
-            padding-bottom: 50px;
+            padding-bottom: 56px;
         }
         &--tres {
             width: 40%;
@@ -418,6 +418,9 @@ export default {
         }
         &__column {
             width: 50%;
+            &--uno {
+                padding-bottom: 0;
+            }
             &--tres {
                 width: 100%;
                 margin-top: 80px;
