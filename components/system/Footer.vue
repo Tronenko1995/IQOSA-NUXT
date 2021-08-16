@@ -59,8 +59,8 @@
                 <div class="footer__column-middle">
                     <p class="footer__main-text">{{ data.right_big_text }}
                     <span class="footer__main-item" @mouseover="showAnimateText($event)" @mouseleave="hideAnimateText($event)">
-                    <a @click.prevent="goPage('forms/sayhi')" href="/forms/sayhi" class="footer__main-link">{{ data.right_big_link_text }}</a>
-                    <a @click.prevent="goPage('forms/sayhi')" href="/forms/sayhi" class="footer__main-link">{{ data.right_big_link_text }}</a>
+                    <a @click.prevent="goPage('/forms/sayhi')" href="/forms/sayhi" class="footer__main-link">{{ data.right_big_link_text }}</a>
+                    <a @click.prevent="goPage('/forms/sayhi')" href="/forms/sayhi" class="footer__main-link">{{ data.right_big_link_text }}</a>
                         <!-- <nuxt-link :to="localePath('/sayhi')"  class="footer__main-link">say hi.</nuxt-link> -->
                         <!-- <nuxt-link :to="localePath('/sayhi')"  class="footer__main-link">say hi.</nuxt-link> -->
                         <!-- <a href="/sayhi" class="footer__main-link">say hi.</a> -->

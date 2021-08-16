@@ -8,7 +8,11 @@
         <p class="request-page__title">{{ data.title_big_bold }}</p>
         <SayHiText :data="dataRequests" />
 
-        <nuxt-child />
+        <transition name="fade" mode="out-in">
+          <div :key="getKey">
+            <nuxt-child />
+          </div>
+        </transition>
         <Modals v-if="modal.show" :modal="modal" />
       </section>
     </main>
@@ -92,6 +96,9 @@ export default {
     return { fullUrl };
   },
   computed: {
+    getKey() {
+      return this.$route.name;
+    },
     ...mapGetters("lang/request/", [
       "dataSayHi",
       "dataJoin",
