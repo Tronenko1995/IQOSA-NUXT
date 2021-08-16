@@ -22,7 +22,7 @@
                     <template v-if="item.vacancy_description">
                         <p v-for="(item,i) in item.vacancy_description" :key="i" v-html="item.paragraph"></p>
                     </template>
-                        <nuxt-link :to="localePath('/join')" class="job__link job-link arrow-link" @mouseover.native="findElement($event)" @mouseleave.native="animateTextHide($event)">
+                        <nuxt-link :to="localePath('/forms/join')" class="job__link job-link arrow-link" @mouseover.native="findElement($event)" @mouseleave.native="animateTextHide($event)">
                             <span class="arrow-link__change">
                                 <span class="arrow-link__span arrow-link__span--first">fill</span>
                                 <span class="arrow-link__span arrow-link__span--last">fill</span>
@@ -47,7 +47,7 @@
                 @mouseover="findElement($event)"
                 @mouseleave="animateTextHide($event)"
                 >
-                <a @click.prevent="goPage('/sayhi')" :href="localePath('/sayhi')"  class="make-request__link">
+                <a @click.prevent="goPage('/forms/sayhi')" :href="localePath('/forms/sayhi')"  class="make-request__link">
                     <span class="make-request__text">{{ data.vacancy_link_text }}</span>
                     <span class="make-request__change">
                     <span class="make-request__span make-request__span--first"
@@ -184,7 +184,7 @@ export default {
                     },
                 this.$gsap.to(item, {translateX: 0, opacity: 1, duration: 1})
                 );
-                
+
             })
         },
         hideJobs() {
@@ -264,11 +264,11 @@ export default {
             }
 		},
         animateTextShow(el) {
-            this.$gsap.to(el.children[0], { 
+            this.$gsap.to(el.children[0], {
                 translateY: -100 + "%",
                 duration: .5
             })
-            this.$gsap.to(el.children[1], { 
+            this.$gsap.to(el.children[1], {
                 translateY: -100 + "%",
                 duration: .5
             })
@@ -276,11 +276,11 @@ export default {
 		animateTextHide(e) {
 			if (e.target.classList.contains('arrow-link')) {
                 const el = e.target.querySelector('.arrow-link__change')
-				this.$gsap.to(el.children[0], { 
+				this.$gsap.to(el.children[0], {
 					translateY: 0 + "%",
 					duration: .5
 				})
-				this.$gsap.to(el.children[1], { 
+				this.$gsap.to(el.children[1], {
 					translateY: 0 + "%",
 					duration: .5
 				})

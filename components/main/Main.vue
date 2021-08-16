@@ -21,7 +21,7 @@
 					@mouseover="findElement($event)"
 					@mouseleave="animateTextHide($event)"
 				>
-					<nuxt-link :to="localePath('/sayhi')" class="make-request__link">
+					<nuxt-link :to="localePath('/forms/sayhi')" class="make-request__link">
 						<span class="make-request__text">{{ data.hero_link_text }}</span>
 						<span class="make-request__change">
 							<span class="make-request__span make-request__span--first"

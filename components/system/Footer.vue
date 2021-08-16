@@ -59,8 +59,8 @@
                 <div class="footer__column-middle">
                     <p class="footer__main-text">{{ data.right_big_text }}
                     <span class="footer__main-item" @mouseover="showAnimateText($event)" @mouseleave="hideAnimateText($event)">
-                    <a @click.prevent="goPage('sayhi')" href="/sayhi" class="footer__main-link">{{ data.right_big_link_text }}</a>
-                    <a @click.prevent="goPage('sayhi')" href="/sayhi" class="footer__main-link">{{ data.right_big_link_text }}</a>
+                    <a @click.prevent="goPage('/forms/sayhi')" href="/forms/sayhi" class="footer__main-link">{{ data.right_big_link_text }}</a>
+                    <a @click.prevent="goPage('/forms/sayhi')" href="/forms/sayhi" class="footer__main-link">{{ data.right_big_link_text }}</a>
                         <!-- <nuxt-link :to="localePath('/sayhi')"  class="footer__main-link">say hi.</nuxt-link> -->
                         <!-- <nuxt-link :to="localePath('/sayhi')"  class="footer__main-link">say hi.</nuxt-link> -->
                         <!-- <a href="/sayhi" class="footer__main-link">say hi.</a> -->
@@ -117,11 +117,11 @@ export default {
         }),
         showAnimateText(e) {
             if (e.target.tagName === 'A') {
-                gsap.to(e.target.parentElement.children[0], { 
+                gsap.to(e.target.parentElement.children[0], {
                     translateY: -100 + "%",
                     duration: .5
                 })
-                gsap.to(e.target.parentElement.children[1], { 
+                gsap.to(e.target.parentElement.children[1], {
                     translateY: -100 + "%",
                     duration: .5
                 })
@@ -129,11 +129,11 @@ export default {
         },
         hideAnimateText(e) {
             if (e.target.tagName === 'SPAN') {
-                gsap.to(e.target.children[0], { 
+                gsap.to(e.target.children[0], {
                     translateY: 0 + "%",
                     duration: .5
                 })
-                gsap.to(e.target.children[1], { 
+                gsap.to(e.target.children[1], {
                     translateY: 0 + "%",
                     duration: .5
                 })
@@ -141,11 +141,11 @@ export default {
         },
         showCursive(e) {
             if (e.target.tagName === 'A') {
-                gsap.to(e.target.parentElement.children[0], { 
+                gsap.to(e.target.parentElement.children[0], {
                     translateY: -100 + "%",
                     duration: .5
                 })
-                gsap.to(e.target.parentElement.children[1], { 
+                gsap.to(e.target.parentElement.children[1], {
                     translateY: -100 + "%",
                     duration: .5
                 })
@@ -153,11 +153,11 @@ export default {
         },
         hideCursive(e) {
             if (e.target.tagName === 'LI') {
-                gsap.to(e.target.children[0], { 
+                gsap.to(e.target.children[0], {
                     translateY: 0 + "%",
                     duration: .5
                 })
-                gsap.to(e.target.children[1], { 
+                gsap.to(e.target.children[1], {
                     translateY: 0 + "%",
                     duration: .5
                 })

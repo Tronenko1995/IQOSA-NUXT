@@ -123,7 +123,7 @@ export default {
                     marginTop = 586;
                   }
 
-                  const width = window.innerWidth <= 1088 ? window.innerWidth - 128 : 960;
+                  const width = window.innerWidth <= 1088 ? window.innerWidth - 128 : 1280;
 
                   let elementTop = card.getBoundingClientRect().top;
 
