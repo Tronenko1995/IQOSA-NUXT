@@ -15,11 +15,11 @@ export default {
         }
     },
     beforeMount() {
-        document.body.style = 'overflow: hidden'
+        // document.body.style = 'overflow: hidden'
         document.querySelector('.header').style = 'z-index: 3;'
     },
     beforeDestroy() {
-        document.body.style = ''
+        // document.body.style = ''
         document.querySelector('.header').style = ''
     }
 }

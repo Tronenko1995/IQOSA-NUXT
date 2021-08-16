@@ -71,7 +71,7 @@ export default {
       throw new Error(e);
     }
     try {
-        await store.dispatch('lang/projects/getProjects', '/projects')
+        await store.dispatch('lang/projects/getProjects', `/projects?lang=${i18n.locale}`)
     } catch(e) {
       // redirect(`404`);
       throw new Error(e);

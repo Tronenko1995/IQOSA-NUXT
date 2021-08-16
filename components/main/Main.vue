@@ -111,13 +111,13 @@ export default {
 
 			let bf = document.querySelector('.black-friend')
 
-			this.$gsap.to(bf, 0.3, {
+			this.$gsap.to(bf, 1.2, {
 				scrollTrigger: {
                     trigger: bf,
                     start: "top bottom-=200px",
 				},
 				height: 0 + '%',
-				duration: 0.3,
+				// duration: 0.3,
 			});
 
 

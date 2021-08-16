@@ -245,6 +245,8 @@ export default {
         text-transform: uppercase;
         font-size: 16px;
         line-height: 120%;
+        padding-right: 2px;
+        padding-left: 2px;
         &--cursive {
             font-family: ThinItalic,Arial;
             position: absolute;
@@ -253,7 +255,7 @@ export default {
 }
 .lang {
     display: none;
-    width: 120px;
+    // width: 120px;
     &__list {
         display: flex;
         justify-content: space-between;
@@ -269,6 +271,7 @@ export default {
         transform: translate(0px, 100%);
         opacity: 0;
         transition: opacity .5s ease;
+        margin-left: 16px;
         &--selected {
             opacity: 1;
             pointer-events: none;

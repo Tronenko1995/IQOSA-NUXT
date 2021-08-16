@@ -195,6 +195,9 @@ export default {
         display: flex;
         flex-direction: column;
         width: 30%;
+        & > .footer__link {
+            margin-bottom: 8px;
+        }
         &--tres {
             width: 40%;
         }

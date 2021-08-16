@@ -470,7 +470,7 @@ export default {
         // height: 950px;
         // height: auto;
         height: 720px;
-        max-width: 960px;
+        max-width: 1280px;
         img {
             width: 100%;
             height: 100%;
@@ -548,11 +548,11 @@ export default {
         margin-top: 48px;
         background: #FFFFFF;
         &--share {
-            margin-top: 3px;
+            margin-top: 108px;
         }
     }
     &__info {
-        padding: 0 72px;
+        // padding: 0 72px;
         margin: 24px auto 156px;
         width: 1280px;
         // margin-top: 24px;
@@ -570,8 +570,10 @@ export default {
             margin-bottom: 0px;
         }
         &-left {
-            &:first-child {
-                margin-right: 70px;
+            span {
+                &:first-child {
+                    margin-right: 70px;
+                }
             }
             &--share {
                 display: flex;
@@ -588,6 +590,9 @@ export default {
                 display: flex;
                 flex-direction: column;
                 // margin-right: 529px;
+                & > span {
+                    font-family: 'LightItalic';
+                }
                 span {
                     &:last-child {
                         margin-left: 0;
@@ -1027,8 +1032,10 @@ export default {
                 margin-bottom: 0px;
             }
             &-left {
-                &:first-child {
-                    margin-right: 10px;
+                span {
+                    &:first-child {
+                        margin-right: 10px;
+                    }
                 }
             }
             &-right {

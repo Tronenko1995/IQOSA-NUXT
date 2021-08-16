@@ -62,6 +62,10 @@ export default {
         line-height: 120%;
         letter-spacing: 0.035em;
         color: #000000;
+        a {
+            color: #000; 
+            border-bottom: 1px solid #000;
+        }
     }
     &__action {
         position: relative;
