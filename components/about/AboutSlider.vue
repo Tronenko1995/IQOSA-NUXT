@@ -46,7 +46,7 @@ export default {
         },
         init() {
             const Draggabilly = require("draggabilly")
-            
+
             // let drag = document.body.querySelector(".drag");
 
             function initSlider() {
@@ -55,7 +55,7 @@ export default {
                 // console.dir(cursorich)
                 // const body = document.body;
                 // imagesLoaded(document.querySelectorAll('.img-inner'), { background: true }, () => document.body.classList.remove('loading'));
-            
+
                 const MathUtils = {
                 lineEq: (y2, y1, x2, x1, currentVal) => {
                     // y = mx + b
@@ -65,7 +65,7 @@ export default {
                 lerp: (a, b, n) => (1 - n) * a + n * b,
                 getRandomFloat: (min, max) => (Math.random() * (max - min) + min).toFixed(2)
                 };
-            
+
                 // const getMousePos = (e) => {
                 // let posx = 0;
                 // let posy = 0;
@@ -86,15 +86,15 @@ export default {
                 // }
                 // return { x: posx, y: posy }
                 // };
-            
+
                 let winsize;
                 const calcWinsize = () => winsize = { width: window.innerWidth, height: window.innerHeight };
                 calcWinsize();
                 window.addEventListener('resize', calcWinsize);
-            
+
                 // let mousepos = { x: winsize.width / 2, y: winsize.height / 2 };
                 // window.addEventListener('mousemove', ev => mousepos = getMousePos(ev));
-            
+
                 // Strip Item
                 class StripItem {
                 constructor(el) {
@@ -103,10 +103,10 @@ export default {
                     this.DOM.number = this.DOM.el.querySelector('.strip__item-link');
                 }
                 }
-            
+
                 // Content Item
-            
-            
+
+
                 // Images strip
                 class Strip {
                 constructor(el) {
@@ -126,7 +126,7 @@ export default {
                     this.dragPosition = 0;
                     // Initialize the Draggabilly
                     this.draggie = new Draggabilly(this.DOM.draggable, { axis: 'x' });
-            
+
                     this.init();
                     this.initEvents();
                 }
@@ -140,20 +140,20 @@ export default {
                     coverOpacity: { previous: 0, current: 0 },
                     indicatorScale: { previous: 1, current: 1 },
                     };
-            
+
                     this.render = () => {
                     this.renderId = undefined;
-            
+
                     for (const key in this.renderedStyles) {
                         this.renderedStyles[key].previous = MathUtils.lerp(this.renderedStyles[key].previous, this.renderedStyles[key].current, 0.1);
                     }
-            
+
                     gsap.set(this.DOM.strip, { x: this.renderedStyles.position.previous });
                     for (const item of this.items) {
                         gsap.set(item.DOM.el, { scale: this.renderedStyles.scale.previous, opacity: this.renderedStyles.opacity.previous });
                         gsap.set(item.DOM.image, { scale: this.renderedStyles.imgScale.previous });
                     }
-            
+
                     if (!this.renderId) {
                         this.renderId = requestAnimationFrame(() => this.render());
                     }
@@ -169,7 +169,7 @@ export default {
                     this.renderedStyles.coverOpacity.current = 1;
                     this.renderedStyles.indicatorScale.current = 0;
                     };
-            
+
                     this.onDragMove = (event, pointer, moveVector) => {
                     // The possible range for the drag is draggie.position.x = [-maxDrag,0 ]
                     if (this.draggie.position.x >= 0) {
@@ -184,10 +184,10 @@ export default {
                         this.dragPosition = this.draggie.position.x;
                     }
                     this.renderedStyles.position.current = this.dragPosition;
-            
+
                     // mousepos = getMousePos(event);
                     };
-            
+
                     this.onDragEnd = () => {
                     // reset draggable if out of bounds.
                     if (this.draggie.position.x > 0) {
@@ -206,11 +206,11 @@ export default {
                     this.renderedStyles.coverOpacity.current = 0;
                     this.renderedStyles.indicatorScale.current = 1;
                     };
-            
+
                     this.draggie.on('pointerDown', this.onDragStart);
                     this.draggie.on('dragMove', this.onDragMove);
                     this.draggie.on('pointerUp', this.onDragEnd);
-            
+
                     window.addEventListener('resize', () => {
                     this.maxDrag = this.draggableWidth < winsize.width ? 0 : this.draggableWidth - winsize.width;
                     if (Math.abs(this.dragPosition) + winsize.width > this.draggableWidth) {
@@ -222,7 +222,7 @@ export default {
                     });
                 }
                 }
-            
+
                 // The images strip
                 const strip = new Strip(document.querySelector('.strip-outer'));
             }
@@ -344,6 +344,7 @@ export default {
 
 @media (max-width: 1440px) {
     .slider-text {
+        position: absolute;
         margin: 0;
         right: 120px;
         top: 18px;
@@ -494,6 +495,8 @@ export default {
     }
     .slider-text {
         font-size: 13px;
+        max-width: 85%;
+        margin-left: auto;
     }
 }
 </style>

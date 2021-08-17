@@ -20,7 +20,7 @@
         <no-ssr>
             <AboutSlider :list="data.slider_pictures" :data="data.slider_text" />
         </no-ssr>
-        <Next :data="data"/>
+        <Next :data="data" :classes="['next__title--top']"/>
         <!-- <div>
             <nuxt-link to="/"  class="project__next">
                 <div class="project__title project__title--next">

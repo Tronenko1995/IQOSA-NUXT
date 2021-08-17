@@ -1,7 +1,7 @@
 <template>
     <div class="menu">
         <div>
-            <IcosahedronCrystal :has_image="false" :color="0x333333" />
+            <IcosahedronCrystal :has_image="false" :color="0x333333" :timeout="0" />
         </div>
         <nav class="menu__nav">
             <ul class="menu__list">
@@ -123,7 +123,7 @@ export default {
         },
         changeLocale(lang) {
             this.$router.push(this.switchLocalePath(lang))
-            
+
             let setEnglishLang = () => {
                 window.location.href = this.switchLocalePath('en')
             }

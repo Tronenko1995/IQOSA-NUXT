@@ -1,7 +1,7 @@
  <template>
     <div class="next-wrap">
         <nuxt-link :to="localePath('/forms/join')"  class="next">
-            <div class="next__title">
+            <div class="next__title" :class="classes">
                 <ul class="animate-text animate-text--next">
                     <li class="animate-text__item">
                         <a href="#" class="animate-text__button animate-text__button--cursive  animate-text__button--next">{{ data.bottom_block_text }}</a>
@@ -23,7 +23,8 @@
         data: {
             type: Object,
             required: true
-        }
+        },
+        classes: Array
     },
     data() {
         return {
@@ -166,20 +167,28 @@
             width: 100%;
             transition: .4s;
         }
+        &--next:nth-of-type(2) {
+          font-family: 'Light', Arial;
+        }
     }
 }
 @media (max-width: 1440px) {
     .next {
         &-wrap {
-            margin: 326px auto 0 auto;
+            // margin: 326px auto 0 auto;
+            margin: 200px auto 0 auto;
         }
         &__title {
             font-size: 140px;
             top: -111px;
         }
+        &__title--top {
+            top: -48px;
+        }
         &__image {
             width: 639px;
-            height: 398px;
+            // height: 398px;
+            height: 350px;
         }
     }
 }

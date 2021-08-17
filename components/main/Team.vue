@@ -288,11 +288,11 @@ export default {
             }
 		},
         animateTextShow(el) {
-            gsap.to(el.children[0], { 
+            gsap.to(el.children[0], {
                 translateY: -100 + "%",
                 duration: .5
             })
-            gsap.to(el.children[1], { 
+            gsap.to(el.children[1], {
                 translateY: -100 + "%",
                 duration: .5
             })
@@ -300,11 +300,11 @@ export default {
 		animateTextHide(e) {
 			if (e.target.classList.contains('arrow-link')) {
                 const el = e.target.querySelector('.arrow-link__change')
-				gsap.to(el.children[0], { 
+				gsap.to(el.children[0], {
 					translateY: 0 + "%",
 					duration: .5
 				})
-				gsap.to(el.children[1], { 
+				gsap.to(el.children[1], {
 					translateY: 0 + "%",
 					duration: .5
 				})
@@ -324,7 +324,7 @@ export default {
     height: 100vh;
     overflow: hidden;
     pointer-events: unset !important;
-    backface-visibility: hidden; 
+    backface-visibility: hidden;
     position: relative;
     &__shadow {
         background: linear-gradient(180deg,#1b1b1b,rgba(27,27,27,0) 29.75%,rgba(27,27,27,0) 72.02%,#1b1b1b);
@@ -415,7 +415,7 @@ export default {
                     margin: auto 446px 3px 113px;
                 }
                 &--cinco {
-                    
+
                 }
             }
         }
@@ -440,7 +440,7 @@ export default {
                     margin: auto 661px 76px 290px;
                 }
                 &--cinco {
-                    
+
                 }
             }
         }
@@ -461,7 +461,7 @@ export default {
 
                 }
                 &--cinco {
-                    
+
                 }
             }
         }
@@ -568,5 +568,9 @@ export default {
 }
 .team-link {
     margin-top: 48px;
+}
+.arrow-link__span--first {
+  position: relative;
+  top: 2px;
 }
 </style>

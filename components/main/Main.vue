@@ -8,7 +8,7 @@
 					{'main__title--ua': $i18n.locale === 'ua'},
 				]">{{ data.hero_title[0] }}</p>
 			</div>
-			<div class="main__row">
+			<div class="main__row main__row--middle">
 				<p class="main__title main__title--second main__title--italic" :class="[
 					{'main__title--ru': $i18n.locale === 'ru'},
 					{'main__title--ua': $i18n.locale === 'ua'},
@@ -173,13 +173,28 @@ export default {
 </script>
 
 <style lang="scss">
+@media (max-width: 768px) {
+  .motto--main .motto__item {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 414px) {
+  .motto--main .motto__item {
+    font-size: 13px;
+  }
+}
+
+</style>
+
+<style lang="scss">
 .main {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	width: 100%;
 	height: 100vh;
-	padding: 35px 0 0;
+	padding: 106px 0 0;
 	margin-bottom: 190px;
 	&__wrap {
 		width: 100%;
@@ -267,11 +282,26 @@ export default {
 	.main {
 		position: relative;
 		&__wrap {
-			max-width: 650px;
+			// max-width: 650px;
+			max-width: 100%;
+      padding-right: 105px;
+      padding-left: 105px;
 		}
 		&__title {
-			font-size: 70px;
+			// font-size: 70px;
+			font-size: 84px;
 		}
+    &__row {
+			&--first {
+				display: block;
+			}
+      &--middle {
+				display: block;
+      }
+		}
+    .make-request__link {
+      font-size: 17px;
+    }
 	}
 }
 @media (max-width: 700px) {
@@ -279,6 +309,7 @@ export default {
 		margin-bottom: 0px;
 			font-size: 56px;
 		&__title {
+			font-size: 70px;
 			&--ru,
 			&--ua {
 				font-size: 42px;
@@ -298,6 +329,7 @@ export default {
 		}
 		&__row {
 			&--first {
+        display: flex;
 				justify-content: flex-end;
 			}
 		}
@@ -309,8 +341,11 @@ export default {
 			padding: 0 15px;
 		}
 		&__title {
-			// font-size: 56px;
+			font-size: 56px;
 		}
+    .make-request__link {
+      font-size: 14px;
+    }
 	}
 }
 </style>

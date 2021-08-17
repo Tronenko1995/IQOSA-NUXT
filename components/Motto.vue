@@ -31,9 +31,10 @@ export default {
     }
     &__item {
     overflow: hidden;
-    // font-size: 22px;
-    font-size: 20px;
-    line-height: 140%;
+    font-size: 22px;
+    // font-size: 20px;
+    // line-height: 140%;
+    line-height: 115%;
     font-family: Light, Arial;
     font-weight: 300;
     // line-height: 120%;
@@ -50,7 +51,8 @@ export default {
     }
     &--about {
         position: absolute;
-        bottom: 105px;
+        // bottom: 105px;
+        bottom: 78px;
         width: 100%;
         padding: 0 72px;
     }
@@ -58,7 +60,7 @@ export default {
 @media (max-width: 1440px) {
     .motto {
         &--about {
-            padding: 0 63px;
+            padding: 0 64px;
         }
     }
 }
@@ -109,8 +111,12 @@ export default {
     .motto {
         &--about {
             padding: 0 16px;
+            .motto__list {
+              margin-left: auto;
+              width: fit-content;
+            }
             .motto__item {
-                text-align: right;
+                text-align: left;
                 &--right {
                     margin-right: 40px;
                 }

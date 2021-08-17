@@ -13,7 +13,7 @@
                     <img :src="getImg(project.main_picture)" alt="">
                 </div>
             </div>
-            <hr class="project__line">
+            <hr class="project__line" v-showWidth>
             <div class="project__wrap">
                 <div class="project__info">
                     <div class="project__info-left">
@@ -39,25 +39,25 @@
                 <template v-for="(item, i) in project.content">
                     <template v-if="item && item.big_image">
                         <div class="project__image project__image--standart" :key="i">
-                            <img :src="getImg(item.big_image)" alt="">
+                            <img :src="getImg(item.big_image)" alt="" v-showFade>
                         </div>
                     </template>
                     <div v-if="item && item.gallery" :key="i">
                         <div class="project__images" >
                             <div v-if="item.gallery.first_image" class="project__image project__image--uno project__image--parallax">
-                                <img :src="getImg(item.gallery.first_image)" alt="">
+                                <img :src="getImg(item.gallery.first_image)" alt="" v-showFade>
                             </div>
                             <div v-if="item.gallery.second_image" class="project__image project__image--dos project__image--parallax">
-                                <img :src="getImg(item.gallery.second_image)" alt="">
+                                <img :src="getImg(item.gallery.second_image)" alt="" v-showFade>
                             </div>
                         </div>
                         <div v-if="item && item.gallery && item.gallery.center_text" class="project__title project__title--text" v-html="item.gallery.center_text"></div>
                         <div class="project__images">
                             <div v-if="item.gallery.third_image" class="project__image project__image--tres project__image--parallax">
-                                <img :src="getImg(item.gallery.third_image)" alt="">
+                                <img :src="getImg(item.gallery.third_image)" alt="" v-showFade>
                             </div>
                             <div v-if="item.gallery.fourth_image" class="project__image project__image--quatro project__image--parallax">
-                                <img :src="getImg(item.gallery.fourth_image)" alt="">
+                                <img :src="getImg(item.gallery.fourth_image)" alt="" v-showFade>
                             </div>
                         </div>
                     </div>
@@ -499,7 +499,8 @@ export default {
         }
         &--next {
             width: auto;
-            height: 530px;
+            height: 160px;
+            // height: 530px;
             // height: 720px;
             overflow: hidden;
             margin: 0 auto;
@@ -522,6 +523,7 @@ export default {
         opacity: .3;
         margin-top: 48px;
         background: #FFFFFF;
+        margin-right: auto;
         &--share {
             margin-top: 108px;
         }
@@ -613,7 +615,7 @@ export default {
                       transform: translateY(-100%);
                   }
                   &:last-child {
-                      transform: translateY(-100%);
+                      transform: translateY(-130%);
                   }
               }
           }
@@ -664,6 +666,14 @@ export default {
             text-align: center;
             width: 100%;
             transition: .4s;
+                        .animate-text__item {
+              height: 220px;
+            }
+        }
+    }
+    &--next {
+      .animate-text__item {
+          height: 220px;
         }
     }
 }

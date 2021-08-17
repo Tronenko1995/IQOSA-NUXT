@@ -103,6 +103,7 @@ export default {
 						slidesPerView: 1,
 						autoplay: {
 								delay: 3000,
+                disableOnInteraction: false
 						},
 						pagination: {
 								el: '.swiper-pagination',
@@ -180,7 +181,7 @@ export default {
 			// console.dir(this.$refs.projectName)
 			// console.log(this.$refs.projectName.querySelector(`[data-swiper-slide-index="${this.projectPhotos.realIndex}"]`))
 			// this.projectLink = this.container.querySelector(`[data-swiper-slide-index="${this.projectPhotos.realIndex}"] a`).dataset.href
-			
+
 			// console.log(document.querySelector(`[data-swiper-slide-index="${this.projectPhotos.realIndex}"] a`).dataset.href)
 			// console.log(this.projectLink)
 
