@@ -179,7 +179,7 @@ export default {
 	align-items: center;
 	width: 100%;
 	height: 100vh;
-	padding: 35px 0 0;
+	padding: 106px 0 0;
 	margin-bottom: 190px;
 	&__wrap {
 		width: 100%;
