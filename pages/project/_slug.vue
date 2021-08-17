@@ -499,7 +499,8 @@ export default {
         }
         &--next {
             width: auto;
-            height: 530px;
+            height: 160px;
+            // height: 530px;
             // height: 720px;
             overflow: hidden;
             margin: 0 auto;
@@ -614,7 +615,7 @@ export default {
                       transform: translateY(-100%);
                   }
                   &:last-child {
-                      transform: translateY(-100%);
+                      transform: translateY(-130%);
                   }
               }
           }
@@ -665,6 +666,14 @@ export default {
             text-align: center;
             width: 100%;
             transition: .4s;
+                        .animate-text__item {
+              height: 220px;
+            }
+        }
+    }
+    &--next {
+      .animate-text__item {
+          height: 220px;
         }
     }
 }
