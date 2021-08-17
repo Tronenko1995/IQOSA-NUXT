@@ -345,14 +345,15 @@ export default {
 }
 @media (max-width: 1440px) {
 .projects-grid {
-  margin-top: 255px;
+  margin-top: 230px;
   margin-bottom: 156px;
     &__title {
       font-size: 148px;
     }
   }
   .projects-interior {
-    margin-top: 156px;
+    // margin-top: 156px;
+    margin-top: 100px;
   }
 }
 @media (max-width: 1280px) {
