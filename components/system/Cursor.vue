@@ -223,6 +223,10 @@ export default {
 				opacity: 1;
 			}
 	}
+	&--play {
+    transition: border-radius 0.3s ease, width 0.3s ease, height 0.3s ease,
+		margin 0.3s ease, opacity .5s ease .2s, background-color .5s ease .2s;
+  }
 	&--eye {
 		&::after {
 			background: url('~@/assets/svg/eye-cursor.svg') no-repeat center;
