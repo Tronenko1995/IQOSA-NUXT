@@ -129,7 +129,7 @@ export default {
     font-size: 16px;
     line-height: 100%;
     text-transform: uppercase;
-    font-feature-settings: "pnum"on, "lnum"on, "zero"on, "hist"on, "ss12"on, "kern"off;
+    // font-feature-settings: "pnum"on, "lnum"on, "zero"on, "hist"on, "ss12"on, "kern"off;
     color: #ffffff;
     background: unset;
     cursor: pointer;

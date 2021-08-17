@@ -39,7 +39,7 @@ export default {
     // line-height: 120%;
     color: #fff;
     text-transform: uppercase;
-    font-feature-settings: "pnum" on, "lnum" on, "kern" off;
+    // font-feature-settings: "pnum" on, "lnum" on, "kern" off;
         span {
             transform: translateY(100%);
             display: block;

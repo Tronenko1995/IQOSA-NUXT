@@ -385,7 +385,7 @@ export default {
       line-height: 100%;
       letter-spacing: 0.05em;
       text-transform: uppercase;
-      font-feature-settings: "pnum"on, "lnum"on, "kern"off;
+      // font-feature-settings: "pnum"on, "lnum"on, "kern"off;
       color: #ffffff;
       &--roman {
         font-family: "Roman", Arial;
@@ -450,7 +450,7 @@ export default {
     font-size: 50px;
     line-height: 120%;
     text-transform: uppercase;
-    font-feature-settings: 'pnum' on, 'lnum' on, 'dnom' on, 'liga' off, 'kern' off;
+    // font-feature-settings: 'pnum' on, 'lnum' on, 'dnom' on, 'liga' off, 'kern' off;
     color: #FFFFFF;
     span {
       font-family: 'Roman', Arial;
@@ -466,7 +466,7 @@ export default {
     font-size: 14px;
     line-height: 120%;
     text-transform: uppercase;
-    font-feature-settings: 'pnum' on, 'lnum' on;
+    // font-feature-settings: 'pnum' on, 'lnum' on;
     color: #FFFFFF;
     margin: 0 0 19px;
     opacity: .5;

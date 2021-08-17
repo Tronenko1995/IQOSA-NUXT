@@ -1,7 +1,7 @@
 <template>
     <div class="footer">
         <div class="footer__row">
-            <div class="footer__column">
+            <div class="footer__column footer__column--uno">
                 <div class="footer__column-top">
                     <p class="footer__title">{{ data.left_title }}</p>
                 </div>
@@ -10,7 +10,7 @@
                         <p class="footer__subtitle">{{ data.left_city }}</p>
                         <div class="footer__block-column">
                             <a target="_blank" :href="data.left_google_map_link" class="footer__link">{{ data.left_address }}</a>
-                            <a href="mailto:info@iqosa.com" class="footer__link">{{ data.left_emails }}</a>
+                            <a href="mailto:info@iqosa.com" class="footer__link footer__link--mail">{{ data.left_emails }}</a>
                         </div>
 
                     </div>
@@ -184,7 +184,7 @@ export default {
 <style lang="scss">
 .footer {
     background-color: #E8E8E8;
-    padding: 64px 72px 55px 72px;
+    padding: 64px 64px 42px;
     &__row {
         display: flex;
         &--bottom {
@@ -195,8 +195,8 @@ export default {
         display: flex;
         flex-direction: column;
         width: 30%;
-        & > .footer__link {
-            margin-bottom: 8px;
+        &--uno {
+            padding-bottom: 56px;
         }
         &--tres {
             width: 40%;
@@ -225,7 +225,7 @@ export default {
         font-size: 22px;
         line-height: 100%;
         text-transform: uppercase;
-        font-feature-settings: 'pnum' on, 'lnum' on, 'dnom' on, 'liga' off, 'kern' off;
+        // font-feature-settings: 'pnum' on, 'lnum' on, 'dnom' on, 'liga' off, 'kern' off;
         color: #000000;
     }
     &__subtitle {
@@ -234,7 +234,7 @@ export default {
         font-weight: normal;
         font-size: 22px;
         line-height: 140%;
-        font-feature-settings: 'pnum' on, 'lnum' on, 'dnom' on, 'liga' off, 'kern' off;
+        // font-feature-settings: 'pnum' on, 'lnum' on, 'dnom' on, 'liga' off, 'kern' off;
         color: #000000;
         margin-bottom: 8px;
     }
@@ -244,7 +244,7 @@ export default {
         font-weight: normal;
         font-size: 16px;
         line-height: 140%;
-        font-feature-settings: 'pnum' on, 'lnum' on, 'kern' off;
+        // font-feature-settings: 'pnum' on, 'lnum' on, 'kern' off;
         color: #000000;
         margin-bottom: 8px;
     }
@@ -254,7 +254,7 @@ export default {
         font-weight: 300;
         font-size: 16px;
         line-height: 140%;
-        font-feature-settings: 'pnum' on, 'lnum' on, 'kern' off;
+        // font-feature-settings: 'pnum' on, 'lnum' on, 'kern' off;
         color: #000000;
         &--opacity {
             opacity: .5;
@@ -266,7 +266,7 @@ export default {
         font-weight: 300;
         font-size: 16px;
         line-height: 140%;
-        font-feature-settings: 'pnum' on, 'lnum' on, 'kern' off;
+        // font-feature-settings: 'pnum' on, 'lnum' on, 'kern' off;
         color: #000000;
         transition: opacity .5s ease;
         width: fit-content;
@@ -277,6 +277,9 @@ export default {
             &:hover {
                 opacity: 1;
             }
+        }
+        &--mail {
+            margin-bottom: 8px;
         }
     }
     &__bottom-item {
@@ -295,7 +298,7 @@ export default {
         font-size: 50px;
         line-height: 110%;
         text-transform: uppercase;
-        font-feature-settings: 'pnum' on, 'lnum' on, 'dnom' on, 'liga' off, 'kern' off;
+        // font-feature-settings: 'pnum' on, 'lnum' on, 'dnom' on, 'liga' off, 'kern' off;
         color: #000000;
         &--italic {
             font-family: 'ThinItalic', Arial;
@@ -322,7 +325,7 @@ export default {
         font-size: 50px;
         line-height: 110%;
         text-transform: uppercase;
-        font-feature-settings: 'pnum' on, 'lnum' on, 'dnom' on, 'liga' off, 'kern' off;
+        // font-feature-settings: 'pnum' on, 'lnum' on, 'dnom' on, 'liga' off, 'kern' off;
         color: #000000;
         &:last-child {
             position: absolute;
@@ -415,6 +418,9 @@ export default {
         }
         &__column {
             width: 50%;
+            &--uno {
+                padding-bottom: 0;
+            }
             &--tres {
                 width: 100%;
                 margin-top: 80px;

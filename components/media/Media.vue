@@ -177,7 +177,7 @@ export default {
                 text-align: center;
                 letter-spacing: 0.05em;
                 text-transform: uppercase;
-                font-feature-settings: 'pnum' on, 'lnum' on, 'kern' off;
+                // font-feature-settings: 'pnum' on, 'lnum' on, 'kern' off;
                 color: #FFFFFF;
                 opacity: 0.15;
                 transform: translateY(100%);
@@ -204,7 +204,7 @@ export default {
             font-size: 22px;
             line-height: 120%;
             text-transform: uppercase;
-            font-feature-settings: 'pnum' on, 'lnum' on, 'kern' off;
+            // font-feature-settings: 'pnum' on, 'lnum' on, 'kern' off;
             color: #FFFFFF;
             width: 516px;
             text-align: center;

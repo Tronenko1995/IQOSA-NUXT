@@ -204,19 +204,19 @@ export default {
         font-size: 50px;
         line-height: 110%;
         text-transform: uppercase;
-        font-feature-settings: 'pnum' on, 'lnum' on, 'dnom' on, 'liga' off, 'kern' off;
+        // font-feature-settings: 'pnum' on, 'lnum' on, 'dnom' on, 'liga' off, 'kern' off;
         color: #FFFFFF;
         transform: translateX(300px);
         opacity: 0.5;
     }
     &__subtitle {
         font-family: 'ThinItalic', Arial;
-        font-style: italic;
+        // font-style: italic;
         font-weight: 300;
         font-size: 50px;
         line-height: 110%;
         text-transform: uppercase;
-        font-feature-settings: 'pnum' on, 'lnum' on, 'dnom' on, 'liga' off, 'kern' off;
+        // font-feature-settings: 'pnum' on, 'lnum' on, 'dnom' on, 'liga' off, 'kern' off;
         color: #FFFFFF;
         margin-right: 56px;
         transform: translateX(-300px);
