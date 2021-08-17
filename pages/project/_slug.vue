@@ -445,7 +445,7 @@ export default {
         // height: 950px;
         // height: auto;
         height: 720px;
-        max-width: 1280px;
+        max-width: 960px;
         img {
             width: 100%;
             height: 100%;
@@ -730,7 +730,7 @@ export default {
         }
         &__info {
             margin-bottom: 156px;
-            padding: 0 64px;
+            // padding: 0 64px;
             &--share {
                 margin-bottom: 0px;
             }

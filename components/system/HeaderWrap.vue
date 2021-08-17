@@ -1,9 +1,9 @@
 <template>
-    <div>
-        <Header :data="data" :headerType="headerType" :view="view" :menuStatus="menuStatus" :class="[{'hideInScroll': hideInScroll}, {'open': menuStatus}]"/>
+    <div v-if="data">
+        <Header  :data="data" :headerType="headerType" :view="view" :menuStatus="menuStatus" :class="[{'hideInScroll': hideInScroll}, {'open': menuStatus}]"/>
         <transition
         v-if="menuStatus"
-        name="fade" 
+        name="fade"
         appear
         v-on:before-enter="beforeEnter"
         >
@@ -15,8 +15,8 @@
 <script>
 import gsap from "gsap"
 import { mapMutations } from 'vuex'
-import Header from '@/components/system/Header.vue' 
-import Menu from '@/components/system/Menu.vue' 
+import Header from '@/components/system/Header.vue'
+import Menu from '@/components/system/Menu.vue'
 export default {
     props: {
         headerType: String,
@@ -60,7 +60,7 @@ export default {
 
             const showLink = ((el) => {
                 el.forEach(item => {
-                    gsap.timeline().to(item, { 
+                    gsap.timeline().to(item, {
                             translateY: 0 + "%",
                             duration: 0.5,
                             delay: 1,
@@ -69,7 +69,7 @@ export default {
             })
             const showMenuLine = ((el) => {
                 el.forEach(item => {
-                    gsap.timeline().to(item, { 
+                    gsap.timeline().to(item, {
                         translateX: 0 + "%",
                         opacity: 1,
                         duration: 0.5,
