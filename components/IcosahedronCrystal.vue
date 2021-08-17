@@ -16,6 +16,10 @@ export default {
       type: Number,
       default: 0x222222
     },
+    timeout: {
+      type: Number,
+      default: 2000
+    },
   },
   data: function () {
     return {
@@ -28,7 +32,7 @@ export default {
       has_image: this.has_image,
       color: this.color
     });
-    setTimeout(() => this.animate(), 2000);
+    setTimeout(() => this.animate(), this.timeout);
   },
   methods: {
     animate() {
