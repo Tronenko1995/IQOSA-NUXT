@@ -9,32 +9,34 @@
         <ul class="career__list" v-if="list">
             <li v-for="(item, i) in list" class="job" ref="job" @mouseover="hideJobs()" @mouseleave="showJobs()" @click="job(i)"  :key="i">
                 <hr class="job__line">
-                <div class="job__for-counter">
-                    <p class="job__counter">{{ data.numeration_text }} {{i+1}}</p>
-                </div>
-                <div class="job__info">
-                    <h2 class="job__title">
-                        <p class="job__title-text">{{ item.vacancy_name }}</p>
-                    </h2>
-                    <!-- <div class="job__visible" v-html="item.visible"></div> -->
-                    <div class="job__visible" v-html="item.vacancy_responsibilities"></div>
-                    <div class="job__hidden">
-                    <template v-if="item.vacancy_description">
-                        <p v-for="(item,i) in item.vacancy_description" :key="i" v-html="item.paragraph"></p>
-                    </template>
-                        <nuxt-link :to="localePath('/forms/join')" class="job__link job-link arrow-link" @mouseover.native="findElement($event)" @mouseleave.native="animateTextHide($event)">
-                            <span class="arrow-link__change">
-                                <span class="arrow-link__span arrow-link__span--first">fill</span>
-                                <span class="arrow-link__span arrow-link__span--last">fill</span>
-                            </span>
-                            <span class="arrow-link__text">THE form</span>
-                            <span class="arrow-link__circle">
-                                <svg class="arrow-link__svg" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.40039 12.4004H17.6004" stroke-linecap="square"/><path d="M13.9004 8L18.4004 12.4L13.9004 16.8" stroke-linecap="square"/></svg>
-                            </span>
-                        </nuxt-link>
+                <div class="job__container">
+                    <div class="job__for-counter">
+                        <p class="job__counter">{{ data.numeration_text }} {{i+1}}</p>
                     </div>
+                    <div class="job__info">
+                        <h2 class="job__title">
+                            <p class="job__title-text">{{ item.vacancy_name }}</p>
+                        </h2>
+                        <!-- <div class="job__visible" v-html="item.visible"></div> -->
+                        <div class="job__visible" v-html="item.vacancy_responsibilities"></div>
+                        <div class="job__hidden">
+                        <template v-if="item.vacancy_description">
+                            <p v-for="(item,i) in item.vacancy_description" :key="i" v-html="item.paragraph"></p>
+                        </template>
+                            <nuxt-link :to="localePath('/forms/join')" class="job__link job-link arrow-link" @mouseover.native="findElement($event)" @mouseleave.native="animateTextHide($event)">
+                                <span class="arrow-link__change">
+                                    <span class="arrow-link__span arrow-link__span--first">fill</span>
+                                    <span class="arrow-link__span arrow-link__span--last">fill</span>
+                                </span>
+                                <span class="arrow-link__text">THE form</span>
+                                <span class="arrow-link__circle">
+                                    <svg class="arrow-link__svg" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.40039 12.4004H17.6004" stroke-linecap="square"/><path d="M13.9004 8L18.4004 12.4L13.9004 16.8" stroke-linecap="square"/></svg>
+                                </span>
+                            </nuxt-link>
+                        </div>
+                    </div>
+                    <img class="job__svg" :src="require('~/assets/svg/arrow-career.svg')" alt="" width="42" height="42">
                 </div>
-                <img class="job__svg" :src="require('~/assets/svg/arrow-career.svg')" alt="" width="42" height="42">
                 <hr class="job__line job__line--last" v-if="i === list.length">
             </li>
         </ul>
@@ -75,18 +77,6 @@ export default {
 			type: Array,
 		}
 	},
-    data() {
-        return {
-            jobs: [
-                {
-                    id: 1,
-                    name: 'architecture',
-                    visible: '<p>Итак, если ты:</p><ul><li>имеешь высшее профильное образование и опыт работы от 3х лет;</li><li>мобильный, активный, в “теме” рынка современных материалов, нормы их расхода;</li><li>знаешь процессы ремонтно-строительных работ и у тебя всегда всё под контролем.</li></ul><p>Ты - тот, кто нам нужен!</p>',
-                    hidden: '<p>Обязанности:</p><ul><li>читать чертежи, составлять и контролировать сметную документацию по проектам;</li><li>контролировать расходование и списание материальных ресурсов;</li><li>учет и анализ взаиморасчетов с контрагентами и поставщиками, контроль выполнения договорных обязательств;</li><li>проверка актов выполненных работ (соответствия объемов выполненных работ).</li></ul><p>Что еще важно:</p><ul><li>личное авто;</li><li>контролировать расходование и списание материальных ресурсов;</li><li>организаторские навыки;</li><li>пунктуальность;</li></ul>',
-                }
-            ]
-      }
-    },
     mounted() {
         this.$gsap.registerPlugin(this.$ScrollTrigger);
         if (this.preloader) {
@@ -165,11 +155,11 @@ export default {
                     tl = this.$gsap.timeline()
                 );
 
-                tl.to(item.querySelector("hr"), {width: 100 + "%", duration: 0.5, delay: 1})
+                tl.to(item.querySelector("hr"), {width: 100 + "%", duration: 0.5, delay: 0})
                 tl.to(item.querySelector("hr:last-child"), {width: 100 + "%", duration: 0.5})
                 tl.to(item.querySelector(".job__counter"), {translateY: 0, duration: 0.5})
                 tl.to(item.querySelector(".job__title-text"), {translateY: 0, scale: 1, duration: 0.5, delay: 0.5}, 0)
-                tl.to(item.querySelectorAll(".job__visible div p"), {translateY: 0, opacity: 1, duration: 0.5, delay: 0.850}, 0)
+                tl.to(item.querySelectorAll(".job__visible div"), {translateY: 0, opacity: 1, duration: 0.5, delay: 0.850}, 0)
                 tl.to(item.querySelectorAll(".job__visible li"), {translateY: 0, opacity: 1, duration: 0.5, delay: 0.850}, 0)
             })
 
@@ -349,24 +339,30 @@ export default {
     }
     &__list {
         margin-top: 164px;
+        width: 60%;
     }
     &__no-vacancy {
         margin-top: 200px;
     }
 }
 .job {
-    width: 978px;
+    // width: 978px;
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
     transition: .5s;
-    padding-bottom: 56px;
+    // padding-bottom: 56px;
+    &__container {
+        display: flex;
+        width: 100%;
+    }
     &__for-counter {
-        position: absolute;
-        top: 20px;
-        left: 0;
+        // position: absolute;
+        // top: 20px;
+        // left: 0;
         overflow: hidden;
+        margin-top: 16px;
     }
     &__counter {
         font-family: 'Light', Arial;
@@ -374,7 +370,7 @@ export default {
         font-weight: 300;
         font-size: 16px;
         line-height: 100%;
-        text-transform: uppercase;
+        // text-transform: uppercase;
         // font-feature-settings: 'pnum' on, 'lnum' on, 'zero' on, 'hist' on, 'ss12' on, 'kern' off;
         color: #FFFFFF;
         transform: translateY(-100%);
@@ -384,13 +380,16 @@ export default {
         // width: 100%;
         width: 0;
         background: #fff;
+        margin-right: auto;
         &--last {
             display: none;
         }
     }
     &__info {
         margin-top: 16px;
-        width: 607px;
+        width: 60%;
+        margin-left: auto;
+        margin-right: auto;
     }
     &__title {
         font-family: 'Roman', Arial;
@@ -417,7 +416,7 @@ export default {
     }
     &__visible {
         margin-top: 16px;
-        margin-bottom: 40px;
+        margin-bottom: 50px;
         font-family: 'Light';
         font-style: normal;
         font-weight: 300;
@@ -425,7 +424,11 @@ export default {
         line-height: 140%;
         // font-feature-settings: 'pnum' on, 'lnum' on, 'kern' off;
         color: #FFFFFF;
-        p {
+        // p {
+        //     transform: translateY(-20%);
+        //     opacity: 0;
+        // }
+        div {
             transform: translateY(-20%);
             opacity: 0;
         }
@@ -462,9 +465,11 @@ export default {
         li {}
     }
     &__svg {
-        position: absolute;
-        top: 18px;
-        right: 0;
+        // position: absolute;
+        margin-top: 28px;
+        margin-right: 13px;
+        // top: 18px;
+        // right: 0;
         opacity: 0;
         transition: .5s;
     }
@@ -478,6 +483,10 @@ export default {
     }
     &__request {
         margin-left: 56px;
+    }
+    &__link {
+        margin-top: 72px;
+        margin-bottom: 56px;
     }
     &:hover {
         cursor: pointer;
@@ -544,7 +553,7 @@ export default {
 }
 @media (max-width: 1024px) {
     .career {
-        padding: 0 56px;
+        // padding: 0;
         margin-top: 296px;
         margin-bottom: 180px;
         &__title {
@@ -556,22 +565,17 @@ export default {
             margin-top: 80px;
         }
         &__list {
+            width: 90%;
             margin-top: 132px;
         }
         &__no-vacancy {
             margin-top: 140px;
-        }
-        &__list {
-            width: 100%;
         }
     }
     .job {
         width: 100%;
         &__counter {
             font-size: 14px;
-        }
-        &__info {
-            width: 522px;
         }
         &__request {
             margin-left: 40px;
@@ -582,16 +586,16 @@ export default {
         }
     }
 }
-@media (max-width: 825px) {
-    .job {
-        &__title {
-            font-size: 40px;
-        }
-    }
-}
+// @media (max-width: 825px) {
+//     .job {
+//         &__title {
+//             font-size: 40px;
+//         }
+//     }
+// }
 @media (max-width: 768px) {
     .career {
-        padding: 0 48px;
+        // padding: 0 48px;
         margin-top: 242px;
         margin-bottom: 156px;
         &__title {
@@ -605,9 +609,9 @@ export default {
         &__no-vacancy {
             margin-top: 106px;
         }
-        &__list {
-            width: 100%;
-        }
+        // &__list {
+        //     width: 100%;
+        // }
     }
     .job {
         width: 100%;
@@ -615,15 +619,12 @@ export default {
         &__counter {
             font-size: 14px;
         }
-        &__info {
-            width: 522px;
-        }
         &__request {
             margin-left: 40px;
         }
-        &__title {
-            font-size: 36px;
-        }
+        // &__title {
+            // font-size: 36px;
+        // }
         &__visible {
             margin-bottom: 50px;
         }
@@ -650,9 +651,9 @@ export default {
         }
     }
 }
-@media (max-width: 414px) {
+@media (max-width: 660px) {
     .career {
-        padding: 0 16px;
+        // padding: 0 16px;
         margin-top: 187px;
         margin-bottom: 124px;
         &__title {
@@ -667,22 +668,30 @@ export default {
             margin-top: 106px;
         }
         &__list {
-            width: 100%;
+            // width: 100%;
             margin-top: 88px;
         }
     }
     .job {
         width: 100%;
         padding-bottom: 16px;
+        &__info {
+            width: 100%;
+            margin-left: 0;
+            margin-right: 0;
+        }
+        &__container {
+            flex-direction: column;
+        }
         &__for-counter {
             display: none;
         }
         &__counter {
             display: none;
         }
-        &__title {
-            font-size: 32px;
-        }
+        // &__title {
+            // font-size: 32px;
+        // }
         &__visible {
             margin-bottom: 50px;
         }
@@ -696,6 +705,14 @@ export default {
                 display: block;
                 margin-top: 16px;
             }
+        }
+    }
+}
+
+@media (max-width: 414px) {
+    .job {
+        &__title {
+            font-size: 32px;
         }
     }
 }

@@ -166,6 +166,9 @@ export default {
     },
     getImg(img) {
       return `${this.baseUrl}${img}`;
+    },
+    scrollToTop() {
+      window.scrollTo(0,0);
     }
   },
   beforeMount() {
@@ -176,6 +179,7 @@ export default {
   },
   mounted() {
     this.setPlugVisibility();
+    this.scrollToTop();
   }
 };
 </script>

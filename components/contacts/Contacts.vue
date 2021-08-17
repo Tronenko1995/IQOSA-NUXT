@@ -227,15 +227,15 @@ export default {
                 // font-style: italic;
                 font-weight: 300;
                 font-size: 22px;
-                line-height: 100%;
+                line-height: 120%;
                 align-items: center;
                 letter-spacing: 0.05em;
                 text-transform: uppercase;
-                font-feature-settings: 'pnum' on, 'lnum' on;
+                // font-feature-settings: 'pnum' on, 'lnum' on;
                 color: #FFFFFF;
             }
             &--light {
-                margin-top: 4px;
+                padding-top: 4px;
                 a {
                     font-family: 'Light', Arial;
                     font-style: normal;
@@ -254,13 +254,13 @@ export default {
 }
 @media (max-width: 1440px) {
     .contacts {
-        &__title,
-        &__description {
-            font-size: 148px;
-        }
-        &__title {
-            margin-left: 135px;
-        }
+        // &__title,
+        // &__description {
+        //     font-size: 148px;
+        // }
+        // &__title {
+        //     margin-left: 135px;
+        // }
         &__description {
             margin-right: 79px;
         }
@@ -275,9 +275,9 @@ export default {
         &__description {
             font-size: 116px;
         }
-        &__title {
-            margin-left: 131px;
-        }
+        // &__title {
+        //     margin-left: 131px;
+        // }
         &__description {
             margin-right: 48px;
         }
@@ -299,9 +299,9 @@ export default {
         &__description {
             margin-right: 40px;
         }
-        &__title {
-            margin-left: 116px;
-        }
+        // &__title {
+        //     margin-left: 116px;
+        // }
         .make-request {
             width: 193px;
         }

@@ -152,7 +152,7 @@ export default {
 		font-size: 148px;
 		line-height: 90%;
 		text-transform: uppercase;
-		font-feature-settings: 'pnum' on, 'lnum' on, 'kern' off;
+		// font-feature-settings: 'pnum' on, 'lnum' on, 'kern' off;
 		color: #FFFFFF;
 		transform: translateX(-300px);
 		opacity: 0.5;
@@ -212,7 +212,7 @@ export default {
 		font-size: 16px;
 		line-height: 100%;
 		text-transform: uppercase;
-		font-feature-settings: 'pnum' on, 'lnum' on, 'zero' on, 'hist' on, 'ss12' on, 'kern' off;
+		// font-feature-settings: 'pnum' on, 'lnum' on, 'zero' on, 'hist' on, 'ss12' on, 'kern' off;
 		color: #FFFFFF;
 		display: block;
 	}
@@ -236,7 +236,7 @@ export default {
         font-size: 50px;
         line-height: 110%;
         text-transform: uppercase;
-        font-feature-settings: 'pnum' on, 'lnum' on, 'dnom' on, 'liga' off, 'kern' off;
+        // font-feature-settings: 'pnum' on, 'lnum' on, 'dnom' on, 'liga' off, 'kern' off;
         color: #FFFFFF;
         overflow: hidden;
     }
@@ -246,7 +246,7 @@ export default {
 		font-weight: 300;
 		font-size: 22px;
 		line-height: 140%;
-		font-feature-settings: 'pnum' on, 'lnum' on;
+		// font-feature-settings: 'pnum' on, 'lnum' on;
 		color: #FFFFFF;
 		// margin-top: 16px;
 	}

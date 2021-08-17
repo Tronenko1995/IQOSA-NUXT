@@ -5,7 +5,9 @@
                 <div class="one-news__date">
                     <span>{{ getDate(article.created_at, 'DD MMMM') }} </span>{{ getDate(article.created_at, 'YYYY') }}
                 </div>
-                <h1 class="one-news__title">{{ article.title }}</h1>
+                <h1 v-ca:title="{
+                    duration: durationAnimate
+                }" class="one-news__title">{{ article.title }}</h1>
                 <div class="one-news__image one-news__image--main">
                     <img :src="getImg(article.main_picture)" alt="">
                 </div>
@@ -236,11 +238,19 @@ export default {
             baseUrl: process.env.baseUrl,
             imgParallax: null,
             index: null,
+            durationAnimate: 0,
         }
     },
     created() {
         // this.$gsap.registerPlugin(this.$ScrollTrigger)
         // gsap.registerPlugin(ScrollTrigger);
+    },
+    beforeMount() {
+        if (this.preloader) {
+            this.durationAnimate = this.duration.preloader
+        } else {
+            this.durationAnimate = this.duration.page
+        }
     },
     mounted() {
         this.$gsap.registerPlugin(this.$ScrollTrigger);
@@ -249,10 +259,12 @@ export default {
         if (this.preloader) {
             setTimeout(() => {
                 this.setPlug(false)
+                this.animate()
             }, this.duration.preloader);
         } else {
         setTimeout(() => {
                 this.setPlug(false)
+                this.animate()
             }, this.duration.page);
         }
         // if (this.list) {
@@ -275,6 +287,52 @@ export default {
             setTeam: 'team/setTeam',
             setAnimate: 'plug/setAnimate',
         }),
+        animate() {
+            let tl,
+                line = document.querySelector('.one-news__line')
+
+                this.$ScrollTrigger.create(
+                    {
+                        trigger: line,
+                        start: "top bottom",
+                    },
+                    tl = this.$gsap.timeline()
+                );
+                this.$gsap.to(line, {width: 100 + "%", duration: 1, delay: 1})
+
+
+            // Array.from(this.$refs.job).forEach((item)=> {
+
+            //     this.$ScrollTrigger.create(
+            //         {
+            //             trigger: item,
+            //             start: "top bottom",
+            //         },
+            //         tl = this.$gsap.timeline()
+            //     );
+
+            //     tl.to(item.querySelector("hr"), {width: 100 + "%", duration: 0.5, delay: 0})
+            //     tl.to(item.querySelector("hr:last-child"), {width: 100 + "%", duration: 0.5})
+            //     tl.to(item.querySelector(".job__counter"), {translateY: 0, duration: 0.5})
+            //     tl.to(item.querySelector(".job__title-text"), {translateY: 0, scale: 1, duration: 0.5, delay: 0.5}, 0)
+            //     tl.to(item.querySelectorAll(".job__visible div"), {translateY: 0, opacity: 1, duration: 0.5, delay: 0.850}, 0)
+            //     tl.to(item.querySelectorAll(".job__visible li"), {translateY: 0, opacity: 1, duration: 0.5, delay: 0.850}, 0)
+            // })
+
+            // let titleAnimate = document.querySelectorAll('.jsTitleAnimation')
+
+            // Array.from(titleAnimate).forEach((item)=> {
+
+            //     this.$ScrollTrigger.create(
+            //         {
+            //             trigger: item,
+            //             start: "top bottom",
+            //         },
+            //     this.$gsap.to(item, {translateX: 0, opacity: 1, duration: 1})
+            //     );
+
+            // })
+        },
         testSize() {
             // console.log(this.imgParallax)
             if (window.innerWidth > 480) {
@@ -322,19 +380,6 @@ export default {
                 })
             }
         },
-        openModal() {
-            this.setTeam({
-                name: 'Fil Vladimir',
-                position: 'Designer-Visualizer',
-                img: 'https://iqosa.com/wp-content/uploads/2021/05/IMG_4211-2-copy.jpg',
-                quote: 'IQOSA is ambition, striving for individuality in design. We always wanted to create something unique and that no one has pointed us what to do.'
-            })
-            this.setModal({
-                show: true,
-                type: 'team',
-                animate: 'fade'
-            })
-        },
         go(link) {
             if (this.$route.path !== link) {
                 this.setAnimate('up')
@@ -364,6 +409,9 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
+    .js-line {
+        transform: translateY(100%);
+    }
     &__wrap {
         display: flex;
         flex-direction: column;
@@ -480,7 +528,8 @@ export default {
         width: 100%;
     }
     &__line {
-        width: 100%;
+        width: 0;
+        margin-right: auto;
         height: 1px;
         opacity: .3;
         margin-top: 72px;
@@ -593,6 +642,10 @@ export default {
         line-height: 140%;
         // font-feature-settings: 'pnum' on, 'lnum' on;
         color: #FFFFFF;
+        div {
+            margin-top: 22px;
+            margin-bottom: 16px;
+        }
         strong {
             display: block;
             margin-top: 38px;
@@ -618,28 +671,38 @@ export default {
             margin-top: 16px;
         }
         blockquote {
-            color: rgba(255,255,255,0.5);
-            position: relative;
-            padding-left: 57px;
-            // font-style: italic;
+            border-left: 1px solid #fff;
+            padding-left: 16px;
+            margin-left: 32px;
             font-family: 'LightItalic', Arial;
-            margin-top: 50px;
-            margin-bottom: 50px;
-            position: relative;
-            &::before {
-                position: absolute;
-                content: '';
-                background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjIiIGhlaWdodD0iMjMiIHZpZXdCb3g9IjAgMCAyMiAyMyIgZmlsbD0iI2ZmZmZmZjgwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGQ9Ik0yMS4yMTIgMC40NTc5OThMMjAuNiAzLjEwOTk5QzE4LjA4NCA0LjUzOCAxNi4zMTYgNy42NjYgMTUuMjk2IDEyLjQ5NEwxMy4xNTQgMjIuNjk0SDExLjAxMkwxMy4xNTQgMTIuNDk0QzEzLjgzNCA5LjA5Mzk5IDE0LjY1IDYuNTc3OTkgMTUuNjAyIDQuOTQ2QzE2LjYyMiAzLjI0NiAxOC40OTIgMS43NSAyMS4yMTIgMC40NTc5OThaTTEwLjkxIDAuNDU3OTk4TDEwLjI5OCAzLjEwOTk5QzcuNzgyIDQuNTM4IDYuMDE0IDcuNjY2IDQuOTk0IDEyLjQ5NEwyLjg1MiAyMi42OTRIMC43MUwyLjg1MiAxMi40OTRDMy41MzIgOS4wOTM5OSA0LjM0OCA2LjU3Nzk5IDUuMyA0Ljk0NkM2LjMyIDMuMjQ2IDguMTkgMS43NSAxMC45MSAwLjQ1Nzk5OFoiLz48L3N2Zz4=');
-                background-repeat: no-repeat;
+            font-weight: 300;
+            font-size: 22px;
+
+            margin-top: 22px;
+            margin-bottom: 22px;
+
+            // color: rgba(255,255,255,0.5);
+            // position: relative;
+            // padding-left: 57px;
+            // font-style: italic;
+            // font-family: 'LightItalic', Arial;
+            // margin-top: 50px;
+            // margin-bottom: 50px;
+            // position: relative;
+            // &::before {
+                // position: absolute;
+                // content: '';
+                // background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjIiIGhlaWdodD0iMjMiIHZpZXdCb3g9IjAgMCAyMiAyMyIgZmlsbD0iI2ZmZmZmZjgwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGQ9Ik0yMS4yMTIgMC40NTc5OThMMjAuNiAzLjEwOTk5QzE4LjA4NCA0LjUzOCAxNi4zMTYgNy42NjYgMTUuMjk2IDEyLjQ5NEwxMy4xNTQgMjIuNjk0SDExLjAxMkwxMy4xNTQgMTIuNDk0QzEzLjgzNCA5LjA5Mzk5IDE0LjY1IDYuNTc3OTkgMTUuNjAyIDQuOTQ2QzE2LjYyMiAzLjI0NiAxOC40OTIgMS43NSAyMS4yMTIgMC40NTc5OThaTTEwLjkxIDAuNDU3OTk4TDEwLjI5OCAzLjEwOTk5QzcuNzgyIDQuNTM4IDYuMDE0IDcuNjY2IDQuOTk0IDEyLjQ5NEwyLjg1MiAyMi42OTRIMC43MUwyLjg1MiAxMi40OTRDMy41MzIgOS4wOTM5OSA0LjM0OCA2LjU3Nzk5IDUuMyA0Ljk0NkM2LjMyIDMuMjQ2IDguMTkgMS43NSAxMC45MSAwLjQ1Nzk5OFoiLz48L3N2Zz4=');
+                // background-repeat: no-repeat;
                 // background-size: 29px 102px;
-                width: 22px;
-                height: 102px;
-                left: 10;
-                top: -20px;
+                // width: 22px;
+                // height: 102px;
+                // left: 10;
+                // top: -20px;
                 // display: flex;
                 // justify-content: flex-end;
                 
-            }
+            // }
             // span {
             //     width: 29px;
             //     height: 102px;
@@ -649,9 +712,9 @@ export default {
             //     display: flex;
             //     justify-content: flex-end;
             // }
-            svg {
-                fill: rgba(255,255,255,0.2);
-            }
+            // svg {
+                // fill: rgba(255,255,255,0.2);
+            // }
         }
     }
 }
@@ -1117,10 +1180,10 @@ export default {
             blockquote {
                 margin-top: 32px;
                 margin-bottom: 32px;
-                &::before {
-                    left: 10px;
-                    top: -15px;
-                }
+                // &::before {
+                    // left: 10px;
+                    // top: -15px;
+                // }
             }
         }
     }

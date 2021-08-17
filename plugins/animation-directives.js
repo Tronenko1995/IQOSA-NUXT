@@ -57,6 +57,38 @@ function selectAnimation(el, type, value = {},) {
   
           // preloaderText.remove('script');
       }
+      break
+
+    case 'title':
+      function TitleTextAnimation() {
+        console.log('value.duration', value.duration)
+        let split = new SplitText(el, {type: "lines", linesClass: "lines-wrapper"})
+        let split2 = new SplitText(split.lines, {type: "lines", linesClass: "js-line"})
+  
+        let tl = gsap.timeline();
+  
+            tl.to(el, {
+                duration: value.duration / 1000
+            }, 0)
+            tl.to(split2.lines, {
+                translateY: 0,
+                stagger: 0.2,
+                duration: 1,
+            })
+      }
+      if (el !== undefined) {
+        const font = `${window.getComputedStyle(el).fontSize} ${window.getComputedStyle(el).fontFamily}`; // 48px SuisseIntl
+          if (document.fonts.check(font)) {
+            TitleTextAnimation();
+          } else {
+              document.fonts.ready.then(() => {
+                TitleTextAnimation();
+              });
+          }
+  
+          // preloaderText.remove('script');
+      }
+    break
   }
 }
 

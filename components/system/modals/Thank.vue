@@ -78,6 +78,9 @@ import { mapMutations } from 'vuex'
 export default {
     mounted() {
         this.animate()
+        setTimeout(()=> {
+            this.$emit('close', 'show')
+        }, 30000)
     },
 	computed: {
 		data() { return this.$store.getters['lang/request/dataSayHi'] },
@@ -221,6 +224,12 @@ export default {
         margin-right: 56px;
         transform: translateX(-300px);
         opacity: 0.5;
+    }
+    .make-request {
+        width: 240px;
+        &__span {
+            padding: 0 2px;
+        }
     }
 }
 
