@@ -13,7 +13,7 @@
                     <img :src="getImg(project.main_picture)" alt="">
                 </div>
             </div>
-            <hr class="project__line">
+            <hr class="project__line" v-showWidth>
             <div class="project__wrap">
                 <div class="project__info">
                     <div class="project__info-left">
@@ -522,6 +522,7 @@ export default {
         opacity: .3;
         margin-top: 48px;
         background: #FFFFFF;
+        margin-right: auto;
         &--share {
             margin-top: 108px;
         }

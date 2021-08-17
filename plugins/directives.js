@@ -34,3 +34,24 @@ Vue.directive('showFade', {
     })
   }
 })
+
+Vue.directive('showWidth', {
+  inserted: function (el, binding, vnode) {
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: el,
+        start: 'top bottom',
+      },
+    });
+
+    tl.from(el, {
+      width: 0,
+      duration: 1,
+    })
+
+    tl.to(el, {
+      width: '100%'
+    })
+  }
+})
