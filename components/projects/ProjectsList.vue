@@ -507,6 +507,12 @@ export default {
       width: calc(33% - 64px);
       z-index: 10;
       flex-direction: column;
+      @media (min-height: 800px) {
+        top: -80px;
+      }
+      @media (min-height: 1000px) {
+        top: -0;
+      }
     }
     &-slide {
       display: flex;
