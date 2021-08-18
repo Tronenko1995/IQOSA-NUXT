@@ -200,16 +200,16 @@ export default {
                             duration: 0
                         })
                     })
+                    this.$gsap.to(job.querySelector(".job__hidden"), {
+                        height: "auto",
+                        opacity: 1,
+                        duration: 1,
+                    })
+                    job.classList.toggle('job--active')
+                    job.classList.toggle('job--transition')
                     setTimeout(() => {
-                        this.$gsap.to(job.querySelector(".job__hidden"), {
-                            height: "auto",
-                            opacity: 1,
-                            duration: 1,
-                        })
-                        job.classList.toggle('job--active')
-                        job.classList.toggle('job--transition')
                         this.scrollToElement(job)
-                    }, 200);
+                    }, 300);
 
             } else {
                 job.classList.toggle('job--active')
@@ -222,23 +222,32 @@ export default {
             }
         },
         scrollToElement(el) {
-            let selectedPosX = 0
             let selectedPosY = 0
+            // let selectedPosX = 0
 
             while (el != null) {
-                selectedPosX += el.offsetLeft
+                // selectedPosX += el.offsetLeft
                 selectedPosY += el.offsetTop
                 el = el.offsetParent
             }
 
-            selectedPosY -= 20
+            selectedPosY -= 21
 
             window.scrollTo({
                 top: selectedPosY,
-                left: selectedPosX,
+                // left: selectedPosX,
                 behavior: 'smooth'
-
             })
+
+            setTimeout(() => {
+            selectedPosY += 1
+
+            window.scrollTo({
+                top: selectedPosY,
+                // left: selectedPosX,
+                behavior: 'smooth'
+            })
+            }, 500);
         },
 		findElement(e) {
 			if (e.target.classList.contains('arrow-link__text') || e.target.classList.contains('arrow-link') || e.target.classList.contains('arrow-link__circle')) {
