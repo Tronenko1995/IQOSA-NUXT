@@ -592,22 +592,6 @@ export default {
             transform: scale(1.1);
             transition: .5s;
         }
-<<<<<<< HEAD
-        &:hover {
-            @media (hover: hover) {
-                img {
-                    transform: scale(1);
-                }
-                .animate-text__button {
-                    &:first-child {
-                        transform: translateY(-100%);
-                    }
-                    &:last-child {
-                        transform: translateY(-100%);
-                    }
-                }
-            }
-=======
         @media (hover: hover) {
           &:hover {
               img {
@@ -622,7 +606,6 @@ export default {
                   }
               }
           }
->>>>>>> c42c5df8cd5e8cd90a2dc0c4cb6244b07adf6d73
         }
     }
     &__list {
