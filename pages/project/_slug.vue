@@ -196,55 +196,6 @@
               >
               <span class="animate-line__line"></span>
             </div>
-<<<<<<< HEAD
-            <hr class="project__line project__line--share">
-            <div class="project__wrap">
-                <div class="project__info project__info--share">
-                    <div class="project__info-left project__info-left--share">
-                        <span>{{ data.share_title }}</span>
-                        <ul class="animate-text animate-text--share">
-                            <li class="animate-text__item" @mouseover="showCursive($event)" @mouseleave="hideCursive($event)">
-                                <a :href="share('facebook')" class="animate-text__button" target="_blank">{{ data.share_facebook }}</a>
-                                <a :href="share('facebook')" class="animate-text__button animate-text__button--cursive animate-text__button--absolute" target="_blank">{{ data.share_facebook }}</a>
-                            </li>
-                            <li class="animate-text__item" @mouseover="showCursive($event)" @mouseleave="hideCursive($event)">
-                                <a :href="share('twitter')" class="animate-text__button" target="_blank">{{ data.share_twitter }}</a>
-                                <a :href="share('twitter')" class="animate-text__button animate-text__button--cursive animate-text__button--absolute" target="_blank">{{ data.share_twitter }}</a>
-                            </li>
-                            <li class="animate-text__item" @mouseover="showCursive($event)" @mouseleave="hideCursive($event)">
-                                <a :href="share('linkedIn')" class="animate-text__button" target="_blank">{{ data.share_linkedin }}</a>
-                                <a :href="share('linkedIn')" class="animate-text__button animate-text__button--cursive animate-text__button--absolute" target="_blank">{{ data.share_linkedin }}</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="project__info-middle project__info-middle--share">
-                        <span>{{ data.link_block_title }}</span>
-                        <div class="animate-line animate-line--share">
-                             <a @click.prevent="goPage('/forms/sayhi')" :href="localePath('/forms/sayhi')"  class="animate-line__link">{{ data.link_block_text }}</a>
-						    <!-- <nuxt-link :to="localePath('/say-hi')" class="animate-line__link">{{ data.link_block_text }}</nuxt-link> -->
-						    <span class="animate-line__line"></span>
-					    </div>
-                    </div>
-                </div>
-                <div ref="next__wrap" class="project__next-wrap">
-                    <div ref="next" @click.prevent="openProject(`/project/${list[index+1].link}`)" v-if="index !== null && list[index+1]"  class="project__next" >
-                    <!-- :href="localePath(`/project/${list[index+1].link}`)"  -->
-                        <div ref="nextText" class="project__title project__title--next">
-                            <ul class="animate-text animate-text--next">
-                                <li class="animate-text__item">
-                                    <a href="#" ref="nextText1" class="animate-text__button animate-text__button--cursive  animate-text__button--next">{{ data.next_project_text }}</a>
-                                    <a href="#" class="animate-text__button animate-text__button--next animate-text__button--absolute">{{ list[index+1].type }}<span>-{{ list[index+1].number }} </span></a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="project__image project__image--next">
-                          <div class="project__image--wrapper">
-                            <img ref="next_img" :src="getImg(list[index+1].main_picture)" alt="">
-                          </div>
-                        </div>
-                    </div>
-                </div>
-=======
           </div>
         </div>
         <div ref="next__wrap" class="project__next-wrap">
@@ -273,7 +224,6 @@
                   >
                 </li>
               </ul>
->>>>>>> c42c5df8cd5e8cd90a2dc0c4cb6244b07adf6d73
             </div>
             <div ref="last_screen" class="project__image project__image--next">
               <div class="project__image--wrapper">
@@ -316,37 +266,6 @@ export default {
   },
   scrollToTop: true,
   transition: "project-page",
-<<<<<<< HEAD
-  layout: 'project',
-    async asyncData({ store, i18n, params, redirect }) {
-		// try {
-		// 	await store.dispatch('lang/parts/getPartsContent', `/parts?lang=${i18n.locale}`)
-		// } catch(e) {
-			// redirect(`404`);
-		// 	throw new Error(e);
-		// }
-        try {
-            await store.dispatch('lang/project/getProjectPageContent', `/project_page?lang=${i18n.locale}`)
-		} catch(e) {
-			redirect(`/404`);
-			// throw new Error(e);
-		}
-        try {
-          await store.dispatch('lang/projects/getProjects', '/projects')
-			} catch(e) {
-            redirect(`/404`);
-        // throw new Error(e);
-        }
-        try {
-            const slug = params.slug // When calling /abc the slug will be "abc"
-			await store.dispatch('lang/project/getProject', `/projects/${slug}?lang=${i18n.locale}`)
-            return { slug }
-		} catch(e) {
-			redirect(`/404`);
-			// throw new Error(e);
-		}
-
-=======
   layout: "project",
   async asyncData({ store, i18n, params }) {
     // try {
@@ -430,7 +349,6 @@ export default {
     },
     modal() {
       return this.$store.getters["modal/modal"];
->>>>>>> c42c5df8cd5e8cd90a2dc0c4cb6244b07adf6d73
     },
     data() {
       return this.$store.getters["lang/project/data"];
@@ -580,57 +498,10 @@ export default {
         // })
       }
     },
-<<<<<<< HEAD
-    // watch: {
-    //     list() {
-    //         if (this.list) {
-    //             this.index = this.list.findIndex(item => item.link === this.project.link);
-    //         }
-    //     }
-    // },
-    computed: {
-        preloader() { return this.$store.getters['preloader/preloader'] },
-        duration() { return this.$store.getters['plug/duration'] },
-        modal() { return this.$store.getters['modal/modal'] },
-        data() { return this.$store.getters['lang/project/data'] },
-        project() { return this.$store.getters['lang/project/project'] },
-		list() { return this.$store.getters['lang/projects/list'] },
-    },
-    methods: {
-        ...mapMutations({
-			setAnimate: 'plug/setAnimate',
-            setPlug: 'plug/setVisible',
-            setModal: 'modal/setModal',
-            setTeam: 'team/setTeam',
-        }),
-        testSize() {
-            // console.log(this.imgParallax)
-            if (window.innerWidth > 480) {
-                this.$nextTick( () => {
-                    this.imgParallax.forEach((img) => {
-                        let hero_scroll = this.$gsap.timeline({
-                            scrollTrigger: {
-                                trigger: img,
-                                start: "top bottom",
-                                end: "bottom top",
-                                // markers:true,
-                                scrub: 1.7,
-                            },
-                        })
-                        .to(img, {
-                            translateY: 0,
-                            duration: 1
-                        })
-                    })
-                })
-            }
-        },
-=======
     goToOneProject(link) {
       if (window.innerWidth >= 1024) {
         this.fullScreen = true;
         let { last_screen } = this.$refs;
->>>>>>> c42c5df8cd5e8cd90a2dc0c4cb6244b07adf6d73
 
         let tl = this.$gsap.timeline();
 
@@ -717,27 +588,6 @@ export default {
           last_screen__content.classList.add("first-screen-adapted");
         }, 500);
 
-<<<<<<< HEAD
-                setTimeout(() => {
-                  this.$router.push(this.localePath(fullLink))
-                }, 1500);
-            } else {
-                this.$router.push(this.localePath(fullLink))
-                // window.scrollTo({
-                //     top: 0,
-                //     left: 0,
-                // })
-            }
-        },
-        goPage(page) {
-            this.setAnimate('up')
-            this.setPlug(true)
-            setTimeout(() => {
-                this.setAnimate('dissolve')
-                this.$router.push(this.localePath(page))
-            }, 1000);
-        },
-=======
         setTimeout(() => {
           this.$router.push(this.localePath(link));
         }, 1500);
@@ -755,7 +605,6 @@ export default {
           }
         }
       });
->>>>>>> c42c5df8cd5e8cd90a2dc0c4cb6244b07adf6d73
     }
   }
 };
@@ -1556,65 +1405,6 @@ export default {
 }
 
 @media (max-width: 620px) {
-<<<<<<< HEAD
-    .project {
-        &__title {
-            // font-size: 50px;
-            padding: 0 16px;
-            &--next {
-                padding: 0;
-            }
-            // &--text {
-            //     font-size: 32px;
-            // }
-        }
-        &__wrap {
-            // padding: 0 16px;
-        }
-        &__info {
-            padding: 0 16px;
-            font-size: 13px;
-            margin-bottom: 88px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            &--share {
-                margin-bottom: 0px;
-            }
-            &-left {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                span {
-                    &:first-child {
-                        margin-right: 0;
-                    }
-                }
-            }
-            &-right {
-                margin-left: 0px;
-                margin-top: 56px;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                span {
-                    &:last-child {
-                        margin-left: 0px;
-                        margin-top: 8px;
-                    }
-                }
-            }
-            &-middle {
-                margin-top: 56px;
-                align-items: center;
-                flex-direction: column;
-                margin-left: 0;
-                &--share {
-                    margin-right: 0px;
-                }
-            }
-        }
-=======
   .project {
     &__title {
       // font-size: 50px;
@@ -1625,7 +1415,6 @@ export default {
       // &--text {
       //     font-size: 32px;
       // }
->>>>>>> c42c5df8cd5e8cd90a2dc0c4cb6244b07adf6d73
     }
     &__wrap {
       // padding: 0 16px;
