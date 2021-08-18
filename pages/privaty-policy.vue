@@ -53,12 +53,12 @@ export default {
         }
     },
     layout: 'standart',
-	async asyncData({ store, i18n, route, env }) {
+	async asyncData({ store, i18n, route, env, redirect }) {
 		try {
 			await store.dispatch('lang/privaty-policy/getPrivatyPolicyPageContent', `/privacy_policy?lang=${i18n.locale}`)
 		} catch(e) {
-			// redirect(`404`);
-			throw new Error(e);
+			redirect('/404');
+			// throw new Error(e);
 		}
 		let fullUrl = `${env.frontUrl}${route.path}`
 		return { fullUrl }

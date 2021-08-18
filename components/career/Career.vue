@@ -17,11 +17,17 @@
                         <h2 class="job__title">
                             <p class="job__title-text">{{ item.vacancy_name }}</p>
                         </h2>
-                        <!-- <div class="job__visible" v-html="item.visible"></div> -->
-                        <div class="job__visible" v-html="item.vacancy_responsibilities"></div>
+                        <div class="job__visible">
+                            <div v-if="item.vacancy_top_text">{{ item.vacancy_top_text }}</div>
+                            <div v-if="item.vacancy_responsibilities" v-html="item.vacancy_responsibilities"></div>
+                            <div v-if="item.vacancy_bottom_text">{{ item.vacancy_bottom_text }}</div>
+                        </div>
                         <div class="job__hidden">
                         <template v-if="item.vacancy_description">
-                            <p v-for="(item,i) in item.vacancy_description" :key="i" v-html="item.paragraph"></p>
+                            <template v-for="(item,i) in item.vacancy_description">
+                                <div v-if="item" :key="i" v-html="item.paragraph">
+                                </div>
+                            </template>
                         </template>
                             <nuxt-link :to="localePath('/forms/join')" class="job__link job-link arrow-link" @mouseover.native="findElement($event)" @mouseleave.native="animateTextHide($event)">
                                 <span class="arrow-link__change">

@@ -56,6 +56,12 @@ export default {
         width: 100%;
         padding: 0 72px;
     }
+    &--main {
+        .motto__item {
+            font-size: 20px;
+            line-height: 140%;
+        }
+    }
 }
 @media (max-width: 1440px) {
     .motto {
@@ -72,12 +78,31 @@ export default {
         &--about {
             padding: 0 56px;
         }
+        &--main {
+            .motto__item {
+                font-size: 19px;
+            }
+        }
     }
 }
 @media (max-width: 1024px) {
     .motto {
         &__item {
             font-size: 16px;
+        }
+        &--main {
+            .motto__item {
+                font-size: 16px;
+            }
+        }
+    }
+}
+@media (max-width: 820px) {
+    .motto {
+        &--main {
+            .motto__item {
+                font-size: 13px;
+            }
         }
     }
 }

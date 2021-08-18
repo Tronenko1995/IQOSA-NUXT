@@ -75,7 +75,7 @@ export default {
     };
   },
   layout: "standart",
-  async asyncData({ store, i18n, route, env }) {
+  async asyncData({ store, i18n, route, env, redirect }) {
     try {
       await store.dispatch(
         "lang/request/getDataWorkWithYouPageContent",
@@ -90,7 +90,8 @@ export default {
         `/join?lang=${i18n.locale}`
       );
     } catch (e) {
-      throw new Error(e);
+      // throw new Error(e);
+      redirect('/404')
     }
     let fullUrl = `${env.frontUrl}${route.path}`;
     return { fullUrl };

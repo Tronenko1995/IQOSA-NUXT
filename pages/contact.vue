@@ -56,12 +56,12 @@ export default {
     components: {
 		Contacts,
     },
-	async asyncData({ store, i18n, route, env }) {
+	async asyncData({ store, i18n, route, env, redirect }) {
 		try {
 			await store.dispatch('lang/contacts/getContactsPageContent', `/contacts?lang=${i18n.locale}`)
 		} catch(e) {
-			// redsirect(`404`);
-			throw new Error(e);
+			redirect(`/404`);
+			// throw new Error(e);
 		}
 		let fullUrl = `${env.frontUrl}${route.path}`
 		return { fullUrl }

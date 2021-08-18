@@ -63,17 +63,17 @@ export default {
     ProjectsList, ProjectsGrid
   },
   layout: 'projects',
-	async asyncData({ store, i18n, route, env }) {
+	async asyncData({ store, i18n, route, env, redirect }) {
     try {
         await store.dispatch('lang/projects/getProjectsPageContent', `/projects_page?lang=${i18n.locale}`)
     } catch(e) {
-      // redirect(`404`);
-      throw new Error(e);
+      redirect('/404');
+      // throw new Error(e);
     }
     try {
         await store.dispatch('lang/projects/getProjects', `/projects?lang=${i18n.locale}`)
     } catch(e) {
-      // redirect(`404`);
+      redirect(`/404`);
       throw new Error(e);
     }
 		let fullUrl = `${env.frontUrl}${route.path}`

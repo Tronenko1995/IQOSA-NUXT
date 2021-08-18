@@ -28,7 +28,7 @@ export default {
     components: {
 		News,
     },
-	async asyncData({ store, i18n }) {
+	async asyncData({ store, i18n, redirect }) {
 		// try {
 		// 	await store.dispatch('lang/parts/getPartsContent', `/parts?lang=${i18n.locale}`)
 		// } catch(e) {
@@ -38,14 +38,14 @@ export default {
 		try {
 			await store.dispatch('lang/articles/getArticlesPageContent', `/blog?lang=${i18n.locale}`)
 		} catch(e) {
-			// redsirect(`404`);
-			throw new Error(e);
+			redirect(`/404`);
+			// throw new Error(e);
 		}
         try {
             await store.dispatch('lang/articles/getArticles', '/articles')
         } catch(e) {
-            // redirect(`404`);
-            throw new Error(e);
+            redirect(`/404`);
+            // throw new Error(e);
         }
 	},
 	computed: {
