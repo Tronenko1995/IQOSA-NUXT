@@ -65,7 +65,7 @@ export default {
           }
         }
       },
-      slide_index: 0
+      slide_index: 0,
     };
   },
   methods: {
@@ -79,17 +79,15 @@ export default {
       setPlug: "plug/setVisible"
     }),
     slideChange(sw) {
-      console.log(sw);
       this.$nextTick(() => {
         const swiper = this.$refs.requestName.$el;
 
         let slide = swiper.querySelector(`.swiper-slide-active .say-hi__text`);
         if (slide) {
-          this.$router.push(this.localePath(`/forms${slide.dataset.link}`));
+          this.$router.replace(this.localePath(`/forms${slide.dataset.link}`));
         }
       });
-    },
-    setInitialSlide() {}
+    }
     // goPage(page) {
     //   this.setAnimate("up");
     //   this.setPlug(true);
