@@ -1,5 +1,8 @@
 .join-form {
     position: relative;
+    input {
+      border-radius: 0;
+    }
     em {
         font-style: normal;
         color: #fff;
