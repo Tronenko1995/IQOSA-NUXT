@@ -1476,7 +1476,7 @@ export default {
   .project {
     &__title {
       margin-top: 32px;
-      margin-bottom: 48px;
+      margin-bottom: 88px;
     }
   }
 }

@@ -79,6 +79,7 @@ export default {
 					speed: 500,
 					loop: true,
 					direction: 'vertical',
+          allowTouchMove: false,
 					slidesPerView: 1,
 					dragSize: 22,
 					controller: {
@@ -89,6 +90,7 @@ export default {
 					speed: 700,
 					loop: true,
 					direction: 'vertical',
+          allowTouchMove: false,
 					dragSize: 22,
 					slidesPerView: 1,
 					controller: {
