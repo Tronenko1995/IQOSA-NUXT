@@ -278,8 +278,10 @@ export default {
         // margin: 200px 0 70px 0;
         &--first {
             margin-top: 100px;
+            margin-bottom: 100px;
         }
         &--second {
+            margin-top: 100px;
             margin-bottom: 70px;
         }
         &__text {
