@@ -1,6 +1,6 @@
 <template>
     <main class="error-page">
-        <IcosahedronCrystal />
+        <IcosahedronCrystal :timeout="0" />
         <section class="error">
             <div class="error__info">
                 <h1 class="error__title">{{ data.title_big_bold }}</h1>
@@ -136,11 +136,11 @@ export default {
             }
 		},
         animateTextShow(el) {
-            this.$gsap.to(el.children[0], { 
+            this.$gsap.to(el.children[0], {
                 translateY: -100 + "%",
                 duration: .5
             })
-            this.$gsap.to(el.children[1], { 
+            this.$gsap.to(el.children[1], {
                 translateY: -100 + "%",
                 duration: .5
             })
