@@ -50,15 +50,24 @@ export default {
 	},
     name: 'Error',
     layout: 'error',
-    async fetch() {
-        try {
-            await this.$store.dispatch('lang/error/getErrorPageContent', `/404?lang=${this.$i18n.locale}`)
+	async asyncData({ store, i18n, route, env, redirect }) {
+		try {
+			await store.dispatch('lang/error/getErrorPageContent', `/404?lang=${i18n.locale}`)
 		} catch(e) {
-			// this.redsirect(`404`);
-            this.$router.push(this.localePath('/404'))
-			// throw new Error(e);
+			// redirect('/404');
+			throw new Error(e);
+			// error({ statusCode: 404, message: 'Post not found' })
 		}
-    },
+		try {
+			await store.dispatch('lang/parts/getPartsContent', `/parts?lang=${i18n.locale}`)
+		} catch(e) {
+			// redirect('/404');
+			throw new Error(e);
+			// error({ statusCode: 404, message: 'Post not found' })
+		}
+		let fullUrl = `${env.frontUrl}${route.path}`
+		return { fullUrl }
+	},
     beforeMount() {
         this.testPage()
     },

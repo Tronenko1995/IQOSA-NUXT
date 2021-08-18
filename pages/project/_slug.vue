@@ -93,7 +93,8 @@
                     <div class="project__info-middle project__info-middle--share">
                         <span>{{ data.link_block_title }}</span>
                         <div class="animate-line animate-line--share">
-						    <nuxt-link :to="localePath('/say-hi')" class="animate-line__link">{{ data.link_block_text }}</nuxt-link>
+                             <a @click.prevent="goPage('/forms/sayhi')" :href="localePath('/forms/sayhi')"  class="animate-line__link">{{ data.link_block_text }}</a>
+						    <!-- <nuxt-link :to="localePath('/say-hi')" class="animate-line__link">{{ data.link_block_text }}</nuxt-link> -->
 						    <span class="animate-line__line"></span>
 					    </div>
                     </div>
@@ -147,7 +148,7 @@ export default {
   scrollToTop: true,
   transition: "project-page",
   layout: 'project',
-    async asyncData({ store, i18n, params }) {
+    async asyncData({ store, i18n, params, redirect }) {
 		// try {
 		// 	await store.dispatch('lang/parts/getPartsContent', `/parts?lang=${i18n.locale}`)
 		// } catch(e) {
@@ -157,22 +158,22 @@ export default {
         try {
             await store.dispatch('lang/project/getProjectPageContent', `/project_page?lang=${i18n.locale}`)
 		} catch(e) {
-			// redsirect(`404`);
-			throw new Error(e);
+			redirect(`/404`);
+			// throw new Error(e);
 		}
         try {
           await store.dispatch('lang/projects/getProjects', '/projects')
 			} catch(e) {
-        // redirect(`404`);
-        throw new Error(e);
+            redirect(`/404`);
+        // throw new Error(e);
         }
         try {
             const slug = params.slug // When calling /abc the slug will be "abc"
 			await store.dispatch('lang/project/getProject', `/projects/${slug}?lang=${i18n.locale}`)
             return { slug }
 		} catch(e) {
-			// redsirect(`404`);
-			throw new Error(e);
+			redirect(`/404`);
+			// throw new Error(e);
 		}
 
     },
@@ -224,6 +225,7 @@ export default {
     },
     methods: {
         ...mapMutations({
+			setAnimate: 'plug/setAnimate',
             setPlug: 'plug/setVisible',
             setModal: 'modal/setModal',
             setTeam: 'team/setTeam',
@@ -356,6 +358,14 @@ export default {
                 //     left: 0,
                 // })
             }
+        },
+        goPage(page) {
+            this.setAnimate('up')
+            this.setPlug(true)
+            setTimeout(() => {
+                this.setAnimate('dissolve')
+                this.$router.push(this.localePath(page))
+            }, 1000);
         },
     }
 }
@@ -1184,6 +1194,11 @@ export default {
                 display: flex;
                 flex-direction: column;
                 align-items: center;
+                span {
+                    &:first-child {
+                        margin-right: 0;
+                    }
+                }
             }
             &-right {
                 margin-left: 0px;

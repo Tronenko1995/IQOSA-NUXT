@@ -65,12 +65,12 @@ export default {
 		Team,
 		TeamMobi,
     },
-	async asyncData({ store, i18n, route, env }) {
+	async asyncData({ store, i18n, route, env, redirect }) {
 		try {
 			await store.dispatch('lang/main/getMainPageContent', `/main?lang=${i18n.locale}`)
 		} catch(e) {
-			// redsirect(`404`);
-			throw new Error(e);
+			redirect(`/404`);
+			// throw new Error(e);
 		}
 		let fullUrl = `${env.frontUrl}${route.path}`
 		return { fullUrl }

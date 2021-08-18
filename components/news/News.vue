@@ -80,7 +80,7 @@ export default {
         animate() {
             let tl,
                 title = document.querySelectorAll('.media__title-text'),
-                description = document.querySelector('.media__description-text')
+                description = document.querySelectorAll('.media__description-text')
 
                 Array.from(title).forEach((item) => {
 
@@ -95,14 +95,17 @@ export default {
                 tl.to(item, {translateY: 0, duration: 1})
                 })
 
+                Array.from(description).forEach((item) => {
+
                 this.$ScrollTrigger.create(
                     {
-                        trigger: description,
+                        trigger: item,
                         start: "top bottom",
                     },
                     tl = this.$gsap.timeline()
                 );
-                this.$gsap.to(description, {translateY: 0, duration: 1})
+                this.$gsap.to(item, {translateY: 0, duration: 1})
+                })
         },
         goTo(page) {
           if (this.$route.name !== page) {

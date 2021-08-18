@@ -204,7 +204,7 @@ export default {
 		};
 	},
   layout: 'project',
-    async asyncData({ store, i18n, params }) {
+    async asyncData({ store, i18n, params, redirect }) {
 		// try {
 		// 	await store.dispatch('lang/parts/getPartsContent', `/parts?lang=${i18n.locale}`)
 		// } catch(e) {
@@ -220,16 +220,16 @@ export default {
         try {
           await store.dispatch('lang/articles/getArticles', '/articles')
 			} catch(e) {
-        // redirect(`404`);
-        throw new Error(e);
+        redirect(`/404`);
+        // throw new Error(e);
         }
         try {
             const slug = params.slug // When calling /abc the slug will be "abc"
 			await store.dispatch('lang/article/getArticle', `/articles/${slug}?lang=${i18n.locale}`)
             return { slug }
 		} catch(e) {
-			// redsirect(`404`);
-			throw new Error(e);
+			redirect(`/404`);
+			// throw new Error(e);
 		}
       
     },
@@ -593,15 +593,17 @@ export default {
             transition: .5s;
         }
         &:hover {
-            img {
-                transform: scale(1);
-            }
-            .animate-text__button {
-                &:first-child {
-                    transform: translateY(-100%);
+            @media (hover: hover) {
+                img {
+                    transform: scale(1);
                 }
-                &:last-child {
-                    transform: translateY(-100%);
+                .animate-text__button {
+                    &:first-child {
+                        transform: translateY(-100%);
+                    }
+                    &:last-child {
+                        transform: translateY(-100%);
+                    }
                 }
             }
         }
