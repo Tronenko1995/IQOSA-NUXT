@@ -173,17 +173,23 @@ export default {
 </script>
 
 <style lang="scss">
-@media (max-width: 768px) {
-  .motto--main .motto__item {
-    font-size: 20px;
+.motto--main .motto__item {
+  font-size: 20px;
+  line-height: 140%;
+
+  @media (max-width: 768px) {
+    .motto--main .motto__item {
+      font-size: 20px;
+    }
+  }
+
+  @media (max-width: 414px) {
+    .motto--main .motto__item {
+      font-size: 13px;
+    }
   }
 }
 
-@media (max-width: 414px) {
-  .motto--main .motto__item {
-    font-size: 13px;
-  }
-}
 
 </style>
 

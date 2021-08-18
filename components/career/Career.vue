@@ -729,6 +729,10 @@ export default {
         &__title {
             font-size: 32px;
         }
+        &:last-of-type {
+          padding-bottom: 10px;
+          border-bottom: 1px solid white;
+        }
     }
 }
 </style>

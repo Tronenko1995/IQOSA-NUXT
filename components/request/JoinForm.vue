@@ -5,15 +5,17 @@
         <span class="say-hi-form__span say-hi-form__span--wrap" ref="nameWrap">
             <input type="text" class="say-hi-form__input" v-model="name" @focus="focusInput($event)" @blur="BlurInput($event)">
             <span class="say-hi-form__placeholder">{{ data.name_input_placeholder }}</span>
+            <span v-if="!this.name" :class="{'active': errors}" class="join-form__error-item join-form__error__input">{{$t('IncorrectName')}}</span>
         </span>
 
         <div class="join-form__inner-text" v-html="data.text_before_vacancy"></div>
 
-        <div class="say-hi-form__select" :class="[{'active': vacancy !== data.vacancy_input_placeholder},{'open': vacancySelect}]">
+        <div class="say-hi-form__select" :class="[{'active': vacancy !== data.vacancy_input_placeholder},{'open': vacancySelect}, {'error': errors && vacancy === data.vacancy_input_placeholder}]">
             <div class="say-hi-form__select-head" @click.stop="vacancySelect = !vacancySelect">{{ vacancy }}</div>
             <ul v-if="vacancySelect" class="say-hi-form__dropdown">
                 <li class="say-hi-form__dropdown-item" v-for="(item, index) in data.vacancy" :key="index" @click="changeVacancy($event)">{{ item }}</li>
             </ul>
+            <span v-if="this.vacancy === this.data.vacancy_input_placeholder" :class="{'active': errors}" class="join-form__error-item join-form__error__select">{{$t('IncorrectVacancy')}}</span>
         </div>
 
         <div class="join-form__inner-text" v-html="data.text_before_file"></div>
@@ -21,6 +23,7 @@
         <span class="say-hi-form__span say-hi-form__span--wrap" :class="{'focus': inputNameFile}" ref="fileWrap">
             <input type="text" class="say-hi-form__input" @focus="focusFileInput($event)" v-model="inputNameFile">
             <span class="say-hi-form__placeholder">{{ data.file_input_placeholder }}</span>
+            <span v-if="!this.cv.file" :class="{'active': errors}" class="join-form__error-item join-form__error__input">{{$t('IncorrectCV')}}</span>
         </span>
         <input class="say-hi-form__file" :disabled="cv.preloader" type="file" name="file" ref="fileInput" accept=".doc, .docx, .pdf" @change="uploadCv">
 
@@ -29,6 +32,7 @@
         <span class="say-hi-form__span say-hi-form__span--wrap" ref="portfolioWrap">
             <input @focus="focusInput($event)" @blur="BlurInput($event)" type="text" class="say-hi-form__input" v-model="portfolio">
             <span class="say-hi-form__placeholder">{{ data.portfolio_input_placeholder }}</span>
+            <span v-if="!this.portfolio" :class="{'active': errors}" class="join-form__error-item join-form__error__input">{{$t('IncorrectLink')}}</span>
         </span>
 
         <div class="join-form__inner-text" v-html="data.text_before_email"></div>
@@ -36,9 +40,10 @@
         <span class="say-hi-form__span say-hi-form__span--wrap" ref="emailWrap">
             <input @focus="focusInput($event)" @blur="BlurInput($event)" type="text" class="say-hi-form__input" v-model="email">
             <span class="say-hi-form__placeholder">{{ data.email_input_placeholder }}</span>
+            <span v-if="!this.email || !regMail.test(this.email)" :class="{'active': errors}" class="join-form__error-item join-form__error__input">{{$t('IncorrectEmail')}}</span>
         </span>
 
-        <ul class="join-form__error" :class="{'active': errors}">
+        <!-- <ul class="join-form__error" :class="{'active': errors}">
             <li v-if="!this.name && !this.cv.file && !this.portfolio && (!this.email || !regMail.test(this.email))" class="join-form__error-item">{{ $t('FillTheForm') }}</li>
             <template v-else>
                 <li v-if="this.vacancy === this.data.vacancy_input_placeholder" class="join-form__error-item">{{ $t('IncorrectVacancy') }}</li>
@@ -47,8 +52,7 @@
                 <li v-if="!this.email || !regMail.test(this.email)" class="join-form__error-item">{{ $t('IncorrectEmail') }}</li>
                 <li v-if="!this.name" class="join-form__error-item">{{ $t('IncorrectName') }}</li>
             </template>
-
-        </ul>
+        </ul> -->
 
 
         <button class="say-hi-form__button arrow-link" :disabled="dispatchForm" @mouseover="findElement($event)" @mouseleave="animateTextHide($event)">
@@ -116,11 +120,11 @@ export default {
             }
 		},
         animateTextShow(el) {
-            this.$gsap.to(el.children[0], { 
+            this.$gsap.to(el.children[0], {
                 translateY: -100 + "%",
                 duration: .5
             })
-            this.$gsap.to(el.children[1], { 
+            this.$gsap.to(el.children[1], {
                 translateY: -100 + "%",
                 duration: .5
             })
@@ -128,11 +132,11 @@ export default {
 		animateTextHide(e) {
 			if (e.target.classList.contains('arrow-link')) {
                 const el = e.target.querySelector('.arrow-link__change')
-				this.$gsap.to(el.children[0], { 
+				this.$gsap.to(el.children[0], {
 					translateY: 0 + "%",
 					duration: .5
 				})
-				this.$gsap.to(el.children[1], { 
+				this.$gsap.to(el.children[1], {
 					translateY: 0 + "%",
 					duration: .5
 				})
@@ -282,6 +286,9 @@ export default {
         // font-feature-settings: 'pnum' on, 'lnum' on;
         &-head {
             width: 100%;
+        }
+        &.error {
+          border-bottom: 1px solid rgba(255, 73, 73, 0.4);
         }
         &::after {
             content: "";
@@ -566,5 +573,21 @@ export default {
             margin: 64px auto 0 auto;
         }
     }
+}
+.join-form__error__input {
+  position: absolute;
+  right: 0;
+  bottom: -6px;
+  @media (max-width: 500px) {
+    bottom: -9px;
+  }
+}
+.join-form__error__select {
+  position: absolute;
+  right: 0;
+  bottom: -13px;
+  @media (max-width: 500px) {
+    bottom: -14px;
+  }
 }
 </style>
