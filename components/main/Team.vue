@@ -571,6 +571,6 @@ export default {
 }
 .arrow-link__span--first {
   position: relative;
-  top: 2px;
+//   top: 2px;
 }
 </style>

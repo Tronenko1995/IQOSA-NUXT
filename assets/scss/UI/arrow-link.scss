@@ -7,6 +7,8 @@
         display: block;
         overflow: hidden;
         position: relative;
+        // padding-bottom: 1px;
+        line-height: 140%;
         .arrow-link__span {
             display: block;
             &:last-child {
@@ -25,6 +27,9 @@
         padding-right: 2px;
         line-height: 140%;
         font-size: 14px;
+        &--first {
+            top: 1;
+        }
         &--last {
             font-family: 'Light', Arial;
             font-weight: 400;
@@ -37,7 +42,9 @@
         letter-spacing: 0.05em;
         text-transform: uppercase;
         // font-feature-settings: 'pnum' on, 'lnum' on;
-        margin-left: 8px;
+        margin-left: 6px;
+        font-size: 14px;
+        line-height: 140%;
     }
     &__circle {
         display: flex;

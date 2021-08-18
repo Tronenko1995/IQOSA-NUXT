@@ -342,6 +342,10 @@ export default {
 		}
 		&__title {
 			font-size: 56px;
+			&--ru,
+			&--ua {
+				font-size: 42px;
+			}
 		}
     .make-request__link {
       font-size: 14px;
