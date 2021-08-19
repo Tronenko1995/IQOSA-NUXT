@@ -592,20 +592,20 @@ export default {
             transform: scale(1.1);
             transition: .5s;
         }
-        &:hover {
-            @media (hover: hover) {
-                img {
-                    transform: scale(1);
-                }
-                .animate-text__button {
-                    &:first-child {
-                        transform: translateY(-100%);
-                    }
-                    &:last-child {
-                        transform: translateY(-100%);
-                    }
-                }
-            }
+        @media (hover: hover) {
+          &:hover {
+              img {
+                  transform: scale(1);
+              }
+              .animate-text__button {
+                  &:first-child {
+                      transform: translateY(-100%);
+                  }
+                  &:last-child {
+                      transform: translateY(-100%);
+                  }
+              }
+          }
         }
     }
     &__list {

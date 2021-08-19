@@ -126,10 +126,30 @@ export default {
 				translateY: 0,
 				duration: 0.5
           	})
-			
+
 			delay = delay + 0.25
 
 			})
+
+        Array.from(this.$refs.job).forEach((item)=> {
+
+          this.$ScrollTrigger.create(
+              {
+                  trigger: item,
+                  start: "top bottom",
+              },
+              tl = this.$gsap.timeline()
+          );
+
+          tl.fromTo(item,
+           {translateY: 40, opacity: 0},
+           {translateY: 0, opacity: 1, duration: 0.5}, 0)
+          tl.to(item.querySelector("hr"), {width: 100 + "%", duration: 0.5})
+          tl.fromTo(item.querySelectorAll(".job__text"),
+           {translateY: 40, opacity: 0},
+           {translateY: 0, opacity: 1, duration: 0.5}, 0)
+          // tl.to(item.querySelector(".job__title-text"), {translateY: 0, scale: 1, duration: 0.5, delay: 0.5}, 0)
+      })
 		}
   	}
 }
@@ -218,7 +238,9 @@ export default {
 	}
     &__line {
         height: 1px;
-        width: 100%;
+        // width: 100%;
+        width: 0;
+        margin-right: auto;
         background: #fff;
 		opacity: 0.3;
         &--last {

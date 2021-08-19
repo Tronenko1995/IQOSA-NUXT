@@ -18,9 +18,6 @@
           </swiper-slide>
         </swiper>
       </div>
-      <p class="say-hi__text say-hi__text--first say-hi__text--mobile">
-        {{ data[0].title_big_thin }}
-      </p>
     </div>
   </div>
 </template>
@@ -88,14 +85,6 @@ export default {
         }
       });
     }
-    // goPage(page) {
-    //   this.setAnimate("up");
-    //   this.setPlug(true);
-    //   setTimeout(() => {
-    //     this.setAnimate("dissolve");
-    //     this.$router.push(this.localePath("/forms" + page));
-    //   }, 1000);
-    // }
   },
   computed: {
     requestSlider() {
@@ -147,11 +136,11 @@ export default {
     justify-content: center;
     width: 100%;
   }
-  .slider__container {
-    @media (max-width: 414px) {
-      display: none;
-    }
-  }
+  // .slider__container {
+  //   @media (max-width: 414px) {
+  //     display: none;
+  //   }
+  // }
   &__text {
     font-family: "ThinItalic", Arial;
     // font-style: italic;
@@ -180,16 +169,6 @@ export default {
     &--last {
       // width: 25%;
     }
-  }
-}
-
-.say-hi__text--mobile {
-  display: none;
-}
-
-.say-hi__text--mobile {
-  @media (max-width: 414px) {
-    display: block;
   }
 }
 
@@ -269,7 +248,8 @@ export default {
 @media (max-width: 414px) {
   .say-hi {
     &__text {
-      font-size: 36px;
+      // font-size: 36px;
+      font-size: 32px;
     }
   }
 }
