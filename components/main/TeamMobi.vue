@@ -90,11 +90,11 @@ export default {
             }
 		},
         animateTextShow(el) {
-            this.$gsap.to(el.children[0], { 
+            this.$gsap.to(el.children[0], {
                 translateY: -100 + "%",
                 duration: .5
             })
-            this.$gsap.to(el.children[1], { 
+            this.$gsap.to(el.children[1], {
                 translateY: -100 + "%",
                 duration: .5
             })
@@ -102,11 +102,11 @@ export default {
 		animateTextHide(e) {
 			if (e.target.classList.contains('arrow-link')) {
                 const el = e.target.querySelector('.arrow-link__change')
-				this.$gsap.to(el.children[0], { 
+				this.$gsap.to(el.children[0], {
 					translateY: 0 + "%",
 					duration: .5
 				})
-				this.$gsap.to(el.children[1], { 
+				this.$gsap.to(el.children[1], {
 					translateY: 0 + "%",
 					duration: .5
 				})
@@ -134,6 +134,10 @@ export default {
         &-text {
             font-size: 42px;
             white-space: normal;
+
+            @media (max-width: 1440px) {
+              white-space: normal;
+            }
             &:nth-child(2) {
                 margin-left: auto;
             }

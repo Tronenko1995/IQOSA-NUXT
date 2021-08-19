@@ -15,23 +15,32 @@ Vue.directive('scroll', {
 Vue.directive('showFade', {
   inserted: function (el, binding, vnode) {
 
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: el,
-        start: 'top bottom',
-      },
-    });
+    if (el.tagName === 'IMG') {
+      el.addEventListener('load', animateElement)
+    } else {
+      animateElement();
+    }
 
-    tl.from(el, {
-      opacity: 0,
-      y: 50,
-      duration: 0.7,
-    })
+    function animateElement() {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: el,
+          start: 'top bottom',
+        },
+      });
 
-    tl.to(el, {
-      opacity: 1,
-      y: 0,
-    })
+      tl.from(el, {
+        opacity: 0,
+        y: 50,
+        duration: 0.7,
+      })
+
+      tl.to(el, {
+        opacity: 1,
+        y: 0,
+      })
+    }
+
   }
 })
 
