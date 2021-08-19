@@ -155,6 +155,17 @@ export default {
 }
 </script>
 
+<style lang="scss">
+.privaty-policy {
+    &__info--ru, &__info--ua {
+    .motto--privaty .motto__item {
+      font-size: 16px;
+    }
+  }
+}
+</style>
+
+
 <style lang="scss" scoped>
 .privaty-policy {
 	margin-top: 367px;
