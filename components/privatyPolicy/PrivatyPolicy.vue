@@ -1,7 +1,7 @@
 <template>
 	<main class="private-policy-page">
 		<section class="privaty-policy">
-			<div class="privaty-policy__info">
+			<div class="privaty-policy__info" :class="'privaty-policy__info--' + $i18n.locale">
 				<div class="privaty-policy__title privaty-policy__title--uno">{{ data.title_bold }}</div>
 				<div class="privaty-policy__row">
 					<Motto class="motto motto--privaty" :motto-list="data.subtitle"/>
@@ -198,6 +198,11 @@ export default {
 		flex-direction: column;
 		align-items: center;
 	}
+  &__info--ru, &__info--ua {
+    .privaty-policy__title {
+      font-size: 64px;
+    }
+  }
 }
 
 .motto {
