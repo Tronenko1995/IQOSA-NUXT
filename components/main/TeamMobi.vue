@@ -135,9 +135,6 @@ export default {
             font-size: 42px;
             white-space: normal;
 
-            @media (max-width: 1440px) {
-              white-space: normal;
-            }
             &:nth-child(2) {
                 margin-left: auto;
             }
@@ -146,7 +143,13 @@ export default {
     &__link {
         margin-bottom: 88px;
     }
+    .team-mobi__title-text {
+      @media (max-width: 1440px) {
+        white-space: normal;
+      }
+    }
 }
+
 .team-slider {
     display: block;
     margin-bottom: 88px;
