@@ -299,6 +299,7 @@ export default {
             right: 0;
             bottom: 10px;
             transition: .5s ease;
+            pointer-events: none;
         }
         &.active {
             color: #FFFFFF;
