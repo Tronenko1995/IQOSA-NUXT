@@ -190,7 +190,7 @@
             <span>{{ data.link_block_title }}</span>
             <div class="animate-line animate-line--share">
               <nuxt-link
-                :to="localePath('/say-hi')"
+                :to="localePath('/forms/sayhi')"
                 class="animate-line__link"
                 >{{ data.link_block_text }}</nuxt-link
               >

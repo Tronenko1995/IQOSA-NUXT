@@ -9,7 +9,7 @@
                     duration: durationAnimate
                 }" class="one-news__title">{{ article.title }}</h1>
                 <div class="one-news__image one-news__image--main">
-                    <img :src="getImg(article.main_picture)" alt="">
+                    <img :src="getImg(article.main_picture)" alt="" v-showFade>
                 </div>
             </div>
             <hr class="one-news__line">
@@ -49,7 +49,7 @@
                 </div>
                 <template v-for="(item, i) in article.content">
                     <div v-if="item && item.text_block" class="one-news__block" :key="i">
-                        <div class="one-news__text" v-html="item.text_block">
+                        <div class="one-news__text" v-html="item.text_block" v-showFade>
 
                         </div>
                         <!-- <p class="one-news__text">It’s not easy to choose a particular style to work with for any studio. Why? With the abundance of materials, trends, requests, and decoration available now, it might seem like the only way out is to succumb to the omnipresent eclecticism. While it might be an option for some, it’s not the one for IQOSA. In our industry, there is an idea that a great studio focuses on one-two styles, creates the projects in those styles only and only for those people, who share the philosophy behind them. For IQOSA, these styles are modern and modern classic.</p>
@@ -62,11 +62,11 @@
                         <p class="one-news__text one-news__text--standart">And in this article, we’ll tell you why we decided to work with the modern and modern classic styles, what’s the difference between them, and why you might consider them for your future home. Let’s start with a review of both.</p> -->
                     </div>
                     <div v-if="item && item.gallery && item.gallery.length == 1" class="one-news__image one-news__image--main" :key="i">
-                        <img :src="getImg(item.gallery[0].picture)" alt="">
+                        <img :src="getImg(item.gallery[0].picture)" alt="" v-showFade>
                     </div>
                     <div v-if="item && item.gallery && item.gallery.length == 2" class="one-news__images" :key="i">
                         <div class="one-news__image" v-for="(obj, y) in item.gallery" :key="y">
-                            <img :src="getImg(obj.picture)" alt="">
+                            <img :src="getImg(obj.picture)" alt="" v-showFade>
                         </div>
                     </div>
                 </template>
