@@ -255,7 +255,35 @@ export default {
           hid: "description",
           name: "description",
           content: this.project.meta_description
-        }
+        },
+				{
+					property: 'og:title',
+					content: this.project.seo_title,
+				},
+				{
+					property: 'og:description',
+					content: this.project.meta_description,
+				},
+				{
+					property: 'og:url',
+					content: this.fullUrl
+				},
+				{
+					property: 'og:image',
+					content: this.getImg(this.project.main_picture),
+				},
+				{
+					property: 'og:image:width',
+					content: '1080',
+				},
+				{
+					property: 'og:image:height',
+					content: '1080',
+				},
+				{
+					property: 'twitter:card',
+					content: 'summary_large_image',
+				},
         // {
         //   hid: "keywords",
         //   name: "keywords",
@@ -267,7 +295,7 @@ export default {
   scrollToTop: true,
   transition: "project-page",
   layout: "project",
-  async asyncData({ store, i18n, params }) {
+  async asyncData({ store, i18n, route, params, env }) {
     // try {
     // 	await store.dispatch('lang/parts/getPartsContent', `/parts?lang=${i18n.locale}`)
     // } catch(e) {
@@ -295,7 +323,8 @@ export default {
         "lang/project/getProject",
         `/projects/${slug}?lang=${i18n.locale}`
       );
-      return { slug };
+		  let fullUrl = `${env.frontUrl}${route.path}`
+      return { slug, fullUrl  };
     } catch (e) {
       // redsirect(`404`);
       throw new Error(e);
