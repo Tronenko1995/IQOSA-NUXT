@@ -489,6 +489,12 @@ export default {
             font-family: 'LightItalic';
             // font-style: italic;
         }
+        .arrow-link__change {
+            padding-bottom: 1px;
+            .arrow-link__span--first {
+                top: 0;
+            }
+        }
     }
     &__file {
         display: none;
