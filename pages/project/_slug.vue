@@ -721,7 +721,7 @@ export default {
       position: absolute;
       margin-top: 0px;
       left: 50%;
-      transform: translateX(-50%);
+      transform: translate(-50%, 50%);
       top: -150px;
       z-index: 1;
       // width: 100%;
@@ -942,7 +942,7 @@ export default {
             transform: translateY(-100%);
           }
           &:last-child {
-            transform: translateY(-130%);
+            transform: translateY(-100%);
           }
         }
       }
@@ -996,11 +996,6 @@ export default {
       .animate-text__item {
         height: 220px;
       }
-    }
-  }
-  &--next {
-    .animate-text__item {
-      height: 220px;
     }
   }
 }
