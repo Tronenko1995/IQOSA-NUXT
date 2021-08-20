@@ -61,7 +61,7 @@ function selectAnimation(el, type, value = {},) {
 
     case 'title':
       function TitleTextAnimation() {
-        console.log('value.duration', value.duration)
+        // console.log('value.duration', value.duration)
         let split = new SplitText(el, {type: "lines", linesClass: "lines-wrapper"})
         let split2 = new SplitText(split.lines, {type: "lines", linesClass: "js-line"})
   
