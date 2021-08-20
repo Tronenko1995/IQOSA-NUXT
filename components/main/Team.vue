@@ -5,6 +5,7 @@
                 <div class="team__line team__line--uno"></div>
                 <div class="team__line team__line--dos">
                     <div class="team__item team__item--uno team__item--small" data-position="13">
+                        <div v-showForeground class="foreground_appear"></div>
                         <template v-if="data.team_members[12]">
                             <picture class="team__block">
                                 <img class="team__img" @click="openModal(data.team_members[12])" :src="getImg(data.team_members[12].parallax_photo)" alt="">
@@ -16,6 +17,7 @@
                         </template>
                     </div>
                     <div class="team__item team__item--dos team__item--middle" data-position="6">
+                        <div v-showForeground class="foreground_appear"></div>
                         <template v-if="data.team_members[5]">
                             <picture class="team__block">
                                 <img class="team__img" @click="openModal(data.team_members[5])" :src="getImg(data.team_members[5].parallax_photo)" alt="">
@@ -27,6 +29,7 @@
                         </template>
                     </div>
                     <div class="team__item team__item--tres team__item--middle" data-position="1">
+                        <div v-showForeground class="foreground_appear"></div>
                         <template v-if="data.team_members[0]">
                             <picture class="team__block">
                                 <img class="team__img" @click="openModal(data.team_members[0])" :src="getImg(data.team_members[0].parallax_photo)" alt="">
@@ -38,6 +41,7 @@
                         </template>
                     </div>
                     <div class="team__item team__item--cuatro team__item--small" data-position="7">
+                        <div v-showForeground class="foreground_appear"></div>
                         <template v-if="data.team_members[6]">
                             <picture class="team__block">
                                 <img class="team__img" @click="openModal(data.team_members[6])" :src="getImg(data.team_members[6].parallax_photo)" alt="">
@@ -49,6 +53,7 @@
                         </template>
                     </div>
                     <div  class="team__item team__item--cinco team__item--small" data-position="14">
+                        <div v-showForeground class="foreground_appear"></div>
                         <template v-if="data.team_members[13]">
                             <picture class="team__block">
                                 <img class="team__img" @click="openModal(data.team_members[13])" :src="getImg(data.team_members[13].parallax_photo)" alt="">
@@ -62,6 +67,7 @@
                 </div>
                 <div class="team__line team__line--tres">
                     <div  class="team__item team__item--uno team__item--major" data-position="9">
+                        <div v-showForeground class="foreground_appear"></div>
                         <template v-if="data.team_members[8]">
                             <picture class="team__block">
                                 <img class="team__img" @click="openModal(data.team_members[8])" :src="getImg(data.team_members[8].parallax_photo)" alt="">
@@ -73,6 +79,7 @@
                         </template>
                     </div>
                     <div class="team__item team__item--dos team__item--middle" data-position="4">
+                        <div v-showForeground class="foreground_appear"></div>
                         <template v-if="data.team_members[3]">
                             <picture class="team__block">
                                 <img class="team__img" @click="openModal(data.team_members[3])" :src="getImg(data.team_members[3].parallax_photo)" alt="">
@@ -99,6 +106,7 @@
 
                     </div>
                     <div class="team__item team__item--tres team__item--small" data-position="2">
+                        <div v-showForeground class="foreground_appear"></div>
                         <template v-if="data.team_members[1]">
                             <picture class="team__block">
                                 <img class="team__img" @click="openModal(data.team_members[1])" :src="getImg(data.team_members[1].parallax_photo)" alt="">
@@ -110,6 +118,7 @@
                          </template>
                     </div>
                     <div  class="team__item team__item--cuatro team__item--middle" data-position="8">
+                        <div v-showForeground class="foreground_appear"></div>
                         <template v-if="data.team_members[7]">
                             <picture class="team__block">
                                 <img class="team__img" @click="openModal(data.team_members[7])" :src="getImg(data.team_members[7].parallax_photo)" alt="">
@@ -123,6 +132,7 @@
                 </div>
                 <div class="team__line team__line--cuatro">
                     <div class="team__item team__item--uno team__item--small" data-position="12">
+                        <div v-showForeground class="foreground_appear"></div>
                         <template v-if="data.team_members[11]">
                             <picture class="team__block">
                                 <img class="team__img" @click="openModal(data.team_members[11])" :src="getImg(data.team_members[11].parallax_photo)" alt="">
@@ -134,6 +144,7 @@
                         </template>
                     </div>
                     <div class="team__item team__item--dos team__item--small" data-position="5">
+                        <div v-showForeground class="foreground_appear"></div>
                         <template v-if="data.team_members[4]">
                             <picture class="team__block">
                                 <img class="team__img" @click="openModal(data.team_members[4])" :src="getImg(data.team_members[4].parallax_photo)" alt="">
@@ -145,6 +156,7 @@
                         </template>
                     </div>
                     <div class="team__item team__item--tres team__item--major" data-position="3">
+                        <div v-showForeground class="foreground_appear"></div>
                         <template v-if="data.team_members[2]">
                             <picture class="team__block">
                                 <img class="team__img" @click="openModal(data.team_members[2])" :src="getImg(data.team_members[2].parallax_photo)" alt="">
@@ -156,6 +168,7 @@
                         </template>
                     </div>
                     <div class="team__item team__item--cuatro team__item--square" data-position="10">
+                        <div v-showForeground class="foreground_appear"></div>
                         <template v-if="data.team_members[9]">
                             <picture class="team__block">
                                 <img class="team__img" @click="openModal(data.team_members[9])" :src="getImg(data.team_members[9].parallax_photo)" alt="">
@@ -169,6 +182,7 @@
                 </div>
                 <div class="team__line team__line--cinco">
                     <div  class="team__item team__item--uno team__item--major" data-position="11">
+                        <div v-showForeground class="foreground_appear"></div>
                         <template v-if="data.team_members[10]">
                             <picture class="team__block">
                                 <img class="team__img" @click="openModal(data.team_members[10])" :src="getImg(data.team_members[10].parallax_photo)" alt="">
@@ -572,5 +586,15 @@ export default {
 .arrow-link__span--first {
   position: relative;
 //   top: 2px;
+}
+
+.foreground_appear {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: #1b1b1b;
+  z-index: 10;
 }
 </style>

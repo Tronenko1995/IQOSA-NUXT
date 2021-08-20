@@ -13,6 +13,7 @@
           v-for="(item, i) in list" :key="i"
           @click="setChosen(i)"
           :class="{'projects-interior__item__is-visible': i == chosed_project_index, 'projects-interior__item__is-hidden': chosed_project_index != null}"
+          v-showFade
         >
           <div class="projects-interior__block">
             <img  class="projects-interior__img" :src="getImg(item.main_picture)" alt="">

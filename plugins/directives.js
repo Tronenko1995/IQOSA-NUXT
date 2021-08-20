@@ -64,3 +64,22 @@ Vue.directive('showWidth', {
     })
   }
 })
+
+Vue.directive('showForeground', {
+  inserted: function (el, binding, vnode) {
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: el,
+        start: 'top bottom',
+      },
+    });
+
+    tl.to(el, {
+      height: 0,
+      duration: 1,
+      delay: 0.25
+    })
+  }
+})
+
