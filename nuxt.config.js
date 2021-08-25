@@ -16,7 +16,7 @@ export default {
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { property: 'og:type', content: 'website' },
       { property: 'og:site_name', content: 'IQOSA' },
-      { property: 'theme-color', content: '#1b1b1b' },
+      { name: 'theme-color', content: '#1b1b1b' },
     ],
     link: [
       { rel: 'apple-touch-icon', href: '/favicon/apple-icon-57x57.png', sizes: '57x57' },
