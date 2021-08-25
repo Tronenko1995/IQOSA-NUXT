@@ -41,28 +41,28 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    { 
+    {
       src: '~/plugins/i18n.js'
     },
-    { 
+    {
       src: '~/plugins/app-components'
     },
-    { 
+    {
       src: '~/plugins/swiper.js'
     },
-    { 
+    {
       src: '~/plugins/scrollLock.js'
     },
-    { 
-      src: '~/plugins/directives', 
+    {
+      src: '~/plugins/directives',
       mode: 'client'
     },
-    { 
-      src: '~/plugins/animation-directives', 
+    {
+      src: '~/plugins/animation-directives',
       mode: 'client'
     },
   ],
-  
+
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
 
@@ -70,6 +70,7 @@ export default {
   buildModules: [
     'nuxt-gsap-module',
     '@nuxtjs/moment',
+    '@nuxtjs/pwa',
   ],
 
   moment: {
