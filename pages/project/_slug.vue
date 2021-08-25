@@ -65,23 +65,31 @@
             <div class="project__images">
               <div
                 v-if="item.gallery.first_image"
-                class="project__image project__image--uno project__image--parallax"
+                class="project__image project__image--uno project__image--parallax project__image--text"
               >
                 <img
                   :src="getImg(item.gallery.first_image)"
                   alt=""
                   v-showFade
                 />
+                <div class="project__image-text" v-if="item.gallery.first_image_text1 || item.gallery.first_image_text2">
+                  <p>{{ item.gallery.first_image_text1 }}</p>
+                  <p>{{ item.gallery.first_image_text2 }}</p>
+                </div>
               </div>
               <div
                 v-if="item.gallery.second_image"
-                class="project__image project__image--dos project__image--parallax"
+                class="project__image project__image--dos project__image--parallax project__image--text"
               >
                 <img
                   :src="getImg(item.gallery.second_image)"
                   alt=""
                   v-showFade
                 />
+                <div class="project__image-text project__image-text--right" v-if="item.gallery.second_image_text1 || item.gallery.second_image_text2">
+                  <p>{{ item.gallery.second_image_text1 }}</p>
+                  <p>{{ item.gallery.second_image_text2 }}</p>
+                </div>
               </div>
             </div>
             <div
@@ -92,23 +100,31 @@
             <div class="project__images">
               <div
                 v-if="item.gallery.third_image"
-                class="project__image project__image--tres project__image--parallax"
+                class="project__image project__image--tres project__image--parallax project__image--text"
               >
                 <img
                   :src="getImg(item.gallery.third_image)"
                   alt=""
                   v-showFade
                 />
+                <div class="project__image-text" v-if="item.gallery.third_image_text1 || item.gallery.third_image_text2">
+                  <p>{{ item.gallery.third_image_text1 }}</p>
+                  <p>{{ item.gallery.third_image_text2 }}</p>
+                </div>
               </div>
               <div
                 v-if="item.gallery.fourth_image"
-                class="project__image project__image--quatro project__image--parallax"
+                class="project__image project__image--quatro project__image--parallax project__image--text"
               >
                 <img
                   :src="getImg(item.gallery.fourth_image)"
                   alt=""
                   v-showFade
                 />
+                <div class="project__image-text project__image-text--right" v-if="item.gallery.fourth_image_text1 || item.gallery.fourth_image_text2">
+                  <p>{{ item.gallery.fourth_image_text1 }}</p>
+                  <p>{{ item.gallery.fourth_image_text2 }}</p>
+                </div>
               </div>
             </div>
           </div>
@@ -705,7 +721,7 @@ export default {
       position: absolute;
       margin-top: 0px;
       left: 50%;
-      transform: translateX(-50%);
+      transform: translate(-50%, 50%);
       top: -150px;
       z-index: 1;
       // width: 100%;
@@ -724,6 +740,7 @@ export default {
     // height: auto;
     height: 720px;
     max-width: 960px;
+    position: relative;
     img {
       width: 100%;
       height: 100%;
@@ -786,6 +803,38 @@ export default {
     &--wrapper {
       height: 720px;
       overflow: hidden;
+    }
+    &--text {
+      display: flex;
+      overflow: unset;
+    }
+    &-text {
+      position: absolute;
+      transform: rotate(-90deg);
+      display: flex;
+      flex-direction: row;
+      width: 12px;
+      height: fit-content;
+      bottom: 0;
+      right: -20px;
+      &--right {
+        left: -20px;
+      }
+      p {
+        font-family: 'Light',Arial;
+        font-weight: 300;
+        font-size: 11px;
+        line-height: 120%;
+        width: fit-content;
+        height: fit-content;
+        text-transform: uppercase;
+        white-space: nowrap;
+        margin: 0;
+        color: #fff;
+        &:first-child {
+          margin-right: 97px;
+        }
+      }
     }
   }
   &__images {
@@ -893,7 +942,7 @@ export default {
             transform: translateY(-100%);
           }
           &:last-child {
-            transform: translateY(-130%);
+            transform: translateY(-100%);
           }
         }
       }
@@ -947,11 +996,6 @@ export default {
       .animate-text__item {
         height: 220px;
       }
-    }
-  }
-  &--next {
-    .animate-text__item {
-      height: 220px;
     }
   }
 }
@@ -1148,6 +1192,13 @@ export default {
         // width: 640px;
         // height: 720px;
         height: 530px;
+      }
+      &-text {
+        p {
+          &:first-child {
+            margin-right: 50px;
+          }
+        }
       }
     }
     &__next {
@@ -1354,6 +1405,12 @@ export default {
         // width: auto;
         // height: 206px;
       }
+      &--text {
+        overflow: hidden;
+      }
+      &-text {
+        display: none;
+      }
     }
     &__next {
       margin: 222px auto 0 auto;
@@ -1410,6 +1467,9 @@ export default {
       }
       img {
         width: 100%;
+      }
+      &-text {
+        display: none;
       }
     }
     &__title {

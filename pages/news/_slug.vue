@@ -19,16 +19,16 @@
                         <span>{{ $t('share') }}</span>
                         <ul class="animate-text animate-text--share">
                             <li class="animate-text__item" @mouseover="showCursive($event)" @mouseleave="hideCursive($event)">
-                                <a href="#" class="animate-text__button">Facebook</a>
-                                <a href="#" class="animate-text__button animate-text__button--cursive animate-text__button--absolute">Facebook</a>
+                                <a :href="share('facebook')" target="_blank" class="animate-text__button">Facebook</a>
+                                <a :href="share('facebook')" target="_blank" class="animate-text__button animate-text__button--cursive animate-text__button--absolute">Facebook</a>
                             </li>
                             <li class="animate-text__item" @mouseover="showCursive($event)" @mouseleave="hideCursive($event)">
-                                <a href="#" class="animate-text__button">Twitter</a>
-                                <a href="#" class="animate-text__button animate-text__button--cursive animate-text__button--absolute">Twitter</a>
+                                <a :href="share('twitter')" target="_blank" class="animate-text__button">Twitter</a>
+                                <a :href="share('twitter')" target="_blank" class="animate-text__button animate-text__button--cursive animate-text__button--absolute">Twitter</a>
                             </li>
                             <li class="animate-text__item" @mouseover="showCursive($event)" @mouseleave="hideCursive($event)">
-                                <a href="#" class="animate-text__button">LinkedIn</a>
-                                <a href="#" class="animate-text__button animate-text__button--cursive animate-text__button--absolute">LinkedIn</a>
+                                <a :href="share('linkedIn')" target="_blank" class="animate-text__button">LinkedIn</a>
+                                <a :href="share('linkedIn')" target="_blank" class="animate-text__button animate-text__button--cursive animate-text__button--absolute">LinkedIn</a>
                             </li>
                         </ul>
                     </div>
@@ -195,6 +195,34 @@ export default {
 			name: "description",
 			content: this.article.meta_description
 			},
+            {
+                property: 'og:title',
+                content: this.article.seo_title,
+            },
+            {
+                property: 'og:description',
+                content: this.article.meta_description,
+            },
+            {
+                property: 'og:url',
+                content: this.fullUrl
+            },
+            {
+                property: 'og:image',
+                content: this.getImg(this.article.main_picture),
+            },
+            {
+                property: 'og:image:width',
+                content: '1080',
+            },
+            {
+                property: 'og:image:height',
+                content: '1080',
+            },
+            {
+                property: 'twitter:card',
+                content: 'summary_large_image',
+            },
 			// {
 			//   hid: "keywords",
 			//   name: "keywords",
@@ -204,7 +232,7 @@ export default {
 		};
 	},
   layout: 'project',
-    async asyncData({ store, i18n, params, redirect }) {
+    async asyncData({ store, i18n, params, redirect, env, route }) {
 		// try {
 		// 	await store.dispatch('lang/parts/getPartsContent', `/parts?lang=${i18n.locale}`)
 		// } catch(e) {
@@ -226,7 +254,8 @@ export default {
         try {
             const slug = params.slug // When calling /abc the slug will be "abc"
 			await store.dispatch('lang/article/getArticle', `/articles/${slug}?lang=${i18n.locale}`)
-            return { slug }
+		    let fullUrl = `${env.frontUrl}${route.path}`
+            return { slug, fullUrl  };
 		} catch(e) {
 			redirect(`/404`);
 			// throw new Error(e);
@@ -239,6 +268,7 @@ export default {
             imgParallax: null,
             index: null,
             durationAnimate: 0,
+            url: '',
         }
     },
     created() {
@@ -254,6 +284,7 @@ export default {
     },
     mounted() {
         this.$gsap.registerPlugin(this.$ScrollTrigger);
+        this.url = window.location.href;
         this.imgParallax = document.querySelectorAll('.one-news__image--parallax')
         this.testSize()
         if (this.preloader) {
@@ -397,6 +428,15 @@ export default {
             let locale
             this.$i18n.locale === 'ua' ? locale = 'uk' : locale = this.$i18n.locale
             return this.$moment(date).locale(locale).format(format)
+        },
+        share(social) {
+        if (social === "facebook") {
+            return `https://www.facebook.com/sharer.php?s=100&p[title]=${this.article.title}&u=${this.url}&p[summary]=&p[url]=${this.url}`;
+        } else if (social === "twitter") {
+            return `https://twitter.com/intent/tweet?url=${this.url}/&text=${this.article.title}`;
+        } else if (social === "linkedIn") {
+            return `https://www.linkedin.com/shareArticle?mini=true&url=${this.url}/&title=${this.article.title}`;
+        }
         },
     }
 }

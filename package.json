@@ -34,6 +34,7 @@
     "vue-awesome-swiper": "^4.1.1"
   },
   "devDependencies": {
+    "@nuxtjs/pwa": "^3.3.5",
     "nuxt-gsap-module": "^1.4.0"
   }
 }

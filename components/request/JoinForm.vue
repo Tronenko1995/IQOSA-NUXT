@@ -299,6 +299,7 @@ export default {
             right: 0;
             bottom: 10px;
             transition: .5s ease;
+            pointer-events: none;
         }
         &.active {
             color: #FFFFFF;
@@ -487,6 +488,12 @@ export default {
         span {
             font-family: 'LightItalic';
             // font-style: italic;
+        }
+        .arrow-link__change {
+            padding-bottom: 1px;
+            .arrow-link__span--first {
+                top: 0;
+            }
         }
     }
     &__file {

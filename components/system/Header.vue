@@ -127,7 +127,7 @@ export default {
           }
         },
         showCursive(e) {
-            console.dir(e)
+            // console.dir(e)
             if (e.target.tagName === 'A') {
                 gsap.to(e.target.parentElement.children[0], {
                     translateY: -100 + "%",
@@ -140,7 +140,7 @@ export default {
             }
         },
         hideCursive(e) {
-            console.dir(e)
+            // console.dir(e)
             if (e.target.tagName === 'LI' || e.target.classList.contains('request')) {
                 gsap.to(e.target.children[0], {
                     translateY: 0 + "%",
