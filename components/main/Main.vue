@@ -21,7 +21,7 @@
 					@mouseover="findElement($event)"
 					@mouseleave="animateTextHide($event)"
 				>
-					<nuxt-link :to="localePath('/forms/sayhi')" class="make-request__link">
+					<a @click.prevent="goPage('/forms/sayhi')" :href="localePath('/forms/sayhi')" class="make-request__link">
 						<span class="make-request__text">{{ data.hero_link_text }}</span>
 						<span class="make-request__change">
 							<span class="make-request__span make-request__span--first"
@@ -29,7 +29,7 @@
 							>
 							<span class="make-request__span">{{ data.hero_link_text_animated }}</span>
 						</span>
-					</nuxt-link>
+					</a>
 					<span class="make-request__line"></span>
 				</div>
 			</div>
@@ -75,7 +75,8 @@ export default {
 	},
 	methods: {
 		...mapMutations({
-				setPlug: 'plug/setVisible',
+			setAnimate: 'plug/setAnimate',
+			setPlug: 'plug/setVisible',
 		}),
 		animate() {
 			const mottoItem = document.querySelectorAll('.motto__item span')
@@ -168,6 +169,14 @@ export default {
 				});
 			}
 		},
+        goPage(page) {
+            this.setAnimate('up')
+            this.setPlug(true)
+            setTimeout(() => {
+                this.setAnimate('dissolve')
+                this.$router.push(this.localePath(page))
+            }, 1000);
+        },
 	},
 };
 </script>

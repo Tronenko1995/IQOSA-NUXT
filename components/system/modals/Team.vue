@@ -83,9 +83,9 @@ export default {
         color: #fff;
         font-style: normal;
         em {
-        font-family: 'LightItalic', Arial;
-
-        font-weight: 300;
+            font-family: 'LightItalic', Arial;
+            font-style: normal;
+            font-weight: 300;
         }
     }
     &__position {

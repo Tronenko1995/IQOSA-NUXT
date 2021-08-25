@@ -1074,6 +1074,7 @@ export default {
   .project {
     &__info {
       width: 100%;
+      padding: 0 56px;
     }
   }
 }
@@ -1095,7 +1096,6 @@ export default {
       }
     }
     &__info {
-      padding: 0 56px;
       margin-bottom: 148px;
       &--share {
         margin-bottom: 0px;
