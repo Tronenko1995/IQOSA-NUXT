@@ -31,10 +31,10 @@
       <div data-img="https://iqosa.com/wp-content/uploads/2020/12/3-1.jpg" class="multi-textures__area"></div> -->
     </div>
 
-		<div class="projects-list__title">
-			<p v-if="data.projects_title" class="projects-list__title-text">{{ data.projects_title.thin_text }}</p>
-			<p v-if="data.projects_title" class="projects-list__title-text projects-list__title-text--roman">{{ data.projects_title.bold_text }}</p>
-		</div>
+		<h1 class="projects-list__title">
+			<span v-if="data.projects_title" class="projects-list__title-text">{{ data.projects_title.thin_text }}</span>
+			<span v-if="data.projects_title" class="projects-list__title-text projects-list__title-text--roman">{{ data.projects_title.bold_text }}</span>
+		</h1>
 
     <SwitchProjects class="switch-project-list" :view="view" :data="data"/>
 
@@ -376,6 +376,8 @@ export default {
     position: absolute;
     left: 72px;
     bottom: 72px;
+    display: flex;
+    flex-direction: column;
     // z-index: 2;
     &-text {
       font-family: "ThinItalic", Arial;

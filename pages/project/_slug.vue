@@ -6,9 +6,9 @@
           <span>{{ project.city }}</span
           >, {{ project.country }}
         </div>
-        <div class="project__title" v-showFade>
+        <h1 class="project__title" v-showFade>
           {{ project.type }}<span>-{{ project.number }}</span>
-        </div>
+        </h1>
         <!-- <p>{{ slug }}</p> -->
         <div class="project__image">
           <img :src="getImg(project.main_picture)" alt="" />
