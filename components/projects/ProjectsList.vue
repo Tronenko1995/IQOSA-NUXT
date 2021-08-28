@@ -42,11 +42,11 @@
 			<!-- <nuxt-link class="projects-slider__link projects-slider__link--head" :to="localePath(projectLink)"></nuxt-link> -->
 
 
-      <a id="projectLink" @click.prevent="go($event)" class="projects-slider__link projects-slider__link--head" :href="`/${$i18n.locale}/project/${list[0].link}`" :data-link="list[0].link"></a>
+      <a id="projectLink" @click.prevent="go($event)" class="projects-slider__link projects-slider__link--head" :href="localePath(`/project/${list[0].link}`)" :data-link="list[0].link"></a>
 			<div class="swiper-wrapper" data-cursor="drag">
 				<div v-for="(item, i) in list" :key="i" class="swiper-slide projects-slider__item" :data-link="item.link">
           <!-- <a href=""></a> -->
-          <a class="projects-slider__link" @click.prevent="goPage(`/project/${item.link}`)" :href="`/${$i18n.locale}/project/${item.link}`"></a>
+          <a class="projects-slider__link" @click.prevent="goPage(`/project/${item.link}`)" :href="localePath(`/project/${item.link}`)"></a>
             <p class="projects-slider__title">
               <span>{{ item.type }}</span>-{{ item.number }}
             </p>
