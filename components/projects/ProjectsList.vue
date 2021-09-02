@@ -5,30 +5,6 @@
 		<div class="projects-list__shadow"></div>
     <div ref="shaderObj" class="projects-list__shader">
       <div v-for="(item, i) in list" :key="i" :data-img="getImg(item.main_picture)" class="multi-textures__area"></div>
-      <!-- <div :data-img="require('~/assets/img/projects/shader/1.jpg')" class="multi-textures__area"></div> -->
-      <!-- <div :data-img="require('~/assets/img/projects/shader/2.jpg')" class="multi-textures__area"></div> -->
-      <!-- <div :data-img="require('~/assets/img/projects/shader/3.jpg')" class="multi-textures__area"></div> -->
-      <!-- <div :data-img="require('~/assets/img/projects/shader/4.jpg')" class="multi-textures__area"></div> -->
-
-      <!-- <div data-img="https://iqosa.com/wp-content/uploads/2021/03/1.7.jpg" class="multi-textures__area"></div>
-      <div data-img="https://iqosa.com/wp-content/uploads/2021/02/13-4.jpg" class="multi-textures__area"></div>
-      <div data-img="https://iqosa.com/wp-content/uploads/2021/02/05-2.jpg" class="multi-textures__area"></div>
-      <div data-img="https://iqosa.com/wp-content/uploads/2021/02/09.jpg" class="multi-textures__area"></div>
-      <div data-img="https://iqosa.com/wp-content/uploads/2021/02/09-1.jpg" class="multi-textures__area"></div>
-      <div data-img="https://iqosa.com/wp-content/uploads/2021/01/1.jpg" class="multi-textures__area"></div>
-      <div data-img="https://iqosa.com/wp-content/uploads/2021/01/1-1.jpg" class="multi-textures__area"></div>
-      <div data-img="https://iqosa.com/wp-content/uploads/2021/01/1-3.jpg" class="multi-textures__area"></div>
-      <div data-img="https://iqosa.com/wp-content/uploads/2021/01/1-4.jpg" class="multi-textures__area"></div>
-      <div data-img="https://iqosa.com/wp-content/uploads/2021/01/3-3.jpg" class="multi-textures__area"></div>
-      <div data-img="https://iqosa.com/wp-content/uploads/2021/01/render_2-3-e1611310593828.jpg" class="multi-textures__area"></div>
-      <div data-img="https://iqosa.com/wp-content/uploads/2020/12/1-8.jpg" class="multi-textures__area"></div>
-      <div data-img="https://iqosa.com/wp-content/uploads/2020/12/1-6.jpg" class="multi-textures__area"></div>
-      <div data-img="https://iqosa.com/wp-content/uploads/2020/12/3-4.jpg" class="multi-textures__area"></div>
-      <div data-img="https://iqosa.com/wp-content/uploads/2020/12/1-1-1.jpg" class="multi-textures__area"></div>
-      <div data-img="https://iqosa.com/wp-content/uploads/2020/12/1-3.jpg" class="multi-textures__area"></div>
-      <div data-img="https://iqosa.com/wp-content/uploads/2020/12/14-2.jpg" class="multi-textures__area"></div>
-      <div data-img="https://iqosa.com/wp-content/uploads/2020/12/13.jpg" class="multi-textures__area"></div>
-      <div data-img="https://iqosa.com/wp-content/uploads/2020/12/3-1.jpg" class="multi-textures__area"></div> -->
     </div>
 
 		<h1 class="projects-list__title">
@@ -54,33 +30,6 @@
               {{ item.release_date }}, <span>{{ item.city }}</span>, {{ item.country }}, {{ item.area }}M2
             </p>
 				</div>
-				<!-- <div class="swiper-slide projects-slider__item" data-url="/project/iq-87-or/">
-          <nuxt-link class="projects-slider__link" :to="localePath('/project/iq-87-or/')"></nuxt-link>
-            <p class="projects-slider__title">
-              <span>IQ</span>-87-OR
-            </p>
-            <p class="projects-slider__description">
-              2021,<span>Kyiv</span>, Ukraine, 119M2
-            </p>
-				</div>
-				<div class="swiper-slide projects-slider__item" data-url="/project/iq-86-sl/">
-          <nuxt-link class="projects-slider__link" :to="localePath('/project/iq-86-sl/')"></nuxt-link>
-            <p class="projects-slider__title">
-              <span>IQ</span>-86-SL
-            </p>
-            <p class="projects-slider__description">
-              2021,<span>Kyiv</span>, Ukraine, 101M2
-            </p>
-				</div>
-				<div class="swiper-slide projects-slider__item" data-url="/project/iq-94-or/">
-          <nuxt-link class="projects-slider__link" :to="localePath('/project/iq-94-or/')"></nuxt-link>
-            <p class="projects-slider__title">
-              <span>IQ</span>-94-OR
-            </p>
-            <p class="projects-slider__description">
-              2021,<span>Kyiv</span>, Ukraine, 181M2
-            </p>
-				</div> -->
 			</div>
 		</div>
 
@@ -291,7 +240,8 @@ export default {
     scene.add(mesh)
 
     setTimeout(() => {
-        this.renderer.setSize(this.texture.active.image.naturalWidth, this.texture.active.image.naturalHeight)
+        // this.renderer.setSize(this.texture.active.image.naturalWidth, this.texture.active.image.naturalHeight)
+        this.setRendererSize();
     }, 1000)
 
     let animate = () => {
@@ -326,13 +276,21 @@ export default {
               onComplete: this.getActiveTexture()
           })
       }
+      // this.renderer.setSize(this.texture.active.image.naturalWidth, this.texture.active.image.naturalHeight)
+      this.setRendererSize();
+    },
+    setRendererSize() {
+      const {naturalWidth, naturalHeight} = this.texture.active.image;
+      this.renderer.setSize(naturalWidth, naturalHeight)
+      this.renderer.domElement.style.transform = `translate(-50%, -50%) scale(${window.innerWidth/naturalWidth})`
     },
     getActiveTexture() {
       this.texture.active =  this.shader.images[this.shader.active]
       this.shader.flag = false
     },
     onWindowResize() {
-      this.renderer.setSize(this.texture.active.image.naturalWidth, this.texture.active.image.naturalHeight)
+      this.setRendererSize();
+      // this.renderer.setSize(this.texture.active.image.naturalWidth, this.texture.active.image.naturalHeight)
     },
     passView() {
       // console.log(e)
@@ -528,8 +486,8 @@ export default {
   }
 }
 .projects-list canvas{
-  min-width: 100% !important;
-  min-height: 100% !important;
+  // min-width: 100% !important;
+  // min-height: 100% !important;
   position: absolute;
   left: 50%;
   top: 50%;
