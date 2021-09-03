@@ -14,15 +14,15 @@
         </div>
         <ul class="media-plug__social">
             <li class="media-plug__social-item">
-                <a class="media-plug__social-link" href="https://www.facebook.com/IQOSA/" target="_blank">Facebook</a>
+                <a class="media-plug__social-link" href="https://www.facebook.com/IQOSA/" target="_blank" rel="noopener noreferrer">Facebook</a>
                 <span class="media-plug__social-line"></span>
             </li>
             <li class="media-plug__social-item">
-                <a class="media-plug__social-link" href="https://www.pinterest.com/iqosa/_created/" target="_blank">Pinterest</a>
+                <a class="media-plug__social-link" href="https://www.pinterest.com/iqosa/_created/" target="_blank" rel="noopener noreferrer">Pinterest</a>
                 <span class="media-plug__social-line"></span>
             </li>
             <li class="media-plug__social-item">
-                <a class="media-plug__social-link" href="https://www.instagram.com/iqosa/" target="_blank">Instagram</a>
+                <a class="media-plug__social-link" href="https://www.instagram.com/iqosa/" target="_blank" rel="noopener noreferrer">Instagram</a>
                 <span class="media-plug__social-line"></span>
             </li>
         </ul>

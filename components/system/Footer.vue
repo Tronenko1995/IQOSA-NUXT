@@ -9,7 +9,7 @@
                     <div class="footer__block">
                         <p class="footer__subtitle">{{ data.left_city }}</p>
                         <div class="footer__block-column">
-                            <a target="_blank" :href="data.left_google_map_link" class="footer__link">{{ data.left_address }}</a>
+                            <a target="_blank" rel="noopener noreferrer" :href="data.left_google_map_link" class="footer__link">{{ data.left_address }}</a>
                             <a href="mailto:info@iqosa.com" class="footer__link footer__link--mail">{{ data.left_emails }}</a>
                         </div>
 
@@ -70,7 +70,7 @@
                     <!-- <p class="footer__main-text footer__main-text--italic">say hi.</p> -->
                     <div class="footer__main-row">
                         <div class="footer__unit" v-for="(item, i) in data.right_links" :key="i">
-                            <a target="_blank" class="footer__link footer__link--line" :href="getImg(item.link_content)">{{ item.link_text }}</a>
+                            <a target="_blank" rel="noopener noreferrer" class="footer__link footer__link--line" :href="getImg(item.link_content)">{{ item.link_text }}</a>
                             <span class="footer__line"></span>
                         </div>
                     </div>
@@ -91,7 +91,7 @@
                 <p class="footer__description footer__description--opacity">&copy; IQOSA {{ data.year }}.</p>
                 <p class="footer__developed">
                     <span class="footer__description footer__description--opacity">{{ $t('developed') }}</span>
-                    <a target="_blank" href="https://thefirstthelast.agency/" class="footer__link">The First The Last.</a>
+                    <a target="_blank" rel="noopener noreferrer" href="https://thefirstthelast.agency/" class="footer__link">The First The Last.</a>
                 </p>
             </div>
         </div>

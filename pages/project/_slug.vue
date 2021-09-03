@@ -154,13 +154,13 @@
                 <a
                   :href="share('facebook')"
                   class="animate-text__button"
-                  target="_blank"
+                  target="_blank" rel="noopener noreferrer"
                   >{{ data.share_facebook }}</a
                 >
                 <a
                   :href="share('facebook')"
                   class="animate-text__button animate-text__button--cursive animate-text__button--absolute"
-                  target="_blank"
+                  target="_blank" rel="noopener noreferrer"
                   >{{ data.share_facebook }}</a
                 >
               </li>
@@ -172,13 +172,13 @@
                 <a
                   :href="share('twitter')"
                   class="animate-text__button"
-                  target="_blank"
+                  target="_blank" rel="noopener noreferrer"
                   >{{ data.share_twitter }}</a
                 >
                 <a
                   :href="share('twitter')"
                   class="animate-text__button animate-text__button--cursive animate-text__button--absolute"
-                  target="_blank"
+                  target="_blank" rel="noopener noreferrer"
                   >{{ data.share_twitter }}</a
                 >
               </li>
@@ -190,13 +190,13 @@
                 <a
                   :href="share('linkedIn')"
                   class="animate-text__button"
-                  target="_blank"
+                  target="_blank" rel="noopener noreferrer"
                   >{{ data.share_linkedin }}</a
                 >
                 <a
                   :href="share('linkedIn')"
                   class="animate-text__button animate-text__button--cursive animate-text__button--absolute"
-                  target="_blank"
+                  target="_blank" rel="noopener noreferrer"
                   >{{ data.share_linkedin }}</a
                 >
               </li>

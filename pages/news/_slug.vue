@@ -19,16 +19,16 @@
                         <span>{{ $t('share') }}</span>
                         <ul class="animate-text animate-text--share">
                             <li class="animate-text__item" @mouseover="showCursive($event)" @mouseleave="hideCursive($event)">
-                                <a :href="share('facebook')" target="_blank" class="animate-text__button">Facebook</a>
-                                <a :href="share('facebook')" target="_blank" class="animate-text__button animate-text__button--cursive animate-text__button--absolute">Facebook</a>
+                                <a :href="share('facebook')" target="_blank" rel="noopener noreferrer" class="animate-text__button">Facebook</a>
+                                <a :href="share('facebook')" target="_blank" rel="noopener noreferrer" class="animate-text__button animate-text__button--cursive animate-text__button--absolute">Facebook</a>
                             </li>
                             <li class="animate-text__item" @mouseover="showCursive($event)" @mouseleave="hideCursive($event)">
-                                <a :href="share('twitter')" target="_blank" class="animate-text__button">Twitter</a>
-                                <a :href="share('twitter')" target="_blank" class="animate-text__button animate-text__button--cursive animate-text__button--absolute">Twitter</a>
+                                <a :href="share('twitter')" target="_blank" rel="noopener noreferrer" class="animate-text__button">Twitter</a>
+                                <a :href="share('twitter')" target="_blank" rel="noopener noreferrer" class="animate-text__button animate-text__button--cursive animate-text__button--absolute">Twitter</a>
                             </li>
                             <li class="animate-text__item" @mouseover="showCursive($event)" @mouseleave="hideCursive($event)">
-                                <a :href="share('linkedIn')" target="_blank" class="animate-text__button">LinkedIn</a>
-                                <a :href="share('linkedIn')" target="_blank" class="animate-text__button animate-text__button--cursive animate-text__button--absolute">LinkedIn</a>
+                                <a :href="share('linkedIn')" target="_blank" rel="noopener noreferrer" class="animate-text__button">LinkedIn</a>
+                                <a :href="share('linkedIn')" target="_blank" rel="noopener noreferrer" class="animate-text__button animate-text__button--cursive animate-text__button--absolute">LinkedIn</a>
                             </li>
                         </ul>
                     </div>

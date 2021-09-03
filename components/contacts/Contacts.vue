@@ -9,22 +9,22 @@
                 <div class="contacts__row">
                     <div class="contacts__location">
                         <div class="contacts__location-text">
-                            <a :href="data.map_link" target="_blank" v-html="data.address"></a>
+                            <a :href="data.map_link" target="_blank" rel="noopener noreferrer" v-html="data.address"></a>
                         </div>
                         <div class="contacts__location-text contacts__location-text--light">
-                            <a :href="data.map_link" target="_blank"  v-html="data.address_two"></a>
+                            <a :href="data.map_link" target="_blank" rel="noopener noreferrer"  v-html="data.address_two"></a>
                         </div>
                     </div>
-                    <a :href="data.map_link" target="_blank" class="contacts__title">{{ data.latitude }}</a>
+                    <a :href="data.map_link" target="_blank" rel="noopener noreferrer" class="contacts__title">{{ data.latitude }}</a>
                 </div>
                 <div class="contacts__row">
-                    <a :href="data.map_link" target="_blank" class="contacts__description">{{ data.longitude }}</a>
+                    <a :href="data.map_link" target="_blank" rel="noopener noreferrer" class="contacts__description">{{ data.longitude }}</a>
                     <div
                         class="make-request job__request"
                         @mouseover="findElement($event)"
                         @mouseleave="animateTextHide($event)"
                         >
-                        <a :href="data.map_link" target="_blank" class="make-request__link">
+                        <a :href="data.map_link" target="_blank" rel="noopener noreferrer" class="make-request__link">
                             <span class="make-request__text">{{ data.map_link_text }}</span>
                             <span class="make-request__change">
                             <span class="make-request__span make-request__span--first"

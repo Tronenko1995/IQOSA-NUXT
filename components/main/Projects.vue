@@ -49,7 +49,7 @@
 			<swiper ref="projectPhotos" :options="projectPhotosSetting" class="projects__photos projects-photos" data-cursor="drag">
 				<swiper-slide class="projects-photos__item" :data-link="item.link" v-for="item in data.projects" :key="item.link">
 					<!-- <div class="projects-photos__slide"> -->
-					<a @click.prevent="goPage(`/project/${item.link}`)" :href="`/project/${item.link}`"  class="projects-photos__slide">
+					<a @click.prevent="goPage(`/project/${item.link}`)" :href="`/project/${item.link}`"  class="projects-photos__slide" aria-label="iqosa project">
 					<!-- <nuxt-link :to="localePath(`/project/${item.link}`)" class="projects-photos__slide"> -->
 						<img class="projects-photos__img" :src='`${baseUrl}${item.main_picture}`' alt="">
 					</a>

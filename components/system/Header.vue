@@ -1,10 +1,10 @@
 <template>
     <header class="header" :class="[{'header--main': headerType === 'main'},{'header--transparent': headerType === 'transparent' || view === 'list'}]" v-scroll="handleScroll">
         <div class="header__wrap">
-            <a v-if="headerType === 'main'" href="/" class="header__logo">
+            <a v-if="headerType === 'main'" href="/" class="header__logo" aria-label="iqosa">
               <img :src="getImg(data.logo)" alt="" class="header__img">
             </a>
-            <a v-else @click.prevent="goTo('/')" href="/" class="header__logo">
+            <a v-else @click.prevent="goTo('/')" href="/" class="header__logo" aria-label="iqosa">
               <img :src="getImg(data.logo)" alt="" class="header__img">
             </a>
             <div class="menu-button" @click="openMenu()">
