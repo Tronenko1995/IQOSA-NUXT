@@ -7,7 +7,7 @@
       <div class="projects-grid__description">
         <p v-for="(item, i) in data.projects_subtitle" :key="i">{{ item }}</p>
       </div>
-      <ul class="projects-interior">
+      <ul class="projects-interior" ref="links_ul">
         <li class="projects-interior__item"
           ref="card" data-cursor="link"
           v-for="(item, i) in list" :key="i"
@@ -128,15 +128,21 @@ export default {
 
                   let elementTop = card.getBoundingClientRect().top;
 
-
                   this.$gsap.to(card, {
-
                       width,
                       y: marginTop - elementTop,
                       duration: 1,
                   })
 
                     card.querySelector(".projects-interior-link").style.opacity = 0;
+                    let cards = this.$refs.links_ul.querySelectorAll(".projects-interior__item")
+
+                    for (const card_item of cards) {
+                      console.log(card_item != card);
+                      if (card_item != card) {
+                        card_item.style.opacity = 0;
+                      }
+                    }
                   }
                   // window.scrollTo(selectedPosX, selectedPosY);
               })
@@ -378,7 +384,7 @@ export default {
         &-left span,
         &-right span {
         transform: translateY(0);
-        } 
+        }
       }
       .projects-name__item {
         transform: translateY(0);
