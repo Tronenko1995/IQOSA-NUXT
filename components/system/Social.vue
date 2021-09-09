@@ -2,8 +2,8 @@
     <div class="social">
         <ul class="social__list">
             <li class="social__item" v-for="(item, i) in social" @mouseover="$emit('showCursive', $event)" @mouseleave="$emit('hideCursive', $event)" :key="i">
-                <a target="_blank" rel="noopener noreferrer" :href="item.social_link" class="social__link">{{ item.social_name }}</a>
-                <a target="_blank" rel="noopener noreferrer" :href="item.social_link" class="social__link social__link--cursive">{{ item.social_name }}</a>
+                <a target="_blank" rel="nofollow noopener noreferrer" :href="item.social_link" class="social__link">{{ item.social_name }}</a>
+                <a target="_blank" rel="nofollow noopener noreferrer" :href="item.social_link" class="social__link social__link--cursive">{{ item.social_name }}</a>
             </li>
             <!-- <li class="social__item" @mouseover="$emit('showCursive', $event)" @mouseleave="$emit('hideCursive', $event)">
                 <a target="_blank" rel="noopener noreferrer" href="https://www.pinterest.com/iqosa/_created/" class="social__link">Pinterest,</a>

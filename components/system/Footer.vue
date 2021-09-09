@@ -91,7 +91,7 @@
                 <p class="footer__description footer__description--opacity">&copy; IQOSA {{ data.year }}.</p>
                 <p class="footer__developed">
                     <span class="footer__description footer__description--opacity">{{ $t('developed') }}</span>
-                    <a target="_blank" rel="noopener noreferrer" href="https://thefirstthelast.agency/" class="footer__link">The First The Last.</a>
+                    <a target="_blank" rel="nofollow noopener noreferrer" href="https://thefirstthelast.agency/" class="footer__link">The First The Last.</a>
                 </p>
             </div>
         </div>
