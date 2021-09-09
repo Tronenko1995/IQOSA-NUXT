@@ -22,30 +22,44 @@ export default {
 					content: this.data.meta_description
 				},
 				{
+					hid: 'og:title',
+					name: 'og:title',
 					property: 'og:title',
 					content: this.data.seo_title,
 				},
 				{
+					hid: 'og:description',
+					name: 'og:description',
 					property: 'og:description',
 					content: this.data.meta_description,
 				},
 				{
+					hid: 'og:url',
+					name: 'og:url',
 					property: 'og:url',
 					content: this.fullUrl
 				},
 				{
+					hid: 'og:image',
+					name: 'og:image',
 					property: 'og:image',
 					content: this.getImg(this.dataFooter.og_image),
 				},
 				{
+					hid: 'og:image:width',
+					name: 'og:image:width',
 					property: 'og:image:width',
 					content: '1080',
 				},
 				{
+					hid: 'og:image:height',
+					name: 'og:image:height',
 					property: 'og:image:height',
 					content: '1080',
 				},
 				{
+					hid: 'twitter:card',
+					name: 'twitter:card',
 					property: 'twitter:card',
 					content: 'summary_large_image',
 				},
