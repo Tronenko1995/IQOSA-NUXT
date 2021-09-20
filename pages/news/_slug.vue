@@ -178,6 +178,7 @@
             </div>
         </section>
         <Modals v-if="modal.show" :modal="modal"/>
+        <script v-html="jsonld" type="application/ld+json"></script>
     </main>
 </template>
 
@@ -283,6 +284,7 @@ export default {
             index: null,
             durationAnimate: 0,
             url: '',
+			jsonld: null,
         }
     },
     created() {
@@ -295,6 +297,29 @@ export default {
         } else {
             this.durationAnimate = this.duration.page
         }
+        this.jsonld = {
+				"@context": "http://schema.org",
+				"@type": "Article",
+				"headline": this.article.seo_title,
+				"author": "IQOSA",
+				"dateModified": this.article.created_at,
+				"datePublished": this.article.created_at,
+				"image": {
+					"@type": "imageObject",
+					"url": this.getImg(this.article.main_picture),
+					"height": 1080,
+					"width": 1080
+				},
+				"publisher": {
+					"@type": "Organization",
+					"name": "Varus",
+					"logo": {
+						"@type": "imageObject",
+						"url": "https://api.iqosa.com/storage/group-4041-1-1629291959UsffA.png",
+						"mainEntityOfPage": this.fullUrl, 
+					}
+				}
+			}
     },
     mounted() {
         this.$gsap.registerPlugin(this.$ScrollTrigger);
