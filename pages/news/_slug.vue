@@ -316,6 +316,7 @@ export default {
         //     this.index = this.list.findIndex(item => item.link === this.article.link);
         //     this.index === this.list.length-1 ? this.index = -1 : ''
         // }
+        this.copyFunction()
     },
   computed: {
     preloader() { return this.$store.getters['preloader/preloader'] },
@@ -452,6 +453,24 @@ export default {
             return `https://www.linkedin.com/shareArticle?mini=true&url=${this.url}/&title=${this.article.title}`;
         }
         },
+		copyFunction() {
+			document.oncopy = function () {
+				let bodyElement = document.body
+				let selection = getSelection()
+				let href = document.location.href
+				let copyright = "<br><br>Источник: <a href='"+ href +"'>" + href + "</a><br>©  IQOSA  "
+				let text = selection + copyright
+				let divElement = document.createElement('div')
+				divElement.style.position = 'absolute'
+				divElement.style.left = '-99999px'
+				divElement.innerHTML = text
+				bodyElement.appendChild(divElement)
+				selection.selectAllChildren(divElement)
+				setTimeout(function() { 
+					bodyElement.removeChild(divElement)
+				}, 0)
+			}
+		},
     }
 }
 </script>

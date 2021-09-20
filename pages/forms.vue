@@ -170,7 +170,25 @@ export default {
     },
     scrollToTop() {
       window.scrollTo(0,0);
-    }
+    },
+		copyFunction() {
+			document.oncopy = function () {
+				let bodyElement = document.body
+				let selection = getSelection()
+				let href = document.location.href
+				let copyright = "<br><br>Источник: <a href='"+ href +"'>" + href + "</a><br>©  IQOSA  "
+				let text = selection + copyright
+				let divElement = document.createElement('div')
+				divElement.style.position = 'absolute'
+				divElement.style.left = '-99999px'
+				divElement.innerHTML = text
+				bodyElement.appendChild(divElement)
+				selection.selectAllChildren(divElement)
+				setTimeout(function() { 
+					bodyElement.removeChild(divElement)
+				}, 0)
+			}
+		},
   },
   beforeMount() {
     this.testLang();
@@ -181,6 +199,7 @@ export default {
   mounted() {
     this.setPlugVisibility();
     this.scrollToTop();
+		this.copyFunction()
   }
 };
 </script>
