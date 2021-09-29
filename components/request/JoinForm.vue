@@ -43,26 +43,29 @@
             <span v-if="!this.email || !regMail.test(this.email)" :class="{'active': errors}" class="join-form__error-item join-form__error__input">{{$t('IncorrectEmail')}}</span>
         </span>
 
-        <!-- <ul class="join-form__error" :class="{'active': errors}">
-            <li v-if="!this.name && !this.cv.file && !this.portfolio && (!this.email || !regMail.test(this.email))" class="join-form__error-item">{{ $t('FillTheForm') }}</li>
-            <template v-else>
-                <li v-if="this.vacancy === this.data.vacancy_input_placeholder" class="join-form__error-item">{{ $t('IncorrectVacancy') }}</li>
-                <li v-if="!this.cv.file" class="join-form__error-item">{{ $t('IncorrectCV') }}</li>
-                <li v-if="!this.portfolio" class="join-form__error-item">{{ $t('IncorrectLink') }}</li>
-                <li v-if="!this.email || !regMail.test(this.email)" class="join-form__error-item">{{ $t('IncorrectEmail') }}</li>
-                <li v-if="!this.name" class="join-form__error-item">{{ $t('IncorrectName') }}</li>
-            </template>
-        </ul> -->
-
-
         <button class="say-hi-form__button arrow-link" :disabled="dispatchForm" @mouseover="findElement($event)" @mouseleave="animateTextHide($event)">
             <span class="arrow-link__change">
                 <span class="arrow-link__span arrow-link__span--first">{{ data.submit_text_animated }}</span>
                 <span class="arrow-link__span arrow-link__span--last">{{ data.submit_text_animated }}</span>
             </span>
             <span class="arrow-link__text">{{ data.submit_text }}</span>
-            <span class="arrow-link__circle">
-                <svg class="arrow-link__svg" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.40039 12.4004H17.6004" stroke-linecap="square"/><path d="M13.9004 8L18.4004 12.4L13.9004 16.8" stroke-linecap="square"/></svg>
+            <span
+            class="arrow-link__circle"
+            :class="dispatchForm ? 'arrow-link__circle--dispatch' : ''">
+                <svg v-if="!dispatchForm" class="arrow-link__svg" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.40039 12.4004H17.6004" stroke-linecap="square"/><path d="M13.9004 8L18.4004 12.4L13.9004 16.8" stroke-linecap="square"/></svg>
+                <svg v-if="dispatchForm" class="loader" viewBox="0 0 156 156">
+                    <g>
+                        <circle class="loader__circle" cx="78" cy="78" r="26.5" fill="none" stroke-width="53" stroke="#fff" stroke-dasharray="21 166,5044106403"></circle>
+                        <circle class="loader__circle" cx="78" cy="78" r="26.5" fill="none" stroke-width="53" stroke="#fff" stroke-dasharray="21 166,5044106403"></circle>
+                        <circle class="loader__circle" cx="78" cy="78" r="26.5" fill="none" stroke-width="53" stroke="#fff" stroke-dasharray="21 166,5044106403"></circle>
+                        <circle class="loader__circle" cx="78" cy="78" r="26.5" fill="none" stroke-width="53" stroke="#fff" stroke-dasharray="21 166,5044106403"></circle>
+                        <circle class="loader__circle" cx="78" cy="78" r="26.5" fill="none" stroke-width="53" stroke="#fff" stroke-dasharray="21 166,5044106403"></circle>
+                        <circle class="loader__circle" cx="78" cy="78" r="26.5" fill="none" stroke-width="53" stroke="#fff" stroke-dasharray="21 166,5044106403"></circle>
+                        <circle class="loader__circle" cx="78" cy="78" r="26.5" fill="none" stroke-width="53" stroke="#fff" stroke-dasharray="21 166,5044106403"></circle>
+                        <circle class="loader__circle" cx="78" cy="78" r="26.5" fill="none" stroke-width="53" stroke="#fff" stroke-dasharray="21 166,5044106403"></circle>
+                    </g>
+                    <circle class="loader__moving-circle" cx="78" cy="78" r="26.5" fill="none" stroke-width="53" stroke="#ffffffb3" stroke-dasharray="21 166,5044106403"></circle>
+                    </svg>
             </span>
         </button>
     </form>
@@ -84,7 +87,6 @@ export default {
             email: '',
             vacancy: 'VACANCY LIST',
             vacancySelect: false,
-            // vacancyArray: ['Architecture','3D Max Visualisator','Engineer'],
             cv: {
                 file: '',
                 preloader: false,
@@ -177,7 +179,6 @@ export default {
             if (this.name && this.cv.file && this.portfolio && this.email && this.regMail.test(this.email) && this.vacancy !== this.data.vacancy_input_placeholder) {
                 this.errors = false
                 this.dispatchForm = true
-                // this.openModal('thank')
                 let formData = new FormData()
                 formData.append('name', this.name)
                 formData.append('vacancy', this.vacancy)
@@ -215,12 +216,8 @@ export default {
             this.vacancySelect = false
         },
         focusFileInput(e) {
-            // console.log('фокус')
-            // e.target.parentElement.classList.add('focus')
             e.target.blur()
-            // console.log('снял фокус')
             this.$refs.fileInput.click()
-            // console.log('кликнул')
         },
         uploadCv() {
             this.cv.file = this.$refs.fileInput.files[0]
@@ -244,7 +241,6 @@ export default {
     font-size: 35px;
     line-height: calc(110% + 15px);
     text-transform: uppercase;
-    // font-feature-settings: 'pnum' on, 'lnum' on;
     color: rgba(255,255,255,.2);
     &__span {
         &--accent {
@@ -278,12 +274,10 @@ export default {
         border-bottom: 1px solid hsla(0,0%,100%,.5);
         height: 40px;
         font-family: 'Lightitalic', Arial;
-        // font-style: italic;
         font-weight: 300;
         font-size: 35px;
         line-height: 110%;
         text-transform: uppercase;
-        // font-feature-settings: 'pnum' on, 'lnum' on;
         &-head {
             width: 100%;
         }
@@ -356,7 +350,6 @@ export default {
         line-height: 110%;
         text-align: center;
         text-transform: uppercase;
-        // font-feature-settings: 'pnum' on, 'lnum' on;
         color: #FFFFFF;
         margin-bottom: 72px;
     }
@@ -382,17 +375,6 @@ export default {
         }
     }
     &__input {
-        // padding: 11px 14px;
-        // background: 0 0;
-        // outline: none;
-        // border: none;
-        // border-bottom: 1px solid hsla(0,0%,100%,.1);
-        // border-radius: 0;
-        // width: 100%;
-        // transition: .3s;
-        // color: #fff;
-        // line-height: 140%;
-        // font-size: 16px;
         height: 40px;
         width: 100%;
         background: none;
@@ -413,7 +395,6 @@ export default {
         font-weight: 300;
         font-size: 16px;
         line-height: 140%;
-        // font-feature-settings: 'pnum' on, 'lnum' on, 'kern' off;
         color: #FFFFFF;
         &--placeholder {
             position: absolute;
@@ -481,13 +462,11 @@ export default {
         line-height: 120%;
         letter-spacing: 0.05em;
         text-transform: uppercase;
-        // font-feature-settings: 'pnum' on, 'lnum' on;
         color: #FFFFFF;
         background: none;
         cursor: pointer;
         span {
             font-family: 'LightItalic';
-            // font-style: italic;
         }
         .arrow-link__change {
             padding-bottom: 1px;
@@ -504,7 +483,6 @@ export default {
         left: 0;
         bottom: 0;
         font-family: 'LightItalic';
-        // font-style: italic;
         pointer-events: none;
         transition: .2s;
     }

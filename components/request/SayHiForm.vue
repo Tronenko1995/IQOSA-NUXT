@@ -28,19 +28,25 @@
                 <span class="arrow-link__span arrow-link__span--last">{{ data.submit_text_animated }}</span>
             </span>
             <span class="arrow-link__text">{{ data.submit_text }}</span>
-            <span class="arrow-link__circle">
-                <svg class="arrow-link__svg" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.40039 12.4004H17.6004" stroke-linecap="square"/><path d="M13.9004 8L18.4004 12.4L13.9004 16.8" stroke-linecap="square"/></svg>
+            <span
+            class="arrow-link__circle"
+            :class="dispatchForm ? 'arrow-link__circle--dispatch' : ''">
+                <svg v-if="!dispatchForm" class="arrow-link__svg" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.40039 12.4004H17.6004" stroke-linecap="square"/><path d="M13.9004 8L18.4004 12.4L13.9004 16.8" stroke-linecap="square"/></svg>
+                <svg v-if="dispatchForm" class="loader" viewBox="0 0 156 156">
+                    <g>
+                        <circle class="loader__circle" cx="78" cy="78" r="26.5" fill="none" stroke-width="53" stroke="#fff" stroke-dasharray="21 166,5044106403"></circle>
+                        <circle class="loader__circle" cx="78" cy="78" r="26.5" fill="none" stroke-width="53" stroke="#fff" stroke-dasharray="21 166,5044106403"></circle>
+                        <circle class="loader__circle" cx="78" cy="78" r="26.5" fill="none" stroke-width="53" stroke="#fff" stroke-dasharray="21 166,5044106403"></circle>
+                        <circle class="loader__circle" cx="78" cy="78" r="26.5" fill="none" stroke-width="53" stroke="#fff" stroke-dasharray="21 166,5044106403"></circle>
+                        <circle class="loader__circle" cx="78" cy="78" r="26.5" fill="none" stroke-width="53" stroke="#fff" stroke-dasharray="21 166,5044106403"></circle>
+                        <circle class="loader__circle" cx="78" cy="78" r="26.5" fill="none" stroke-width="53" stroke="#fff" stroke-dasharray="21 166,5044106403"></circle>
+                        <circle class="loader__circle" cx="78" cy="78" r="26.5" fill="none" stroke-width="53" stroke="#fff" stroke-dasharray="21 166,5044106403"></circle>
+                        <circle class="loader__circle" cx="78" cy="78" r="26.5" fill="none" stroke-width="53" stroke="#fff" stroke-dasharray="21 166,5044106403"></circle>
+                    </g>
+                    <circle class="loader__moving-circle" cx="78" cy="78" r="26.5" fill="none" stroke-width="53" stroke="#ffffffb3" stroke-dasharray="21 166,5044106403"></circle>
+                    </svg>
             </span>
         </button>
-        <!-- <div class="say-hi-form__button">
-            <span>SHOW</span>&nbsp; MORE 
-            <span class="arrow-link__circle arrow-link__circle--news">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="arrow-link__svg">
-                    <path d="M6.40039 12.4004H17.6004" stroke-linecap="square"></path>
-                    <path d="M13.9004 8L18.4004 12.4L13.9004 16.8" stroke-linecap="square"></path>
-                </svg>
-            </span>
-        </div> -->
     </form>
 </template>
 
@@ -174,11 +180,9 @@ export default {
         font-family: 'Light', Arial;
         font-style: normal;
         font-weight: normal;
-        // font-size: 35px;
         line-height: 110%;
         text-align: center;
         text-transform: uppercase;
-        // font-feature-settings: 'pnum' on, 'lnum' on;
         color: #FFFFFF;
         margin-bottom: 72px;
         font-size: 22px;
@@ -226,7 +230,6 @@ export default {
         font-weight: 300;
         font-size: 16px;
         line-height: 140%;
-        // font-feature-settings: 'pnum' on, 'lnum' on, 'kern' off;
         color: #FFFFFF;
         &--placeholder {
             position: absolute;
@@ -296,13 +299,11 @@ export default {
         line-height: 120%;
         letter-spacing: 0.05em;
         text-transform: uppercase;
-        // font-feature-settings: 'pnum' on, 'lnum' on;
         color: #FFFFFF;
         background: none;
         cursor: pointer;
         span {
             font-family: 'LightItalic';
-            // font-style: italic;
         }
     }
 }
@@ -327,9 +328,6 @@ export default {
             font-size: 24px;
             margin-bottom: 64px;
         }
-        // &__input {
-
-        // }
         &__input-wrap {
             margin-bottom: 56px;
         }

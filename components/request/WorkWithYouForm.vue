@@ -32,8 +32,23 @@
                 <span class="arrow-link__span arrow-link__span--last">{{ data.submit_text_animated }}</span>
             </span>
             <span class="arrow-link__text">{{ data.submit_text }}</span>
-            <span class="arrow-link__circle">
-                <svg class="arrow-link__svg" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.40039 12.4004H17.6004" stroke-linecap="square"/><path d="M13.9004 8L18.4004 12.4L13.9004 16.8" stroke-linecap="square"/></svg>
+            <span
+            class="arrow-link__circle"
+            :class="dispatchForm ? 'arrow-link__circle--dispatch' : ''">
+                <svg v-if="!dispatchForm" class="arrow-link__svg" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.40039 12.4004H17.6004" stroke-linecap="square"/><path d="M13.9004 8L18.4004 12.4L13.9004 16.8" stroke-linecap="square"/></svg>
+                <svg v-if="dispatchForm" class="loader" viewBox="0 0 156 156">
+                    <g>
+                        <circle class="loader__circle" cx="78" cy="78" r="26.5" fill="none" stroke-width="53" stroke="#fff" stroke-dasharray="21 166,5044106403"></circle>
+                        <circle class="loader__circle" cx="78" cy="78" r="26.5" fill="none" stroke-width="53" stroke="#fff" stroke-dasharray="21 166,5044106403"></circle>
+                        <circle class="loader__circle" cx="78" cy="78" r="26.5" fill="none" stroke-width="53" stroke="#fff" stroke-dasharray="21 166,5044106403"></circle>
+                        <circle class="loader__circle" cx="78" cy="78" r="26.5" fill="none" stroke-width="53" stroke="#fff" stroke-dasharray="21 166,5044106403"></circle>
+                        <circle class="loader__circle" cx="78" cy="78" r="26.5" fill="none" stroke-width="53" stroke="#fff" stroke-dasharray="21 166,5044106403"></circle>
+                        <circle class="loader__circle" cx="78" cy="78" r="26.5" fill="none" stroke-width="53" stroke="#fff" stroke-dasharray="21 166,5044106403"></circle>
+                        <circle class="loader__circle" cx="78" cy="78" r="26.5" fill="none" stroke-width="53" stroke="#fff" stroke-dasharray="21 166,5044106403"></circle>
+                        <circle class="loader__circle" cx="78" cy="78" r="26.5" fill="none" stroke-width="53" stroke="#fff" stroke-dasharray="21 166,5044106403"></circle>
+                    </g>
+                    <circle class="loader__moving-circle" cx="78" cy="78" r="26.5" fill="none" stroke-width="53" stroke="#ffffffb3" stroke-dasharray="21 166,5044106403"></circle>
+                    </svg>
             </span>
         </button>
         <!-- <div class="say-hi-form__button">
