@@ -159,12 +159,12 @@ export default {
         ];
       }
     },
-    testLang() {
-      const html = document.getElementsByTagName("html");
-      let lang;
-      this.$i18n.locale === "ua" ? (lang = "uk") : (lang = this.$i18n.locale);
-      html[0].setAttribute("lang", lang);
-    },
+    // testLang() {
+    //   const html = document.getElementsByTagName("html");
+    //   let lang;
+    //   this.$i18n.locale === "ua" ? (lang = "uk") : (lang = this.$i18n.locale);
+    //   html[0].setAttribute("lang", lang);
+    // },
     getImg(img) {
       return `${this.baseUrl}${img}`;
     },
@@ -191,7 +191,7 @@ export default {
 		},
   },
   beforeMount() {
-    this.testLang();
+    // this.testLang();
   },
   created() {
     this.setDataRequests();

@@ -296,24 +296,7 @@ export default {
 					property: 'og:image',
 					content: this.getImg(this.project.main_picture),
 				},
-				{
-					hid: 'og:image:width',
-					name: 'og:image:width',
-					property: 'og:image:width',
-					content: '1080',
-				},
-				{
-					hid: 'og:image:height',
-					name: 'og:image:height',
-					property: 'og:image:height',
-					content: '1080',
-				},
-				{
-					hid: 'twitter:card',
-					name: 'twitter:card',
-					property: 'twitter:card',
-					content: 'summary_large_image',
-				},
+
         // {
         //   hid: "keywords",
         //   name: "keywords",

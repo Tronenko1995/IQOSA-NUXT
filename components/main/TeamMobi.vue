@@ -15,7 +15,7 @@
             </div>
         </div>
         <swiper ref="teamSlider" :options="teamSliderSetting" class="team-slider">
-            <swiper-slide class="team-slider__item" v-for="(item, i) in data.team_members" :key="i">
+            <swiper-slide class="team-slider__item" v-for="(item, i) in data.team_members_mob" :key="i">
                 <img class="team-slider__img" @click="openModal(item)" :src="getImg(item.parallax_photo)" alt="">
                 <div class="team-slider__text">
                     <p class="team-slider__surname">{{ item.surname }}</p>
@@ -41,7 +41,7 @@ export default {
             baseUrl: process.env.baseUrl,
             teamSliderSetting: {
                 speed: 500,
-                loop: true,
+                loop: false,
                 slidesPerView: 'auto',
                 centeredSlides: true,
             },

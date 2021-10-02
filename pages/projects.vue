@@ -47,24 +47,7 @@ export default {
 					property: 'og:image',
 					content: this.getImg(this.dataFooter.og_image),
 				},
-				{
-					hid: 'og:image:width',
-					name: 'og:image:width',
-					property: 'og:image:width',
-					content: '1080',
-				},
-				{
-					hid: 'og:image:height',
-					name: 'og:image:height',
-					property: 'og:image:height',
-					content: '1080',
-				},
-				{
-					hid: 'twitter:card',
-					name: 'twitter:card',
-					property: 'twitter:card',
-					content: 'summary_large_image',
-				},
+
 			],
 		};
 	},
@@ -95,7 +78,7 @@ export default {
 	},
 	beforeMount() {
 		window.addEventListener('resize', this.onWindowResize);
-		this.testLang()
+		// this.testLang()
 	},
 	mounted() {
 		this.testSize()
@@ -128,12 +111,12 @@ export default {
 		this.setView('list')
 	  }
 	},
-	testLang() {
-		const html = document.getElementsByTagName('html')
-		let lang
-		this.$i18n.locale === 'ua' ? lang = 'uk' : lang = this.$i18n.locale
-		html[0].setAttribute('lang', lang)
-	},
+	// testLang() {
+	// 	const html = document.getElementsByTagName('html')
+	// 	let lang
+	// 	this.$i18n.locale === 'ua' ? lang = 'uk' : lang = this.$i18n.locale
+	// 	html[0].setAttribute('lang', lang)
+	// },
 	getImg(img) {
 		return `${this.baseUrl}${img}`
 	},

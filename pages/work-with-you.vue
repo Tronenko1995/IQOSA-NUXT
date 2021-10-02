@@ -81,9 +81,9 @@ export default {
 		let fullUrl = `${env.frontUrl}${route.path}`
 		return { fullUrl }
 	},
-    beforeMount() {
-		this.testLang()
-    },
+    // beforeMount() {
+	// 	this.testLang()
+    // },
 	mounted() {
 		this.copyFunction()
 	},
@@ -93,12 +93,12 @@ export default {
 		dataFooter() { return this.$store.getters['lang/parts/dataFooter'] },
 	},
 	methods: {
-		testLang() {
-			const html = document.getElementsByTagName('html')
-			let lang
-			this.$i18n.locale === 'ua' ? lang = 'uk' : lang = this.$i18n.locale
-			html[0].setAttribute('lang', lang)
-		},
+		// testLang() {
+		// 	const html = document.getElementsByTagName('html')
+		// 	let lang
+		// 	this.$i18n.locale === 'ua' ? lang = 'uk' : lang = this.$i18n.locale
+		// 	html[0].setAttribute('lang', lang)
+		// },
         getImg(img) {
             return `${this.baseUrl}${img}`
         },
