@@ -12,7 +12,7 @@
             <p
               class="say-hi__text say-hi__text--first"
               :data-link="getLink(index)"
-            >
+              :class="{'say-hi__text--ru': $i18n.locale === 'ru'}">
               {{ form.title_big_thin }}
             </p>
           </swiper-slide>
@@ -241,6 +241,16 @@ export default {
     }
     &__container {
       // margin: 0 auto;
+    }
+  }
+}
+
+@media (max-width: 450px) {
+  .say-hi {
+    &__text {
+      &--ru {
+        font-size: 32px;
+      }
     }
   }
 }

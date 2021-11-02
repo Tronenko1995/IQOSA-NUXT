@@ -5,7 +5,7 @@
         <div class="request-page__question">
           <p v-for="(item, i) in data.title_small" :key="i">{{ item }}</p>
         </div>
-        <p class="request-page__title">{{ data.title_big_bold }}</p>
+        <p class="request-page__title" :class="{'request-page__title--ru': $i18n.locale === 'ru'}">{{ data.title_big_bold }}</p>
         <SayHiText :data="dataRequests" />
 
         <transition name="fade" mode="out-in">
@@ -184,7 +184,7 @@ export default {
 				divElement.innerHTML = text
 				bodyElement.appendChild(divElement)
 				selection.selectAllChildren(divElement)
-				setTimeout(function() { 
+				setTimeout(function() {
 					bodyElement.removeChild(divElement)
 				}, 0)
 			}
@@ -306,6 +306,15 @@ export default {
     &__title {
       font-size: 56px;
       margin-top: 48px;
+    }
+  }
+}
+@media (max-width: 450px) {
+  .request-page {
+    &__title {
+      &--ru {
+        font-size: 36px;
+      }
     }
   }
 }
