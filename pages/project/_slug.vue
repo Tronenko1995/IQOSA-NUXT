@@ -56,13 +56,11 @@
           </div>
         </div>
         <template v-for="(item, i) in project.content">
-          <template v-if="item && item.big_image">
-            <div class="project__image project__image--standart" :key="i">
+            <div v-if="item && item.big_image" class="project__image project__image--standart" :key="i">
               <img :src="getImg(item.big_image)" alt="" v-showFade />
             </div>
-          </template>
-          <div v-if="item && item.gallery" :key="i">
-            <div class="project__images">
+          <template v-if="item && item.gallery">
+            <div class="project__images" :key="i">
               <div
                 v-if="item.gallery.first_image"
                 class="project__image project__image--uno project__image--parallax project__image--text"
@@ -96,8 +94,9 @@
               v-if="item && item.gallery && item.gallery.center_text"
               class="project__title project__title--text"
               v-html="item.gallery.center_text"
+              :key="i"
             ></div>
-            <div class="project__images">
+            <div class="project__images" :key="i">
               <div
                 v-if="item.gallery.third_image"
                 class="project__image project__image--tres project__image--parallax project__image--text"
@@ -127,8 +126,17 @@
                 </div>
               </div>
             </div>
-          </div>
+          </template>
+          <template v-if="item && item.text_block && item.text_block.length">
+              <div class="project__block" :key="i">
+                <template v-for="(block, y) in item.text_block">
+                  <h2 v-if="block.title" :key="y">{{ block.title }}</h2>
+                  <p v-if="block.paragraph" :key="y">{{ block.paragraph }}</p>
+                </template>
+              </div>
+          </template>
         </template>
+
 
         <!-- <div class="project__image project__image--margin">
                     <img :src="require('~/assets/img/project/2.jpg')" alt="">
@@ -445,7 +453,7 @@ export default {
 				divElement.innerHTML = text
 				bodyElement.appendChild(divElement)
 				selection.selectAllChildren(divElement)
-				setTimeout(function() { 
+				setTimeout(function() {
 					bodyElement.removeChild(divElement)
 				}, 0)
 			}
@@ -682,7 +690,6 @@ export default {
     flex-direction: column;
     width: 100%;
     max-width: 100%;
-    // padding: 0 72px;
   }
   &__address {
     font-family: "Light", Arial;
@@ -693,11 +700,9 @@ export default {
     text-align: center;
     letter-spacing: 0.05em;
     text-transform: uppercase;
-    // font-feature-settings: 'pnum' on, 'lnum' on;
     color: #ffffff;
     span {
       font-family: "LightItalic", Arial;
-      // font-style: italic;
     }
   }
   &__title {
@@ -710,16 +715,11 @@ export default {
     font-family: "Roman", Arial;
     font-style: normal;
     font-weight: 400;
-    // font-size: 164px;
-    // line-height: 90%;
     text-align: center;
-    // letter-spacing: 0.05em;
     text-transform: uppercase;
-    // font-feature-settings: 'pnum' on, 'lnum' on, 'kern' off;
     color: #ffffff;
     span {
       font-family: "LightItalic", Arial;
-      // font-style: italic;
       font-weight: 300;
     }
     &--text {
@@ -740,7 +740,6 @@ export default {
       transform: translate(-50%, 50%);
       top: -150px;
       z-index: 1;
-      // width: 100%;
       min-width: 710px;
       padding: 0;
     }
@@ -751,9 +750,6 @@ export default {
     justify-content: center;
     overflow: hidden;
     margin: 0 auto;
-    // width: 100%;
-    // height: 950px;
-    // height: auto;
     height: 720px;
     max-width: 960px;
     position: relative;
@@ -770,50 +766,31 @@ export default {
     }
     &--uno {
       margin: 0 0 260px 0;
-      // width: 645px;
       width: 476px;
-      // width: 516px;
-      // height: 610px;
-      // height: 762px;
       height: fit-content;
       transform: translateY(260px);
-      // margin-bottom: 260px;
     }
     &--dos {
       margin: 0 0 170px 0;
       width: 576px;
-      // width: 781px;
-      // height: 1057px;
       height: fit-content;
       transform: translateY(200px);
-      // margin-bottom: 200px;
-      // width: 625px;
-      // height: 846px;
     }
     &--tres {
       margin: 0 0 260px 0;
       width: 350px;
-      // width: 288px;
       height: fit-content;
-      // height: 340px;
       transform: translateY(260px);
-      // margin-bottom: 260px;
     }
     &--quatro {
       margin: 0 0 120px 0;
-      // width: 665px;
       width: 491px;
-      // height: 785px;
       height: fit-content;
       transform: translateY(120px);
-      // margin-bottom: 120px;
     }
     &--next {
       width: auto;
       height: 160px;
-      // height: 530px;
-      // height: 720px;
-      // overflow: hidden;
       margin: 0 auto;
     }
     &--wrapper {
@@ -872,10 +849,8 @@ export default {
     }
   }
   &__info {
-    // padding: 0 72px;
     margin: 24px auto 156px;
     width: 1280px;
-    // margin-top: 24px;
     margin-bottom: 188px;
     font-family: "Light", Arial;
     font-style: normal;
@@ -883,7 +858,6 @@ export default {
     font-size: 14px;
     line-height: 120%;
     text-transform: uppercase;
-    // font-feature-settings: 'pnum' on, 'lnum' on, 'kern' off;
     color: #ffffff;
     display: flex;
     &--share {
@@ -909,7 +883,6 @@ export default {
       &--share {
         display: flex;
         flex-direction: column;
-        // margin-right: 529px;
         & > span {
           font-family: "LightItalic";
         }
@@ -921,11 +894,37 @@ export default {
       }
     }
     &-right {
-      // margin-left: 367px;
       span {
         &:last-child {
           margin-left: 70px;
         }
+      }
+    }
+  }
+  &__block {
+    margin: 156px auto;
+    width: 100%;
+    max-width: 755px;
+    h2 {
+      margin-bottom: 16px;
+      font-family: 'Roman', Arial;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 50px;
+      line-height: 110%;
+      text-transform: uppercase;
+      color: #FFFFFF;
+    }
+    p {
+      font-family: 'Light', Arial;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 22px;
+      line-height: 140%;
+      color: #FFFFFF;
+      margin-bottom: 40px;
+      &:last-child {
+        margin-bottom: 0;
       }
     }
   }
@@ -938,11 +937,9 @@ export default {
     align-items: center;
   }
   &__next {
-    // width: 852px;
     width: 640px;
     max-width: 100%;
     cursor: pointer;
-    // position: relative;
     img {
       transform: scale(1.1);
       transition: 0.5s;
@@ -990,7 +987,6 @@ export default {
     font-size: 14px;
     line-height: 120%;
     text-transform: uppercase;
-    // font-feature-settings: 'pnum' on, 'lnum' on, 'kern' off;
     color: #ffffff;
     background: none;
     cursor: pointer;
@@ -1041,31 +1037,10 @@ export default {
   }
 }
 
-// @media (max-width: 1643px) {
-// .project {
-// &__image {
-// &--uno {
-// width: 516px;
-// height: 610px;
-// }
-// &--dos {
-// width: 625px;
-// height: 846px;
-// }
-// &--tres {
-
-// }
-// &--quatro {
-
-// }
-// }
-// }
-// }
 @media (max-width: 1440px) {
   .project {
     margin-top: 241px;
     &__wrap {
-      // padding: 0 64px;
     }
     &__title {
       padding: 0 64px;
@@ -1078,47 +1053,17 @@ export default {
     }
     &__info {
       margin-bottom: 156px;
-      // padding: 0 64px;
       &--share {
         margin-bottom: 0px;
       }
-      // &-right {
-      // margin-left: 191px;
-      // }
       &-middle {
         &--share {
-          // margin-right: 353px;
         }
       }
     }
     &__image {
       &--margin {
         margin: 0 auto 181px auto;
-      }
-      &--uno {
-        // margin: 116px 0 260px 0;
-        // width: 476px;
-        // height: 562px;
-      }
-      &--dos {
-        // margin: 371px 0 200px 0;
-        // width: 576px;
-        // height: 780px;
-      }
-      &--tres {
-        // margin: -113px 0 200px 0;
-        // width: 213px;
-        // height: 251px;
-      }
-      &--quatro {
-        // margin: 160px 0 120px 0;
-        // margin: 160px 0 275px 0;
-        // width: 491px;
-        // height: 579px;
-      }
-      &--next {
-        // width: auto;
-        // height: 398px;
       }
     }
     &__next {
@@ -1142,15 +1087,11 @@ export default {
 @media (max-width: 1280px) {
   .project {
     margin-top: 223px;
-    // &__wrap {
-    // padding: 0 56px;
-    // }
     &__title {
       padding: 0 56px;
       font-size: 116px;
       &--next {
         font-size: 116px;
-        // top: -63px;
         top: 160px;
         padding: 0;
       }
@@ -1159,14 +1100,6 @@ export default {
       margin-bottom: 148px;
       &--share {
         margin-bottom: 0px;
-      }
-      // &-right {
-      // margin-left: 120px;
-      // }
-      &-middle {
-        &--share {
-          // margin-right: 245px;
-        }
       }
     }
     &__image {
@@ -1177,16 +1110,12 @@ export default {
         margin: 0 0 260px 0;
         width: 424px;
         height: 501px;
-        // width: 382px;
-        // height: 451px;
         transform: translateY(0);
       }
       &--dos {
         margin: 0 0 170px 0;
         width: 513px;
         height: 695px;
-        // width: 462px;
-        // height: 626px;
         transform: translateY(0);
       }
       &--tres {
@@ -1202,11 +1131,6 @@ export default {
         transform: translateY(0);
       }
       &--next {
-        // width: auto;
-        // height: 357px;
-        // comment width for page transition
-        // width: 640px;
-        // height: 720px;
         height: 530px;
       }
       &-text {
@@ -1217,57 +1141,45 @@ export default {
         }
       }
     }
+    &__block {
+      margin: 148px auto;
+      max-width: 629px;
+      h2 {
+        font-size: 46px;
+        max-width: 600px;
+      }
+      p {
+        font-size: 20px;
+        line-height: 140%;
+      }
+    }
     &__next {
       margin: 272px auto 0 auto;
-    }
-    &__line {
-      &--share {
-        // margin-top: 148px;
-      }
     }
   }
 }
 @media (max-width: 1024px) {
   .project {
-    // margin-top: 206px;
     margin-top: 280px;
-    // &__wrap {
-    // padding: 0 56px;
-    // }
     &__address {
-      // font-size: 14px;
       font-size: 16px;
     }
     &__title {
       font-size: 108px;
-      // padding: 0 56px;
-      // font-size: 90px;
       &--next {
-        // padding: 0;
         font-size: 90px;
-        // top: -42px;
         top: 142px;
       }
     }
     &__info {
-      // padding: 0 56px;
       font-size: 12px;
       margin-bottom: 132px;
       &--share {
         margin-bottom: 0px;
       }
-      // &-right {
-      // margin-left: 100px;
-      // }
-      &-middle {
-        &--share {
-          // margin-right: 204px;
-        }
-      }
     }
     &__image {
       margin: 0 auto;
-      // margin: 64px auto 0 auto;
       &--standart {
         margin: 0 auto 32px auto;
       }
@@ -1308,6 +1220,17 @@ export default {
         margin-top: 0px;
       }
     }
+    &__block {
+      margin: 132px auto;
+      max-width: 620px;
+      h2 {
+        font-size: 46px;
+      }
+      p {
+        font-size: 20px;
+        max-width: 620px;
+      }
+    }
   }
 }
 
@@ -1326,7 +1249,6 @@ export default {
     &__info {
       &-middle {
         &--share {
-          // margin-right: 100px;
         }
       }
     }
@@ -1335,18 +1257,11 @@ export default {
 
 @media (max-width: 768px) {
   .project {
-    // margin-top: 190px;
     margin-top: 145px;
-    // &__wrap {
-    // padding: 0 48px;
-    // }
     &__title {
       padding: 0 48px;
-      // margin-top: 40px;
       font-size: 88px;
-      // font-size: 50px;
       &--next {
-        // font-size: 88px;
         font-size: 50px;
         top: 173px;
         padding: 0;
@@ -1378,9 +1293,6 @@ export default {
       }
       &-middle {
         margin-right: 0px;
-        // &--share {
-        //     margin-right: 204px;
-        // }
       }
     }
     &__images {
@@ -1397,35 +1309,26 @@ export default {
       &--margin {
         margin: 0 auto 154px auto;
       }
-      &--uno {
-        // margin: 100px 0 0 0;
-        // width: 244px;
-        // height: 288px;
-      }
-      &--dos {
-        // margin: 232px 0 0 0;
-        // width: 295px;
-        // height: 399px;
-      }
-      &--tres {
-        // margin: -70px 0 0 0;
-        // width: 109px;
-        // height: 129px;
-      }
-      &--quatro {
-        // margin: 107px 0 124px 0;
-        // width: 252px;
-        // height: 297px;
-      }
-      &--next {
-        // width: auto;
-        // height: 206px;
-      }
       &--text {
         overflow: hidden;
       }
       &-text {
         display: none;
+      }
+    }
+    &__block {
+      max-width: 556px;
+      h2 {
+        max-width: unset;
+        font-size: 36px;
+      }
+      p {
+        max-width: unset;
+        font-size: 18px;
+        margin-bottom: 24px;
+        &:last-child {
+          margin-bottom: 0;
+        }
       }
     }
     &__next {
@@ -1459,25 +1362,6 @@ export default {
       width: calc(100% - 32px);
       height: unset;
       margin-bottom: 11px;
-      &--uno {
-        // width: 255px;
-        // height: 302px;
-      }
-      &--dos {
-        // margin: 16px 0 0 0;
-        // width: 100%;
-        // height: auto;
-      }
-      &--tres {
-        // margin: 88px 0 0 0;
-        // width: 100%;
-        // height: auto;
-      }
-      &--quatro {
-        // margin: 16px 0 88px auto;
-        // width: 255px;
-        // height: 301px;
-      }
       &--next {
         height: 254px;
       }
@@ -1502,9 +1386,6 @@ export default {
       width: 100%;
       padding-left: 75px;
       padding-right: 75px;
-      // &-wrap {
-      //     margin-top: 0px;
-      // }
     }
   }
 }
@@ -1512,17 +1393,10 @@ export default {
 @media (max-width: 620px) {
   .project {
     &__title {
-      // font-size: 50px;
       padding: 0 16px;
       &--next {
         padding: 0;
       }
-      // &--text {
-      //     font-size: 32px;
-      // }
-    }
-    &__wrap {
-      // padding: 0 16px;
     }
     &__info {
       padding: 0 16px;
@@ -1587,51 +1461,43 @@ export default {
 }
 @media (max-width: 414px) {
   .project {
-    // margin-top: 145px;
     &__address {
       font-size: 13px;
     }
     &__title {
-      // margin-top: 35px;
-      // font-size: 56px;
       &--text {
         margin-top: 88px;
-        // font-size: 32px;
       }
       &--next {
         margin-top: 0px;
         top: 87px;
-        // font-size: 49px;
       }
     }
     &__image {
-      // margin: 48px auto 0 auto;
       &--standart {
         margin: 0 auto 16px auto;
-      }
-      &--uno {
-        // margin: 72px 0 0 0;
-      }
-      &--dos {
-        // margin: 16px 0 0 0;
-      }
-      &--tres {
-        // margin: 88px 0 0 0;
-      }
-      &--quatro {
-        // margin: 16px 0 88px auto;
       }
       &--margin {
         margin: 0 auto 108px auto;
       }
       &--next {
         width: auto;
-        // height: 144px;
         margin: 0 auto;
       }
     }
     &__line {
       margin-top: 48px;
+    }
+    &__block {
+      margin: 88px auto;
+      max-width: unset;
+      padding: 0 16px;
+      h2 {
+        font-size: 36px;
+      }
+      p {
+        font-size: 18px;
+      }
     }
     &__next {
       margin: 143px auto 0 auto;
